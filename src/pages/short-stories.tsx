@@ -1,4 +1,3 @@
-// src/pages/short-stories.tsx
 import Nav from '../components/Nav';
 import ShortStoryCard from '../components/ShortStoryCard';
 
@@ -11,7 +10,7 @@ const shortStories = [
 
 export default function ShortStoriesPage() {
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-base-100">
       <Nav />
       <div className="container mx-auto p-4">
         <h1 className="text-4xl font-bold">Short Stories</h1>

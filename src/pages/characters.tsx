@@ -11,7 +11,7 @@ const characters = [
 
 export default function CharactersPage() {
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-base-100">
       <Nav />
       <div className="container mx-auto p-4">
         <h1 className="text-4xl font-bold">Characters</h1>
