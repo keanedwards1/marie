@@ -4,7 +4,7 @@ import Image from 'next/image'; // Import the Image component */
 
 export default function Nav() {
   return (
-    <nav className="navbar bg-base-100 shadow-md p-4 flex justify-between">
+    <nav className="navbar bg-base-100 p-4 flex justify-between">
       <div className="">
         <Link href="/" className="btn btn-ghost normal-case text-xl">
           Marie
