@@ -1,6 +1,7 @@
 // src/pages/characters.tsx
 import Nav from '../components/Nav';
 import CharacterCard from '../components/CharacterCard';
+import Footer from '../components/RespFooter';
 
 const characters = [
   // Sample data
@@ -39,7 +40,7 @@ const characters = [
 
 export default function CharactersPage() {
   return (
-    <div className="min-h-screen bg-base-100">
+    <div className="min-h-screen bg-white">
       <Nav />
       <div className="container mx-auto p-4">
         <h1 className="text-4xl font-bold">Characters</h1>
@@ -48,6 +49,9 @@ export default function CharactersPage() {
             <CharacterCard key={index} character={character} />
           ))}
         </div>
+      </div>
+      <div className="mt-8">
+          <Footer />
       </div>
     </div>
   );

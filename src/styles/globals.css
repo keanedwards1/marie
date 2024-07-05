@@ -6,11 +6,41 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+:root {
+  --primary: #6B7280; /* Muted blue-grey */
+  --secondary: #7692bc; /* Darker blue-grey */
+  --accent: #9CA3AF; /* Light blue-grey */
+  --neutral: #3D4451;
+  --base-100: #f5f5f5;
+  --text-color: #03495179;
+  --info: #60A5FA; /* Soft blue */
+  --success: #34D399; /* Muted green */
+  --warning: #FBBF24; /* Soft yellow */
+  --error: #F87171; /* Soft red */
+
+  --primary: #5b3f8e;
+  --secondary: #84ceeb;
+  --accent: #5ab9ea;
+  --neutral: #c1c8e4;
+  --base-100: #8860d0;
+  --base-100-light: #9278c2;
+  --base-100-darker: #795fa8;
+  --base-100-very-light: #dacfed99;
+  --text-color: #03495179;
+  --info: #60A5FA; /* Soft blue */
+  --success: #34D399; /* Muted green */
+  --warning: #FBBF24; /* Soft yellow */
+  --error: #F87171; /* Soft red */
+}
+
 body {
   font-family: Inter, "Segoe UI", "Helvetica Neue", sans-serif;
   font-family: 'Barlow', sans-serif;
   color: #034951;
   color: #4e6381;
+  color: var(--base-100-light);
+  background-color: #bf6262 !important;
+  background-color: var(--base-100-very-light) !important;
   font-weight: 400;
 }
 
@@ -30,53 +60,49 @@ body {
   box-shadow: 5px 5px 0px #ff5252;
 } */
 
-.nav-menu-button {
-
+.nav-menu-main-button {
+  font-family: serif;
 }
 
-.nav-menu-button:hover {
+.nav-menu-button, .nav-menu-main-button {
+  position: relative;
+  transition: color 0.3s ease, transform 0.3s ease; 
+}
+
+.nav-menu-button:hover, .nav-menu-main-button:hover {
   background-color: transparent;
-  text-decoration: underline;
+  color: var(--base-100-darker);
+  transform: scale(1.02);
 }
 
-:root {
-  --primary: #6B7280; /* Muted blue-grey */
-  --secondary: #7692bc; /* Darker blue-grey */
-  --accent: #9CA3AF; /* Light blue-grey */
-  --neutral: #3D4451;
-  --base-100: #f5f5f5;
-  --text-color: #03495179;
-  --info: #60A5FA; /* Soft blue */
-  --success: #34D399; /* Muted green */
-  --warning: #FBBF24; /* Soft yellow */
-  --error: #F87171; /* Soft red */
-}
 
 .comic-button {
   display: inline-block;
   padding: 10px 20px;
-  font-size: 24px;
-  font-weight: bold;
+  font-size: 22px;
   text-align: center;
   text-decoration: none;
   color: #fff;
-  background-color: var(--secondary);
+  font-weight: 800;
+  letter-spacing: 0.9px;
+  font-family: serif;
+  background-color: var(--base-100-light);
   border: 2px solid #000;
   border-radius: 10px;
-  box-shadow: 5px 5px 0px #000;
+  box-shadow: 1px 1px 0px #000;
   transition: all 0.3s ease;
   cursor: pointer;
 }
 
 .comic-button:hover {
   background-color: #fff;
-  color: var(--secondary);
-  border: 2px solid var(--secondary);
-  box-shadow: 5px 5px 0px var(--secondary);
+  color: var(--base-100-light);
+  border: 2px solid var(--base-100-light);
+  box-shadow: 5px 5px 0px var(--base-100-light);
 }
 
 .comic-button:active {
-  background-color: #fcf414;
+  background-color: var(--base-100-light);
   box-shadow: none;
   transform: translateY(4px);
 }

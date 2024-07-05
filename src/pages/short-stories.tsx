@@ -1,5 +1,6 @@
 import Nav from '../components/Nav';
 import ShortStoryCard from '../components/ShortStoryCard';
+import Footer from '../components/RespFooter';
 
 const shortStories = [
   // Sample data
@@ -17,7 +18,7 @@ const shortStories = [
 
 export default function ShortStoriesPage() {
   return (
-    <div className="min-h-screen bg-base-100">
+    <div className="min-h-screen bg-white">
       <Nav />
       <div className="container mx-auto p-4">
         <h1 className="text-4xl font-bold">Short Stories</h1>
@@ -26,6 +27,9 @@ export default function ShortStoriesPage() {
             <ShortStoryCard key={index} story={story} />
           ))}
         </div>
+      </div>
+      <div className="mt-8">
+          <Footer />
       </div>
     </div>
   );
