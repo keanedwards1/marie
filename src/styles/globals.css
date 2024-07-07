@@ -92,6 +92,8 @@ body {
   box-shadow: 1px 1px 0px #000;
   transition: all 0.3s ease;
   cursor: pointer;
+  white-space: nowrap;
+  margin-left: 0px !important;
 }
 
 .comic-button:hover {

@@ -70,7 +70,7 @@ export default function Nav() {
           flex flex-col items-end lg:flex-row lg:items-center
         `}
       >
-        <ul className="menu menu-vertical lg:menu-horizontal p-0 mt-4 lg:mt-0 w-full lg:flex lg:space-x-0">
+        <ul className="menu menu-vertical lg:menu-horizontal p-0 mt-4 lg:mt-0 w-full lg:flex lg:space-x-0 mr-20">
           <li className="w-full lg:w-auto">
             <Link
               className="nav-menu-button text-right lg:text-left w-full lg:w-auto justify-end lg:justify-start"
