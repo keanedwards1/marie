@@ -8,6 +8,8 @@
 ├── postcss.config.js
 ├── postcss.config.mjs
 ├── public
+│   ├── books.png
+│   ├── crystal.jpg
 │   ├── next.svg
 │   └── vercel.svg
 ├── src
@@ -18,17 +20,30 @@
 │   │       ├── layout.tsx
 │   │       └── page.tsx
 │   ├── components
-│   │   └── Nav.tsx
+│   │   ├── CharacterCard.tsx
+│   │   ├── ComicButton.tsx
+│   │   ├── ContactForm.tsx
+│   │   ├── Head.tsx
+│   │   ├── HomeRightCrystal.tsx
+│   │   ├── Nav.tsx
+│   │   ├── Pyramid.tsx
+│   │   ├── RespFooter.tsx
+│   │   ├── ShortStoryCard.tsx
+│   │   ├── SubscribeForm.tsx
+│   │   └── ThemeSwitcher.tsx
 │   ├── pages
 │   │   ├── _app.tsx
-│   │   ├── about.tsx
-│   │   └── index.tsx
+│   │   ├── _document.tsx
+│   │   ├── characters.tsx
+│   │   ├── for-later
+│   │   │   └── about.tsx
+│   │   ├── index.tsx
+│   │   └── short-stories.tsx
 │   └── styles
 │       └── globals.css
 ├── t.sh
-├── tailwind.config.js
 ├── tailwind.config.ts
 ├── tree.txt
 └── tsconfig.json
 
-8 directories, 24 files
+9 directories, 38 files

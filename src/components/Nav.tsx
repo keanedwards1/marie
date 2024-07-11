@@ -19,7 +19,7 @@ export default function Nav() {
     <nav className="navbar p-4 flex flex-wrap justify-between items-center">
       <div className="flex items-center">
         <Link href="/" className="nav-menu-main-button btn btn-ghost normal-case text-xl">
-          Marie
+          The Realm of Unity
         </Link>
       </div>
       <button
@@ -82,6 +82,14 @@ export default function Nav() {
           <li className="w-full lg:w-auto">
             <Link
               className="nav-menu-button text-right lg:text-left w-full lg:w-auto justify-end lg:justify-start"
+              href="/"
+            >
+              Gallery
+            </Link>
+          </li>
+          <li className="w-full lg:w-auto">
+            <Link
+              className="nav-menu-button text-right lg:text-left w-full lg:w-auto justify-end lg:justify-start"
               href="/characters"
             >
               Characters
@@ -93,6 +101,14 @@ export default function Nav() {
               href="/short-stories"
             >
               Short Stories
+            </Link>
+          </li>
+          <li className="w-full lg:w-auto">
+            <Link
+              className="nav-menu-button text-right lg:text-left w-full lg:w-auto justify-end lg:justify-start"
+              href="/short-stories"
+            >
+              Resources
             </Link>
           </li>
         </ul>

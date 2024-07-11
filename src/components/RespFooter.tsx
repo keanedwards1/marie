@@ -11,7 +11,7 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* About Section */}
           <div>
-            <h3 className="text-lg font-serif font-semibold mb-4 text-lavender-900">About Us</h3>
+            <h3 className="text-lg font-serif font-semibold mb-4 text-lavender-900">About The Author</h3>
             <p className="text-sm leading-relaxed">
               I&apos;m passionate about creating engaging stories and characters. My mission is to inspire and entertain through the power of storytelling.
             </p>

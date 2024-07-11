@@ -23,9 +23,9 @@
   --accent: #5ab9ea;
   --neutral: #c1c8e4;
   --base-100: #8860d0;
-  --base-100-light: #9278c2;
+  --base-100-light: #eddbf8;
   --base-100-darker: #795fa8;
-  --base-100-very-light: #dacfed99;
+  --base-100-very-light: #d884ff;
   --text-color: #03495179;
   --info: #60A5FA; /* Soft blue */
   --success: #34D399; /* Muted green */
@@ -135,4 +135,51 @@ body {
 
 .short-story-card:active {
   transform: scale(0.95) rotateZ(1.7deg);
+}
+
+.text{
+  color : #954eeb;
+  position: relative;
+  top: 40vh;
+  text-align: center;
+  font-family: 'Roboto Slab', arial;
+}
+.wave {
+    overflow-x : hidden;
+    border-radius: 45%;
+    bottom: 0;
+    height: 350vw;
+    left: 50%;
+    margin-left: -175vw;
+    position: absolute;
+    top: 90vh;
+    width: 350vw
+}
+.wave-front {
+    animation: drift 13s infinite cubic-bezier(.4,0,.2,1);
+    background-color: #d2b6ff;
+    opacity: 1
+}
+ .wave-middle {
+    animation: drift 15s infinite cubic-bezier(.4,0,.2,1);
+    background-color: #d2b6ff;
+    opacity: 1
+}
+.wave-back {
+    animation: drift 20s infinite cubic-bezier(.075,.82,.165,1);
+    background-color: #954eeb;
+    border-radius: 43%;
+    opacity: .8;
+    -ms-transform-origin: 51% 50%;
+    transform-origin: 51% 50%
+}
+
+@keyframes drift {
+    from {
+        transform: rotate(0)
+    }
+
+    from {
+        transform: rotate(360deg)
+    }
 }
