@@ -8,7 +8,7 @@ interface ComicButtonProps {
 const ComicButton: React.FC<ComicButtonProps> = ({ label, onClick }) => {
   return (
     <button
-      className="comic-button ml-3"
+      className="comic-button"
       onClick={onClick}
     >
       {label}
