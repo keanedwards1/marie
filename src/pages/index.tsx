@@ -1,18 +1,17 @@
 import Nav from "../components/Nav";
 import React from "react";
-import { useRouter } from "next/router";
 import Footer from "../components/RespFooter";
 import RightImage from "../components/RightImage";
 import LeftImage from "../components/LeftImage";
-/* import Wisteria from "../components/WisteriaRow";
- */import Image from "next/image";
+import Head from "../components/Head"
+import Image from "next/image";
 import WisteriaRow from "../components/WisteriaRow";
 
 
 const Home: React.FC = () => {
-  const router = useRouter();
   return (
     <div className="min-h-screen flex flex-col relative">
+      <Head />
       <Nav />
       <WisteriaRow />
       <div className="container mx-auto p-4 flex flex-col md:flex-row items-center gap-6">
