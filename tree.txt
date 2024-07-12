@@ -1,17 +1,38 @@
 .
 ├── README.md
 ├── c.sh
+├── go-backend
+│   └── main.go
 ├── next-env.d.ts
 ├── next.config.mjs
 ├── package-lock.json
 ├── package.json
-├── postcss.config.js
 ├── postcss.config.mjs
 ├── public
-│   ├── books.png
-│   ├── crystal.jpg
-│   ├── next.svg
-│   └── vercel.svg
+│   ├── android-chrome-192x192.png
+│   ├── android-chrome-512x512.png
+│   ├── apple-touch-icon.png
+│   ├── book.png
+│   ├── browserconfig.xml
+│   ├── favicon-16x16.png
+│   ├── favicon-32x32.png
+│   ├── favicon.ico
+│   ├── images
+│   │   ├── butterfly-0.png
+│   │   ├── butterfly-1.png
+│   │   ├── butterfly-2.png
+│   │   ├── butterfly-3.png
+│   │   ├── butterfly-4.png
+│   │   ├── butterfly-5.png
+│   │   ├── butterfly-6.png
+│   │   ├── lavender.png
+│   │   ├── ray-of-light.jpg
+│   │   ├── wisteria-1.png
+│   │   └── wisteria.png
+│   ├── index.html
+│   ├── manifest.json
+│   ├── mstile-150x150.png
+│   └── safari-pinned-tab.svg
 ├── src
 │   ├── archive
 │   │   └── app
@@ -20,17 +41,20 @@
 │   │       ├── layout.tsx
 │   │       └── page.tsx
 │   ├── components
+│   │   ├── Butterfly.tsx
 │   │   ├── CharacterCard.tsx
 │   │   ├── ComicButton.tsx
 │   │   ├── ContactForm.tsx
 │   │   ├── Head.tsx
-│   │   ├── HomeRightCrystal.tsx
+│   │   ├── LeftImage.tsx
 │   │   ├── Nav.tsx
 │   │   ├── Pyramid.tsx
 │   │   ├── RespFooter.tsx
+│   │   ├── RightImage.tsx
 │   │   ├── ShortStoryCard.tsx
 │   │   ├── SubscribeForm.tsx
-│   │   └── ThemeSwitcher.tsx
+│   │   ├── ThemeSwitcher.tsx
+│   │   └── WisteriaRow.tsx
 │   ├── pages
 │   │   ├── _app.tsx
 │   │   ├── _document.tsx
@@ -46,4 +70,4 @@
 ├── tree.txt
 └── tsconfig.json
 
-9 directories, 38 files
+11 directories, 60 files

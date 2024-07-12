@@ -6,11 +6,11 @@ const LeftImage: React.FC = () => {
   const router = useRouter();
 
   return (
-    <div className="w-full md:w-1/2">
-      <h1 className="text-4xl font-bold text-center md:text-left">
+    <div className="w-full z-10 md:w-1/2">
+      <h1 className="text-4xl font-bold text-center z-10 md:text-left">
         The Realm of Unity{" "}
       </h1>
-      <p className="mt-4 text-m text-center md:text-left font-serif">
+      <p className="mt-4 text-m text-center z-10 md:text-left font-serif">
         <strong>
           &quot;After a lifetime of chasing the slippery fish of peace while
           trying to navigate a sleeping world, I reveled in the rainstorm of the
@@ -19,7 +19,7 @@ const LeftImage: React.FC = () => {
         <br></br>
         <br></br>
         <br></br>
-        <span className="text-lg">
+        <span className="text-lg z-10">
           Seeking respite in a collapsing world, Rose meditates on a beach and
           is transported to an <em>entirely NEW world.</em> She laughs, cries
           and transforms as she journeys through a magical utopian wonderland.
@@ -42,7 +42,7 @@ const LeftImage: React.FC = () => {
           <br></br>
         </span>
       </p>
-      <div className="flex items-center justify-center md:justify-start mt-8 space-x-4 gap-6">
+      <div className="flex items-center justify-center z-10 absolute md:justify-start mt-8 space-x-4 gap-6">
         <ComicButton
           label="Coming Soon"
           onClick={() => router.push("/purchase")}

@@ -6,6 +6,7 @@ import LeftImage from "../components/LeftImage";
 import Head from "../components/Head"
 import Image from "next/image";
 import WisteriaRow from "../components/WisteriaRow";
+import Butterfly from "../components/Butterfly";
 
 
 const Home: React.FC = () => {
@@ -13,27 +14,21 @@ const Home: React.FC = () => {
     <div className="min-h-screen flex flex-col relative">
       <Head />
       <Nav />
-      <WisteriaRow />
-      <div className="container mx-auto p-4 flex flex-col md:flex-row items-center gap-6">
-        <LeftImage />
-        <RightImage />
+      
+      {/* Common parent container */}
+      <div className="relative w-full">
+        <WisteriaRow />
+        <div className="container mx-auto p-4 flex flex-col md:flex-row items-center gap-6 z-10">
+          <LeftImage/>
+          <RightImage />
+        </div>
+        
+        {/* Butterflies container */}
+        <div className="butterflies-container w-full absolute inset-0 pointer-events-none z-5">
+          <Butterfly />
+        </div>
       </div>
-      <div className="butterflies-container absolute z-0 inset-0 pointer-events-none">
-        <Image
-          src="/images/butterfly.png"
-          alt="Butterfly"
-          className="butterfly"
-          width={40}
-          height={33}
-        />
-        <Image
-          src="/images/butterfly.png"
-          alt="Butterfly"
-          className="butterfly"
-          width={40}
-          height={33}
-        />
-      </div>
+      
       <div className="lavender-container absolute bottom-0 z-0 w-full flex justify-center">
         <Image src="/public/lavender.png" alt="Lavender" className="lavender" width={30} height={40} />
       </div>
