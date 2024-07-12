@@ -4,8 +4,8 @@ import { useRouter } from "next/router";
 import Footer from "../components/RespFooter";
 import RightImage from "../components/RightImage";
 import LeftImage from "../components/LeftImage";
-import Wisteria from "../components/WisteriaRow";
-import Image from "next/image";
+/* import Wisteria from "../components/WisteriaRow";
+ */import Image from "next/image";
 import WisteriaRow from "../components/WisteriaRow";
 
 

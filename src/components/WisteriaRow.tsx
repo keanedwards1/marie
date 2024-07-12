@@ -21,21 +21,21 @@ const Wisteria: React.FC<WisteriaProps> = ({ offsetX, offsetY, zIndex, delay }) 
       className="wisteria-container absolute transition-all duration-300 ease-in-out"
       style={style}
     >
-      <Image src="/images/wisteria.png" alt="Wisteria" width={50} height={60} />
+      <Image src="/images/wisteria-1.png" alt="Wisteria" width={200} height={220} />
     </div>
   );
 };
 
 const WisteriaRow: React.FC = () => {
   const wisteriaCount = 60;
-  const wisteriaWidth = 50;
+  const wisteriaWidth = 220;
 
   const getRandomOverlapFactor = () => {
-    return 0.5 + Math.random() * 0.008; // Random value between 0.5 and 0.6
+    return 0.5 + Math.random() * 0.04; // Random value between 0.5 and 0.6
   };
 
   return (
-    <section className="relative w-full h-60 overflow-hidden">
+    <section className="relative w-full h-96 overflow-hidden">
       {[...Array(wisteriaCount)].map((_, index) => {
         const overlapFactor = getRandomOverlapFactor();
         return (
