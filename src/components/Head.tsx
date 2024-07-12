@@ -36,7 +36,7 @@ const Head = () => (
     <meta name="msapplication-TileColor" content="#da532c" />
     <meta name="theme-color" content="#ffffff" /> */}
 
-  <link rel="icon" type="image/png" href="/images/logo.png" />
+  <link rel="icon" type="image/png" href="/logo.png" />
 
     <script type="application/ld+json">
       {`
