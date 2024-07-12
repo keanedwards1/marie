@@ -37,7 +37,7 @@ const LeftImage: React.FC = () => {
               and embrace the infinite depths of human compassion.
               <br></br>
               <br></br>
-              <br></br> The realm of Unity challenges everything you ever
+              <br></br> The Realm of Unity challenges everything you ever
               thought you knew about yourself and the world in which you live.
               The delightfully spine-tingling conclusion may <em>alter</em> the
               very fabric of your reality.

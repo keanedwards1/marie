@@ -19,7 +19,7 @@ export default function Nav() {
     <nav className="navbar p-4 z-40 flex flex-wrap justify-between items-center">
       <div className="flex items-center">
         <Link href="/" className="nav-menu-main-button btn btn-ghost normal-case text-xl">
-          The Realm of Unity
+          The Realm of Unity Book
         </Link>
       </div>
       <button

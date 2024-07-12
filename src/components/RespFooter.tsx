@@ -13,12 +13,10 @@ const Footer: React.FC = () => {
           {/* About Section */}
           <div>
             <h3 className="text-lg font-serif font-semibold mb-4 text-lavender-900">
-              About Us
+              About The Author
             </h3>
             <p className="text-sm leading-relaxed">
-              I&apos;m passionate about creating engaging stories and
-              characters. My mission is to inspire and entertain through the
-              power of storytelling.
+              V. M. Elyse lives in Northern California with her husband and daughter. This is her offering to the world and her first book.
             </p>
           </div>
 
