@@ -32,7 +32,7 @@ const Home: React.FC = () => {
       <div className="lavender-container absolute bottom-0 z-0 w-full flex justify-center">
         <Image src="/public/lavender.png" alt="Lavender" className="lavender" width={30} height={40} />
       </div>
-      <div className="rays-container z-0 absolute">
+{/*       <div className="rays-container z-0 absolute">
         <Image
           src="/images/ray-of-light.jpg"
           alt="Ray of Light"
@@ -40,7 +40,7 @@ const Home: React.FC = () => {
           width={40}
           height={30}
         />
-      </div>
+      </div> */}
       <div className="mt-40">
         <Footer />
       </div>

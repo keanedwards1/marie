@@ -26,7 +26,7 @@ const Wisteria: React.FC<WisteriaProps> = ({ offsetX, offsetY, zIndex, delay }) 
   );
 };
 
-const WisteriaRow: React.FC = () => {
+  const WisteriaRow: React.FC = () => {
   const wisteriaCount = 24;
   const wisteriaWidth = 140;
 
@@ -44,7 +44,7 @@ const WisteriaRow: React.FC = () => {
             offsetX={index * wisteriaWidth * overlapFactor} 
             offsetY={Math.random() * 20}
             zIndex={index}
-            delay={index * 1} // Staggered delay
+            delay={index * 0.5} // Staggered delay
           />
         );
       })}
