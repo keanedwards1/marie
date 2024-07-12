@@ -16,7 +16,7 @@ export default function Nav() {
   }, []);
 
   return (
-    <nav className="navbar p-4 flex flex-wrap justify-between items-center">
+    <nav className="navbar p-4 z-40 flex flex-wrap justify-between items-center">
       <div className="flex items-center">
         <Link href="/" className="nav-menu-main-button btn btn-ghost normal-case text-xl">
           The Realm of Unity
@@ -63,7 +63,7 @@ export default function Nav() {
           transition-all duration-300 ease-in-out
           ${
             isMenuOpen
-              ? "h-[120px] opacity-100"
+              ? "h-[200px] opacity-100"
               : "h-0 opacity-0 lg:h-auto lg:opacity-100"
           }
           overflow-hidden
@@ -84,7 +84,7 @@ export default function Nav() {
               className="nav-menu-button text-right lg:text-left w-full lg:w-auto justify-end lg:justify-start"
               href="/"
             >
-              Gallery
+              Landscape
             </Link>
           </li>
           <li className="w-full lg:w-auto">
@@ -92,7 +92,7 @@ export default function Nav() {
               className="nav-menu-button text-right lg:text-left w-full lg:w-auto justify-end lg:justify-start"
               href="/characters"
             >
-              Characters
+              Luminoles
             </Link>
           </li>
           <li className="w-full lg:w-auto">
@@ -108,7 +108,7 @@ export default function Nav() {
               className="nav-menu-button text-right lg:text-left w-full lg:w-auto justify-end lg:justify-start"
               href="/short-stories"
             >
-              Resources
+              Offerings
             </Link>
           </li>
         </ul>

@@ -28,9 +28,7 @@ const Footer: React.FC = () => {
               Contact Me
             </h3>
             <ul className="text-sm space-y-2">
-              <li>Email: marie@marie.com</li>
-              <li>Phone: (123) 456-7890</li>
-              <li>Address: 123 marie ave, antarctica, NP 12345</li>
+              <li> Email: <a href="mailto:vmelyse@gmail.com" className="hover:text-lavender-600 transition duration-300">vmelyse@gmail.com</a></li>
             </ul>
           </div>
 
@@ -73,7 +71,7 @@ const Footer: React.FC = () => {
           </div>
 
           {/* Subscribe Form */}
-          <div className="col-span-1 md:col-span-2 lg:col-span-1">
+          <div className="col-span-1 md:col-span-1 lg:col-span-1">
             <h3 className="text-lg font-serif font-semibold mb-4 text-lavender-900">
               Stay Updated
             </h3>

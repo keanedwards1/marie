@@ -23,9 +23,9 @@
   --accent: #5ab9ea;
   --neutral: #c1c8e4;
   --base-100: #8860d0;
-  --base-100-light: #eddbf8;
+  --base-100-light: #7e4e9d;
   --base-100-darker: #795fa8;
-  --base-100-very-light: #d884ff;
+  --base-100-very-light: #dfbdf7;
   --text-color: #03495179;
   --info: #60A5FA; /* Soft blue */
   --success: #34D399; /* Muted green */
@@ -66,13 +66,22 @@ body {
 
 .nav-menu-button, .nav-menu-main-button {
   position: relative;
-  transition: color 0.3s ease, transform 0.3s ease; 
-}
+  transition: color 0.3s ease, transform 0.4s ease, background-color 0.4s ease; 
+  margin: 0 3px;
+  padding: 7px 13px;
+  }
 
 .nav-menu-button:hover, .nav-menu-main-button:hover {
-  background-color: transparent;
+  background-color: rgb(232, 212, 255);
   color: var(--base-100-darker);
-  transform: scale(1.02);
+  transform: scale(1.04);
+}
+
+@media (max-width: 1024px) {
+  .nav-menu-button:hover, .nav-menu-main-button:hover {
+    background-color: transparent;
+    transform: scale(1.01);
+  }
 }
 
 
@@ -183,3 +192,13 @@ body {
         transform: rotate(360deg)
     }
 }
+
+@keyframes sway {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(5deg); }
+}
+
+.wisteria-container {
+  animation: sway 4s ease-in-out infinite;
+}
+
