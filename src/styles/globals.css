@@ -312,3 +312,24 @@ width: fit-content;
   }
 }
 
+.footer-card {
+  transition: all 0.3s ease;
+  border-radius: 8px;
+  padding: 12px;
+  background-color: #dfbdf768;
+}
+
+.footer-card:hover {
+    transform: scale(1.01);
+    box-shadow: 0 12px 16px rgba(0, 0, 0, 0.1);
+  background-color: #eacefe;
+}
+
+/* .footer-card:hover h3 {
+  color: #a78bfa; 
+}
+
+.footer-card:hover a {
+  color: #ddd6fe;
+} */
+

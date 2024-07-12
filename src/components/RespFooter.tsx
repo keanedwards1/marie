@@ -11,31 +11,31 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           
           {/* About Section */}
-          <div>
+          <div className="footer-card">
             <h3 className="text-lg font-serif font-semibold mb-4 text-lavender-900">
               About The Author
             </h3>
-            <p className="text-sm leading-relaxed">
+            <p className="text-md font-serif leading-relaxed">
               V. M. Elyse lives in Northern California with her husband and daughter. This is her offering to the world and her first book.
             </p>
           </div>
 
           {/* Contact Information */}
-          <div>
+          <div className="footer-card">
             <h3 className="text-lg font-serif font-semibold mb-4 text-lavender-900">
               Contact Me
             </h3>
-            <ul className="text-sm space-y-2">
+            <ul className="text-m font-serif space-y-2">
               <li> Email: <a href="mailto:vmelyse@gmail.com" className="hover:text-lavender-600 transition duration-300">vmelyse@gmail.com</a></li>
             </ul>
           </div>
 
           {/* Quick Links */}
-          <div>
+          <div className="footer-card">
             <h3 className="text-lg font-serif font-semibold mb-4 text-lavender-900">
               Quick Links
             </h3>
-            <ul className="text-sm space-y-2">
+            <ul className="text-m font-serif space-y-2">
               <li>
                 <Link
                   href="/"
@@ -46,10 +46,18 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <Link
+                  href="/"
+                  className="hover:text-lavender-600 transition duration-300"
+                >
+                  Landscape
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/characters"
                   className="hover:text-lavender-600 transition duration-300"
                 >
-                  Characters
+                  Luminoles
                 </Link>
               </li>
               <li>
@@ -58,6 +66,14 @@ const Footer: React.FC = () => {
                   className="hover:text-lavender-600 transition duration-300"
                 >
                   Short Stories
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/"
+                  className="hover:text-lavender-600 transition duration-300"
+                >
+                  Offerings
                 </Link>
               </li>
               {/*               <li>
@@ -69,12 +85,13 @@ const Footer: React.FC = () => {
           </div>
 
           {/* Subscribe Form */}
-          <div className="col-span-1 md:col-span-1 lg:col-span-1">
+          <div className="footer-card col-span-1 md:col-span-1 lg:col-span-1">
             <h3 className="text-lg font-serif font-semibold mb-4 text-lavender-900">
               Stay Updated
             </h3>
             <SubscribeForm />
           </div>
+
         </div>
 
         {/* Social Media Links */}

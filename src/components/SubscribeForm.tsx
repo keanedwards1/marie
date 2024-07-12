@@ -2,9 +2,9 @@ import React from "react";
 
 const SubscribeForm = () => {
   return (
-    <form className="text-neutral-800 py-4 -ml-6 relative overflow-hidden flex flex-col justify-around w-full max-w-md border border-lavender-300 rounded-lg bg-lavender-50 p-3 px-4 sm:px-6">
+    <form className="text-neutral-800 py-4 relative overflow-hidden flex flex-col justify-around w-full max-w-md border border-lavender-300 rounded-lg bg-lavender-50 p-3 px-4 sm:px-6">
       <div className="relative z-10 mb-4">
-        <p className="text-lavender-600 text-sm sm:text-base mt-1">
+        <p className="text-lavender-600 font-serif text-xs sm:text-base mt-1">
           Sign up for our newsletter and be the first to know about new stories!
         </p>
       </div>
