@@ -325,15 +325,25 @@ width: fit-content;
   background-color: #eacefe;
 }
 
-.footer-copyright {
+/* .footer-copyright {
   background-color: #dfbdf768;
-}
-
-/* .footer-card:hover h3 {
-  color: #a78bfa; 
-}
-
-.footer-card:hover a {
-  color: #ddd6fe;
 } */
+
+.right-image-styles {
+  position: relative;
+  overflow: visible; /* Allow elements to overflow */
+}
+
+.ray {
+  width: 300%; /* Extend beyond the container */
+  height: 3px;
+  background: linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: 0 0;
+  box-shadow: 0 0 20px white, 0 0 30px white, 0 0 40px white, 0 0 50px white, 0 0 60px white;
+}
+
+
 
