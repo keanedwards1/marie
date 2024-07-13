@@ -331,7 +331,7 @@ width: fit-content;
 
 .right-image-styles {
   position: relative;
-  overflow: visible; /* Allow elements to overflow */
+  overflow: hidden; /* Allow elements to overflow */
 }
 
 .ray {
