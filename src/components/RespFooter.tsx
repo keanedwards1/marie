@@ -128,7 +128,7 @@ const Footer: React.FC = () => {
         </div>
 
         {/* Copyright */}
-        <div className="mt-12 text-center text-sm text-lavender-700">
+        <div className="mt-12 text-center text-sm footer-copyright p-3 rounded-lg text-lavender-700">
           <p>
             &copy; {new Date().getFullYear()} Marie Lastname. All rights
             reserved.
