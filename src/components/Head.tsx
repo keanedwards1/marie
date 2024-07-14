@@ -6,7 +6,7 @@ const Head = () => (
      <meta charSet="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>The Realm of Unity</title>
+    <title>Book Launch | The Realm of Unity</title>
     <link rel="canonical" href="https://therealmofunity.com/" />
 
     <meta property="og:title" content="Rose's Journey: The Realm of Unity - A Spiritual Fantasy Adventure" />

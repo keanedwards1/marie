@@ -46,7 +46,7 @@ const LeftImage: React.FC = () => {
             </span>
           </p>
         </div>
-        <div className="flex items-center justify-center z-10 absolute md:justify-start mt-8 space-x-4 gap-6">
+        <div className="flex items-center justify-center z-10 absolute md:justify-center mt-8 w-full space-x-4 gap-6">
           <ComicButton
             label="Coming Soon"
             onClick={() => router.push("/purchase")}

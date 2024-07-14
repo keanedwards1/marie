@@ -13,7 +13,9 @@ import Garden from "../components/Garden";
 const Home: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col relative">
+
       <Head />
+      
       <Nav />
       
       {/* Common parent container */}
