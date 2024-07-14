@@ -7,6 +7,7 @@ import Head from "../components/Head"
 import Image from "next/image";
 import WisteriaRow from "../components/WisteriaRow";
 import Butterfly from "../components/Butterfly";
+import Garden from "../components/Garden";
 
 
 const Home: React.FC = () => {
@@ -17,33 +18,27 @@ const Home: React.FC = () => {
       
       {/* Common parent container */}
       <div className="relative w-full">
+
         <WisteriaRow />
-        <div className="container mx-auto p-4 flex flex-col md:flex-row items-center gap-6 z-10">
+
+        <section className="container mx-auto p-4 flex flex-col md:flex-row items-center gap-6 z-10">
           <LeftImage/>
           <RightImage />
-        </div>
+        </section>
         
         {/* Butterflies container */}
         <div className="butterflies-container w-full absolute inset-0 pointer-events-none z-5">
           <Butterfly />
         </div>
+
       </div>
       
-      <div className="lavender-container absolute bottom-0 z-0 w-full flex justify-center">
-        <Image src="/public/lavender.png" alt="Lavender" className="lavender" width={30} height={40} />
-      </div>
-{/*       <div className="rays-container z-0 absolute">
-        <Image
-          src="/images/ray-of-light.jpg"
-          alt="Ray of Light"
-          className="ray"
-          width={40}
-          height={30}
-        />
-      </div> */}
-      <div className="mt-40">
-        <Footer />
-      </div>
+      {/* Garden with flowers */}
+      <Garden/>
+
+      {/* Responsive Footer */}
+      <Footer />
+
     </div>
   );
 };

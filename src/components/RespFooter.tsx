@@ -4,7 +4,7 @@ import SubscribeForm from "./SubscribeForm";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="relative pt-24 pb-12 bg-lavender-50 text-lavender-800">
+    <footer className="relative pt-24 pb-12 bg-lavender-50 text-lavender-800 mt-16">
       <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-white to-lavender-50"></div>
       <div className="container relative mx-auto px-4">
         {/* Rest of the footer content */}
