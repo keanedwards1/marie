@@ -9,8 +9,10 @@ const SubscribeForm: React.FC = () => {
     event.preventDefault();
     setIsLoading(true);
 
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
+
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/subscribe`, {
+      const response = await fetch(`${apiUrl}/api/subscribe`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
