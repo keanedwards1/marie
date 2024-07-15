@@ -81,10 +81,10 @@ body {
 @media (max-width: 1024px) {
 
   .nav-menu-button, .nav-menu-main-button {
-    background-color: transparent;
+    background-color: transparent !important;
   }
   .nav-menu-button:hover, .nav-menu-main-button:hover {
-    background-color: transparent;
+    background-color: transparent !important;
     transform: scale(1.01);
   }
 }

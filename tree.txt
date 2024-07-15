@@ -18,6 +18,9 @@
 │   ├── favicon-32x32.png
 │   ├── favicon.ico
 │   ├── images
+│   │   ├── animal-0.png
+│   │   ├── animal-1.png
+│   │   ├── animal-2.png
 │   │   ├── butterfly-0.png
 │   │   ├── butterfly-1.png
 │   │   ├── butterfly-2.png
@@ -25,14 +28,17 @@
 │   │   ├── butterfly-4.png
 │   │   ├── butterfly-5.png
 │   │   ├── butterfly-6.png
-│   │   ├── lavender.png
-│   │   ├── ray-of-light.jpg
-│   │   ├── wisteria-1.png
+│   │   ├── flower-0.png
+│   │   ├── flower-1.png
+│   │   ├── flower-2.png
+│   │   ├── flower-3.png
 │   │   └── wisteria.png
 │   ├── index.html
 │   ├── manifest.json
 │   ├── mstile-150x150.png
-│   └── safari-pinned-tab.svg
+│   ├── robots.txt
+│   ├── safari-pinned-tab.svg
+│   └── sitemap.xml
 ├── src
 │   ├── archive
 │   │   └── app
@@ -45,6 +51,7 @@
 │   │   ├── CharacterCard.tsx
 │   │   ├── ComicButton.tsx
 │   │   ├── ContactForm.tsx
+│   │   ├── Garden.tsx
 │   │   ├── Head.tsx
 │   │   ├── LeftImage.tsx
 │   │   ├── Nav.tsx
@@ -70,4 +77,4 @@
 ├── tree.txt
 └── tsconfig.json
 
-11 directories, 60 files
+11 directories, 67 files
