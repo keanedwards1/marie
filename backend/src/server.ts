@@ -25,7 +25,7 @@ app.post('/api/subscribe', async (req, res) => {
   }
 });
 
-// Test endpoint
+// Test endpoint for debugging
 app.post('/api/test', (req, res) => {
   res.status(200).send({ message: 'Test endpoint works!' });
 });

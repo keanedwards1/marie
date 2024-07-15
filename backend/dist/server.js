@@ -34,7 +34,7 @@ app.post('/api/subscribe', (req, res) => __awaiter(void 0, void 0, void 0, funct
         res.status(500).send({ message: 'Failed to subscribe.' });
     }
 }));
-// Test endpoint
+// Test endpoint for debugging
 app.post('/api/test', (req, res) => {
     res.status(200).send({ message: 'Test endpoint works!' });
 });
