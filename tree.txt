@@ -16,6 +16,15 @@
 ├── next.config.mjs
 ├── package-lock.json
 ├── package.json
+├── pages
+│   ├── _app.tsx
+│   ├── _document.tsx
+│   ├── api
+│   │   └── subscribe.ts
+│   ├── characters.tsx
+│   ├── hello
+│   ├── index.tsx
+│   └── short-stories.tsx
 ├── postcss.config.mjs
 ├── public
 │   ├── android-chrome-192x192.png
@@ -72,19 +81,13 @@
 │   │   ├── ThemeSwitcher.tsx
 │   │   └── WisteriaRow.tsx
 │   ├── pages
-│   │   ├── _app.tsx
-│   │   ├── _document.tsx
-│   │   ├── characters.tsx
-│   │   ├── for-later
-│   │   │   └── about.tsx
-│   │   ├── index.tsx
-│   │   └── short-stories.tsx
+│   │   └── for-later
+│   │       └── about.tsx
 │   └── styles
 │       └── globals.css
 ├── t.sh
 ├── tailwind.config.ts
 ├── tree.txt
-├── tsconfig.json
-└── vercel.json
+└── tsconfig.json
 
-13 directories, 75 files
+15 directories, 76 files
