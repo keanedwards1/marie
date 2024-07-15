@@ -4,7 +4,6 @@ import Footer from "../components/RespFooter";
 import RightImage from "../components/RightImage";
 import LeftImage from "../components/LeftImage";
 import Head from "../components/Head"
-import Image from "next/image";
 import WisteriaRow from "../components/WisteriaRow";
 import Butterfly from "../components/Butterfly";
 import Garden from "../components/Garden";
