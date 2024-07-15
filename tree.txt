@@ -1,15 +1,17 @@
 .
 ├── README.md
 ├── backend
+│   ├── dist
+│   │   ├── mailService.js
+│   │   └── server.js
 │   ├── nodemon.json
 │   ├── package-lock.json
 │   ├── package.json
 │   ├── src
+│   │   ├── mailService.ts
 │   │   └── server.ts
 │   └── tsconfig.json
 ├── c.sh
-├── go-backend
-│   └── main.go
 ├── next-env.d.ts
 ├── next.config.mjs
 ├── package-lock.json
@@ -82,6 +84,7 @@
 ├── t.sh
 ├── tailwind.config.ts
 ├── tree.txt
-└── tsconfig.json
+├── tsconfig.json
+└── vercel.json
 
-13 directories, 72 files
+13 directories, 75 files
