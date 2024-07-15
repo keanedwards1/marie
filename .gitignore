@@ -9,6 +9,7 @@
 
 # testing
 /coverage
+/backend/coverage
 
 # next.js
 /.next/
@@ -16,6 +17,7 @@
 
 # production
 /build
+/backend/build
 
 # misc
 .DS_Store
@@ -29,6 +31,8 @@ yarn-error.log*
 # local env files
 .env*.local
 .env
+/backend/.env*.local
+/backend/.env
 
 # vercel
 .vercel
@@ -36,3 +40,24 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+/backend/*.tsbuildinfo
+/backend/next-env.d.ts
+
+# logs
+/backend/logs
+/backend/*.log
+/backend/**/*.log
+
+# temp files
+/backend/temp
+/backend/tmp
+/backend/*.tmp
+/backend/**/*.tmp
+
+# IDE specific
+.vscode/
+.backend/.vscode/
+
+# Docker
+/backend/Dockerfile
+/backend/docker-compose.yml

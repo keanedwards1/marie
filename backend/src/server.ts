@@ -1,24 +1,34 @@
-import express, { Request, Response } from "express";
-import bodyParser from "body-parser";
-import cors from "cors";
+import dotenv from 'dotenv';
+import express from 'express';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import { addSubscriber } from './mailService';
+
+// Load environment variables from .env file in development
+if (process.env.NODE_ENV !== 'production') {
+  dotenv.config();
+}
 
 const app = express();
+
 app.use(cors());
 app.use(bodyParser.json());
 
-app.post("/api/subscribe", (req: Request, res: Response) => {
+app.post('/api/subscribe', async (req, res) => {
   const { email } = req.body;
+  console.log(`Received subscription request for email: ${email}`);
 
-  // Add your subscription logic here (e.g., save to database, send confirmation email)
-  if (email) {
-    // Simulate success response
-    res.status(200).json({ message: "Subscription successful!" });
-  } else {
-    res.status(400).json({ error: "Invalid email address." });
+  try {
+    const response = await addSubscriber(email);
+    console.log(`Mailchimp response: ${JSON.stringify(response)}`);
+    res.status(200).send({ message: 'Subscribed successfully!' });
+  } catch (error) {
+    console.error('Error subscribing:', error);
+    res.status(500).send({ message: 'Failed to subscribe.' });
   }
 });
 
-const PORT = process.env.PORT || 5001; // Ensure this port matches your server setup
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
