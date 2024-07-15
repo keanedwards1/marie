@@ -1,13 +1,10 @@
 import dotenv from 'dotenv';
+dotenv.config();
+
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import { addSubscriber } from './mailService';
-
-// Load environment variables from .env file in development
-if (process.env.NODE_ENV !== 'production') {
-  dotenv.config();
-}
 
 const app = express();
 
@@ -31,4 +28,8 @@ app.post('/api/subscribe', async (req, res) => {
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
+});
+
+app.post('/api/test', (req, res) => {
+  res.status(200).send({ message: 'Test endpoint works!' });
 });
