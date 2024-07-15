@@ -25,11 +25,16 @@ app.post('/api/subscribe', async (req, res) => {
   }
 });
 
+// Test endpoint
+app.post('/api/test', (req, res) => {
+  res.status(200).send({ message: 'Test endpoint works!' });
+});
+
+app.get('/api/test', (req, res) => {
+  res.status(200).send({ message: 'Test endpoint works!' });
+});
+
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
-});
-
-app.post('/api/test', (req, res) => {
-  res.status(200).send({ message: 'Test endpoint works!' });
 });
