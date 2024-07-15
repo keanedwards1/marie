@@ -1,13 +1,13 @@
-import Nav from "../src/components/Nav";
+import Nav from "../components/Nav";
 import React from "react";
-import Footer from "../src/components/RespFooter";
-import RightImage from "../src/components/RightImage";
-import LeftImage from "../src/components/LeftImage";
-import Head from "../src/components/Head"
+import Footer from "../components/RespFooter";
+import RightImage from "../components/RightImage";
+import LeftImage from "../components/LeftImage";
+import Head from "../components/Head"
 import Image from "next/image";
-import WisteriaRow from "../src/components/WisteriaRow";
-import Butterfly from "../src/components/Butterfly";
-import Garden from "../src/components/Garden";
+import WisteriaRow from "../components/WisteriaRow";
+import Butterfly from "../components/Butterfly";
+import Garden from "../components/Garden";
 
 
 const Home: React.FC = () => {

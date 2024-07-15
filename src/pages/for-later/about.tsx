@@ -1,5 +1,5 @@
 // src/pages/about.tsx
-import Nav from '../../src/components/Nav';
+import Nav from '../../components/Nav';
 
 export default function About() {
   return (

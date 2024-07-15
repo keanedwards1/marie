@@ -1,7 +1,7 @@
 // src/pages/characters.tsx
-import Nav from '../src/components/Nav';
-import CharacterCard from '../src/components/CharacterCard';
-import Footer from '../src/components/RespFooter';
+import Nav from '../components/Nav';
+import CharacterCard from '../components/CharacterCard';
+import Footer from '../components/RespFooter';
 
 const characters = [
   // Sample data

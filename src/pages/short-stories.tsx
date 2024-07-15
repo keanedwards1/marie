@@ -1,6 +1,6 @@
-import Nav from '../src/components/Nav';
-import ShortStoryCard from '../src/components/ShortStoryCard';
-import Footer from '../src/components/RespFooter';
+import Nav from '../components/Nav';
+import ShortStoryCard from '../components/ShortStoryCard';
+import Footer from '../components/RespFooter';
 
 const shortStories = [
   // Sample data
