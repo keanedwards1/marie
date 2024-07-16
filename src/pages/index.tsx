@@ -4,8 +4,8 @@ import Footer from "../components/RespFooter";
 import RightImage from "../components/RightImage";
 import LeftImage from "../components/LeftImage";
 import Head from "../components/Head"
-import WisteriaRow from "../components/WisteriaRow";
-import Butterfly from "../components/Butterfly";
+/* import WisteriaRow from "../components/WisteriaRow";
+ */import Butterfly from "../components/Butterfly";
 import Garden from "../components/Garden";
 
 
@@ -20,11 +20,11 @@ const Home: React.FC = () => {
       {/* Common parent container */}
       <div className="relative w-full">
 
-        <WisteriaRow />
-
-        <section className="container mx-auto p-4 flex flex-col md:flex-row items-center gap-6 z-10">
+{/*         <WisteriaRow />
+ */}
+        <section className="container mx-auto p-4 flex flex-col md:flex-row items-center z-10">
           <LeftImage/>
-          <RightImage />
+          <RightImage/>
         </section>
         
         {/* Butterflies container */}
@@ -32,10 +32,12 @@ const Home: React.FC = () => {
           <Butterfly />
         </div>
 
+              {/* Garden with flowers */}
+      <Garden/>
+
       </div>
       
-      {/* Garden with flowers */}
-      <Garden/>
+
 
       {/* Responsive Footer */}
       <Footer />

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import Image from "next/image";
 
 export default function Nav() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -18,8 +19,18 @@ export default function Nav() {
   return (
     <nav className="navbar p-4 z-40 flex flex-wrap justify-between items-center">
       <div className="flex items-center">
-        <Link href="/" className="nav-menu-main-button btn btn-ghost normal-case text-xl">
-          The Realm of Unity Book
+        <Link
+          href="/"
+          className="btn btn-ghost normal-case text-2xl text-slate-800 font-serif"
+        >
+          <Image
+            src="/android-chrome-192x192.png"
+            alt="Logo"
+            width={50}
+            height={50}
+            priority
+          />
+          A Book Launch 🦋 {" "}
         </Link>
       </div>
       <button
@@ -35,21 +46,27 @@ export default function Nav() {
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
-            className={`transition-transform duration-300 ease-in-out ${isMenuOpen ? 'rotate-45 -translate-y-1 translate-x-2' : ''}`}
+            className={`transition-transform duration-300 ease-in-out ${
+              isMenuOpen ? "rotate-45 -translate-y-1 translate-x-2" : ""
+            }`}
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth={2}
             d="M4 6h16"
           />
           <path
-            className={`transition-opacity duration-300 ease-in-out ${isMenuOpen ? 'opacity-0' : ''}`}
+            className={`transition-opacity duration-300 ease-in-out ${
+              isMenuOpen ? "opacity-0" : ""
+            }`}
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth={2}
             d="M4 12h16"
           />
           <path
-            className={`transition-transform duration-300 ease-in-out ${isMenuOpen ? '-rotate-45 translate-y-1 -translate-x-2' : ''}`}
+            className={`transition-transform duration-300 ease-in-out ${
+              isMenuOpen ? "-rotate-45 translate-y-1 -translate-x-2" : ""
+            }`}
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth={2}

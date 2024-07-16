@@ -9,7 +9,7 @@ const getRandomInt = (min: number, max: number): number => {
 // Generate a random group of butterflies with random positions
 const generateButterflies = (): { type: number; style: React.CSSProperties }[] => {
     const butterflies = [];
-    const totalButterflies = getRandomInt(15, 20);
+    const totalButterflies = getRandomInt(12, 16);
     const butterflyTypes = 7; // We have butterfly-0.png to butterfly-6.png
 
     for (let i = 0; i < totalButterflies; i++) {
