@@ -344,7 +344,7 @@ width: fit-content;
   z-index: 0;
   height: 100vh;
   width: 100vw;
-  width: 230%; /* Extend beyond the container */
+  width: 220%; /* Extend beyond the container */
   height: 4px;
   background: linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
   position: absolute;

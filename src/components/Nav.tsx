@@ -90,7 +90,7 @@ export default function Nav() {
         <ul className="menu menu-vertical lg:menu-horizontal p-0 mt-4 lg:mt-0 w-full lg:flex lg:space-x-0 mr-20">
           <li className="w-full lg:w-auto">
             <Link
-              className="nav-menu-button text-right lg:text-left w-full lg:w-auto justify-end lg:justify-start"
+              className="nav-menu-button text-right font-serif lg:text-left w-full lg:w-auto justify-end lg:justify-start"
               href="/"
             >
               Home
@@ -98,23 +98,23 @@ export default function Nav() {
           </li>
           <li className="w-full lg:w-auto">
             <Link
-              className="nav-menu-button text-right lg:text-left w-full lg:w-auto justify-end lg:justify-start"
-              href="/"
+              className="nav-menu-button text-right font-serif lg:text-left w-full lg:w-auto justify-end lg:justify-start"
+              href="/landscape"
             >
               Landscape
             </Link>
           </li>
           <li className="w-full lg:w-auto">
             <Link
-              className="nav-menu-button text-right lg:text-left w-full lg:w-auto justify-end lg:justify-start"
-              href="/characters"
+              className="nav-menu-button text-right font-serif lg:text-left w-full lg:w-auto justify-end lg:justify-start"
+              href="/luminoles"
             >
               Luminoles
             </Link>
           </li>
           <li className="w-full lg:w-auto">
             <Link
-              className="nav-menu-button text-right lg:text-left w-full lg:w-auto justify-end lg:justify-start"
+              className="nav-menu-button text-right font-serif lg:text-left w-full lg:w-auto justify-end lg:justify-start"
               href="/short-stories"
             >
               Short Stories
@@ -122,7 +122,7 @@ export default function Nav() {
           </li>
           <li className="w-full lg:w-auto">
             <Link
-              className="nav-menu-button text-right lg:text-left w-full lg:w-auto justify-end lg:justify-start"
+              className="nav-menu-button text-right font-serif lg:text-left w-full lg:w-auto justify-end lg:justify-start"
               href="/short-stories"
             >
               Offerings
