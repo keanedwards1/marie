@@ -10,14 +10,14 @@ const RightImage: React.FC = () => {
       <div className="home-page-text-container">
         <div className="home-page-box">
           <h1 className="text-3xl font-bold text-center font-serif z-10">
-            &quot;The Realm of Unity&quot; Blurb <br></br>
-            <p className="text-2xl">
-              by Author V. M. Elyse
+            The Realm of Unity  <br></br>
+            <p className="text-m">
+              Author: V. M. Elyse
             </p>
           </h1>
           <p className="mt-4 text-m text-center z-10 md:text-left font-serif">
             <strong>
-              &quot;After a lifetime of chasing the slippery fish of peace while
+              Blurb: &quot;After a lifetime of chasing the slippery fish of peace while
               trying to navigate a sleeping world, I reveled in the rainstorm of
               the absence of my suffering.&quot;
             </strong>
