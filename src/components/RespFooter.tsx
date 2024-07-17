@@ -86,9 +86,9 @@ const Footer: React.FC = () => {
 
           {/* Subscribe Form */}
           <div className="footer-card col-span-1 md:col-span-1 lg:col-span-1">
-            <h3 className="text-lg font-serif font-semibold mb-4 text-lavender-900">
+{/*             <h3 className="text-lg font-serif font-semibold mb-4 text-lavender-900">
               Stay Updated
-            </h3>
+            </h3> */}
             <SubscribeForm />
           </div>
 

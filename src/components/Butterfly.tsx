@@ -24,6 +24,8 @@ const generateButterflies = (): { type: number; style: React.CSSProperties }[] =
                     top: `${getRandomInt(0, 90)}%`,
                     left: `${getRandomInt(0, 90)}%`,
                     zIndex: 0,
+                    width: 'auto',
+                    height: 'auto',
                 } as React.CSSProperties
             });
         }
