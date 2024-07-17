@@ -43,7 +43,7 @@ const config: Config = {
     themes: [
       {
         autumn: {
-          'primary': '#5b3f8e',
+          'primary': '#dfbdf7',
           'secondary': '#84ceeb',
           'accent': '#5ab9ea',
           'neutral': '#c1c8e4',

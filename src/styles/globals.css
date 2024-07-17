@@ -25,7 +25,7 @@
   --error: #F87171;
   /* Soft red */
 
-  --primary: #5b3f8e;
+  --primary: #dfbdf7;
   --secondary: #84ceeb;
   --accent: #5ab9ea;
   --neutral: #c1c8e4;
@@ -290,7 +290,7 @@ body {
   width: fit-content;
   height: 106%;
   padding: 1rem;
-  background-color: rgba(255, 255, 255, 0.074);
+  background-color: rgba(208, 188, 234, 0.074);
   border: 1px solid rgba(255, 255, 255, 0.222);
   -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
@@ -401,12 +401,37 @@ body {
   font-size: 1.0rem;
 }
 
+.mt-50vh {
+  margin-top: 20vh;
+}
+
+.bg-hero-image {
+  background-image: url('/images/landscape-1.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+
+.location-header-text {
+  text-shadow:
+    -0.5px -0.5px 10px #00000074,
+    0.5px -0.5px 0 #000,
+    -0.5px 0.5px 0 #000,
+    0.5px 0.5px 0 #000;
+}
 
 .location-card {
   position: relative;
   overflow: visible;
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   border-radius: 20px;
+}
+
+.location-card:hover {
+  box-shadow: 20px 20px 60px #bebebe,
+  -20px -20px 60px #ffffff;
 }
 
 .location-image-container {
@@ -423,23 +448,28 @@ body {
   border-radius: 20px;
 }
 
+.location-image:hover {
+  cursor: pointer;
+}
+
 .location-card:hover .location-image {
   transform: scale(1.01);
+  cursor: pointer;
 }
 
 .location-info {
   position: absolute;
-  bottom: -2px;
+  bottom: -0px;
   left: 0;
   right: 0;
   padding: 1rem;
   margin: 0px;
   width: 100%;
-  background: linear-gradient(to top, rgba(79, 70, 229, 0.8), rgba(79, 70, 229, 0));
+  background: linear-gradient(to top, rgb(186, 118, 225), rgba(203, 70, 229, 0));
   color: white;
   text-align: center;
   transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-  opacity: 0.7;
+  opacity: 0.6;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
   text-shadow:
@@ -452,7 +482,8 @@ body {
 
 .location-info.hovered {
   opacity: 1;
-  transform: scale(1.01);
+  transform: scale(1.01) translateY(2px);
+  cursor: pointer;
 }
 
 .location-title {
@@ -473,11 +504,11 @@ body {
   }
 }
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   .location-info {
     position: static;
     opacity: 1;
     transform: none;
     background: rgba(79, 70, 229, 0.8);
   }
-}
+} */
