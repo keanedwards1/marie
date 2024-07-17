@@ -3,7 +3,7 @@ import { Config } from 'tailwindcss';
 
 const config: Config = {
   content: [
-    './src/**/*.{js,ts,jsx,tsx}', // Ensure all files in the src directory are included
+    './src/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
     extend: {
@@ -26,6 +26,7 @@ const config: Config = {
         neutral: 'var(--neutral)',
         'base-100': 'var(--base-100)',
         'base-100-light': 'var(--base-100-light)',
+        'base-100-darker': 'var(--base-100-darker)',
         'base-100-very-light': 'var(--base-100-very-light)',
         'text-color': 'var(--text-color)',
         info: 'var(--info)',
@@ -42,15 +43,15 @@ const config: Config = {
     themes: [
       {
         autumn: {
-          'primary': 'var(--primary)',
-          'secondary': 'var(--secondary)',
-          'accent': 'var(--accent)',
-          'neutral': 'var(--neutral)',
-          'base-100': 'var(--base-100)',
-          'info': 'var(--info)',
-          'success': 'var(--success)',
-          'warning': 'var(--warning)',
-          'error': 'var(--error)',
+          'primary': '#5b3f8e',
+          'secondary': '#84ceeb',
+          'accent': '#5ab9ea',
+          'neutral': '#c1c8e4',
+          'base-100': '#8860d0',
+          'info': '#60A5FA',
+          'success': '#34D399',
+          'warning': '#FBBF24',
+          'error': '#F87171',
         },
       },
     ],

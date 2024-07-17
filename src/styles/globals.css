@@ -18,19 +18,19 @@
   --warning: #FBBF24; /* Soft yellow */
   --error: #F87171; /* Soft red */
 
-  --primary: #5b3f8e;
-  --secondary: #84ceeb;
-  --accent: #5ab9ea;
-  --neutral: #c1c8e4;
-  --base-100: #8860d0;
-  --base-100-light: #7e4e9d;
-  --base-100-darker: #795fa8;
-  --base-100-very-light: #dfbdf7;
-  --text-color: #03495179;
-  --info: #60A5FA; /* Soft blue */
-  --success: #34D399; /* Muted green */
-  --warning: #FBBF24; /* Soft yellow */
-  --error: #F87171; /* Soft red */
+    --primary: #5b3f8e;
+    --secondary: #84ceeb;
+    --accent: #5ab9ea;
+    --neutral: #c1c8e4;
+    --base-100: #8860d0;
+    --base-100-light: #7e4e9d;
+    --base-100-darker: #795fa8;
+    --base-100-very-light: #dfbdf7;
+    --text-color: #03495179;
+    --info: #60A5FA; /* Soft blue */
+    --success: #34D399; /* Muted green */
+    --warning: #FBBF24; /* Soft yellow */
+    --error: #F87171; /* Soft red */
 }
 
 body {
