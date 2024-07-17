@@ -23,15 +23,15 @@ const SubscribeForm: React.FC = () => {
       const data = await response.json();
 
       if (response.ok) {
-        setMessage("Subscription successful!");
+        setMessage("Great success 🦋");
         setEmail("");
         setName("");
       } else {
-        setMessage(data.error || "Subscription failed. Please try again.");
+        setMessage(data.error || "Subscription failed. Sorry! Feel free to contact us if it persists :)");
       }
     } catch (error) {
       console.error("Subscription error:", error);
-      setMessage("An error occurred. Please try again.");
+      setMessage("We've tripped on our laces. You can try again but feel free to reach out if the error keeps happening.");
     } finally {
       setIsLoading(false);
     }
@@ -59,7 +59,7 @@ const SubscribeForm: React.FC = () => {
             value={name}
             onChange={handleNameChange}
             className="relative bg-white ring-0 outline-none border border-lavender-300 text-lavender-800 placeholder-lavender-400 text-sm rounded-lg focus:ring-lavender-500 focus:border-lavender-500 block w-full p-2.5 mb-2"
-            placeholder="Your name..."
+            placeholder="Fist Name"
             required
           />
           <input
@@ -67,7 +67,7 @@ const SubscribeForm: React.FC = () => {
             value={email}
             onChange={handleEmailChange}
             className="relative bg-white ring-0 outline-none border border-lavender-300 text-lavender-800 placeholder-lavender-400 text-sm rounded-lg focus:ring-lavender-500 focus:border-lavender-500 block w-full p-2.5"
-            placeholder="Your email..."
+            placeholder="Email"
             required
           />
         </div>
