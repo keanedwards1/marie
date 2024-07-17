@@ -17,7 +17,7 @@ const RightImage: React.FC = () => {
           </h1>
           <p className="mt-4 text-m text-center z-10 md:text-left font-serif">
             <strong>
-              Blurb: &quot;After a lifetime of chasing the slippery fish of peace while
+              Blurb:<br></br> &quot;After a lifetime of chasing the slippery fish of peace while
               trying to navigate a sleeping world, I reveled in the rainstorm of
               the absence of my suffering.&quot;
             </strong>
