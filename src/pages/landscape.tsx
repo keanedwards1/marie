@@ -27,61 +27,39 @@ const locations: Location[] = [
 ];
 
 export default function Landscape() {
-  const [activeLocation, setActiveLocation] = useState<Location | null>(null);
+  const [hoveredId, setHoveredId] = useState<number | null>(null);
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-100">
-      <Head title="Landscape - Story Locations" />
+    <div className="min-h-screen flex flex-col">
+      <Head title="Landscape | Story Locations" description="Explore the various locations featured in our stories." />
       <Nav />
-      <main className="flex-grow container mx-auto px-4 py-8 max-w-7xl">
-        <h1 className="text-4xl font-bold mb-8 text-center text-gray-800">Story Locations</h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {locations.map((location, index) => (
+      <main className="flex-grow container mx-auto px-4 py-16 max-w-7xl">
+        <h1 className="text-4xl font-bold mb-16 text-center text-slate-800 font-serif">The Realm of Unity Landscape</h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {locations.map((location) => (
             <div
               key={location.id}
-              className={`relative overflow-hidden rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105 ${
-                index % 5 === 0 ? 'sm:col-span-2 sm:row-span-2' : ''
-              }`}
-              style={{ height: index % 5 === 0 ? '400px' : '250px' }}
-              onClick={() => setActiveLocation(location)}
+              className="location-card"
+              onMouseEnter={() => setHoveredId(location.id)}
+              onMouseLeave={() => setHoveredId(null)}
             >
-              <Image
-                src={location.src}
-                alt={location.alt}
-                layout="fill"
-                objectFit="cover"
-                className="transition-transform duration-300 hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end">
-                <h3 className="text-white text-xl font-semibold p-4">{location.alt}</h3>
+              <div className="location-image-container">
+                <Image
+                  src={location.src}
+                  alt={location.alt}
+                  layout="fill"
+                  objectFit="cover"
+                  className="location-image"
+                />
+              </div>
+              <div className={`location-info ${hoveredId === location.id ? 'hovered' : ''}`}>
+                <h3 className="location-title">{location.alt}</h3>
+                <p className="location-description">{location.description}</p>
               </div>
             </div>
           ))}
         </div>
       </main>
-      {activeLocation && (
-        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
-          <div className="bg-white p-4 sm:p-8 rounded-lg w-full max-w-4xl">
-            <div className="relative aspect-w-16 aspect-h-9 mb-4">
-              <Image
-                src={activeLocation.src}
-                alt={activeLocation.alt}
-                layout="fill"
-                objectFit="cover"
-                className="rounded-lg shadow-md"
-              />
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-bold mb-2 text-gray-800">{activeLocation.alt}</h2>
-            <p className="mb-4 text-gray-600">{activeLocation.description}</p>
-            <button
-              className="bg-blue-500 text-white px-6 py-2 rounded-full hover:bg-blue-600 transition-colors text-lg font-semibold"
-              onClick={() => setActiveLocation(null)}
-            >
-              Close
-            </button>
-          </div>
-        </div>
-      )}
       <Footer />
     </div>
   );

@@ -21,7 +21,7 @@ export default function Nav() {
       <div className="flex items-center">
         <Link
           href="/"
-          className="btn btn-ghost normal-case text-2xl text-slate-800 font-serif"
+          className="btn background-transparent normal-case text-2xl text-slate-800 font-serif"
         >
           <Image
             src="/android-chrome-192x192.png"

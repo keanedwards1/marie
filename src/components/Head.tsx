@@ -1,12 +1,13 @@
 import React from "react";
-import { Helmet } from "react-helmet";
+import NextHead from 'next/head';
 
 interface HeadProps {
   title?: string;
+  description?: string;
 }
 
-const Head: React.FC<HeadProps> = ({ title = "Book Launch | The Realm of Unity" }) => (
-  <Helmet>
+const Head: React.FC<HeadProps> = ({ title = 'Book Launch | The Realm of Unity', description = 'Explore the website for The Realm Of Unity, a book by author V. M. Elyse' }) => (
+  <NextHead>
     <meta charSet="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -24,7 +25,7 @@ const Head: React.FC<HeadProps> = ({ title = "Book Launch | The Realm of Unity" 
     <meta name="twitter:image" content="https://therealmofunity.com/assets/images/twitter-card-image.png" />
 
     <meta name="robots" content="index, follow" />
-    <meta name="author" content="Author Name" />
+    <meta name="author" content="Marie Elyse" />
     <meta name="description" content="Rose's Journey in The Realm of Unity is a spiritual fantasy adventure that contrasts a dystopian Earth with a magical utopia. Explore themes of peace, discovery, and human compassion." />
     <meta name="title" content={title} />
     <meta name="keywords" content="spiritual fantasy book, magical utopian wonderland, transformative journey, dystopian Earth, human compassion, peace, self-discovery, mystical adventure, spiritual awakening, fantasy novel, new world, utopia vs dystopia, inspirational fantasy, realm of unity, Rose's Journey, meditation, mystical realms, spiritual transformation, magical realism, speculative fiction, utopian fantasy" />
@@ -50,7 +51,7 @@ const Head: React.FC<HeadProps> = ({ title = "Book Launch | The Realm of Unity" 
       }
       `}
     </script>
-  </Helmet>
+  </NextHead>
 );
 
 export default Head;
