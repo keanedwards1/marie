@@ -22,6 +22,7 @@ const Home: React.FC = () => {
 
 {/*         <WisteriaRow />
  */}
+
         <section className="container mx-auto p-4 flex flex-col md:flex-row items-center z-10">
           <LeftImage/>
           <RightImage/>
@@ -32,7 +33,7 @@ const Home: React.FC = () => {
           <Butterfly />
         </div>
 
-              {/* Garden with flowers */}
+      {/* Garden with flowers */}
       <Garden/>
 
       </div>

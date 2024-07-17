@@ -2,22 +2,22 @@ import React, { useState, FormEvent, ChangeEvent } from "react";
 
 const SubscribeForm: React.FC = () => {
   const [email, setEmail] = useState<string>("");
-  const [name, setName] = useState<string>("");
-  const [message, setMessage] = useState<string>("");
+/*   const [name, setName] = useState<string>("");
+ */  const [message, setMessage] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
     setIsLoading(true);
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
+    setMessage("");
 
     try {
-      const response = await fetch(`${apiUrl}/subscribe`, {
+      const response = await fetch("http://159.89.233.75:3000", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, name }),
+        body: JSON.stringify({ email }), /* , name */
       });
 
       const data = await response.json();
@@ -25,11 +25,12 @@ const SubscribeForm: React.FC = () => {
       if (response.ok) {
         setMessage("Subscription successful!");
         setEmail("");
-        setName("");
+/*         setName(""); */
       } else {
-        setMessage(data.errors ? data.errors.join(", ") : "Subscription failed. Please try again.");
+        setMessage(data.error || "Subscription failed. Please try again.");
       }
     } catch (error) {
+      console.error("Subscription error:", error);
       setMessage("An error occurred. Please try again.");
     } finally {
       setIsLoading(false);
@@ -40,9 +41,9 @@ const SubscribeForm: React.FC = () => {
     setEmail(event.target.value);
   };
 
-  const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
+/*   const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
-  };
+  }; */
 
   return (
     <form onSubmit={handleSubmit} className="text-neutral-800 py-4 relative overflow-hidden flex flex-col justify-around w-full max-w-md border border-lavender-300 rounded-lg bg-lavender-50 p-3 px-4 sm:px-6">
@@ -53,14 +54,14 @@ const SubscribeForm: React.FC = () => {
       </div>
       <div className="flex flex-col gap-2">
         <div className="relative rounded-lg flex-grow">
-          <input
+{/*           <input
             type="text"
             value={name}
             onChange={handleNameChange}
             className="relative bg-white ring-0 outline-none border border-lavender-300 text-lavender-800 placeholder-lavender-400 text-sm rounded-lg focus:ring-lavender-500 focus:border-lavender-500 block w-full p-2.5 mb-2"
             placeholder="Your name..."
             required
-          />
+          /> */}
           <input
             type="email"
             value={email}
