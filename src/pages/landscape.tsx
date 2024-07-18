@@ -30,7 +30,7 @@ const locations: Location[] = [
   },
   {
     id: 4,
-    src: "/images/Magical-Utopian-City.jpg",
+    src: "/images/magical-utopian-city.jpg",
     alt: "Magical Utopian City",
   },
   {
