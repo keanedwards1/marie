@@ -7,6 +7,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      scale: {
+        '105': '1.05',
+      },
       colors: {
         lavender: {
           50: '#f8f7fe',

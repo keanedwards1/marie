@@ -2,6 +2,7 @@ import Head from "../components/Head";
 import Nav from "../components/Nav";
 import Footer from "../components/RespFooter";
 import ComicButton from "@/components/ComicButton";
+import Cube from "../components/CubeComponent";
 import Image from "next/image";
 import { useState } from "react";
 import router, { useRouter } from "next/router";
@@ -51,7 +52,7 @@ const locations: Location[] = [
   {
     id: 8,
     src: "/images/woman-standing-in-room-with-bamboo-trees.jpg",
-    alt: "Woman Standing In Dome With Bamboo Trees",
+    alt: "Woman Standing In Dome With Trees",
   },
   {
     id: 9,
@@ -87,15 +88,17 @@ export default function Landscape() {
         />
         <Nav />
         <div className="mt-50vh">
-          <h1 className="location-header-text text-5xl font-bold mb-16 text-center text-white font-serif">
-            The Realm of Unity Landscape
-          </h1>
-          <div className="flex justify-center">
-            <div className="w-7/12 flex justify-center">
-              <ComicButton
-                label="Explore"
-                onClick={() => router.push("/landscape/#location")}
-              />
+          <div className="landscape-header-card">
+            <h1 className="location-header-text text-5xl font-bold mb-16 text-center text-white font-serif">
+              The Realm of Unity Landscape
+            </h1>
+            <div className="flex justify-center">
+              <div className="w-7/12 flex justify-center">
+                <ComicButton
+                  label="Explore"
+                  onClick={() => router.push("/landscape/#location")}
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -142,6 +145,11 @@ export default function Landscape() {
             </div>
           ))}
         </div>
+
+        <div className="w-full h-screenw-full h-96 -mb-10 mt-10 pt-10 flex items-center justify-center">
+          <Cube/>
+        </div>
+
       </main>
       <div className="bg-grey">
         <Footer />

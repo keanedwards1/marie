@@ -55,6 +55,10 @@ const RightImage: React.FC = () => {
             label="Coming Soon"
             onClick={() => router.push("/purchase")}
           />
+          <ComicButton
+            label="See The Books Landscape! →"
+            onClick={() => router.push("/landscape")}
+          />
         </div>
       </div>
     </div>
