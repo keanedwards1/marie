@@ -5,11 +5,21 @@ const LeftImage: React.FC = () => {
   const [angles, setAngles] = useState<number[]>([]);
 
   useEffect(() => {
-    const rng = seedrandom('fixed-seed');
+    // Use current time as seed
+    const dynamicSeed = `${Date.now()}-${Math.random()}`;
+    const rng = seedrandom(dynamicSeed);
+
     const getRandomAngles = (numRays: number) => {
       const angles = [];
+      const windowWidth = window.innerWidth;
+
       for (let i = 0; i < numRays; i++) {
-        let angle = 50 + rng() * 260; // Generate a random angle between 50 and 310 degrees
+        let angle;
+        if (windowWidth < 768) {
+          angle = 90 + rng() * 180;
+        } else {
+          angle = 50 + rng() * 260;
+        }
         angles.push(angle);
       }
       return angles;
