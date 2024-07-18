@@ -8,11 +8,11 @@ const shortStories = [
   { title: 'Short Story 2', description: 'Description of short story 2' },
   { title: 'Short Story 3', description: 'Description of short story 3' },
   { title: 'Short Story 4', description: 'Description of short story 4' },
-  { title: 'Short Story 5', description: 'Description of short story 5' },
+/*   { title: 'Short Story 5', description: 'Description of short story 5' },
   { title: 'Short Story 6', description: 'Description of short story 6' },
   { title: 'Short Story 7', description: 'Description of short story 7' },
   { title: 'Short Story 8', description: 'Description of short story 8' },
-  { title: 'Short Story 9', description: 'Description of short story 9' },
+  { title: 'Short Story 9', description: 'Description of short story 9' }, */
   // Add more short stories here
 ];
 
