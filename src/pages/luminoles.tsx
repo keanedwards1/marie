@@ -1,4 +1,5 @@
 // src/pages/characters.tsx
+import Head from "../components/Head";
 import Nav from '../components/Nav';
 import CharacterCard from '../components/CharacterCard';
 import Footer from '../components/RespFooter';
@@ -51,6 +52,10 @@ const characters = [
 export default function CharactersPage() {
   return (
     <div className="min-h-screen bg-gray-100">
+        <Head
+          title="Luminoles | Characters"
+          description="Explore the various characters featured in the book &quot;The Realm of Unity&quot;."
+        />
       <Nav />
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-4xl font-bold text-center mb-8 text-gray-800">Characters</h1>

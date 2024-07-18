@@ -44,6 +44,10 @@
   /* Soft red */
 }
 
+.bg-text-dark-purple {
+  background-color: #8571d4a8;
+}
+
 body {
   font-family: Inter, "Segoe UI", "Helvetica Neue", sans-serif;
   font-family: 'Barlow', sans-serif;

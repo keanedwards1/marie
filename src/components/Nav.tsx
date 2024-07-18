@@ -136,7 +136,7 @@ export default function Nav() {
             <Link
               className={`text-right font-serif lg:text-left w-full lg:w-auto justify-end lg:justify-start ${
               isLandscapePage ? "nav-menu-button-landscape" : "nav-menu-button"}`}
-              href="/short-stories"
+              href="/offerings"
             >
               Offerings
             </Link>

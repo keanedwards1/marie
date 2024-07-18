@@ -150,6 +150,21 @@ export default function Landscape() {
           <Cube/>
         </div>
 
+        <div className="mt-40 -mb-20 flex gap-4 justify-center">
+        <div className="w-3/12">
+            <ComicButton
+                label="← Back to Home 🏡"
+                onClick={() => router.push('/')}
+              />
+          </div>
+          <div className="w-3/12">
+            <ComicButton
+                label="🧚‍♂️ View Luminoles → "
+                onClick={() => router.push('/luminoles')}
+              />
+          </div>
+        </div>
+
       </main>
       <div className="bg-grey">
         <Footer />

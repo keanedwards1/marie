@@ -1,6 +1,7 @@
 // src/components/ShortStoryCard.tsx
 
 import ComicButton from "./ComicButton";
+import DownloadButton from "./Download-Button";
 
 interface ShortStory {
   title: string;
@@ -18,10 +19,10 @@ export default function ShortStoryCard({ story }: ShortStoryCardProps) {
         <h2 className="card-title">{story.title}</h2>
         <p>{story.description}</p>
         <div className="w-full">
-          <ComicButton
-            label="Download"
-            onClick={() => console.log("Downloaded")}
-          />
+            <ComicButton
+              label="Download"
+              onClick={() => console.log("Downloaded")}
+            />
         </div>
       </div>
     </div>
