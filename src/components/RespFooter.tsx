@@ -4,7 +4,7 @@ import SubscribeForm from "./SubscribeForm";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="relative pt-24 pb-12 bg-lavender-50 text-lavender-800 mt-16">
+    <footer className="relative pt-24 pb-16 bg-lavender-50 text-lavender-800 mt-24">
       <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-white to-lavender-50"></div>
       <div className="container relative mx-auto px-4">
         {/* Rest of the footer content */}
@@ -95,11 +95,15 @@ const Footer: React.FC = () => {
         </div>
 
         {/* Social Media Links */}
-        <div className="mt-12 text-center">
-          <h3 className="text-lg font-serif font-semibold mb-4 text-lavender-900">
-            Please share my site with your friends and help me spread the word!
-          </h3>
-          <div className="flex justify-center space-x-6">
+        <div className="mt-4 text-center">
+          
+          <div className="rounded-lg p-8">
+            <h3 className="text-lg font-serif font-semibold text-lavender-900">
+              Please share my site with your friends and help me spread the word!
+            </h3>
+          </div>
+
+{/*           <div className="flex justify-center space-x-6">
             <a
               href="#"
               className="text-2xl text-lavender-700 hover:text-lavender-500 transition duration-300"
@@ -124,11 +128,11 @@ const Footer: React.FC = () => {
             >
               <i className="fab fa-goodreads"></i>
             </a>
-          </div>
+          </div> */}
         </div>
 
         {/* Copyright */}
-        <div className="mt-12 text-center text-sm footer-copyright p-3 rounded-lg text-lavender-700">
+        <div className="mt-2 text-center text-sm footer-copyright p-8 rounded-lg text-lavender-700">
           <p>
             &copy; {new Date().getFullYear()} V. M. Elyse &nbsp; ~ &nbsp; All rights
             reserved.

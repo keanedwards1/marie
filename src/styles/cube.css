@@ -1,3 +1,8 @@
+:root {
+  --starting-color: #dfbdf768;
+  --starting-color: #dfbdf77a;
+}
+
 @keyframes animate {
     0% {
       filter: hue-rotate(0deg);
@@ -39,12 +44,12 @@
           transition: 1.5s;
           &:hover {
             transition: 0s;
-            background: #ef4149;
-            filter: drop-shadow(0 0 30px #ef4149);
+            background: var(--starting-color);
+            filter: drop-shadow(0 0 30px var(--starting-color));
             &:before,
             &:after {
               transition: 0s;
-              background: #ef4149;
+              background: var(--starting-color);
             }
           }
           &:before {
