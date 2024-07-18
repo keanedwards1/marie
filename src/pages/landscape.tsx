@@ -36,7 +36,7 @@ const locations: Location[] = [
   {
     id: 5,
     src: "/images/crystal-fountain.jpg",
-    alt: "Kids Playing In Found With A Crystal Pyramid",
+    alt: "Kids Playing In Fountain With A Crystal Pyramid",
   },
   {
     id: 6,
