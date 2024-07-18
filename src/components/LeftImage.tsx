@@ -3,19 +3,17 @@ import seedrandom from "seedrandom";
 
 const LeftImage: React.FC = () => {
   const [angles, setAngles] = useState<number[]>([]);
+  const [isWide, setIsWide] = useState<boolean | null>(null);
 
-  useEffect(() => {
-    // Use current time as seed
+  const calculateAngles = (wide: boolean) => {
     const dynamicSeed = `${Date.now()}-${Math.random()}`;
     const rng = seedrandom(dynamicSeed);
 
     const getRandomAngles = (numRays: number) => {
       const angles = [];
-      const windowWidth = window.innerWidth;
-
       for (let i = 0; i < numRays; i++) {
         let angle;
-        if (windowWidth < 768) {
+        if (!wide) {
           angle = 90 + rng() * 180;
         } else {
           angle = 50 + rng() * 260;
@@ -26,12 +24,36 @@ const LeftImage: React.FC = () => {
     };
 
     setAngles(getRandomAngles(14));
-  }, []);
+  };
+
+  useEffect(() => {
+    const checkWidth = () => {
+      const wide = window.innerWidth >= 768;
+      if (isWide === null || isWide !== wide) {
+        setIsWide(wide);
+        calculateAngles(wide);
+      }
+    };
+
+    // Initial check
+    checkWidth();
+
+    // Add event listener
+    window.addEventListener("resize", checkWidth);
+
+    // Cleanup
+    return () => window.removeEventListener("resize", checkWidth);
+  }, [isWide]);
+
+  // Don't render anything until we have determined if it's wide or not
+  if (isWide === null) {
+    return null;
+  }
 
   return (
     <div className="right-image-styles w-full md:w-7/12 flex justify-center items-center p-8 md:p-0 relative">
       <div
-        className="w-full max-w-[90%] h-0 pb-[106.67%] relative" // 90% width, 4:3 aspect ratio
+        className="w-full max-w-[90%] h-0 pb-[106.67%] relative"
         style={{
           backgroundImage: "url(/book.png)",
           backgroundSize: "contain",

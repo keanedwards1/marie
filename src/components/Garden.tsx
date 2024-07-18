@@ -71,7 +71,7 @@ const Garden: React.FC = () => {
   }, []);
 
   return (
-    <section className="relative w-full h-60 md:mt-20 z-0 overflow-hidden">
+    <section className="mt-24 w-full h-60 md:mt-20 z-0 overflow-hidden">
       {flowers.map((flower, index) => (
         <Flower 
           key={index} 

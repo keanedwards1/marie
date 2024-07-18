@@ -330,8 +330,8 @@ body {
   transition: all ease 0.3s;
   overflow: visible;
   box-shadow: 0px 0px 20px 10px #bb89d61c;
-
 }
+
 
 .home-page-text-container .home-page-box {
   display: flex;
@@ -339,6 +339,12 @@ body {
   align-items: center;
   justify-content: center;
   padding: 40px;
+}
+
+@media (max-width: 600px) {
+  .home-page-text-container .home-page-box {
+    padding: 40px 0px 40px 0px;
+  }
 }
 
 .home-page-text-container .home-page-box .title {
@@ -384,7 +390,7 @@ body {
 
 @media (max-width: 768px) {
   .right-image-styles {
-    margin-top: 120px;
+    margin-bottom: 100px;
   }
 }
 
