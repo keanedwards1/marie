@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 export default function Nav() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     const handleResize = () => {
@@ -16,12 +18,17 @@ export default function Nav() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // Check if the current route is /landscape
+  const isLandscapePage = router.pathname === "/landscape";
+
   return (
     <nav className="navbar p-4 z-40 flex flex-wrap justify-between items-center">
       <div className="flex items-center">
         <Link
           href="/"
-          className="btn background-transparent normal-case text-2xl text-slate-800 font-serif"
+          className={`btn background-transparent normal-case text-2xl font-serif ${
+            isLandscapePage ? "text-slate-100 custom-text-shadow" : "text-slate-800"
+          }`}
         >
           <Image
             src="/android-chrome-192x192.png"
@@ -30,7 +37,7 @@ export default function Nav() {
             height={50}
             priority
           />
-          A Book Launch 🦋 {" "}
+          A Book Launch 🦋{" "}
         </Link>
       </div>
       <button
@@ -89,8 +96,10 @@ export default function Nav() {
       >
         <ul className="menu menu-vertical lg:menu-horizontal p-0 mt-4 lg:mt-0 w-full lg:flex lg:space-x-0 mr-20">
           <li className="w-full lg:w-auto">
+
             <Link
-              className="nav-menu-button text-right font-serif lg:text-left w-full lg:w-auto justify-end lg:justify-start"
+              className={`text-right font-serif lg:text-left w-full lg:w-auto justify-end lg:justify-start ${
+                isLandscapePage ? "nav-menu-button-landscape" : "nav-menu-button"}`}
               href="/"
             >
               Home
@@ -98,15 +107,17 @@ export default function Nav() {
           </li>
           <li className="w-full lg:w-auto">
             <Link
-              className="nav-menu-button text-right font-serif lg:text-left w-full lg:w-auto justify-end lg:justify-start"
-              href="/landscape"
+              className={`text-right font-serif lg:text-left w-full lg:w-auto justify-end lg:justify-start ${
+                isLandscapePage ? "nav-menu-button-landscape" : "nav-menu-button"}`}
+                href="/landscape"
             >
               Landscape
             </Link>
           </li>
           <li className="w-full lg:w-auto">
             <Link
-              className="nav-menu-button text-right font-serif lg:text-left w-full lg:w-auto justify-end lg:justify-start"
+              className={`text-right font-serif lg:text-left w-full lg:w-auto justify-end lg:justify-start ${
+              isLandscapePage ? "nav-menu-button-landscape" : "nav-menu-button"}`}
               href="/luminoles"
             >
               Luminoles
@@ -114,7 +125,8 @@ export default function Nav() {
           </li>
           <li className="w-full lg:w-auto">
             <Link
-              className="nav-menu-button text-right font-serif lg:text-left w-full lg:w-auto justify-end lg:justify-start"
+              className={`text-right font-serif lg:text-left w-full lg:w-auto justify-end lg:justify-start ${
+              isLandscapePage ? "nav-menu-button-landscape" : "nav-menu-button"}`}
               href="/short-stories"
             >
               Short Stories
@@ -122,7 +134,8 @@ export default function Nav() {
           </li>
           <li className="w-full lg:w-auto">
             <Link
-              className="nav-menu-button text-right font-serif lg:text-left w-full lg:w-auto justify-end lg:justify-start"
+              className={`text-right font-serif lg:text-left w-full lg:w-auto justify-end lg:justify-start ${
+              isLandscapePage ? "nav-menu-button-landscape" : "nav-menu-button"}`}
               href="/short-stories"
             >
               Offerings

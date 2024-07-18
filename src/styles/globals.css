@@ -118,6 +118,36 @@ body {
   }
 }
 
+/* for the landscape page */
+.nav-menu-button-landscape,
+.nav-menu-main-button {
+  background-color: #fbf5ff !important;
+  position: relative;
+  transition: color 0.3s ease, transform 0.4s ease, background-color 0.4s ease;
+  margin: 0 3px;
+  padding: 7px 13px;
+}
+
+.nav-menu-button-landscape:hover,
+.nav-menu-main-button:hover {
+  background-color: rgb(245, 235, 255) !important;
+  color: var(--base-100-darker);
+  transform: scale(1.04);
+}
+
+@media (max-width: 1024px) {
+  .nav-menu-button-landscape,
+  .nav-menu-main-button {
+    background-color: transparent !important;
+  }
+
+  .nav-menu-button-landscape:hover,
+  .nav-menu-main-button:hover {
+    background-color: transparent !important;
+    transform: scale(1.01);
+  }
+}
+
 
 .comic-button {
   display: inline-block;
@@ -256,6 +286,7 @@ body {
 */
   height: fit-content;
   width: fit-content;
+  
 }
 
 .home-page-text-container::before,
@@ -273,6 +304,7 @@ body {
   height: 50%;
   top: 30%;
   right: 7%;
+  
 
 }
 
@@ -297,6 +329,8 @@ body {
   border-radius: 2.7rem;
   transition: all ease 0.3s;
   overflow: visible;
+  box-shadow: 0px 0px 20px 10px #bb89d61c;
+
 }
 
 .home-page-text-container .home-page-box {
@@ -342,7 +376,7 @@ body {
 
 .home-page-text-container .home-page-box:hover {
   box-shadow: 0px 0px 20px 1px #8902b23f;
-  box-shadow: 0px 0px 20px 1px #bb89d651;
+  box-shadow: 0px 0px 20px 1px #bb89d670;
   border: 1px solid rgba(255, 255, 255, 0.454);
   z-index: 0 !important;
   overflow: visible;
@@ -406,7 +440,7 @@ body {
 }
 
 .bg-hero-image {
-  background-image: url('/images/landscape-1.jpg');
+  background-image: url('/images/dome-village.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -430,7 +464,7 @@ body {
 }
 
 .location-card:hover {
-  box-shadow: 20px 20px 60px #bebebe,
+  box-shadow: 20px 20px 60px #d4b2db,
   -20px -20px 60px #ffffff;
 }
 
@@ -465,11 +499,11 @@ body {
   padding: 1rem;
   margin: 0px;
   width: 100%;
-  background: linear-gradient(to top, rgb(186, 118, 225), rgba(203, 70, 229, 0));
+  background: linear-gradient(to top, rgb(215, 173, 240), rgba(203, 70, 229, 0));
   color: white;
   text-align: center;
   transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-  opacity: 0.6;
+  opacity: 0.8;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
   text-shadow:
@@ -503,6 +537,15 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+.custom-text-shadow {
+  text-shadow:
+    -0.5px -0.5px 10px #00000074,
+    0.5px -0.5px 0 #000,
+    -0.5px 0.5px 0 #000,
+    0.5px 0.5px 0 #000;
+}
+
 
 /* @media (max-width: 768px) {
   .location-info {

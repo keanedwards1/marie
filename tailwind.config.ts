@@ -24,7 +24,7 @@ const config: Config = {
         secondary: 'var(--secondary)',
         accent: 'var(--accent)',
         neutral: 'var(--neutral)',
-        'base-100': 'var(--base-100)',
+        'base-100': '#ffffff', // Set to white
         'base-100-light': 'var(--base-100-light)',
         'base-100-darker': 'var(--base-100-darker)',
         'base-100-very-light': 'var(--base-100-very-light)',
@@ -47,7 +47,7 @@ const config: Config = {
           'secondary': '#84ceeb',
           'accent': '#5ab9ea',
           'neutral': '#c1c8e4',
-          'base-100': '#8860d0',
+          'base-100': '#ffffff', // Set to white
           'info': '#60A5FA',
           'success': '#34D399',
           'warning': '#FBBF24',
