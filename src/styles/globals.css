@@ -239,18 +239,20 @@ body {
   border-radius: 17px;
   text-align: center;
   cursor: pointer;
-  transition: all 0.5s;
   display: flex;
   align-items: center;
   justify-content: center;
   user-select: none;
   font-weight: bolder;
+  transition: all 0.5s; /* Combine transition properties */
 }
 
 .short-story-card:hover {
   border: 1px solid black;
   transform: scale(1.01);
 }
+
+
 
 .short-story-card:active {
   transform: scale(0.95) rotateZ(1.7deg);
