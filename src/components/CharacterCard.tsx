@@ -16,7 +16,7 @@ export default function CharacterCard({ character }: CharacterCardProps) {
 
   return (
     <div 
-      className="relative w-full aspect-square bg-gradient-to-br from-indigo-100 to-purple-100 rounded-2xl shadow-lg overflow-hidden transition-all duration-300 ease-in-out hover:shadow-xl"
+      className="relative w-full aspect-square bg-gradient-to-br from-indigo-100 to-purple-100 rounded-2xl shadow-md overflow-hidden transition-all duration-300 ease-in-out hover:shadow-xl"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -32,10 +32,10 @@ export default function CharacterCard({ character }: CharacterCardProps) {
         </div>
       </div>
 
-      <div className={`absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-6 transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}>
+      <div className={`absolute inset-0 bg-black bg-opacity-30 flex flex-col justify-end p-6 transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}>
         <h2 className="text-2xl font-bold text-white mb-2">{character.name}</h2>
         <p className="text-sm text-gray-200 mb-4 line-clamp-3">{character.bio}</p>
-        <button className="bg-white text-indigo-600 px-4 py-2 rounded-full font-semibold hover:bg-indigo-100 transition-colors duration-200">
+        <button className="comic-button comic-button-luminoles-styles">
           View
         </button>
       </div>

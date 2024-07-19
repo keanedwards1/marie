@@ -3,14 +3,14 @@ import Image from "next/image";
 
 const TestimonialGrid: React.FC = () => {
   return (
-    <div className="bg-gray-100 min-h-screen py-16 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="">
           <h2 className="text-4xl text-black font-serif pb-3 italic">Reviews:</h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {/* div1 */}
-          <div className="bg-violet-200 text-black p-8 rounded-lg shadow-lg md:col-span-2">
+          <div className="bg-violet-200 hover:bg-violet-300 text-black p-8 rounded-lg shadow-lg md:col-span-2">
             <div className="flex items-center mb-6">
               <Image
                 className="w-10 h-10 rounded-full mr-4"
@@ -39,7 +39,7 @@ const TestimonialGrid: React.FC = () => {
           </div>
 
           {/* div2 */}
-          <div className="bg-gray-500 text-white p-8 rounded-lg shadow-lg">
+          <div className="bg-gray-500 hover:bg-slate-500 text-white p-8 rounded-lg shadow-lg">
             <div className="flex items-center mb-6">
               <Image
                 className="w-10 h-10 rounded-full mr-4"
@@ -65,7 +65,7 @@ const TestimonialGrid: React.FC = () => {
           </div>
 
           {/* div3 */}
-          <div className="bg-white p-8 rounded-lg shadow-lg md:row-span-2">
+          <div className="bg-white hover:bg-violet-100 p-8 rounded-lg shadow-lg md:row-span-2">
             <div className="flex items-center mb-6">
               <Image
                 className="w-10 h-10 rounded-full mr-4"
@@ -100,7 +100,7 @@ const TestimonialGrid: React.FC = () => {
           </div>
 
           {/* div4 */}
-          <div className="bg-white p-8 rounded-lg shadow-lg">
+          <div className="bg-white hover:bg-purple-50 p-8 rounded-lg shadow-lg">
             <div className="flex items-center mb-6">
               <Image
                 className="w-10 h-10 rounded-full mr-4"
@@ -127,7 +127,7 @@ const TestimonialGrid: React.FC = () => {
           </div>
 
           {/* div5 */}
-          <div className="bg-text-dark-purple text-white p-8 rounded-lg shadow-lg md:col-span-2">
+          <div className="bg-text-dark-purple hover:bg-violet-300 text-white p-8 rounded-lg shadow-lg md:col-span-2">
             <div className="flex items-center mb-6">
               <Image
                 className="w-10 h-10 rounded-full mr-4"

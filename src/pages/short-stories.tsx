@@ -1,6 +1,8 @@
 import Nav from '../components/Nav';
 import ShortStoryCard from '../components/ShortStoryCard';
 import Footer from '../components/RespFooter';
+import ComicButton from "@/components/ComicButton";
+import router, { useRouter } from "next/router";
 
 const shortStories = [
   // Sample data
@@ -18,7 +20,7 @@ const shortStories = [
 
 export default function ShortStoriesPage() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-purple-50">
       <Nav />
       <div className="container mx-auto p-4">
         <h1 className="text-4xl text-slate-800 font-serif font-bold">Short Stories</h1>
@@ -28,6 +30,20 @@ export default function ShortStoriesPage() {
           ))}
         </div>
       </div>
+      <div className="mt-20 flex flex-col lg:flex-row w-full gap-4 items-center justify-center">
+          <div className="lg:w-3/12 md:w-5/12 w-9/12">
+            <ComicButton
+              label="← See Luminoles 🧚‍♂️"
+              onClick={() => router.push("/luminoles")}
+            />
+          </div>
+          <div className="lg:w-3/12 md:w-5/12 w-9/12">
+            <ComicButton
+              label="🕊️ View Resources & Reviews → "
+              onClick={() => router.push("/offerings")}
+            />
+          </div>
+        </div>
       <div className="mt-8">
           <Footer />
       </div>

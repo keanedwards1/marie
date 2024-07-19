@@ -155,9 +155,11 @@ body {
 
 .comic-button {
   display: inline-block;
-  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 15px;
   font-size: 22px;
-  text-align: center;
   text-decoration: none;
   color: #fff;
   font-weight: 800;
@@ -172,6 +174,7 @@ body {
   white-space: nowrap;
   margin-left: 0px !important;
   width: 100%;
+  text-align: center;
 }
 
 .comic-button:hover {
@@ -179,6 +182,7 @@ body {
   color: var(--base-100-light);
   border: 2px solid var(--base-100-light);
   box-shadow: 5px 5px 0px var(--base-100-light);
+  cursor: pointer;
 }
 
 .comic-button:active {
@@ -187,12 +191,49 @@ body {
   transform: translateY(4px);
 }
 
+.comic-button-luminoles-styles {
+  width: 85%;
+  align-self: center;
+  padding: 5px 10px;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.comic-button-landscape-top {
+  width: 85%;
+  align-self: center;
+  padding: 7px 13px;
+  background-color: white;
+  color: var(--base-100-light);
+  border: 2px solid var(--base-100-light);
+  box-shadow: 1px 1px 0px var(--base-100-light);
+  transition: all 0.3s ease;
+}
+
+.comic-button-landscape-top:hover {
+  background-color: var(--base-100-light);
+  border: 2px solid white;
+  color: #fff;
+  font-weight: 800;
+  letter-spacing: 0.9px;
+  font-family: serif;
+  background-color: var(--base-100-light);
+  border: 2px solid #151515;
+  border-radius: 10px;
+  box-shadow: 4px 4px 0px #151515;
+  transform: scale(1.02);
+}
+
+.comic-button-short-stories {
+  padding: 5px 10px;
+}
+
 .short-story-card {
   box-sizing: border-box;
   width: auto;
   height: auto;
-  background: rgba(233, 233, 233, 0.58);
-  border: 1px solid white;
+  background: linear-gradient(to bottom, rgba(249, 226, 255, 0.58) 0%, rgba(215, 157, 248, 0.58) 100%);
+  border: 1px solid rgb(142, 142, 142);
   box-shadow: 12px 17px 51px rgba(99, 99, 99, 0.112);
   backdrop-filter: blur(6px);
   border-radius: 17px;
@@ -208,7 +249,7 @@ body {
 
 .short-story-card:hover {
   border: 1px solid black;
-  transform: scale(1.02);
+  transform: scale(1.01);
 }
 
 .short-story-card:active {

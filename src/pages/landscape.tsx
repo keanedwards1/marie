@@ -94,26 +94,36 @@ export default function Landscape() {
             </h1>
             <div className="flex justify-center">
               <div className="w-7/12 flex justify-center">
-                <ComicButton
-                  label="Explore"
-                  onClick={() => router.push("/landscape/#location")}
-                />
+                <button
+                  className="comic-button comic-button-landscape-top"
+                  onClick={() => {
+                    const element = document.getElementById("location");
+                    if (element) {
+                      element.scrollIntoView({ behavior: "smooth" });
+                    }
+                  }}
+                >
+                  Explore
+                </button>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <main className="flex-grow container mx-auto px-4 py-16 max-w-7xl" id="location">
+      <main
+        className="flex-grow container mx-auto px-4 py-16 max-w-7xl"
+        id="location"
+      >
         <div className="home-page-text-container mr-10 ml-10">
           <div className="flex justify-center home-page-box w-full">
             <div className="w-1/2">
               <h2 className="text-2xl mb-8 text-center font-serif">
-                Akashi (AI) graciously generated these images on your behalf to build
-                excitement and enthusiasm for your visit to Unity.
+                Akashi (AI) graciously generated these images on your behalf to
+                build excitement and enthusiasm for your visit to Unity.
                 <br></br>
               </h2>
               <h2 className="text-2xl font-bold mb-8 text-center font-serif">
-              We very much hope you choose to stay!
+                We very much hope you choose to stay!
               </h2>
             </div>
           </div>
@@ -147,24 +157,23 @@ export default function Landscape() {
         </div>
 
         <div className="w-full h-screenw-full h-96 -mb-10 mt-10 pt-10 flex items-center justify-center">
-          <Cube/>
+          <Cube />
         </div>
 
-        <div className="mt-40 -mb-20 flex gap-4 justify-center">
-        <div className="w-3/12">
+        <div className="mt-40 -mb-20 flex flex-col lg:flex-row w-full gap-4 items-center justify-center">
+          <div className="lg:w-3/12 md:w-5/12 w-9/12">
             <ComicButton
-                label="← Back to Home 🏡"
-                onClick={() => router.push('/')}
-              />
+              label="← Back to Home 🏡"
+              onClick={() => router.push("/")}
+            />
           </div>
-          <div className="w-3/12">
+          <div className="lg:w-3/12 md:w-5/12 w-9/12">
             <ComicButton
-                label="🧚‍♂️ View Luminoles → "
-                onClick={() => router.push('/luminoles')}
-              />
+              label="🧚‍♂️ View Luminoles → "
+              onClick={() => router.push("/luminoles")}
+            />
           </div>
         </div>
-
       </main>
       <div className="bg-grey">
         <Footer />
