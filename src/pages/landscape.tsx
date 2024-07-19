@@ -74,6 +74,17 @@ const locations: Location[] = [
     src: "/images/cote-d’-azur-ville.jpg",
     alt: "Cote d’ Azur Ville",
   },
+  { 
+    id: 13,
+    src: "/images/shumbala-whisper.jpg",
+    alt: "Shumbala",
+  },
+  {
+    id: 14,
+    src: "/images/shumbala.jpg",
+    alt: "Shumbala",
+  }
+
 ];
 
 export default function Landscape() {

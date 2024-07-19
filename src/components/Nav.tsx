@@ -20,10 +20,6 @@ export default function Nav() {
 
   // Check if the current route is /landscape
   const isLandscapePage = router.pathname === "/landscape";
-/*   const isLuminolesPage = router.pathname === "/luminoles";
-  const isShortStoryPage = router.pathname === "/short-stories";
-  const isOfferingsPage = router.pathname === "/offerings";
-  const isHomePage = router.pathname === "/"; */
 
   return (
     <nav className="navbar p-4 z-40 flex flex-wrap justify-between items-center">
@@ -59,7 +55,7 @@ export default function Nav() {
           <path
             className={`transition-transform duration-300 ease-in-out ${
               isMenuOpen ? "rotate-45 -translate-y-1 translate-x-2" : ""
-            }`}
+            } ${isLandscapePage ? "stroke-black" : ""}`}
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth={2}
@@ -68,7 +64,7 @@ export default function Nav() {
           <path
             className={`transition-opacity duration-300 ease-in-out ${
               isMenuOpen ? "opacity-0" : ""
-            }`}
+            } ${isLandscapePage ? "stroke-black" : ""}`}
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth={2}
@@ -77,7 +73,7 @@ export default function Nav() {
           <path
             className={`transition-transform duration-300 ease-in-out ${
               isMenuOpen ? "-rotate-45 translate-y-1 -translate-x-2" : ""
-            }`}
+            } ${isLandscapePage ? "stroke-black" : ""}`}
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth={2}
@@ -100,10 +96,10 @@ export default function Nav() {
       >
         <ul className="menu menu-vertical lg:menu-horizontal p-0 mt-4 lg:mt-0 w-full lg:flex lg:space-x-0 mr-20">
           <li className="w-full lg:w-auto">
-
             <Link
               className={`text-right font-serif lg:text-left w-full lg:w-auto justify-end lg:justify-start ${
-                isLandscapePage ? "nav-menu-button-landscape" : "nav-menu-button"}`}
+                isLandscapePage ? "lg:border-none text-black lg:text-violet-800 nav-menu-button-landscape" : "nav-menu-button"
+              }`}
               href="/"
             >
               Home
@@ -112,8 +108,9 @@ export default function Nav() {
           <li className="w-full lg:w-auto">
             <Link
               className={`text-right font-serif lg:text-left w-full lg:w-auto justify-end lg:justify-start ${
-                isLandscapePage ? "nav-menu-button-landscape" : "nav-menu-button"}`}
-                href="/landscape"
+                isLandscapePage ? "lg:border-none text-black lg:text-violet-800 nav-menu-button-landscape" : "nav-menu-button"
+              }`}
+              href="/landscape"
             >
               Landscape
             </Link>
@@ -121,7 +118,8 @@ export default function Nav() {
           <li className="w-full lg:w-auto">
             <Link
               className={`text-right font-serif lg:text-left w-full lg:w-auto justify-end lg:justify-start ${
-              isLandscapePage ? "nav-menu-button-landscape" : "nav-menu-button"}`}
+                isLandscapePage ? "lg:border-none text-black lg:text-violet-800 nav-menu-button-landscape" : "nav-menu-button"
+              }`}
               href="/luminoles"
             >
               Luminoles
@@ -130,7 +128,8 @@ export default function Nav() {
           <li className="w-full lg:w-auto">
             <Link
               className={`text-right font-serif lg:text-left w-full lg:w-auto justify-end lg:justify-start ${
-              isLandscapePage ? "nav-menu-button-landscape" : "nav-menu-button"}`}
+                isLandscapePage ? "lg:border-none text-black lg:text-violet-800 nav-menu-button-landscape" : "nav-menu-button"
+              }`}
               href="/short-stories"
             >
               Short Stories
@@ -139,7 +138,8 @@ export default function Nav() {
           <li className="w-full lg:w-auto">
             <Link
               className={`text-right font-serif lg:text-left w-full lg:w-auto justify-end lg:justify-start ${
-              isLandscapePage ? "nav-menu-button-landscape" : "nav-menu-button"}`}
+                isLandscapePage ? "lg:border-none text-black lg:text-violet-800 nav-menu-button-landscape" : "nav-menu-button"
+              }`}
               href="/offerings"
             >
               Offerings
