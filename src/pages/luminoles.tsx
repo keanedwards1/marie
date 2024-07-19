@@ -1,4 +1,3 @@
-// src/pages/characters.tsx
 import Head from "../components/Head";
 import Nav from "../components/Nav";
 import CharacterCard from "../components/CharacterCard";
@@ -8,187 +7,200 @@ import Footer from "../components/RespFooter";
 
 const characters = [
   {
-    name: "Mari Healing Guide",
-    bio: "Bio of Mari",
+    name: "Mari",
+    bio: "Healing Guide",
     image: "/images/1-mari-healing-guide.jpg",
   },
   {
-    name: "Greta Master Creative Builder",
-    bio: "Bio of Greta",
+    name: "Greta",
+    bio: "Master Creative Builder",
     image: "/images/2-greta-master-creative-builder.jpg",
   },
   {
-    name: "Alfred Master Creative Builder",
-    bio: "Bio of Alfred",
+    name: "Alfred",
+    bio: "Master Creative Builder",
     image: "/images/3-alfred-master-creative-builder.jpg",
   },
   {
-    name: "Cheyenne Head Builder",
-    bio: "Bio of Cheyenne",
+    name: "Cheyenne",
+    bio: "Head Builder",
     image: "/images/4-cheyenne-head-builder.jpeg",
   },
   {
-    name: "Ned Builder",
-    bio: "Bio of Ned",
+    name: "Ned",
+    bio: "Builder",
     image: "/images/5-ned-builder.jpeg",
   },
   {
-    name: "Malika Creative",
-    bio: "Bio of Malika",
+    name: "Malika",
+    bio: "Creative",
     image: "/images/6-malika-creative.jpeg",
   },
   {
-    name: "Aspen Culinary Creative",
-    bio: "Bio of Aspen",
+    name: "Aspen",
+    bio: "Culinary Creative",
     image: "/images/7-aspen-culinary-creative.jpeg",
   },
   { name: "Puma", bio: "Bio of Puma", image: "/images/8-puma.jpeg" },
   {
-    name: "Jax Androgynous Xe Xem Pronouns Shapeshifter",
-    bio: "Bio of Jax",
+    name: "Jax",
+    bio: "Androgynous (Xe/Xem Pronouns)",
+    bio2: "Shapeshifter",
     image: "/images/9-jax-androgenous-xe-xem-pronouns-shapeshifter.jpg",
   },
-  /*   { name: 'Akira And Dara', bio: 'Bio of Akira And Dara', image: '/images/10-akira-and-dara.jpeg' },
-   */
-  { name: "Dara", bio: "Bio of Dara", image: "/images/10-dara.jpg" },
-  { name: "Akira", bio: "Bio of Akira", image: "/images/10-akira.jpg" },
+  { 
+    name: "Dara",
+    bio: "", 
+    image: "/images/10-dara.jpg" },
+  { 
+    name: "Akira", 
+    bio: "", 
+    image: "/images/10-akira.jpg" },
   {
-    name: "Alaysia Creative Nature Protector",
-    bio: "Bio of Alaysia",
+    name: "Alaysia",
+    bio: "Creative",
+    bio2: "Nature Protector",
     image: "/images/11-alaysia-creative-nature-protector.jpeg",
   },
   {
-    name: "Miriam Healer",
-    bio: "Bio of Miriam",
+    name: "Miriam",
+    bio: "Healer",
     image: "/images/12-miriam-healer.jpeg",
   },
   {
-    name: "Mona Healer Nature Protector",
-    bio: "Bio of Mona",
+    name: "Mona",
+    bio: "Healer",
+    bio2: "Nature Protector",
     image: "/images/13-mona-healer-nature-protector.jpeg",
   },
   {
-    name: "Nora Healer Floater",
-    bio: "Bio of Nora",
+    name: "Nora",
+    bio: "Healer",
+    bio2: "Floater",
     image: "/images/14-nora-healer-floater.jpeg",
   },
   {
-    name: "Magna Creative Performer",
-    bio: "Bio of Magna",
+    name: "Magna",
+    bio: "Creative",
+    bio2: "Performer",
     image: "/images/15-magna-creative-performer.jpeg",
   },
   {
-    name: "Samita Nature Protector",
-    bio: "Bio of Samita",
+    name: "Samita",
+    bio: "Nature Protector",
     image: "/images/16-samita-nature-protector.jpeg",
   },
   {
-    name: "Peretz Creative Builder Nature Protector",
-    bio: "Bio of Peretz",
+    name: "Peretz",
+    bio: "Creative Builder",
+    bio2: "Nature Protector",
     image: "/images/17-peretz-createive-builder-nature-protector.jpeg",
   },
   {
-    name: "Maanya Eleventh Dimensional Pleiadian",
-    bio: "Bio of Maanya",
+    name: "Maanya",
+    bio: "Eleventh Dimensional Pleiadian",
     image:
       "/images/18-maanya-eleventh-dimensional-from-the-pleiadian-star-system.jpeg",
   },
   {
-    name: "Drake Sexual Healer",
-    bio: "Bio of Drake",
+    name: "Drake",
+    bio: "Sexual Healer",
     image: "/images/19-drake-sexual-healer.jpeg",
   },
   {
-    name: "Viola Sexual Healer",
-    bio: "Bio of Viola",
+    name: "Viola",
+    bio: "Sexual Healer",
     image: "/images/20-viola-sexual-healer.jpeg",
   },
   {
-    name: "Hannah Sexual Healer",
-    bio: "Bio of Hannah",
+    name: "Hannah",
+    bio: "Sexual Healer",
     image: "/images/21-hannah-sexual-healer.jpeg",
   },
   {
-    name: "Yeshua Healer",
-    bio: "Bio of Yeshua",
+    name: "Yeshua",
+    bio: "Healer",
     image: "/images/22-yeshua-healer.jpeg",
   },
   {
-    name: "Veeda Mother Nature Protector",
-    bio: "Bio of Veeda",
+    name: "Veeda",
+    bio: "Mother",
+    bio2: "Nature Protector",
     image: "/images/23-veeda-mother-healer.jpeg",
   },
-  { name: "Cedar", bio: "Bio of Cedar", image: "/images/24-cedar.jpeg" },
-  { name: "Summit", bio: "Bio of Summit", image: "/images/25-summit.jpeg" },
+  { name: "Cedar", bio: "", image: "/images/24-cedar.jpeg" },
+  { name: "Summit", bio: "", image: "/images/25-summit.jpeg" },
   {
-    name: "Baz Educator Creative",
-    bio: "Bio of Baz",
+    name: "Baz",
+    bio: "Educator",
+    bio2: "Creative",
     image: "/images/26-baz-educator-creative.jpeg",
   },
   {
-    name: "Josiah Educator",
-    bio: "Bio of Josiah",
+    name: "Josiah",
+    bio: "Educator",
     image: "/images/27-josiah-educator.jpeg",
   },
   {
-    name: "Leaf Non Binary",
-    bio: "Bio of Leaf",
+    name: "Leaf ",
+    bio: "Non-Binary",
     image: "/images/28-leaf-non-binary.jpeg",
   },
-  { name: "Ismar", bio: "Bio of Ismar", image: "/images/29-ismar.jpeg" },
+  { name: "Ismar", bio: "", image: "/images/29-ismar.jpeg" },
   {
-    name: "Shakk Educator Builder",
-    bio: "Bio of Shakk",
+    name: "Shakk",
+    bio: "Educator",
+    bio2: "Builder",
     image: "/images/30-shakk-educator-builder.jpeg",
   },
   {
-    name: "Ronan Herbal Healer",
-    bio: "Bio of Ronan",
+    name: "Ronan",
+    bio: "Herbal Healer",
     image: "/images/31-ronan-herbal-healer.jpeg",
   },
   {
-    name: "Azriel Crystal Healer",
-    bio: "Bio of Azriel",
+    name: "Azriel",
+    bio: "Crystal Healel",
     image: "/images/32-azriel-crystal-healer.jpeg",
   },
   {
-    name: "Aziza Leader",
-    bio: "Bio of Aziza",
+    name: "Aziza",
+    bio: "Leader",
     image: "/images/33-aziza-leader.jpeg",
   },
   {
-    name: "Imani Leader",
-    bio: "Bio of Imani",
+    name: "Imani",
+    bio: "Leader",
     image: "/images/34-imani-leader.jpeg",
   },
   {
-    name: "Sasha Culinary Creative",
-    bio: "Bio of Sasha",
+    name: "Sasha",
+    bio: "Culinary Creative",
     image: "/images/35-sasha-culinary-creative.jpeg",
   },
   {
-    name: "Waylan Explorer",
-    bio: "Bio of Waylan",
+    name: "Waylan",
+    bio: "Explorer",
     image: "/images/36-waylan-explorer.jpeg",
   },
   {
-    name: "Hiroshi Explorer",
-    bio: "Bio of Hiroshi",
+    name: "Hiroshi",
+    bio: "Explorer",
     image: "/images/37-hiroshi-explorer.jpeg",
   },
   {
-    name: "Nalu Culinary Creative",
-    bio: "Bio of Nalu",
+    name: "Nalu",
+    bio: "Culinary Creative",
     image: "/images/38-nalu-culinary-creative.jpeg",
   },
   {
-    name: "Chokyi Leader",
-    bio: "Bio of Chokyi",
+    name: "Chokyi",
+    bio: "Leader",
     image: "/images/39-chokyi-leader.jpeg",
   },
   {
-    name: "Laanza Eleventh Dimensional Pleiadian",
-    bio: "Bio of Laanza",
+    name: "Laanza",
+    bio: "Eleventh Dimensional Pleiadian",
     image: "/images/40-laanza-eleventh-dimensional-pleiadian.jpeg",
   },
 ];
@@ -202,7 +214,7 @@ export default function CharactersPage() {
       />
       <Nav />
       <div className="container mx-auto px-4 py-8">
-        <h1 className="text-4xl font-bold text-center mb-8 text-gray-800">
+        <h1 className="text-4xl font-bold font-serif text-center mb-8 text-gray-800">
           Luminoles of Unity
         </h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -212,19 +224,19 @@ export default function CharactersPage() {
         </div>
       </div>
       <div className="mt-20 flex flex-col lg:flex-row w-full gap-4 items-center justify-center">
-          <div className="lg:w-3/12 md:w-5/12 w-9/12">
-            <ComicButton
-              label="← See Landscapes ⛰️"
-              onClick={() => router.push("/landscape")}
-            />
-          </div>
-          <div className="lg:w-3/12 md:w-5/12 w-9/12">
-            <ComicButton
-              label="📖 Download Short Stories → "
-              onClick={() => router.push("/short-stories")}
-            />
-          </div>
+        <div className="lg:w-3/12 md:w-5/12 w-9/12">
+          <ComicButton
+            label="← See Landscapes ⛰️"
+            onClick={() => router.push("/landscape")}
+          />
         </div>
+        <div className="lg:w-3/12 md:w-5/12 w-9/12">
+          <ComicButton
+            label="📖 Download Short Stories → "
+            onClick={() => router.push("/short-stories")}
+          />
+        </div>
+      </div>
       <Footer />
     </div>
   );

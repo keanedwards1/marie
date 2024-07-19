@@ -16,8 +16,8 @@ interface Location {
 const locations: Location[] = [
   {
     id: 1,
-    src: "/images/dome-village.jpg",
-    alt: "Dome Village",
+    src: "/images/azure-village.jpg",
+    alt: "Azure Village",
   },
   {
     id: 2,
@@ -26,53 +26,53 @@ const locations: Location[] = [
   },
   {
     id: 3,
-    src: "/images/two-woman-with-a-hovercraft.jpg",
-    alt: "Two Woman With A Hovercraft",
+    src: "/images/the-whisper.jpg",
+    alt: "The Whisper",
   },
   {
     id: 4,
-    src: "/images/magical-utopian-city.jpg",
-    alt: "Magical Utopian City",
+    src: "/images/central-hub-of-elysia.jpg",
+    alt: "Central Hub of Elysia",
   },
   {
     id: 5,
-    src: "/images/crystal-fountain.jpg",
-    alt: "Kids Playing In Fountain With A Crystal Pyramid",
+    src: "/images/central-hub.jpg",
+    alt: "Central Hub",
   },
   {
     id: 6,
-    src: "/images/greenhouse.jpg",
-    alt: "Greenhouse",
+    src: "/images/harmony-healing-center-greenhouse.jpg",
+    alt: "Harmony Healing Center Greenhouse",
   },
   {
     id: 7,
-    src: "/images/crystal-room.jpg",
-    alt: "Crystal Room",
+    src: "/images/harmony-crystal-room.jpg",
+    alt: "Harmony Crystal Room",
   },
   {
     id: 8,
-    src: "/images/woman-standing-in-room-with-bamboo-trees.jpg",
-    alt: "Woman Standing In Dome With Trees",
+    src: "/images/radiant-dome.jpg",
+    alt: "Radiant Dome",
   },
   {
     id: 9,
-    src: "/images/spider-girl.jpg",
-    alt: "Spider Girl",
+    src: "/images/radiant-dome-spider-girl.jpg",
+    alt: "Radiant Dome",
   },
   {
     id: 10,
-    src: "/images/crystal-pyramid.jpg",
-    alt: "Crystal Pyramid",
+    src: "/images/the-zephyr.jpg",
+    alt: "The Zephyr",
   },
   {
     id: 11,
-    src: "/images/crystal-tropical-pyramid-with-volcano.jpg",
-    alt: "Tropical Crystal Pyramid With Volcano",
+    src: "/images/makai-ola-island.jpg",
+    alt: "Makai Ola Island",
   },
   {
     id: 12,
-    src: "/images/crystal-pyramid-2.jpg",
-    alt: "Crystal Pyramid In The Louvre In Paris",
+    src: "/images/cote-d’-azur-ville.jpg",
+    alt: "Cote d’ Azur Ville",
   },
 ];
 

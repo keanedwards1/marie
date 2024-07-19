@@ -505,7 +505,7 @@ body {
 }
 
 .bg-hero-image {
-  background-image: url('/images/dome-village.jpg');
+  background-image: url('/images/azure-village.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -558,7 +558,7 @@ body {
 
 .location-info {
   position: absolute;
-  bottom: -0px;
+  bottom: -1px;
   left: 0;
   right: 0;
   padding: 1rem;

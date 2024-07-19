@@ -1,9 +1,11 @@
+// src/components/CharacterCard.tsx
 import Image from 'next/image';
 import { useState } from 'react';
 
 interface Character {
   name: string;
   bio: string;
+  bio2?: string;
   image: string;
 }
 
@@ -34,10 +36,15 @@ export default function CharacterCard({ character }: CharacterCardProps) {
 
       <div className={`absolute inset-0 bg-black bg-opacity-30 flex flex-col justify-end p-6 transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}>
         <h2 className="text-2xl font-bold text-white mb-2">{character.name}</h2>
-        <p className="text-sm text-gray-200 mb-4 line-clamp-3">{character.bio}</p>
-        <button className="comic-button comic-button-luminoles-styles">
-          View
-        </button>
+        <p className="text-sm text-gray-200 mb-4 line-clamp-3">
+          {character.bio}
+          {character.bio2 && (
+            <>
+              <br />
+              {character.bio2}
+            </>
+          )}
+        </p>
       </div>
     </div>
   );
