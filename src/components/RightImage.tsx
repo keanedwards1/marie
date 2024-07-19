@@ -16,23 +16,23 @@ const RightImage: React.FC = () => {
             </p>
           </h1>
           <p className="mt-4 text-m text-center z-10 md:text-left font-serif">
-            <strong>
+{/*             <strong>
               Blurb:<br></br> &quot;After a lifetime of chasing the slippery fish of peace while
               trying to navigate a sleeping world, I reveled in the rainstorm of
               the absence of my suffering.&quot;
             </strong>
             <br />
             <br />
-            <br />
+            <br /> */}
             <span className="text-sm z-10">
-              Seeking respite in a collapsing world, Rose meditates on a beach
+              Seeking respite in a collapsing world, Rose meditates on a beach in Costa Rica
               and is transported to an <em>entirely NEW world.</em> She laughs,
               cries and transforms as she journeys through a magical utopian
               wonderland.
               <br />
               <br />
-              Diving deep within, Rose discovers her unique gifts that
-              are desperately needed in the land of perfection.
+              Diving deep within, Rose must discover her unique gifts to fully thrive
+              in the land of perfection.
               <br />
               <br />
               Her fantastical experience starkly contrasts the dystopian

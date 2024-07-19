@@ -88,7 +88,7 @@ const characters = [
     image: "/images/17-peretz-createive-builder-nature-protector.jpeg",
   },
   {
-    name: "Maanya Eleventh Dimensional From The Pleiadian Star System",
+    name: "Maanya Eleventh Dimensional Pleiadian",
     bio: "Bio of Maanya",
     image:
       "/images/18-maanya-eleventh-dimensional-from-the-pleiadian-star-system.jpeg",
@@ -114,7 +114,7 @@ const characters = [
     image: "/images/22-yeshua-healer.jpeg",
   },
   {
-    name: "Veeda Mother Healer",
+    name: "Veeda Mother Nature Protector",
     bio: "Bio of Veeda",
     image: "/images/23-veeda-mother-healer.jpeg",
   },
@@ -203,7 +203,7 @@ export default function CharactersPage() {
       <Nav />
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-4xl font-bold text-center mb-8 text-gray-800">
-          Characters
+          Luminoles of Unity
         </h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {characters.map((character, index) => (
