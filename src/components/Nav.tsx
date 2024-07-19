@@ -20,6 +20,10 @@ export default function Nav() {
 
   // Check if the current route is /landscape
   const isLandscapePage = router.pathname === "/landscape";
+/*   const isLuminolesPage = router.pathname === "/luminoles";
+  const isShortStoryPage = router.pathname === "/short-stories";
+  const isOfferingsPage = router.pathname === "/offerings";
+  const isHomePage = router.pathname === "/"; */
 
   return (
     <nav className="navbar p-4 z-40 flex flex-wrap justify-between items-center">

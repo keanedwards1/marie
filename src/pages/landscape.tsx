@@ -90,7 +90,7 @@ export default function Landscape() {
         <div className="mt-50vh">
           <div className="landscape-header-card">
             <h1 className="location-header-text text-5xl font-bold mb-16 text-center text-white font-serif">
-              The Realm of Unity Landscape
+              Welcome To The Realm of Unity Landscape
             </h1>
             <div className="flex justify-center">
               <div className="w-7/12 flex justify-center">
