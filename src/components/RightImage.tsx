@@ -31,7 +31,7 @@ const RightImage: React.FC = () => {
               wonderland.
               <br />
               <br />
-              Diving deep within, Rose must discover her unique gifts to fully thrive
+              Diving deep within, Rose must heal ancient wounds and discover her unique gifts to fully thrive
               in the land of perfection.
               <br />
               <br />

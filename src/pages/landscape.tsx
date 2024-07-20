@@ -21,66 +21,96 @@ const locations: Location[] = [
   },
   {
     id: 2,
+    src: "/images/mokai-ola-island.jpg",
+    alt: "Makai Ola Island",
+  },
+  {
+    id: 3,
+    src: "/images/purple-starfruit.jpg",
+    alt: "Purple Starfruit",
+  },
+  {
+    id: 4,
     src: "/images/serene-lake.jpg",
     alt: "Serene Lake",
   },
   {
-    id: 3,
+    id: 5,
+    src: "/images/dragon.jpg",
+    alt: "",
+  },
+  {
+    id: 6,
+    src: "/images/dancing-crowd.jpg",
+    alt: "",
+  },
+  {
+    id: 7,
+    src: "/images/green-haired-girl.jpg",
+    alt: "",
+  },
+  {
+    id: 8,
     src: "/images/the-whisper.jpg",
     alt: "The Whisper",
   },
   {
-    id: 4,
+    id: 9,
     src: "/images/central-hub-of-elysia.jpg",
     alt: "Central Hub of Elysia",
   },
   {
-    id: 5,
+    id: 10,
     src: "/images/central-hub.jpg",
     alt: "Central Hub",
   },
   {
-    id: 6,
+    id: 11,
     src: "/images/harmony-healing-center-greenhouse.jpg",
     alt: "Harmony Healing Center Greenhouse",
   },
   {
-    id: 7,
+    id: 12,
     src: "/images/harmony-crystal-room.jpg",
     alt: "Harmony Crystal Room",
   },
   {
-    id: 8,
+    id: 13,
     src: "/images/radiant-dome.jpg",
     alt: "Radiant Dome",
   },
   {
-    id: 9,
+    id: 14,
     src: "/images/radiant-dome-spider-girl.jpg",
-    alt: "Radiant Dome",
+    alt: "",
   },
   {
-    id: 10,
+    id: 15,
     src: "/images/the-zephyr.jpg",
     alt: "The Zephyr",
   },
   {
-    id: 11,
+    id: 16,
     src: "/images/makai-ola-island.jpg",
     alt: "Makai Ola Island",
   },
   {
-    id: 12,
+    id: 17,
     src: "/images/cote-d’-azur-ville.jpg",
     alt: "Cote d’ Azur Ville",
   },
+  {
+    id: 18,
+    src: "/images/cote-d'-azur-ville.jpg",
+    alt: "Cote d’ Azur Ville",
+  },
   { 
-    id: 13,
+    id: 19,
     src: "/images/shumbala-whisper.jpg",
     alt: "Shumbala",
   },
   {
-    id: 14,
+    id: 20,
     src: "/images/shumbala.jpg",
     alt: "Shumbala",
   }
@@ -129,7 +159,7 @@ export default function Landscape() {
           <div className="flex justify-center home-page-box w-full">
             <div className="w-1/2">
               <h2 className="text-2xl mb-8 text-center font-serif">
-                Akashi (AI) graciously generated these images on your behalf to
+                Akashi (AI) generated these images on your behalf to
                 build excitement and enthusiasm for your visit to Unity.
                 <br></br>
               </h2>
