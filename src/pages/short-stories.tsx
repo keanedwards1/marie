@@ -1,3 +1,5 @@
+// /src/pages/short-stories.tsx
+
 import Nav from '../components/Nav';
 import ShortStoryCard from '../components/ShortStoryCard';
 import Footer from '../components/RespFooter';
