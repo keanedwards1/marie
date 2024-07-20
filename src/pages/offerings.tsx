@@ -21,10 +21,10 @@ const Offerings: React.FC = () => {
         >
           <form className="review-form-text" action="" method="post">
             <fieldset className="border-4 border-dotted review-form-border p-5">
-              <legend className="px-2 italic -mx-2 review-form-legend">
+              <legend className="px-2 italic text-lg -mx-2 review-form-legend">
                 Read the book? Feel free to share your thoughts 💫
               </legend>
-              <label className="text-xs font-bold" htmlFor="first-name">
+              <label className="text-sm font-bold" htmlFor="first-name">
                 First Name or First Initial
               </label>
               <input
@@ -32,9 +32,10 @@ const Offerings: React.FC = () => {
                 type="text"
                 name="first-name"
                 id="first-name"
+                placeholder="Dr."
               />
               <label
-                className="text-xs font-bold after:content-['*'] after:text-red-400"
+                className="text-sm font-bold after:content-['*'] after:text-red-400"
                 htmlFor="last-name"
               >
                 Last Name
@@ -44,9 +45,10 @@ const Offerings: React.FC = () => {
                 type="text"
                 name="last-name"
                 id="last-name"
+                placeholder="Suess"
                 required
               />
-              <label className="text-xs font-bold" htmlFor="job-title">
+              <label className="text-sm font-bold" htmlFor="job-title">
                 Job Title or Passion
               </label>
               <input
@@ -54,12 +56,13 @@ const Offerings: React.FC = () => {
                 type="text"
                 name="job-title"
                 id="job-title"
+                placeholder="Basketweaver"
               />
               <label
-                className="text-xs font-bold after:content-['*'] after:text-red-400"
+                className="text-sm font-bold after:content-['*'] after:text-red-400"
                 htmlFor="review"
               >
-                Review
+                Your Review ✍️
               </label>
               <textarea
                 className="w-full p-2 mb-2 mt-1 outline-none ring-none rounded review-form-input focus:review-form-input-focus"
