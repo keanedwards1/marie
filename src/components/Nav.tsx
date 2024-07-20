@@ -18,9 +18,10 @@ export default function Nav() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Check if the current route is /landscape
+  // Check if the current route is ___
   const isLandscapePage = router.pathname === "/landscape";
-
+  const isHomePage = router.pathname === "/";
+  
   return (
     <nav className="navbar p-4 z-40 flex flex-wrap justify-between items-center">
       <div className="flex items-center">
@@ -37,7 +38,7 @@ export default function Nav() {
             height={50}
             priority
           />
-          A Book Launch 🦋{" "}
+          A Book Launch {isHomePage && "🦋"}
         </Link>
       </div>
       <button
