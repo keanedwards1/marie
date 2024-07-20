@@ -14,6 +14,8 @@ interface ShortStoryCardProps {
   story: ShortStory;
 }
 
+const SERVER_URL = 'https://159.89.233.75.nip.io';
+
 export default function ShortStoryCard({ story }: ShortStoryCardProps) {
   const [isDownloading, setIsDownloading] = useState(false);
 
@@ -22,7 +24,7 @@ export default function ShortStoryCard({ story }: ShortStoryCardProps) {
     
     setIsDownloading(true);
     try {
-      const response = await fetch(`/api/proxy-download?filename=${encodeURIComponent(story.pdfFilename)}`);
+      const response = await fetch(`${SERVER_URL}/api/download/${encodeURIComponent(story.pdfFilename)}`);
       if (response.ok) {
         const blob = await response.blob();
         const url = window.URL.createObjectURL(blob);
