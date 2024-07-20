@@ -7,7 +7,7 @@ const RightImage: React.FC = () => {
 
   return (
     <div className="w-full z-10 md:w-1/2">
-      <div className="home-page-text-container">
+      <div className="home-page-text-container home-page-text-container-1">
         <div className="home-page-box">
           <h1 className="text-3xl font-bold text-center font-serif z-10">
             The Realm of Unity  <br></br>
@@ -56,7 +56,7 @@ const RightImage: React.FC = () => {
             onClick={() => router.push("/purchase")}
           />
           <ComicButton
-            label="⛰️ See The Books Landscape →"
+            label="⛰️ See Landscapes →"
             onClick={() => router.push("/landscape")}
           />
         </div>

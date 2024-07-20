@@ -435,9 +435,19 @@ body {
   overflow: visible;
 }
 
+@media (min-width: 1280px) {
+  .home-page-text-container-1 {
+    margin-top: -80px;
+  }
+}
+
 @media (max-width: 768px) {
   .right-image-styles {
     margin-bottom: 100px;
+  }
+  .home-page-text-container-1 {
+    margin-top: -80px;
+    margin-bottom: 80px;
   }
 }
 
@@ -499,9 +509,10 @@ body {
   width: 50%;
   border-radius: 1rem;
   padding: 3rem;
-  background-color: #4159d024;
-  background-image: linear-gradient(43deg, #4159d05b 0%, #c850c0a7 46%, #ffcd7052 100%);
-  box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+  background-color: #79429c96;
+/*   background-image: linear-gradient(43deg, #4159d05b 0%, #c850c0a7 46%, #ffcd7052 100%);
+ */  /* background-color: #dfbdf788; */
+  box-shadow: rgba(0, 0, 0, 0.17) 0px -13px 15px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
 }
 
 @media (max-width: 786px) {
@@ -521,10 +532,10 @@ body {
 
 .location-header-text {
   text-shadow:
-    -0.5px -0.5px 10px #00000074,
-    0.5px -0.5px 0 #000,
-    -0.5px 0.5px 0 #000,
-    0.5px 0.5px 0 #000;
+    -0.5px -0.5px 10px #00000044,
+    0.5px -0.5px 10px #0000002f,
+    -0.5px 0.5px 10px #0000003f,
+    0.5px 0.5px 10px #00000017;
 }
 
 .location-card {
@@ -564,13 +575,13 @@ body {
 
 .location-info {
   position: absolute;
-  bottom: -1px;
+  bottom: -0px;
   left: 0;
   right: 0;
   padding: 1rem;
   margin: 0px;
   width: 100%;
-  background: linear-gradient(to top, rgb(215, 173, 240), rgba(203, 70, 229, 0));
+  background: linear-gradient(to top, rgba(108, 49, 142, 0.644), rgba(203, 70, 229, 0));
   color: white;
   text-align: center;
   transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
