@@ -34,9 +34,9 @@ export default function CharacterCard({ character }: CharacterCardProps) {
         </div>
       </div>
 
-      <div className={`absolute inset-0 bg-black bg-opacity-30 flex flex-col justify-end p-6 transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}>
-        <h2 className="text-2xl font-bold text-white mb-2">{character.name}</h2>
-        <p className="text-sm text-gray-200 mb-4 line-clamp-3">
+      <div className={`absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-8 transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}>
+        <h2 className="text-3xl font-bold text-white mb-3">{character.name}</h2>
+        <p className="text-base text-gray-100 mb-4 line-clamp-3 font-medium">
           {character.bio}
           {character.bio2 && (
             <>

@@ -17,18 +17,18 @@ const Offerings: React.FC = () => {
       <div>
         <div
           id="review-form"
-          className="lg:mr-32 lg:ml-32 md:ml-10 md:mr-10 mr-6 ml-6 mt-16 bg-violet-100 rounded shadow flex flex-col justify-between p-3"
+          className="lg:mr-32 lg:ml-32 md:ml-10 md:mr-10 mr-6 ml-6 mt-16 rounded shadow flex flex-col justify-between p-3 review-form-bg"
         >
-          <form className="text-violet-400" action="" method="post">
-            <fieldset className="border-4 border-dotted border-violet-400 p-5">
-              <legend className="px-2 italic -mx-2">
+          <form className="review-form-text" action="" method="post">
+            <fieldset className="border-4 border-dotted review-form-border p-5">
+              <legend className="px-2 italic -mx-2 review-form-legend">
                 Read the book? Feel free to share your thoughts 💫
               </legend>
               <label className="text-xs font-bold" htmlFor="first-name">
                 First Name or First Initial
               </label>
               <input
-                className="w-full p-2 mb-2 mt-1 outline-none ring-none focus:ring-2 rounded focus:ring-violet-400"
+                className="w-full p-2 mb-2 mt-1 outline-none ring-none rounded review-form-input focus:review-form-input-focus"
                 type="text"
                 name="first-name"
                 id="first-name"
@@ -40,7 +40,7 @@ const Offerings: React.FC = () => {
                 Last Name
               </label>
               <input
-                className="w-full p-2 mb-2 mt-1 outline-none ring-none focus:ring-2 rounded focus:ring-violet-400"
+                className="w-full p-2 mb-2 mt-1 outline-none ring-none rounded review-form-input focus:review-form-input-focus"
                 type="text"
                 name="last-name"
                 id="last-name"
@@ -50,7 +50,7 @@ const Offerings: React.FC = () => {
                 Job Title or Passion
               </label>
               <input
-                className="w-full p-2 mb-2 mt-1 outline-none ring-none focus:ring-2 rounded focus:ring-violet-400"
+                className="w-full p-2 mb-2 mt-1 outline-none ring-none rounded review-form-input focus:review-form-input-focus"
                 type="text"
                 name="job-title"
                 id="job-title"
@@ -62,13 +62,13 @@ const Offerings: React.FC = () => {
                 Review
               </label>
               <textarea
-                className="w-full p-2 mb-2 mt-1 outline-none ring-none focus:ring-2 rounded focus:ring-violet-400"
+                className="w-full p-2 mb-2 mt-1 outline-none ring-none rounded review-form-input focus:review-form-input-focus"
                 name="review"
                 id="review"
                 rows={4}
                 required
               ></textarea>
-              <button className="w-full rounded bg-violet-400 text-violet-50 p-2 text-center font-bold transition-all hover:bg-violet-500">
+              <button className="w-full rounded p-2 text-center font-bold transition-all review-form-button hover:review-form-button-hover">
                 Submit Review
               </button>
             </fieldset>

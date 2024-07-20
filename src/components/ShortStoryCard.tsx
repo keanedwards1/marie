@@ -47,10 +47,10 @@ export default function ShortStoryCard({ story }: ShortStoryCardProps) {
   };
 
   return (
-    <div className="card bg-base-100 shadow-md short-story-card">
-      <div className="card-body font-serif mt-16 mb-16 text-black">
-        <h2 className="card-title">{story.title}</h2>
-        <p>{story.description}</p>
+    <div className="card bg-base-100 shadow-md flex justify-center align-middle short-story-card">
+      <div className="card-body font-serif mt-16 lg:w-7/12 md:w-full w-8/12 mb-16 text-black">
+        <h2 className="card-title text-left">{story.title}</h2>
+        <p className="text-left">{story.description}</p>
         <div className="w-full">
           <button
             className={`comic-button ${story.pdfFilename ? 'comic-button-short-stories' : 'comic-button-coming-soon'}`}
