@@ -41,10 +41,10 @@ const characters = [
     bio: "Culinary Creative",
     image: "/images/7-aspen-culinary-creative.jpeg",
   },
-  { name: "Puma", bio: "Bio of Puma", image: "/images/8-puma.jpeg" },
+  { name: "Puma", bio: "", image: "/images/8-puma.jpeg" },
   {
     name: "Jax",
-    bio: "Androgynous (Xe/Xem Pronouns)",
+    bio: "Androgynous",
     bio2: "Shapeshifter",
     image: "/images/9-jax-androgenous-xe-xem-pronouns-shapeshifter.jpg",
   },
@@ -81,8 +81,7 @@ const characters = [
   },
   {
     name: "Magna",
-    bio: "Creative",
-    bio2: "Performer",
+    bio: "Creative Performer",
     image: "/images/15-magna-creative-performer.jpeg",
   },
   {
@@ -195,7 +194,7 @@ const characters = [
   },
   {
     name: "Chokyi",
-    bio: "Leader",
+    bio: "Creative Leader",
     image: "/images/39-chokyi-leader.jpeg",
   },
   {
