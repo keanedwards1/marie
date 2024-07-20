@@ -107,12 +107,12 @@ const locations: Location[] = [
   { 
     id: 19,
     src: "/images/shumbala-whisper.jpg",
-    alt: "Shumbala",
+    alt: "Shumba-La",
   },
   {
     id: 20,
     src: "/images/shumbala.jpg",
-    alt: "Shumbala",
+    alt: "Shumba-La",
   }
 
 ];
