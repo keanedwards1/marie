@@ -471,15 +471,15 @@ body {
 }
 
 .review-form-text {
-  color: #b87cec; /* Violet text */
+  color: #a57cec; /* Violet text */
 }
 
 .review-form-border {
-  border-color: #ae6ce1; /* Violet border */
+  border-color: #996ce1; /* Violet border */
 }
 
 .review-form-legend {
-  color: #9f60def6; /* Darker violet for legend */
+  color: #9260def6; /* Darker violet for legend */
 }
 
 .review-form-input {
@@ -492,13 +492,59 @@ body {
 }
 
 .review-form-button {
-  background-color: #ba88f3f4; /* Violet background */
+  background-color: #9164d0f4; /* Violet background */
   color: white;
   transition: all 0.4s;
+  box-shadow: 1px 1px 0px #000;
+  border: 2px solid #000;
+  border-radius: 5px;
 }
 
 .review-form-button:hover {
-  background-color: #b57dff;
+  background-color: #ad7dff;
+  background-color: #fff;
+  color: #7b51b6f4;
+  border: 2px solid #7b51b6f4;
+  box-shadow: 5px 5px 0px #7b51b6f4;
+}
+
+.comic-button {
+  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 15px;
+  font-size: 22px;
+  text-decoration: none;
+  color: #fff;
+  font-weight: 800;
+  letter-spacing: 0.9px;
+  font-family: serif;
+  background-color: #7e4e9d;
+  background-color: #965ec0;
+  border: 2px solid #000;
+  border-radius: 10px;
+  box-shadow: 1px 1px 0px #000;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  white-space: nowrap;
+  margin-left: 0px !important;
+  width: 100%;
+  text-align: center;
+}
+
+.comic-button:hover {
+  background-color: #fff;
+  color: var(--base-100-light);
+  border: 2px solid var(--base-100-light);
+  box-shadow: 5px 5px 0px var(--base-100-light);
+  cursor: pointer;
+}
+
+.comic-button:active {
+  background-color: var(--base-100-light);
+  box-shadow: none;
+  transform: translateY(4px);
 }
 
 /* .footer-copyright {

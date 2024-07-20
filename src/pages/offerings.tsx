@@ -69,7 +69,7 @@ const Offerings: React.FC = () => {
                 required
               ></textarea>
               <button className="w-full rounded p-2 text-center font-bold transition-all review-form-button hover:review-form-button-hover">
-                Submit Review
+                Submit Review →
               </button>
             </fieldset>
           </form>
