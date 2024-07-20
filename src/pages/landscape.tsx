@@ -91,7 +91,7 @@ const locations: Location[] = [
   },
   {
     id: 16,
-    src: "/images/makai-ola-island.jpg",
+    src: "/images/makai-ola-island-2.jpg",
     alt: "Makai Ola Island",
   },
   {
