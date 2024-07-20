@@ -1,3 +1,6 @@
+// not currently being used, save in the case you want to use a proxy to hide the url where
+// the pdf's are being downloaded from
+
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
