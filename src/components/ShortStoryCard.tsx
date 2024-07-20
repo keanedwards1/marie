@@ -22,7 +22,7 @@ export default function ShortStoryCard({ story }: ShortStoryCardProps) {
     
     setIsDownloading(true);
     try {
-      const response = await fetch(`/api/download/${story.pdfFilename}`);
+      const response = await fetch(`/api/proxy-download?filename=${encodeURIComponent(story.pdfFilename)}`);
       if (response.ok) {
         const blob = await response.blob();
         const url = window.URL.createObjectURL(blob);
@@ -35,9 +35,11 @@ export default function ShortStoryCard({ story }: ShortStoryCardProps) {
         window.URL.revokeObjectURL(url);
       } else {
         console.error('Download failed');
+        // You might want to show an error message to the user here
       }
     } catch (error) {
       console.error('Error downloading file:', error);
+      // You might want to show an error message to the user here
     }
     setIsDownloading(false);
   };

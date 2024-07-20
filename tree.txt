@@ -1,30 +1,12 @@
 .
 ├── README.md
-├── backend
-│   ├── dist
-│   │   ├── mailService.js
-│   │   └── server.js
-│   ├── nodemon.json
-│   ├── package-lock.json
-│   ├── package.json
-│   ├── src
-│   │   ├── mailService.ts
-│   │   └── server.ts
-│   └── tsconfig.json
+├── backend.tar.gz
 ├── c.sh
+├── jest.setup.js
 ├── next-env.d.ts
 ├── next.config.mjs
 ├── package-lock.json
 ├── package.json
-├── pages
-│   ├── _app.tsx
-│   ├── _document.tsx
-│   ├── api
-│   │   └── subscribe.ts
-│   ├── characters.tsx
-│   ├── hello
-│   ├── index.tsx
-│   └── short-stories.tsx
 ├── postcss.config.mjs
 ├── public
 │   ├── android-chrome-192x192.png
@@ -36,9 +18,52 @@
 │   ├── favicon-32x32.png
 │   ├── favicon.ico
 │   ├── images
+│   │   ├── 1-mari-healing-guide.jpg
+│   │   ├── 10-akira-and-dara.jpeg
+│   │   ├── 10-akira.jpg
+│   │   ├── 10-dara.jpg
+│   │   ├── 11-alaysia-creative-nature-protector.jpeg
+│   │   ├── 12-miriam-healer.jpeg
+│   │   ├── 13-mona-healer-nature-protector.jpeg
+│   │   ├── 14-nora-healer-floater.jpeg
+│   │   ├── 15-magna-creative-performer.jpeg
+│   │   ├── 16-samita-nature-protector.jpeg
+│   │   ├── 17-peretz-createive-builder-nature-protector.jpeg
+│   │   ├── 18-maanya-eleventh-dimensional-from-the-pleiadian-star-system.jpeg
+│   │   ├── 19-drake-sexual-healer.jpeg
+│   │   ├── 2-greta-master-creative-builder.jpg
+│   │   ├── 20-viola-sexual-healer.jpeg
+│   │   ├── 21-hannah-sexual-healer.jpeg
+│   │   ├── 22-yeshua-healer.jpeg
+│   │   ├── 23-veeda-mother-healer.jpeg
+│   │   ├── 24-cedar.jpeg
+│   │   ├── 25-summit.jpeg
+│   │   ├── 26-baz-educator-creative.jpeg
+│   │   ├── 27-josiah-educator.jpeg
+│   │   ├── 28-leaf-non-binary.jpeg
+│   │   ├── 29-ismar.jpeg
+│   │   ├── 3-alfred-master-creative-builder.jpg
+│   │   ├── 30-shakk-educator-builder.jpeg
+│   │   ├── 31-ronan-herbal-healer.jpeg
+│   │   ├── 32-azriel-crystal-healer.jpeg
+│   │   ├── 33-aziza-leader.jpeg
+│   │   ├── 34-imani-leader.jpeg
+│   │   ├── 35-sasha-culinary-creative.jpeg
+│   │   ├── 36-waylan-explorer.jpeg
+│   │   ├── 37-hiroshi-explorer.jpeg
+│   │   ├── 38-nalu-culinary-creative.jpeg
+│   │   ├── 39-chokyi-leader.jpeg
+│   │   ├── 4-cheyenne-head-builder.jpeg
+│   │   ├── 40-laanza-eleventh-dimensional-pleiadian.jpeg
+│   │   ├── 5-ned-builder.jpeg
+│   │   ├── 6-malika-creative.jpeg
+│   │   ├── 7-aspen-culinary-creative.jpeg
+│   │   ├── 8-puma.jpeg
+│   │   ├── 9-jax-androgenous-xe-xem-pronouns-shapeshifter.jpg
 │   │   ├── animal-0.png
 │   │   ├── animal-1.png
 │   │   ├── animal-2.png
+│   │   ├── azure-village.jpg
 │   │   ├── butterfly-0.png
 │   │   ├── butterfly-1.png
 │   │   ├── butterfly-2.png
@@ -46,10 +71,30 @@
 │   │   ├── butterfly-4.png
 │   │   ├── butterfly-5.png
 │   │   ├── butterfly-6.png
+│   │   ├── central-hub-of-elysia.jpg
+│   │   ├── central-hub.jpg
+│   │   ├── cote-d'-azur-ville.jpg
+│   │   ├── cote-d’-azur-ville.jpg
+│   │   ├── dancing-crowd.jpg
+│   │   ├── dragon.jpg
 │   │   ├── flower-0.png
 │   │   ├── flower-1.png
 │   │   ├── flower-2.png
 │   │   ├── flower-3.png
+│   │   ├── green-haired-girl.jpg
+│   │   ├── harmony-crystal-room.jpg
+│   │   ├── harmony-healing-center-greenhouse.jpg
+│   │   ├── makai-ola-island-2.jpg
+│   │   ├── makai-ola-island.jpg
+│   │   ├── profile.png
+│   │   ├── purple-starfruit.jpg
+│   │   ├── radiant-dome-spider-girl.jpg
+│   │   ├── radiant-dome.jpg
+│   │   ├── serene-lake.jpg
+│   │   ├── shumbala-whisper.jpg
+│   │   ├── shumbala.jpg
+│   │   ├── the-whisper.jpg
+│   │   ├── the-zephyr.jpg
 │   │   └── wisteria.png
 │   ├── index.html
 │   ├── manifest.json
@@ -69,25 +114,38 @@
 │   │   ├── CharacterCard.tsx
 │   │   ├── ComicButton.tsx
 │   │   ├── ContactForm.tsx
+│   │   ├── CubeComponent.tsx
+│   │   ├── Download-Button.tsx
 │   │   ├── Garden.tsx
 │   │   ├── Head.tsx
 │   │   ├── LeftImage.tsx
 │   │   ├── Nav.tsx
-│   │   ├── Pyramid.tsx
 │   │   ├── RespFooter.tsx
 │   │   ├── RightImage.tsx
 │   │   ├── ShortStoryCard.tsx
 │   │   ├── SubscribeForm.tsx
+│   │   ├── TestimonialGrid.tsx
 │   │   ├── ThemeSwitcher.tsx
 │   │   └── WisteriaRow.tsx
+│   ├── config
 │   ├── pages
-│   │   └── for-later
-│   │       └── about.tsx
-│   └── styles
-│       └── globals.css
+│   │   ├── _app.tsx
+│   │   ├── _document.tsx
+│   │   ├── for-later
+│   │   │   └── about.tsx
+│   │   ├── index.tsx
+│   │   ├── landscape.tsx
+│   │   ├── luminoles.tsx
+│   │   ├── offerings.tsx
+│   │   └── short-stories.tsx
+│   ├── styles
+│   │   ├── cube.css
+│   │   ├── download.css
+│   │   └── globals.css
+│   └── utils
 ├── t.sh
 ├── tailwind.config.ts
 ├── tree.txt
 └── tsconfig.json
 
-15 directories, 76 files
+12 directories, 137 files
