@@ -1,12 +1,50 @@
-import React from "react";
+import React, { useState } from "react";
 import Head from "@/components/Head";
 import Nav from "@/components/Nav";
 import TestimonialGrid from "@/components/TestimonialGrid";
 import Footer from "@/components/RespFooter";
 import ComicButton from "@/components/ComicButton";
-import router from "next/router";
+import { useRouter } from "next/router";
 
 const Offerings: React.FC = () => {
+  const router = useRouter();
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    jobTitle: '',
+    review: ''
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('https://159.89.233.75.nip.io/api/submit-review', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      if (response.ok) {
+        alert('Review submitted successfully!');
+        setFormData({ firstName: '', lastName: '', jobTitle: '', review: '' });
+      } else {
+        alert('Error submitting review. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('An error occurred. Please try again later.');
+    }
+  };
+
   return (
     <div className="min-h-screen bg-purple-50">
       <Head
@@ -19,7 +57,7 @@ const Offerings: React.FC = () => {
           id="review-form"
           className="lg:mr-32 lg:ml-32 md:ml-10 md:mr-10 mr-6 ml-6 mt-16 rounded shadow flex flex-col justify-between p-3 review-form-bg"
         >
-          <form className="review-form-text" action="" method="post">
+          <form className="review-form-text" onSubmit={handleSubmit}>
             <fieldset className="border-4 border-dotted review-form-border p-5">
               <legend className="px-2 italic text-lg -mx-2 review-form-legend">
                 Read the book? Feel free to share your thoughts 💫
@@ -30,9 +68,11 @@ const Offerings: React.FC = () => {
               <input
                 className="w-full p-2 mb-2 mt-1 outline-none ring-none rounded review-form-input focus:review-form-input-focus"
                 type="text"
-                name="first-name"
+                name="firstName"
                 id="first-name"
                 placeholder="Dr."
+                value={formData.firstName}
+                onChange={handleInputChange}
               />
               <label
                 className="text-sm font-bold after:content-['*'] after:text-red-400"
@@ -43,10 +83,12 @@ const Offerings: React.FC = () => {
               <input
                 className="w-full p-2 mb-2 mt-1 outline-none ring-none rounded review-form-input focus:review-form-input-focus"
                 type="text"
-                name="last-name"
+                name="lastName"
                 id="last-name"
                 placeholder="Suess"
                 required
+                value={formData.lastName}
+                onChange={handleInputChange}
               />
               <label className="text-sm font-bold" htmlFor="job-title">
                 Job Title or Passion
@@ -54,9 +96,11 @@ const Offerings: React.FC = () => {
               <input
                 className="w-full p-2 mb-2 mt-1 outline-none ring-none rounded review-form-input focus:review-form-input-focus"
                 type="text"
-                name="job-title"
+                name="jobTitle"
                 id="job-title"
                 placeholder="Basketweaver"
+                value={formData.jobTitle}
+                onChange={handleInputChange}
               />
               <label
                 className="text-sm font-bold after:content-['*'] after:text-red-400"
@@ -70,8 +114,10 @@ const Offerings: React.FC = () => {
                 id="review"
                 rows={4}
                 required
+                value={formData.review}
+                onChange={handleInputChange}
               ></textarea>
-              <button className="w-full rounded p-2 text-center font-bold transition-all review-form-button hover:review-form-button-hover">
+              <button type="submit" className="w-full rounded p-2 text-center font-bold transition-all review-form-button hover:review-form-button-hover">
                 Submit Review →
               </button>
             </fieldset>
