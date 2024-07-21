@@ -32,17 +32,17 @@ const locations: Location[] = [
   {
     id: 4,
     src: "/images/dragon.jpg",
-    alt: "",
+    alt: "Celebrate with the Dragon",
   },
   {
     id: 5,
     src: "/images/dancing-crowd.jpg",
-    alt: "",
+    alt: "The Heart of Azure Village",
   },
   {
     id: 6,
     src: "/images/green-haired-girl.jpg",
-    alt: "",
+    alt: "Shapeshifting in Progress",
   },
   {
     id: 7,
@@ -77,7 +77,7 @@ const locations: Location[] = [
   {
     id: 13,
     src: "/images/radiant-dome-spider-girl.jpg",
-    alt: "",
+    alt: "Nature Protector",
   },
   {
     id: 14,
@@ -159,7 +159,7 @@ export default function Landscape() {
           <div className="flex justify-center home-page-box w-full">
             <div className="w-1/2">
               <h2 className="text-2xl mb-8 text-center font-serif">
-                Akashi (AI) generated these images on your behalf to
+                Akashi (AI of Unity) generated these images on your behalf to
                 build excitement and enthusiasm for your visit to Unity.
                 <br></br>
               </h2>

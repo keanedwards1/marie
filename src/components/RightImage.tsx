@@ -26,7 +26,7 @@ const RightImage: React.FC = () => {
             <br /> */}
             <span className="text-sm z-10">
               Seeking respite in a collapsing world, Rose meditates on a beach in Costa Rica
-              and is transported to an <em>entirely NEW world.</em> She laughs,
+              and is transported to an entirely NEW WORLD. She laughs,
               cries and transforms as she journeys through a magical utopian
               wonderland.
               <br />

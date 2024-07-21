@@ -44,8 +44,9 @@ const characters = [
   { name: "Puma", bio: "", image: "/images/8-puma.jpeg" },
   {
     name: "Jax",
-    bio: "Androgynous",
-    bio2: "Shapeshifter",
+    bio: "Educator",
+    bio2: "Androgynous",
+    bio3: "Shapeshifter",
     image: "/images/9-jax-androgenous-xe-xem-pronouns-shapeshifter.jpg",
   },
   { 
@@ -187,6 +188,12 @@ const characters = [
     name: "Hiroshi",
     bio: "Explorer",
     image: "/images/37-hiroshi-explorer.jpeg",
+  },
+  {
+    name: "Bakta and Nebu",
+    bio: "Pleiadians",
+    bio2: "Energy Sector",
+    image: "/images/37-bakta-and-nebu.jpg",
   },
   {
     name: "Nalu",
