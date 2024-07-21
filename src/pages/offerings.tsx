@@ -14,6 +14,8 @@ const Offerings: React.FC = () => {
     jobTitle: '',
     review: ''
   });
+  const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -25,6 +27,8 @@ const Offerings: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setErrorMessage('');
+    setSuccessMessage('');
     try {
       const response = await fetch('https://159.89.233.75.nip.io/api/submit-review', {
         method: 'POST',
@@ -33,15 +37,16 @@ const Offerings: React.FC = () => {
         },
         body: JSON.stringify(formData),
       });
+      const data = await response.json();
       if (response.ok) {
-        alert('Review submitted successfully!');
+        setSuccessMessage('Review submitted successfully!');
         setFormData({ firstName: '', lastName: '', jobTitle: '', review: '' });
       } else {
-        alert('Error submitting review. Please try again.');
+        setErrorMessage(Array.isArray(data.errors) ? data.errors.join(' ') : data.error || 'An error occurred');
       }
     } catch (error) {
       console.error('Error:', error);
-      alert('An error occurred. Please try again later.');
+      setErrorMessage('An error occurred. Please try again later.');
     }
   };
 
@@ -117,6 +122,8 @@ const Offerings: React.FC = () => {
                 value={formData.review}
                 onChange={handleInputChange}
               ></textarea>
+              {errorMessage && <div className="text-red-500 mb-2">{errorMessage}</div>}
+              {successMessage && <div className="text-green-500 mb-2">{successMessage}</div>}
               <button type="submit" className="w-full rounded p-2 text-center font-bold transition-all review-form-button hover:review-form-button-hover">
                 Submit Review →
               </button>
