@@ -578,6 +578,47 @@ body {
   box-shadow: 5px 5px 0px #7b51b6f4;
 }
 
+.review-card1 {
+  background-color: #f7e8ff; /* Light violet background */
+}
+
+.review-card1:hover {
+  background-color: #e7c9fe; /* Light violet background */
+}
+
+.review-card2 {
+  background-color: #a878d8; /* Light violet background */
+}
+
+.review-card2:hover {
+  background-color: #985ccc; /* Light violet background */
+}
+
+.review-card3 {
+  background-color: #f3e8ff; /* Light violet background */
+}
+
+.review-card3:hover {
+  background-color: #e8ceff; /* Light violet background */
+}
+
+.review-card4 {
+  background-color: #f7e5ff; /* Light violet background */
+}
+
+.review-card4:hover {
+  background-color: #eac6ff; /* Light violet background */
+}
+
+.review-card5 {
+  background-color: #8259a9; /* Light violet background */
+}
+
+.review-card5:hover {
+  background-color: #8441a3; /* Light violet background */
+}
+
+
 .comic-button {
   display: inline-block;
   display: flex;
