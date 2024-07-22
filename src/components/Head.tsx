@@ -39,6 +39,7 @@ const Head: React.FC<HeadProps> = ({ title = 'Book Launch | The Realm of Unity',
     <meta name="msapplication-TileColor" content="#da532c" />
     <meta name="theme-color" content="#ffffff" />
 
+
     <script type="application/ld+json">
       {`
       {

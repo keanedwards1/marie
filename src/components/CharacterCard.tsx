@@ -40,8 +40,8 @@ export default function CharacterCard({ character }: CharacterCardProps) {
           isHovered ? "opacity-100" : "opacity-0"
         }`}
       >
-        <h2 className="text-3xl font-bold text-white mb-3">{character.name}</h2>
-        <p className="text-base text-gray-100 mb-4 line-clamp-3 font-medium">
+        <h2 className="text-3xl font-semibold font-playfair font-serif text-fuchsia-50 mb-3">{character.name}</h2>
+        <p className="text-base text-gray-100 mb-4 font-serif line-clamp-3 font-medium">
           {character.bio}
           {character.bio2 && (
             <>

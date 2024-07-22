@@ -10,13 +10,11 @@ const RightImage: React.FC = () => {
       <div className="home-page-text-container home-page-text-container-1">
         <div className="home-page-box">
           <h1 className="text-3xl font-bold text-center font-serif z-10">
-            The Realm of Unity  <br></br>
-            <p className="text-m">
-              Author: V. M. Elyse
-            </p>
+            The Realm of Unity <br></br>
+            <p className="text-m">Author: V. M. Elyse</p>
           </h1>
           <p className="mt-4 text-m text-center z-10 md:text-left font-serif">
-{/*             <strong>
+            {/*             <strong>
               Blurb:<br></br> &quot;After a lifetime of chasing the slippery fish of peace while
               trying to navigate a sleeping world, I reveled in the rainstorm of
               the absence of my suffering.&quot;
@@ -25,26 +23,27 @@ const RightImage: React.FC = () => {
             <br />
             <br /> */}
             <span className="text-sm z-10">
-              Seeking respite in a collapsing world, Rose meditates on a beach in Costa Rica
-              and is transported to an entirely NEW WORLD. She laughs,
-              cries and transforms as she journeys through a magical utopian
-              wonderland.
+              Seeking respite in a collapsing world, Rose meditates on a beach
+              in Costa Rica and arrives in an entirely{" "}
+              <span className="font-magic text-lg">New World</span>. Remarkably unfazed
+              by the oddity of her situation, she laughs, cries, and transforms
+              as she journeys through a magical utopian wonderland.
               <br />
               <br />
-              Diving deep within, Rose must heal ancient wounds and discover her unique gifts to fully thrive
-              in the land of perfection.
+              Diving deep within, Rose must heal ancient wounds of the heart and
+              discover her unique gifts to fully thrive in the land of
+              perfection.
               <br />
               <br />
               Her fantastical experience starkly contrasts the dystopian
-              hellscape of old Earth, where humans are confronted with the power
-              of <em>choice </em>
+              hellscape of old Earth, where humans confront the power of <em>choice</em>
               and embrace the infinite depths of human compassion.
               <br />
               <br />
-              <br /> The Realm of Unity challenges everything you ever
-              thought you knew about yourself and the world in which you live.
-              The delightfully spine-tingling conclusion may <em>alter</em> the
-              very fabric of your reality.
+              The Realm of Unity challenges everything you ever thought you knew
+              about yourself and the world in which you live. The delightfully
+              spine-tingling conclusion may <em>alter</em> the very fabric of
+              your reality.
               <br />
               <br />
             </span>

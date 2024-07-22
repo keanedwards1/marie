@@ -6,6 +6,7 @@ import ComicButton from "./ComicButton";
 interface ShortStory {
   id: number;
   title: string;
+  warning?: string;
   description: string;
   pdfFilename: string;
 }
@@ -48,10 +49,15 @@ export default function ShortStoryCard({ story }: ShortStoryCardProps) {
 
   return (
     <div className="card bg-base-100 shadow-md flex justify-center align-middle short-story-card">
-      <div className="card-body font-serif mt-16 lg:w-7/12 md:w-full w-8/12 mb-16 text-black">
-        <h2 className="card-title text-left">{story.title}</h2>
-        <p className="text-left">{story.description}</p>
-        <div className="w-full">
+      <div className="card-body flex font-serif mt-16 lg:w-7/12 md:w-full w-8/12 mb-16 text-black">
+        <div className='flex justify-center'>
+          <h2 className="card-title text-center">{story.title}</h2>
+        </div>
+        {story.warning && (
+          <p className="text-center text-rose-800 text-sm font-extralight mt-2">{story.warning}</p>
+        )}
+        <p className="mt-2 text-gray-700 font-normal">{story.description}</p>
+        <div className="w-full mt-4">
           <button
             className={`comic-button ${story.pdfFilename ? 'comic-button-short-stories' : 'comic-button-coming-soon'}`}
             onClick={handleDownload}
