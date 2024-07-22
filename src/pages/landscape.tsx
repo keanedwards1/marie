@@ -32,7 +32,7 @@ const locations: Location[] = [
   {
     id: 4,
     src: "/images/dragon.jpg",
-    alt: "Celebrate with the Dragon",
+    alt: "Welcome Party",
   },
   {
     id: 5,
@@ -42,7 +42,7 @@ const locations: Location[] = [
   {
     id: 6,
     src: "/images/green-haired-girl.jpg",
-    alt: "Shapeshifting in Progress",
+    alt: "Shapeshifting",
   },
   {
     id: 7,
