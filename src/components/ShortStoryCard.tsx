@@ -57,7 +57,7 @@ export default function ShortStoryCard({ story }: ShortStoryCardProps) {
             {story.title}
           </h2>
           {story.warning && (
-            <p className="text-center text-rose-800 text-sm font-extralight mt-2 mb-2">{story.warning}</p>
+            <p className="text-center text-gray-800 text-sm font-extralight mt-2 mb-2">{story.warning}</p>
           )}
           <p className="mt-2 text-gray-700 font-normal">{story.description}</p>
         </div>
