@@ -36,15 +36,16 @@ const TestimonialGrid: React.FC = () => {
     fetchReviews();
   }, []);
 
-  const getCardClass = (index: number) => {
-    const classes = [
-      "review-card1 text-black",
-      "review-card2 text-white",
-      "review-card3",
-      "review-card4",
-      "review-card5 text-white"
-    ];
-    return classes[index % classes.length];
+  const cardStyles = [
+    { bgClass: "review-card1", textClass: "text-black", subTextClass: "text-gray-600" },
+    { bgClass: "review-card2", textClass: "text-white", subTextClass: "text-gray-200" },
+    { bgClass: "review-card3", textClass: "text-black", subTextClass: "text-gray-600" },
+    { bgClass: "review-card4", textClass: "text-black", subTextClass: "text-gray-600" },
+    { bgClass: "review-card5", textClass: "text-white", subTextClass: "text-gray-200" },
+  ];
+
+  const getCardStyle = (index: number) => {
+    return cardStyles[index % cardStyles.length];
   };
 
   const breakpointColumnsObj = {
@@ -65,29 +66,32 @@ const TestimonialGrid: React.FC = () => {
           className="my-masonry-grid"
           columnClassName="my-masonry-grid_column"
         >
-          {reviews.map((review, index) => (
-            <div 
-              key={review.id} 
-              className={`${getCardClass(index)} transition-colors duration-300 p-8 rounded-lg shadow-lg mb-6`}
-            >
-              <div className="flex items-center mb-6">
-                <Image
-                  className="w-10 h-10 rounded-full mr-4"
-                  src="/images/profile.png"
-                  alt={`${review.first_name} ${review.last_name}`}
-                  width={100}
-                  height={100}
-                />
-                <div>
-                  <p className="font-semibold">{`${review.first_name} ${review.last_name}`}</p>
-                  <p className={index === 1 ? "text-gray-200" : index === 4 ? "text-gray-200" : "text-gray-600"}>{review.job_title}</p>
+          {reviews.map((review, index) => {
+            const { bgClass, textClass, subTextClass } = getCardStyle(index);
+            return (
+              <div 
+                key={review.id} 
+                className={`${bgClass} ${textClass} transition-colors duration-300 p-8 rounded-lg shadow-lg mb-6`}
+              >
+                <div className="flex items-center mb-6">
+                  <Image
+                    className="w-10 h-10 rounded-full mr-4"
+                    src="/images/profile.png"
+                    alt={`${review.first_name} ${review.last_name}`}
+                    width={100}
+                    height={100}
+                  />
+                  <div>
+                    <p className="font-semibold">{`${review.first_name} ${review.last_name}`}</p>
+                    <p className={subTextClass}>{review.job_title}</p>
+                  </div>
                 </div>
+                <p className={subTextClass}>
+                  {review.review}
+                </p>
               </div>
-              <p className={index === 1 ? "text-gray-200" : index === 4 ? "text-gray-100" : "text-gray-600"}>
-                {review.review}
-              </p>
-            </div>
-          ))}
+            );
+          })}
         </Masonry>
       </div>
     </div>
