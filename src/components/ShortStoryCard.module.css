@@ -1,0 +1,42 @@
+.cardLink {
+    display: block;
+    height: 100%;
+  }
+  
+  .shortStoryCard {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(249, 226, 255, 0.58) 0%, rgba(215, 157, 248, 0.58) 100%);
+    border: 1px solid rgb(142, 142, 142);
+    box-shadow: 12px 17px 51px rgba(99, 99, 99, 0.112);
+    backdrop-filter: blur(6px);
+    border-radius: 17px;
+    text-align: center;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    font-weight: bolder;
+    transition: all 0.5s;
+  }
+  
+  .shortStoryCard:hover {
+    border: 1px solid black;
+    transform: scale(1.01);
+  }
+  
+  .shortStoryCard:active {
+    transform: scale(0.95) rotateZ(1.7deg);
+  }
+  
+  .inactiveCard {
+    cursor: default;
+    transition: 0.3s all;
+  }
+  
+  .inactiveCard:hover, .inactiveCard:active {
+    border: 1px solid rgb(142, 142, 142);
+    transform: none;
+  }

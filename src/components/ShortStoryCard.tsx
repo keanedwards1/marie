@@ -1,18 +1,20 @@
-// src/components/ShortStoryCard.tsx
-
 import { useState } from 'react';
 import ComicButton from "./ComicButton";
+import Link from 'next/link';
+import styles from './ShortStoryCard.module.css';
 
-interface ShortStory {
+interface Story {
   id: number;
   title: string;
   warning?: string;
   description: string;
   pdfFilename: string;
+  fullStory?: string; 
 }
 
+
 interface ShortStoryCardProps {
-  story: ShortStory;
+  story: Story;
 }
 
 const SERVER_URL = 'https://159.89.233.75.nip.io';
@@ -20,7 +22,9 @@ const SERVER_URL = 'https://159.89.233.75.nip.io';
 export default function ShortStoryCard({ story }: ShortStoryCardProps) {
   const [isDownloading, setIsDownloading] = useState(false);
 
-  const handleDownload = async () => {
+  const handleDownload = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
     if (!story.pdfFilename) return;
     
     setIsDownloading(true);
@@ -38,28 +42,28 @@ export default function ShortStoryCard({ story }: ShortStoryCardProps) {
         window.URL.revokeObjectURL(url);
       } else {
         console.error('Download failed');
-        // You might want to show an error message to the user here
       }
     } catch (error) {
       console.error('Error downloading file:', error);
-      // You might want to show an error message to the user here
     }
     setIsDownloading(false);
   };
 
-  return (
-    <div className="card bg-base-100 shadow-md flex justify-center align-middle short-story-card">
-      <div className="card-body flex font-serif mt-16 lg:w-7/12 md:w-full w-8/12 mb-16 text-black">
-        <div className='flex justify-center'>
-          <h2 className="card-title text-center">{story.title}</h2>
+  const cardContent = (
+    <div className={`${styles.shortStoryCard} h-full ${!story.fullStory && styles.inactiveCard}`}>
+      <div className="flex flex-col font-serif p-20 mt-10 text-black w-full h-full justify-between">
+        <div>
+          <h2 className={`text-xl font-bold text-center mb-2}`}>
+            {story.title}
+          </h2>
+          {story.warning && (
+            <p className="text-center text-rose-800 text-sm font-extralight mt-2 mb-2">{story.warning}</p>
+          )}
+          <p className="mt-2 text-gray-700 font-normal">{story.description}</p>
         </div>
-        {story.warning && (
-          <p className="text-center text-rose-800 text-sm font-extralight mt-2">{story.warning}</p>
-        )}
-        <p className="mt-2 text-gray-700 font-normal">{story.description}</p>
-        <div className="w-full mt-4">
+        <div className="w-full mt-4" onClick={(e) => e.stopPropagation()}>
           <button
-            className={`comic-button ${story.pdfFilename ? 'comic-button-short-stories' : 'comic-button-coming-soon'}`}
+            className={`comic-button ${story.pdfFilename ? 'comic-button-short-stories' : 'comic-button-coming-soon'} w-full`}
             onClick={handleDownload}
             disabled={isDownloading || !story.pdfFilename}
           >
@@ -69,6 +73,16 @@ export default function ShortStoryCard({ story }: ShortStoryCardProps) {
           </button>
         </div>
       </div>
+    </div>
+  );
+
+  return story.fullStory ? (
+    <Link href={`/short-stories/${story.id}`} className={styles.cardLink}>
+      {cardContent}
+    </Link>
+  ) : (
+    <div className={styles.cardLink}>
+      {cardContent}
     </div>
   );
 }

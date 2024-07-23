@@ -107,13 +107,11 @@
 │   └── sitemap.xml
 ├── src
 │   ├── archive
-│   │   ├── app
-│   │   │   ├── favicon.ico
-│   │   │   ├── globals.css
-│   │   │   ├── layout.tsx
-│   │   │   └── page.tsx
-│   │   └── short-stories
-│   │       └── [id].tsx
+│   │   └── app
+│   │       ├── favicon.ico
+│   │       ├── globals.css
+│   │       ├── layout.tsx
+│   │       └── page.tsx
 │   ├── components
 │   │   ├── Butterfly.tsx
 │   │   ├── CharacterCard.tsx
@@ -133,8 +131,6 @@
 │   │   ├── ThemeSwitcher.tsx
 │   │   └── WisteriaRow.tsx
 │   ├── config
-│   ├── data
-│   │   └── shortStories.ts
 │   ├── pages
 │   │   ├── _app.tsx
 │   │   ├── _document.tsx
@@ -147,7 +143,9 @@
 │   │   ├── landscape.tsx
 │   │   ├── luminoles.tsx
 │   │   ├── offerings.tsx
-│   │   └── short-stories.tsx
+│   │   ├── short-stories.tsx
+│   │   └── short-story
+│   │       └── [id].tsx
 │   ├── styles
 │   │   ├── cube.css
 │   │   ├── download.css
@@ -158,4 +156,4 @@
 ├── tree.txt
 └── tsconfig.json
 
-15 directories, 144 files
+14 directories, 143 files

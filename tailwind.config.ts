@@ -1,4 +1,3 @@
-// tailwind.config.ts
 import { Config } from 'tailwindcss';
 
 const config: Config = {
@@ -36,11 +35,23 @@ const config: Config = {
         success: 'var(--success)',
         warning: 'var(--warning)',
         error: 'var(--error)',
+        purple: {
+          100: '#F3E8FF',
+          500: '#8B5CF6',
+          800: '#5B21B6',
+        },
+        pink: {
+          100: '#FCE7F3',
+        },
+        rose: {
+          600: '#E11D48',
+        },
       },
     },
   },
   plugins: [
     require('daisyui'),
+    require('@tailwindcss/typography'),
   ],
   daisyui: {
     themes: [

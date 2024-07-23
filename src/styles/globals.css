@@ -17,6 +17,19 @@
 @tailwind components;
 @tailwind utilities;
 
+.prose {
+  max-width: 65ch;
+  color: #374151;
+}
+
+.prose h1, .prose h2, .prose h3 {
+  color: #5b21b6;
+}
+
+.prose a {
+  color: #8b5cf6;
+}
+
 /* Define your font classes */
 .font-magic {
   font-family: 'Great Vibes', cursive;
@@ -304,7 +317,7 @@ body {
   font-size: 18px !important;
 }
 
-.short-story-card {
+/* .short-story-card {
   box-sizing: border-box;
   width: auto;
   height: auto;
@@ -320,7 +333,7 @@ body {
   justify-content: center;
   user-select: none;
   font-weight: bolder;
-  transition: all 0.5s; /* Combine transition properties */
+  transition: all 0.5s;
 }
 
 .short-story-card:hover {
@@ -332,7 +345,7 @@ body {
 
 .short-story-card:active {
   transform: scale(0.95) rotateZ(1.7deg);
-}
+} */
 
 .text {
   color: #954eeb;
