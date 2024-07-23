@@ -153,7 +153,7 @@ const AdminPage: React.FC = () => {
   if (!token) {
     return (
       <div className="min-h-screen bg-purple-50 flex items-center justify-center">
-        <form onSubmit={handleLogin} className="bg-white p-8 rounded shadow-md">
+        <form onSubmit={handleLogin} className="bg-white p-8 m-6 rounded shadow-md">
           <h2 className="text-2xl mb-4 text-purple-900">Admin Login</h2>
           <input
             type="text"
