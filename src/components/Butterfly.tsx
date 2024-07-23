@@ -52,6 +52,7 @@ const Butterflies: React.FC = () => {
                     width={50}
                     height={43}
                     style={butterfly.style}
+                    priority
                 />
             ))}
         </div>

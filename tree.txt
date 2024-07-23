@@ -125,12 +125,15 @@
 │   │   ├── Nav.tsx
 │   │   ├── RespFooter.tsx
 │   │   ├── RightImage.tsx
+│   │   ├── ShortStoryCard.module.css
 │   │   ├── ShortStoryCard.tsx
 │   │   ├── SubscribeForm.tsx
 │   │   ├── TestimonialGrid.tsx
 │   │   ├── ThemeSwitcher.tsx
 │   │   └── WisteriaRow.tsx
 │   ├── config
+│   ├── data
+│   │   └── shortStories.ts
 │   ├── pages
 │   │   ├── _app.tsx
 │   │   ├── _document.tsx
@@ -143,9 +146,9 @@
 │   │   ├── landscape.tsx
 │   │   ├── luminoles.tsx
 │   │   ├── offerings.tsx
-│   │   ├── short-stories.tsx
-│   │   └── short-story
-│   │       └── [id].tsx
+│   │   ├── short-stories
+│   │   │   └── [id].tsx
+│   │   └── short-stories.tsx
 │   ├── styles
 │   │   ├── cube.css
 │   │   ├── download.css
@@ -156,4 +159,4 @@
 ├── tree.txt
 └── tsconfig.json
 
-14 directories, 143 files
+15 directories, 145 files

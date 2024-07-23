@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import seedrandom from "seedrandom";
+import Image from 'next/image';
 
 const LeftImage: React.FC = () => {
   const [angles, setAngles] = useState<number[]>([]);
@@ -52,15 +53,14 @@ const LeftImage: React.FC = () => {
 
   return (
     <div className="right-image-styles w-full md:w-7/12 flex justify-center items-center p-8 md:p-0 relative">
-      <div
-        className="w-full max-w-[90%] h-0 pb-[106.67%] relative"
-        style={{
-          backgroundImage: "url(/book.png)",
-          backgroundSize: "contain",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center",
-        }}
-      >
+      <div className="w-full max-w-[90%] h-0 pb-[106.67%] relative">
+        <Image
+          src="/book.png"
+          alt="Book"
+          fill
+          style={{ objectFit: 'contain' }}
+          priority
+        />
         {angles.map((angle, index) => (
           <div
             key={index}
