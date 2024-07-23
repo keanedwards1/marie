@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router';
+/* import { useRouter } from 'next/router';
 import Nav from '../../components/Nav';
 import Footer from '../../components/RespFooter';
 import ComicButton from "@/components/ComicButton";
@@ -24,9 +24,9 @@ export default function ShortStoryPage() {
           <p className="mt-2 text-rose-800 text-sm font-extralight">{story.warning}</p>
         )}
         <div className="mt-4 text-lg font-serif text-slate-700">
-          {/* This is where you'd render the full story content */}
+           This is where you'd render the full story content 
           <p>{story.description}</p>
-          {/* Add the full story content here */}
+          Add the full story content here 
         </div>
         <div className="mt-8">
           <ComicButton
@@ -38,4 +38,4 @@ export default function ShortStoryPage() {
       <Footer />
     </div>
   );
-}
+} */

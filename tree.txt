@@ -1,5 +1,7 @@
 .
 ├── README.md
+├── TODO-0.txt
+├── TODO.txt
 ├── backend.tar.gz
 ├── c.sh
 ├── jest.setup.js
@@ -50,6 +52,7 @@
 │   │   ├── 34-imani-leader.jpeg
 │   │   ├── 35-sasha-culinary-creative.jpeg
 │   │   ├── 36-waylan-explorer.jpeg
+│   │   ├── 37-bakta-and-nebu.jpg
 │   │   ├── 37-hiroshi-explorer.jpeg
 │   │   ├── 38-nalu-culinary-creative.jpeg
 │   │   ├── 39-chokyi-leader.jpeg
@@ -104,11 +107,13 @@
 │   └── sitemap.xml
 ├── src
 │   ├── archive
-│   │   └── app
-│   │       ├── favicon.ico
-│   │       ├── globals.css
-│   │       ├── layout.tsx
-│   │       └── page.tsx
+│   │   ├── app
+│   │   │   ├── favicon.ico
+│   │   │   ├── globals.css
+│   │   │   ├── layout.tsx
+│   │   │   └── page.tsx
+│   │   └── short-stories
+│   │       └── [id].tsx
 │   ├── components
 │   │   ├── Butterfly.tsx
 │   │   ├── CharacterCard.tsx
@@ -128,9 +133,14 @@
 │   │   ├── ThemeSwitcher.tsx
 │   │   └── WisteriaRow.tsx
 │   ├── config
+│   ├── data
+│   │   └── shortStories.ts
 │   ├── pages
 │   │   ├── _app.tsx
 │   │   ├── _document.tsx
+│   │   ├── admin.tsx
+│   │   ├── api
+│   │   │   └── proxy-download.ts
 │   │   ├── for-later
 │   │   │   └── about.tsx
 │   │   ├── index.tsx
@@ -148,4 +158,4 @@
 ├── tree.txt
 └── tsconfig.json
 
-12 directories, 137 files
+15 directories, 144 files

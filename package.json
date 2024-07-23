@@ -1,10 +1,11 @@
 {
   "name": "marie",
   "version": "0.1.0",
+  "type": "module",
   "private": true,
   "scripts": {
     "dev": "NODE_OPTIONS='--experimental-vm-modules --no-warnings' next dev",
-    "build": "next build",
+    "build": "NODE_OPTIONS='--experimental-vm-modules --no-warnings' next build",
     "start": "next start",
     "lint": "next lint",
     "test": "jest",
@@ -52,6 +53,5 @@
     "setupFilesAfterEnv": [
       "<rootDir>/jest.setup.js"
     ]
-  },
-  "type": "module"
+  }
 }
