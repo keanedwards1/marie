@@ -6,6 +6,7 @@ import Footer from '../components/RespFooter';
 import ComicButton from "@/components/ComicButton";
 import { useRouter } from "next/router";
 
+
 const shortStories = [
   { 
     id: 1, 
