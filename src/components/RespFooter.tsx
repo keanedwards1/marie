@@ -84,7 +84,7 @@ const Footer: React.FC = () => {
             </h3>
             <div className="flex flex-col md:flex-row gap-8">
               <p className="text-md font-serif leading-relaxed">
-                V.M. Elyse (Marie) is a spiritual seeker and lover of truth. She
+                V. M. Elyse (Marie) is a spiritual seeker and lover of truth. She
                 lives in Northern California with her family, and this is her
                 offering to the world. The Realm of Unity is her first book, but
                 not her last. It is her most fervent wish that this book brings
