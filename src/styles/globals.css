@@ -761,6 +761,12 @@ body {
   background-attachment: fixed;
 }
 
+@media (max-width: 786px) {
+  .bg-hero-image {
+    background-image: url('/images/azure-village.webp');
+  }
+}
+
 
 .location-header-text {
   text-shadow:
