@@ -754,7 +754,7 @@ body {
 }
 
 .bg-hero-image {
-  background-image: url('/images/azure-village.jpg');
+  background-image: url('/images/azure-village.webp');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -763,7 +763,6 @@ body {
 
 @media (max-width: 786px) {
   .bg-hero-image {
-    background-image: url('/images/azure-village.webp');
     background-attachment: scroll;
   }
 }
