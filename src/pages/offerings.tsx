@@ -134,7 +134,7 @@ const Offerings: React.FC = () => {
         <TestimonialGrid />
       </div>
 
-      <div className="mt-20 flex flex-col lg:flex-row w-full gap-4 items-center justify-center">
+      <div className="mt-16 mb-16 flex flex-col lg:flex-row w-full gap-4 items-center justify-center">
         <div className="lg:w-3/12 md:w-5/12 w-9/12">
           <ComicButton
             label="← Download Stories 📖"

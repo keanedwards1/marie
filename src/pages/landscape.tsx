@@ -201,7 +201,7 @@ export default function Landscape() {
           <Cube />
         </div>
 
-        <div className="mt-40 -mb-20 flex flex-col lg:flex-row w-full gap-4 items-center justify-center">
+        <div className="mt-36 -mb-0 flex flex-col lg:flex-row w-full gap-4 items-center justify-center">
           <div className="lg:w-3/12 md:w-5/12 w-9/12">
             <ComicButton
               label="← Back to Home 🏡"
