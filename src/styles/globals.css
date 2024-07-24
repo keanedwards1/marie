@@ -764,6 +764,7 @@ body {
 @media (max-width: 786px) {
   .bg-hero-image {
     background-image: url('/images/azure-village.webp');
+    background-attachment: scroll;
   }
 }
 
