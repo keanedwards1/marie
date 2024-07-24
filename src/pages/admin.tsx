@@ -116,8 +116,8 @@ const AdminPage: React.FC = () => {
   const ReviewSection: React.FC<{ title: string, reviews: Review[], actions: string[] }> = ({ title, reviews, actions }) => (
     <>
       <div className="flex flex-row justify-between">
-        <h2 className="text-2xl mb-4 mt-8">{title}</h2>
-        <h2 className="text-2xl mb-4 mt-8">Action: <span className="text-sm">(will move the review to the respective category you pick)</span></h2>
+        <h2 className="sm:text-2xl text-xs mb-4 mt-8">{title}</h2>
+        <h2 className="sm:text-2xl text-right text-xs ml-10 mb-4 mt-8">Action: <span className="text-xs sm:text-sm">(will move the review to the respective category you pick)</span></h2>
       </div>
       {reviews.map((review) => (
         <div key={review.id} className="bg-white p-4 flex flex-row justify-between rounded shadow-md mb-4">
@@ -126,7 +126,7 @@ const AdminPage: React.FC = () => {
             <p><strong>Job Title:</strong> {review.job_title}</p>
             <p><strong>Review:</strong> {review.review}</p>
           </div>
-          <div className="ml-10 flex flex-row items-center">
+          <div className="ml-5 flex flex-col justify-center sm:flex-row gap-5 sm:gap-0 items-center">
             {actions.map(action => (
               <div key={action} className="ml-2">
                 <button
@@ -183,7 +183,7 @@ const AdminPage: React.FC = () => {
   const rejectedReviews = reviews.filter(review => review.status === 'rejected' || review.status === 'reject');
 
   return (
-    <div className="min-h-screen bg-purple-50 p-8">
+    <div className="min-h-screen bg-purple-50 pr-6 pl-6 pt-8 pb-8 sm:pr-8 sm:pl-8">
       <div className="flex flex-row justify-between">
         <h1 className="text-3xl mb-4">Admin Dashboard</h1>
         <div className="w-1/3 md:w-1/6 lg:w-1/12">
@@ -193,7 +193,7 @@ const AdminPage: React.FC = () => {
         </div>
       </div>
 
-      <div className="bg-purple-200 p-8 rounded mb-10">
+      <div className="bg-purple-200 p-8 rounded mb-10 mt-4">
         <ReviewSection title="New/Pending Reviews 🌱🪻🌺" reviews={pendingReviews} actions={["approve", "reject"]} />
       </div>
       <div className="bg-purple-200 p-8 rounded mb-10">

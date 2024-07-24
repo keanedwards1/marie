@@ -4,6 +4,14 @@
 ├── TODO.txt
 ├── backend.tar.gz
 ├── c.sh
+├── cypress
+│   ├── downloads
+│   ├── fixtures
+│   │   └── example.json
+│   └── support
+│       ├── commands.ts
+│       └── e2e.ts
+├── cypress.config.ts
 ├── jest.setup.js
 ├── next-env.d.ts
 ├── next.config.mjs
@@ -159,4 +167,4 @@
 ├── tree.txt
 └── tsconfig.json
 
-15 directories, 145 files
+19 directories, 149 files
