@@ -23,6 +23,8 @@ const RightImage: React.FC = () => {
             <br />
             <br /> */}
             <span className="text-sm z-10">
+              Humanity is faced with a start choice — LOVE or FEAR. Choose! <br></br><br></br>
+            
               Seeking respite in a collapsing world, Rose meditates on a beach
               in Costa Rica and arrives in an entirely{" "}
               <span className="font-magic text-lg">New World</span>. Remarkably unfazed
@@ -36,7 +38,7 @@ const RightImage: React.FC = () => {
               <br />
               <br />
               Her fantastical experience starkly contrasts the dystopian
-              hellscape of old Earth, where humans confront the power of <em>choice</em>
+              hellscape of old Earth, where humans confront the power of <em>choice </em>
               and embrace the infinite depths of human compassion.
               <br />
               <br />
