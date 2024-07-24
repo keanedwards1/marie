@@ -54,7 +54,7 @@ const RightImage: React.FC = () => {
         <div className="flex items-center justify-center z-10 absolute md:justify-center lg:flex-row flex-col mt-8 w-full space-x-4 gap-6">
           <ComicButton
             label="Coming Soon"
-            onClick={() => router.push("/purchase")}
+            onClick={() => router.push("/coming-soon")}
           />
           <ComicButton
             label="⛰️ See Landscapes →"
