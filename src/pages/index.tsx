@@ -3,10 +3,11 @@ import React from "react";
 import Footer from "../components/RespFooter";
 import RightImage from "../components/RightImage";
 import LeftImage from "../components/LeftImage";
-import Head from "../components/Head"
+import Head from "../components/Head";
+import SubscribeForm from "@/components/SubscribeForm";
 /* import WisteriaRow from "../components/WisteriaRow";
- */import Butterfly from "../components/Butterfly";
-import Garden from "../components/Garden";
+ *//* import Butterfly from "../components/Butterfly"; */
+/* import Garden from "../components/Garden"; */
 
 
 const Home: React.FC = () => {
@@ -29,12 +30,17 @@ const Home: React.FC = () => {
         </section>
         
         {/* Butterflies container */}
-        <div className="butterflies-container w-full absolute inset-0 pointer-events-none z-5">
+{/*         <div className="butterflies-container w-full absolute inset-0 pointer-events-none z-5">
           <Butterfly />
-        </div>
+        </div> */}
 
       {/* Garden with flowers */}
-      <Garden/>
+{/*       <Garden/> */}
+
+      <div className="">
+        <SubscribeForm />
+      </div>
+
 
       </div>
       

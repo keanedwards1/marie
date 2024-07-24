@@ -23,7 +23,7 @@ const RightImage: React.FC = () => {
             <br />
             <br /> */}
             <span className="text-sm z-10">
-              Humanity is faced with a start choice — LOVE or FEAR. Choose! <br></br><br></br>
+              <strong>Humanity is currently faced with a stark choice — LOVE or FEAR. Choose!</strong> <br></br><br></br>
             
               Seeking respite in a collapsing world, Rose meditates on a beach
               in Costa Rica and arrives in an entirely{" "}

@@ -1,34 +1,26 @@
 import React from "react";
 import Link from "next/link";
 import SubscribeForm from "./SubscribeForm";
+import Image from "next/image";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="relative pt-24 pb-16 bg-lavender-50 text-lavender-800 mt-24">
+    <footer className="relative pt-24 pb-16 bg-lavender-50 text-lavender-800">
       <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-white to-lavender-50"></div>
       <div className="container relative mx-auto px-4">
         {/* Rest of the footer content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          
-          {/* About Section */}
-          <div className="footer-card">
-            <h3 className="text-lg font-serif font-semibold mb-4 text-lavender-900">
-              About The Author
-            </h3>
-            <p className="text-md font-serif leading-relaxed">
-              V. M. Elyse lives in Northern California with her husband and daughter. This is her offering to the world and her first book.
-            </p>
-          </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        
 
           {/* Contact Information */}
-          <div className="footer-card">
+          {/*           <div className="footer-card">
             <h3 className="text-lg font-serif font-semibold mb-4 text-lavender-900">
               Contact Me
             </h3>
             <ul className="text-m font-serif space-y-2">
               <li> Email: <a href="mailto:vmelyse@gmail.com" className="hover:text-lavender-600 transition duration-300">vmelyse@gmail.com</a></li>
             </ul>
-          </div>
+          </div> */}
 
           {/* Quick Links */}
           <div className="footer-card">
@@ -84,26 +76,51 @@ const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Subscribe Form */}
-          <div className="footer-card col-span-1 md:col-span-1 lg:col-span-1">
-{/*             <h3 className="text-lg font-serif font-semibold mb-4 text-lavender-900">
-              Stay Updated
-            </h3> */}
-            <SubscribeForm />
+
+                    {/* About Section */}
+                    <div className="footer-card">
+            <h3 className="text-lg font-serif font-semibold mb-4 text-lavender-900">
+              About The Author
+            </h3>
+            <div className="flex flex-col md:flex-row gap-8">
+              <p className="text-md font-serif leading-relaxed">
+                V.M. Elyse (Marie) is a spiritual seeker and lover of truth. She
+                lives in Northern California with her family, and this is her
+                offering to the world. The Realm of Unity is her first book, but
+                not her last. It is her most fervent wish that this book brings
+                more light, love and healing into this ailing world.
+              </p>
+              <div className="flex w-full justify-center items-center md:mr-4 mb-4">
+                <Image
+                  className="rounded-xl"
+                  src="/images/vmelyse.jpg"
+                  width={144}
+                  height={169}
+                  alt="Picture of the Author V.M. Elyse"
+                />
+              </div>
+            </div>
           </div>
 
+          {/* Subscribe Form */}
+          {/*           <div className="footer-card col-span-1 md:col-span-1 lg:col-span-1">
+            <h3 className="text-lg font-serif font-semibold mb-4 text-lavender-900">
+              Stay Updated
+            </h3>
+            <SubscribeForm />
+          </div> */}
         </div>
 
         {/* Social Media Links */}
         <div className="mt-4 text-center">
-          
           <div className="rounded-lg p-8">
             <h3 className="text-lg font-serif font-semibold text-lavender-900">
-              Please share my site with your friends and help me spread the word!
+              Please share my site with your friends and help me spread the
+              word!
             </h3>
           </div>
 
-{/*           <div className="flex justify-center space-x-6">
+          {/*           <div className="flex justify-center space-x-6">
             <a
               href="#"
               className="text-2xl text-lavender-700 hover:text-lavender-500 transition duration-300"
@@ -134,8 +151,8 @@ const Footer: React.FC = () => {
         {/* Copyright */}
         <div className="mt-10 text-center text-sm footer-copyright m-6 p-2 rounded-lg text-lavender-700">
           <p>
-            &copy; {new Date().getFullYear()} V. M. Elyse &nbsp; ~ &nbsp; All rights
-            reserved.
+            &copy; {new Date().getFullYear()} V. M. Elyse &nbsp; ~ &nbsp; All
+            rights reserved.
           </p>
         </div>
       </div>
