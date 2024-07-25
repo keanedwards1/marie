@@ -18,12 +18,15 @@ export default function ShortStoriesPage() {
         <h1 className="text-4xl text-slate-800 font-serif font-bold">
           Short Stories
         </h1>
-        <p className="mt-4 text-lg font-serif text-slate-700 italic">
+        <p className="mt-4 text-lg font-serif text-slate-700">
           The Luminoles of Unity have graciously offered to share the intimate
           details of their lives for healing, growth, and joy.
         </p>
         <p className="mt-2 text-lg text-slate-700 font-serif">
           PEACE to all beings in all worlds.
+        </p>
+        <p className="mt-2 text-lg text-slate-700 font-serif">
+          <strong>Short stories will be released as available. Subscribe to receive updates.</strong>
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 mt-5 gap-6">
           {shortStories.map((story) => (
