@@ -6,6 +6,7 @@ import Footer from "../components/RespFooter";
 import ComicButton from "@/components/ComicButton";
 import { useRouter } from "next/router";
 import { shortStories } from "../data/shortStories";
+import SubscribeForm from "@/components/SubscribeForm";
 
 export default function ShortStoriesPage() {
   const router = useRouter();
@@ -44,7 +45,12 @@ export default function ShortStoriesPage() {
           />
         </div>
       </div>
-      <div className="mt-8">
+
+      <div className="">
+        <SubscribeForm />
+      </div>
+
+      <div className="">
         <Footer />
       </div>
     </div>

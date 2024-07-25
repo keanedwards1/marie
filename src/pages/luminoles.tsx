@@ -4,6 +4,7 @@ import CharacterCard from "../components/CharacterCard";
 import ComicButton from "@/components/ComicButton";
 import router, { useRouter } from "next/router";
 import Footer from "../components/RespFooter";
+import SubscribeForm from "@/components/SubscribeForm";
 
 const characters = [
   {
@@ -232,19 +233,24 @@ export default function CharactersPage() {
         </div>
       </div>
       <div className="mt-16 mb-16 flex flex-col lg:flex-row w-full gap-4 items-center justify-center">
-        <div className="lg:w-3/12 md:w-5/12 w-9/12">
+        <div className="lg:w-3/12 md:w-5/12 w-9/12 z-10">
           <ComicButton
             label="← See Landscapes ⛰️"
             onClick={() => router.push("/landscape")}
           />
         </div>
-        <div className="lg:w-3/12 md:w-5/12 w-9/12">
+        <div className="lg:w-3/12 md:w-5/12 w-9/12 z-10">
           <ComicButton
             label="📖 Download Short Stories → "
             onClick={() => router.push("/short-stories")}
           />
         </div>
       </div>
+
+      <div className="">
+        <SubscribeForm />
+      </div>
+
       <Footer />
     </div>
   );

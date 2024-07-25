@@ -55,6 +55,7 @@ const LeftImage: React.FC = () => {
     <div className="right-image-styles w-full md:w-7/12 flex justify-center items-center p-8 md:p-0 relative">
       <div className="w-full max-w-[90%] h-0 pb-[106.67%] relative">
         <Image
+        className="z-10"
           src="/book.png"
           alt="Book"
           fill

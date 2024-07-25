@@ -23,10 +23,12 @@ export default function ComingSoonPage() {
                 <p className="mt-2 -mb-20 text-lg text-slate-700 font-serif">
                     
                 </p>
-                <div className="mb-0 -mt-10 w-full">
+
+            </div>
+            <div className="mb-0 -mt-10 w-full">
                     <SubscribeForm />
                 </div>
-            </div>
+            
             <Footer />
         </div>
     );

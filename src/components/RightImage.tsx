@@ -23,11 +23,11 @@ const RightImage: React.FC = () => {
             <br />
             <br /> */}
             <span className="text-sm z-10">
-              <strong>Humanity is currently faced with a stark choice — LOVE or FEAR. Choose!</strong> <br></br><br></br>
+              <strong>Humanity currently faces a stark choice — LOVE or FEAR. Choose!</strong> <br></br><br></br>
             
               Seeking respite in a collapsing world, Rose meditates on a beach
               in Costa Rica and arrives in an entirely{" "}
-              <span className="font-magic text-lg">New World</span>. Remarkably unfazed
+              <span className="font-magic"><strong>New World</strong></span>. Remarkably unfazed
               by the oddity of her situation, she laughs, cries, and transforms
               as she journeys through a magical utopian wonderland.
               <br />

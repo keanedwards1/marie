@@ -6,6 +6,7 @@ import Cube from "../components/CubeComponent";
 import Image from "next/image";
 import { useState } from "react";
 import router, { useRouter } from "next/router";
+import SubscribeForm from "@/components/SubscribeForm";
 
 interface Location {
   id: number;
@@ -201,14 +202,14 @@ export default function Landscape() {
           <Cube />
         </div>
 
-        <div className="mt-36 -mb-0 flex flex-col lg:flex-row w-full gap-4 items-center justify-center">
-          <div className="lg:w-3/12 md:w-5/12 w-9/12">
+        <div className="mt-36 -mb-20 flex flex-col lg:flex-row w-full z-10 gap-4 items-center justify-center">
+          <div className="lg:w-3/12 md:w-5/12 w-9/12 z-10">
             <ComicButton
               label="← Back to Home 🏡"
               onClick={() => router.push("/")}
             />
           </div>
-          <div className="lg:w-3/12 md:w-5/12 w-9/12">
+          <div className="lg:w-3/12 md:w-5/12 w-9/12 z-10">
             <ComicButton
               label="🧚‍♂️ View Luminoles → "
               onClick={() => router.push("/luminoles")}
@@ -216,6 +217,11 @@ export default function Landscape() {
           </div>
         </div>
       </main>
+
+      <div className="">
+        <SubscribeForm />
+      </div>
+      
       <div className="bg-grey">
         <Footer />
       </div>

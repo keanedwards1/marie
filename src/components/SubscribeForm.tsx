@@ -46,11 +46,11 @@ const SubscribeForm: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="text-neutral-800 py-4 mt-44 relative overflow-hidden flex justify-center items-center flex-col w-full px-4 sm:px-6">
-      <div className="lg:w-1/3 md:w-1/2 lg:m-2 m-0 p-3 rounded-lg bg-lavender-100">
+    <form onSubmit={handleSubmit} className="text-neutral-800 py-4 mt-44 relative bg-gradient-to-b from-white/0 to-white/100 overflow-hidden flex justify-center items-center flex-col w-full px-4 sm:px-6">
+      <div className="lg:w-1/3 md:w-1/2 lg:m-2 m-0 p-3 rounded-lg bg-white bg-opacity-0">
         <div className="relative z-10 mb-4">
-          <p className="text-lavender-600 font-serif text-xs sm:text-base mt-1">
-            Thanks for checking out Marie&apos;s website! Sign-up for free to receive updates and support her work 🌿
+          <p className="text-gray-900 text-base sm:text-lg mt-1">
+            Thanks for checking out Marie&apos;s website! Sign up for free updates and to follow her along in her journey 🪐
           </p>
         </div>
         <div className="flex flex-col gap-2">

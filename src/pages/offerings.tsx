@@ -5,6 +5,7 @@ import TestimonialGrid from "@/components/TestimonialGrid";
 import Footer from "@/components/RespFooter";
 import ComicButton from "@/components/ComicButton";
 import { useRouter } from "next/router";
+import SubscribeForm from "@/components/SubscribeForm";
 
 const Offerings: React.FC = () => {
   const router = useRouter();
@@ -145,7 +146,9 @@ const Offerings: React.FC = () => {
           <ComicButton label="🏡 Go Home ↩" onClick={() => router.push("/")} />
         </div>
       </div>
-
+      <div className="">
+        <SubscribeForm />
+      </div>
       <Footer />
     </div>
   );
