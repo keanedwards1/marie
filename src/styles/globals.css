@@ -458,7 +458,7 @@ body {
 .home-page-text-container .home-page-box {
   width: fit-content;
   height: 106%;
-  padding: 1rem;
+  padding: 3rem;
   background-color: rgba(208, 188, 234, 0.074);
   background-color: #dfbdf774;
   border: 1px solid rgba(255, 255, 255, 0.222);
@@ -476,14 +476,14 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 40px;
+  padding: 30px;
 }
 
-@media (max-width: 600px) {
+/* @media (max-width: 600px) {
   .home-page-text-container .home-page-box {
-    padding: 40px 0px 40px 0px;
+    padding: 40px 30px 40px 30px;
   }
-}
+} */
 
 .home-page-text-container .home-page-box .title {
   font-size: 2.4rem;
