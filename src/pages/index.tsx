@@ -6,49 +6,41 @@ import LeftImage from "../components/LeftImage";
 import Head from "../components/Head";
 import SubscribeForm from "@/components/SubscribeForm";
 /* import WisteriaRow from "../components/WisteriaRow";
- *//* import Butterfly from "../components/Butterfly"; */
+ */ /* import Butterfly from "../components/Butterfly"; */
 /* import Garden from "../components/Garden"; */
-
 
 const Home: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col relative">
-
       <Head />
-      
+
       <Nav />
-      
+
       {/* Common parent container */}
       <div className="relative w-full">
-
-{/*         <WisteriaRow />
- */}
+        {/*         <WisteriaRow />
+         */}
 
         <section className="container mx-auto p-4 flex flex-col md:flex-row items-center z-10">
-          <LeftImage/>
-          <RightImage/>
+          <LeftImage />
+          <RightImage />
         </section>
-        
+
         {/* Butterflies container */}
-{/*         <div className="butterflies-container w-full absolute inset-0 pointer-events-none z-5">
+        {/*         <div className="butterflies-container w-full absolute inset-0 pointer-events-none z-5">
           <Butterfly />
         </div> */}
 
-      {/* Garden with flowers */}
-{/*       <Garden/> */}
+        {/* Garden with flowers */}
+        {/*       <Garden/> */}
 
-      <div className="">
-        <SubscribeForm />
+        <div className="">
+          <SubscribeForm />
+        </div>
       </div>
-
-
-      </div>
-      
-
 
       {/* Responsive Footer */}
       <Footer />
-
     </div>
   );
 };
