@@ -1,3 +1,5 @@
+/* !! not currently in use */
+
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import seedrandom from "seedrandom";

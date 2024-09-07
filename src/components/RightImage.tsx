@@ -1,3 +1,5 @@
+/* Should be called RightElement */
+
 import React from "react";
 import ComicButton from "./ComicButton";
 import { useRouter } from "next/router";
