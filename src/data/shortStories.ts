@@ -4,7 +4,6 @@ export const shortStories = [
   {
     id: 1,
     title: "I Love Ze Young Love!",
-    warning: "(sexually explicit)",
     description:
       "Cedar and Dara have been childhood friends, but now, as teens, taking sex ed classes, desires from the deep are stirring.",
     pdfFilename: "dr-suess-the-bitter-butter-battle.pdf",
@@ -67,7 +66,6 @@ Nam at magna non magna vehicula vestibulum. Suspendisse potenti. Integer pulvina
   {
     id: 3,
     title: "The Many Forms of Healing",
-    warning: "(sexually explicit/ sexual violence)",
     description:
       "Joshiah, after suffering an unspeakable trauma on old Earth, seeks out healing from the one person he trusts more than life itself.",
     pdfFilename: "pov-youre-a.pdf",
@@ -99,7 +97,6 @@ Nam at magna non magna vehicula vestibulum. Suspendisse potenti. Integer pulvina
   {
     id: 4,
     title: "You Don't Have to Hide Forever",
-    warning: "(sexually explicit)",
     description:
       "Jax, reeling from shame on old Earth, buried the sacred carnal delight. Jax is ready to face sexuality and heal once and for all.",
     pdfFilename: "",
@@ -114,7 +111,6 @@ Nam at magna non magna vehicula vestibulum. Suspendisse potenti. Integer pulvina
   {
     id: 6,
     title: "If Love Could Heal",
-    warning: "(reference to intense violence)",
     description:
       "Nora experiences brutal violence on old Earth and awakens to her true nature. She remains on old Earth to help the humans, but can she get through to the most important human in her life?",
     pdfFilename: "",
@@ -122,7 +118,6 @@ Nam at magna non magna vehicula vestibulum. Suspendisse potenti. Integer pulvina
   {
     id: 7,
     title: "I'll Have ALL of You or NONE of You",
-    warning: "(sexually explicit)",
     description:
       "Azriel fears being possessed by a woman, yet desires connection. To finally heal his deep fear of commitment, he must swallow his pride and get assistance from an unusual healer.",
     pdfFilename: "",
@@ -130,7 +125,6 @@ Nam at magna non magna vehicula vestibulum. Suspendisse potenti. Integer pulvina
   {
     id: 8,
     title: "What is Your Desire, My Queen?",
-    warning: "(sexually explicit)",
     description:
       "Taytum, a famous singer on old Earth, was used and abused in every way. She enters adulthood determined to heal her past sexual trauma.",
     pdfFilename: "",
@@ -138,7 +132,6 @@ Nam at magna non magna vehicula vestibulum. Suspendisse potenti. Integer pulvina
   {
     id: 9,
     title: "Descent From the Pedestal",
-    warning: "(reference to suicide)",
     description:
       "Magna, a famous actor on old Earth struggles with drug addiction and must find her way to Unity, heal her trauma, and unearth the truest nature of her gifts.",
     pdfFilename: "",
@@ -146,7 +139,6 @@ Nam at magna non magna vehicula vestibulum. Suspendisse potenti. Integer pulvina
   {
     id: 10,
     title: "The Flight of the Phoenix",
-    warning: "(reference to suicide)",
     description:
       "Puma and Viviana, seeking to understand the humans of old Earth, discover their ultimate purpose.",
     pdfFilename: "",

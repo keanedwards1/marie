@@ -1,5 +1,6 @@
 // /src/pages/short-stories.tsx
 
+import React, { useRef } from "react";
 import Nav from "../components/Nav";
 import ShortStoryCard from "../components/ShortStoryCard";
 import Footer from "../components/RespFooter";
@@ -10,24 +11,38 @@ import SubscribeForm from "@/components/SubscribeForm";
 
 export default function ShortStoriesPage() {
   const router = useRouter();
+  const subscribeFormRef = useRef<HTMLDivElement>(null);
+
+  const scrollToSubscribeForm = () => {
+    if (subscribeFormRef.current) {
+      subscribeFormRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <div className="min-h-screen bg-purple-50">
       <Nav />
       <div className="container mx-auto p-4">
-        <h1 className="text-4xl text-slate-800 font-serif font-bold">
+        {/* <h1 className="text-4xl text-slate-800 font-serif font-bold">
           Short Stories
-        </h1>
-        <p className="mt-4 text-lg font-serif text-slate-700">
-          The Luminoles of Unity have graciously offered to share the intimate
-          details of their lives for healing, growth, and joy.
+        </h1> */}
+        <p className="mt-4 text-3xl text-center text-black font-bold stretched-text-05">
+          Coming 2025
         </p>
-        <p className="mt-2 text-lg text-slate-700 font-serif">
-          PEACE to all beings in all worlds.
+        <p className="mt-2 text-lg text-slate-900 text-center font-serif">
+          Subscribe to receive updates
         </p>
-        <p className="mt-2 text-lg text-slate-700 font-serif">
-          <strong>Short stories will be released as available. Subscribe to receive updates.</strong>
-        </p>
+
+        {/* Add subscribe button here */}
+        <div className="flex justify-center mt-2 mb-8">
+          <button
+            onClick={scrollToSubscribeForm}
+            className="bg-lavender-600 text-white py-1 px-5 rounded-lg hover:bg-lavender-500 transition duration-300 text-sm sm:text-base"
+          >
+            Subscribe
+          </button>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 mt-5 gap-6">
           {shortStories.map((story) => (
             <ShortStoryCard key={story.id} story={story} />
@@ -49,7 +64,7 @@ export default function ShortStoriesPage() {
         </div>
       </div>
 
-      <div className="">
+      <div ref={subscribeFormRef} id="short-stories-subscribe-form">
         <SubscribeForm />
       </div>
 

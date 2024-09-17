@@ -1,3 +1,5 @@
+// src/components/SubscribeForm.tsx
+
 import React, { useState, FormEvent, ChangeEvent } from "react";
 
 const SubscribeForm: React.FC = () => {

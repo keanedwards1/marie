@@ -508,11 +508,6 @@ body {
   width: 93%;
 }
 
-.home-page-text-container .home-page-box div span {
-  font-size: 0.7rem;
-  font-weight: 300;
-}
-
 .home-page-text-container .home-page-box div span:nth-child(3) {
   font-weight: 500;
   margin-right: 5.0rem;
@@ -871,7 +866,13 @@ body {
   text-shadow: none;
 }
 
+.stretched-text {
+  transform: scaleY(1.1);
+}
 
+.stretched-text-05 {
+  transform: scaleY(1.05);
+}
 
 /* @media (max-width: 768px) {
   .location-info {

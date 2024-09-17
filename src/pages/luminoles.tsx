@@ -8,7 +8,7 @@ import SubscribeForm from "@/components/SubscribeForm";
 
 const characters = [
   {
-    name: "Mari",
+    name: "Oriane",
     bio: "Healing Guide",
     image: "/images/1-mari-healing-guide.jpg",
   },
@@ -70,7 +70,7 @@ const characters = [
     image: "/images/12-miriam-healer.jpeg",
   },
   {
-    name: "Mona",
+    name: "Lina",
     bio: "Healer",
     bio2: "Nature Protector",
     image: "/images/13-mona-healer-nature-protector.jpeg",
