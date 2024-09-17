@@ -6,7 +6,7 @@ export const shortStories = [
     title: "I Love Ze Young Love!",
     description:
       "Cedar and Dara have been childhood friends, but now, as teens, taking sex ed classes, desires from the deep are stirring.",
-    pdfFilename: "dr-suess-the-bitter-butter-battle.pdf",
+    pdfFilename: "",
     fullStory: `
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada. Sed vitae justo eget dui pulvinar facilisis at ac magna. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nullam ac erat ante. Nullam sit amet est justo. Vestibulum euismod est eu nisl dapibus, non blandit massa tincidunt. 
@@ -37,7 +37,7 @@ Nam at magna non magna vehicula vestibulum. Suspendisse potenti. Integer pulvina
     title: "Who is Your Baby?",
     description:
       "Veeda, a teenage, single mom, struggling to survive on old Earth, shares her story with her children in Unity, igniting an unstoppable fire.",
-    pdfFilename: "what-if-the-titanic-hadnt-sunk.pdf",
+    pdfFilename: "",
     fullStory: `
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada. Sed vitae justo eget dui pulvinar facilisis at ac magna. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nullam ac erat ante. Nullam sit amet est justo. Vestibulum euismod est eu nisl dapibus, non blandit massa tincidunt. 
@@ -68,7 +68,7 @@ Nam at magna non magna vehicula vestibulum. Suspendisse potenti. Integer pulvina
     title: "The Many Forms of Healing",
     description:
       "Joshiah, after suffering an unspeakable trauma on old Earth, seeks out healing from the one person he trusts more than life itself.",
-    pdfFilename: "pov-youre-a.pdf",
+    pdfFilename: "",
     fullStory: `
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada. Sed vitae justo eget dui pulvinar facilisis at ac magna. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nullam ac erat ante. Nullam sit amet est justo. Vestibulum euismod est eu nisl dapibus, non blandit massa tincidunt. 

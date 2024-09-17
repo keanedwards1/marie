@@ -156,7 +156,7 @@ export default function Landscape() {
         className="flex-grow container mx-auto px-4 py-16 max-w-7xl"
         id="location"
       >
-        <div className="home-page-text-container mr-4 ml-4 sm:mr-10 sml:ml-10">
+{/*         <div className="home-page-text-container mr-4 ml-4 sm:mr-10 sml:ml-10">
           <div className="flex justify-center home-page-box w-full">
             <div className="w-1/2">
               <h2 className="text-2xl mb-8 text-center font-serif">
@@ -169,7 +169,7 @@ export default function Landscape() {
               </h2>
             </div>
           </div>
-        </div>
+        </div> */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 mt-10 mb-10 mr-4 ml-4 sm:mr-10 sml:ml-10">
           {locations.map((location) => (
             <div
