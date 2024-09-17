@@ -62,13 +62,13 @@ const LeftImage: React.FC = () => {
           style={{ objectFit: 'contain' }}
           priority
         />
-        {angles.map((angle, index) => (
+{/*         {angles.map((angle, index) => (
           <div
             key={index}
             className="ray"
             style={{ transform: `rotate(${angle}deg)` }}
           ></div>
-        ))}
+        ))} */}
       </div>
     </div>
   );

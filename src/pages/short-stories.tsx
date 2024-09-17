@@ -19,14 +19,19 @@ export default function ShortStoriesPage() {
     }
   };
 
+  // Function to scroll back to the top of the page
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
-    <div className="min-h-screen bg-purple-50">
+    <div className="min-h-screen bg-purple-50 relative">
       <Nav />
       <div className="container mx-auto p-4">
         {/* <h1 className="text-4xl text-slate-800 font-serif font-bold">
           Short Stories
         </h1> */}
-        <p className="mt-4 text-3xl text-center text-black font-bold stretched-text-05">
+        <p className="mt-4 text-3xl text-center text-black font-serif font-medium stretched-text-05">
           Coming 2025
         </p>
         <p className="mt-2 text-lg text-slate-900 text-center font-serif">
@@ -68,9 +73,17 @@ export default function ShortStoriesPage() {
         <SubscribeForm />
       </div>
 
-      <div className="">
-        <Footer />
+      {/* Scroll back to top */}
+      <div className="w-full flex justify-center bg-white">
+        <button
+          onClick={scrollToTop}
+          className="text-slate-900 font-thin transition-all ease-in hover:font-extralight"
+        >
+          Back to Top
+        </button>
       </div>
+
+      <Footer />
     </div>
   );
 }

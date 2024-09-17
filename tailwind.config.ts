@@ -6,6 +6,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        'lg-xl': '1080px',
+      },
       scale: {
         '105': '1.05',
       },

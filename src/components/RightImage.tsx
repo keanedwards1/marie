@@ -25,7 +25,7 @@ const RightImage: React.FC = () => {
             <br />
             <br /> */}
             <span className="text-sm z-10">
-              <div className="text-2xl text-center font-bold stretched-text">The Realm of Unity is calling you home.</div> 
+              <div className="text-2xl text-center font-bold stretched-text">The Realm of Unity is calling you home</div> 
               <br />
             
               <div className="text-center text-base">

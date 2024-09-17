@@ -1,7 +1,9 @@
+// src/components/Nav.tsx
+
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import Image from "next/image";
 import { useRouter } from "next/router";
+import Image from "next/image"; // Import the Image component
 
 export default function Nav() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -9,7 +11,7 @@ export default function Nav() {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 1024) {
+      if (window.innerWidth >= 1060) {
         setIsMenuOpen(false);
       }
     };
@@ -18,27 +20,41 @@ export default function Nav() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Check if the current route is ___
+  // Determine the current page
   const isLandscapePage = router.pathname === "/landscape";
   const isHomePage = router.pathname === "/";
-  
+
+  // Set the navTitle based on the current route
+  let navTitle = "The Realm of Unity Book Launch";
+  if (router.pathname === "/landscape") {
+    navTitle = "The Realm of Unity Landscape";
+  } else if (router.pathname === "/luminoles") {
+    navTitle = "The Realm of Unity Characters";
+  } else if (router.pathname === "/short-stories") {
+    navTitle = "The Realm of Unity Short Stories";
+  } else if (router.pathname === "/offerings") {
+    navTitle = "The Realm of Unity Offerings";
+  }
+
   return (
-    <nav className="navbar p-4 z-40 flex flex-wrap justify-between items-center">
+    <nav className="navbar p-4 z-50 sticky top-0 bg-white bg-opacity-90 flex flex-wrap justify-between items-center">
       <div className="flex items-center">
         <Link
           href="/"
-          className={`btn background-transparent normal-case text-2xl font-serif ${
-            isLandscapePage ? "text-slate-100 custom-text-shadow" : "text-slate-800"
+          className={`btn background-transparent normal-case sm:text-lg md:text-2xl font-serif flex items-center ${
+            isLandscapePage
+              ? "text-slate-100 custom-text-shadow"
+              : "text-slate-800"
           }`}
         >
           <Image
             src="/android-chrome-192x192.png"
             alt="Logo"
-            width={50}
-            height={50}
+            width={24} // Adjust the width as needed
+            height={24} // Adjust the height as needed
             priority
           />
-          A Book Launch {isHomePage && "🦋"}
+          <span className="ml-1 font-thin">{navTitle}</span>
         </Link>
       </div>
       <button
@@ -99,7 +115,9 @@ export default function Nav() {
           <li className="w-full lg:w-auto">
             <Link
               className={`text-right font-serif lg:text-left w-full lg:w-auto justify-end lg:justify-start ${
-                isLandscapePage ? "lg:border-none text-black lg:text-violet-800 nav-menu-button-landscape" : "nav-menu-button"
+                isLandscapePage
+                  ? "lg:border-none text-black lg:text-violet-800 nav-menu-button-landscape"
+                  : "nav-menu-button"
               }`}
               href="/"
             >
@@ -109,7 +127,9 @@ export default function Nav() {
           <li className="w-full lg:w-auto">
             <Link
               className={`text-right font-serif lg:text-left w-full lg:w-auto justify-end lg:justify-start ${
-                isLandscapePage ? "lg:border-none text-black lg:text-violet-800 nav-menu-button-landscape" : "nav-menu-button"
+                isLandscapePage
+                  ? "lg:border-none text-black lg:text-violet-800 nav-menu-button-landscape"
+                  : "nav-menu-button"
               }`}
               href="/landscape"
             >
@@ -119,7 +139,9 @@ export default function Nav() {
           <li className="w-full lg:w-auto">
             <Link
               className={`text-right font-serif lg:text-left w-full lg:w-auto justify-end lg:justify-start ${
-                isLandscapePage ? "lg:border-none text-black lg:text-violet-800 nav-menu-button-landscape" : "nav-menu-button"
+                isLandscapePage
+                  ? "lg:border-none text-black lg:text-violet-800 nav-menu-button-landscape"
+                  : "nav-menu-button"
               }`}
               href="/luminoles"
             >
@@ -129,7 +151,9 @@ export default function Nav() {
           <li className="w-full lg:w-auto">
             <Link
               className={`text-right font-serif lg:text-left w-full lg:w-auto justify-end lg:justify-start ${
-                isLandscapePage ? "lg:border-none text-black lg:text-violet-800 nav-menu-button-landscape" : "nav-menu-button"
+                isLandscapePage
+                  ? "lg:border-none text-black lg:text-violet-800 nav-menu-button-landscape"
+                  : "nav-menu-button"
               }`}
               href="/short-stories"
             >
@@ -139,7 +163,9 @@ export default function Nav() {
           <li className="w-full lg:w-auto">
             <Link
               className={`text-right font-serif lg:text-left w-full lg:w-auto justify-end lg:justify-start ${
-                isLandscapePage ? "lg:border-none text-black lg:text-violet-800 nav-menu-button-landscape" : "nav-menu-button"
+                isLandscapePage
+                  ? "lg:border-none text-black lg:text-violet-800 nav-menu-button-landscape"
+                  : "nav-menu-button"
               }`}
               href="/offerings"
             >

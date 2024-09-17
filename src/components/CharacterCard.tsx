@@ -19,7 +19,7 @@ export default function CharacterCard({ character }: CharacterCardProps) {
 
   return (
     <div
-      className="relative w-full aspect-square bg-gradient-to-br from-indigo-100 to-purple-100 rounded-2xl shadow-md overflow-hidden transition-all duration-300 ease-in-out hover:shadow-xl"
+      className="relative w-full cursor-pointer aspect-square bg-gradient-to-br from-indigo-100 to-purple-100 rounded-2xl shadow-md overflow-hidden transition-all duration-300 ease-in-out hover:shadow-xl"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -36,7 +36,7 @@ export default function CharacterCard({ character }: CharacterCardProps) {
       </div>
 
       <div
-        className={`absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-8 transition-opacity duration-300 ${
+        className={`absolute inset-0 bg-black bg-opacity-20 flex flex-col justify-end p-8 transition-opacity duration-300 ${
           isHovered ? "opacity-100" : "opacity-0"
         }`}
       >
