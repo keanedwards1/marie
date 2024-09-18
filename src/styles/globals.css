@@ -709,6 +709,11 @@ body {
   /* Allow elements to overflow */
 }
 
+.book-style {
+  height: 70% !important;
+  border-radius: 2.7rem;
+}
+
 /* .ray {
   z-index: 0;
   height: 100vh;

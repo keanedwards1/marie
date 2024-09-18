@@ -1,4 +1,5 @@
-/* Should be called RightElement */
+// /src/components/RightImage.tsx
+// (should be )
 
 import React from "react";
 import ComicButton from "./ComicButton";
@@ -8,14 +9,14 @@ const RightImage: React.FC = () => {
   const router = useRouter();
 
   return (
-    <div className="w-full z-10 md:w-1/2">
+    <div className="w-full z-10 lg:w-1/2 order-2 lg:order-1">
       <div className="home-page-text-container home-page-text-container-1">
         <div className="home-page-box">
 {/*           <h1 className="text-3xl font-bold text-center font-serif z-10">
             The Realm of Unity <br></br>
             <p className="text-m">Author: V. M. Elyse</p>
           </h1> */}
-          <p className="mt-4 text-m text-center z-10 md:text-left font-serif">
+          <p className="mt-4 text-m text-center z-10 lg:text-left font-serif">
             {/*             <strong>
               Blurb:<br></br> &quot;After a lifetime of chasing the slippery fish of peace while
               trying to navigate a sleeping world, I reveled in the rainstorm of
@@ -53,7 +54,7 @@ const RightImage: React.FC = () => {
             </span>
           </p>
         </div>
-        <div className="flex items-center justify-center z-10 absolute md:justify-center lg:flex-row flex-col mt-8 w-full space-x-4 gap-6">
+        <div className="flex items-center justify-center z-10 absolute lg:justify-center lg:flex-row flex-col mt-8 w-full space-x-4 gap-6">
           <ComicButton
             label="Coming Soon"
             onClick={() => router.push("/coming-soon")}

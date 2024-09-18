@@ -1,3 +1,5 @@
+// /src/pages/index.tsx
+
 import Nav from "../components/Nav";
 import React from "react";
 import Footer from "../components/RespFooter";
@@ -21,8 +23,8 @@ const Home: React.FC = () => {
         {/*         <WisteriaRow />
          */}
 
-        <section className="container mx-auto p-4 flex flex-col md:flex-row items-center z-10">
-        <RightImage />
+        <section className="container mx-auto p-4 flex flex-col gap-10 lg:flex-row items-center z-10">
+          <RightImage />
           <LeftImage />
         </section>
 
