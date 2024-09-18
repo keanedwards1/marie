@@ -114,6 +114,7 @@
   --base-100: #8860d0;
   --base-100-light: #7e4e9d;
   --base-100-darker: #795fa8;
+  --base-100-very-light: rgb(223, 189, 247);
   --base-100-very-light: #dfbdf7;
   --text-color: #03495179;
   --info: #60A5FA;
@@ -853,13 +854,13 @@ body {
   }
 }
 
-.custom-text-shadow {
+/* .custom-text-shadow {
   text-shadow:
     -0.5px -0.5px 10px #00000074,
     0.5px -0.5px 0 #000,
     -0.5px 0.5px 0 #000,
     0.5px 0.5px 0 #000;
-}
+} */
 
 .custom-text-shadow-1 {
   text-shadow: none;

@@ -66,7 +66,7 @@ const Offerings: React.FC = () => {
           <form className="review-form-text" onSubmit={handleSubmit}>
             <fieldset className="border-4 border-dotted review-form-border p-5">
               <legend className="px-2 italic text-lg -mx-2 review-form-legend">
-                Read the book? Feel free to share your thoughts 💫
+                Read the book? Feel free to share your thoughts ☁️
               </legend>
               <label className="text-sm font-bold" htmlFor="first-name">
                 First Name or First Initial

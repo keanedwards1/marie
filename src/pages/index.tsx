@@ -22,8 +22,8 @@ const Home: React.FC = () => {
          */}
 
         <section className="container mx-auto p-4 flex flex-col md:flex-row items-center z-10">
+        <RightImage />
           <LeftImage />
-          <RightImage />
         </section>
 
         {/* Butterflies container */}

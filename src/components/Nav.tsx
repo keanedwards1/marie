@@ -41,11 +41,7 @@ export default function Nav() {
       <div className="flex items-center">
         <Link
           href="/"
-          className={`btn background-transparent normal-case sm:text-lg md:text-2xl font-serif flex items-center ${
-            isLandscapePage
-              ? "text-slate-100 custom-text-shadow"
-              : "text-slate-800"
-          }`}
+          className={`btn background-transparent normal-case sm:text-lg md:text-2xl font-serif flex items-center`}
         >
           <Image
             src="/android-chrome-192x192.png"
@@ -72,7 +68,7 @@ export default function Nav() {
           <path
             className={`transition-transform duration-300 ease-in-out ${
               isMenuOpen ? "rotate-45 -translate-y-1 translate-x-2" : ""
-            } ${isLandscapePage ? "stroke-black" : ""}`}
+            }`}
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth={2}
@@ -81,7 +77,7 @@ export default function Nav() {
           <path
             className={`transition-opacity duration-300 ease-in-out ${
               isMenuOpen ? "opacity-0" : ""
-            } ${isLandscapePage ? "stroke-black" : ""}`}
+            }`}
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth={2}
@@ -90,7 +86,7 @@ export default function Nav() {
           <path
             className={`transition-transform duration-300 ease-in-out ${
               isMenuOpen ? "-rotate-45 translate-y-1 -translate-x-2" : ""
-            } ${isLandscapePage ? "stroke-black" : ""}`}
+            }`}
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth={2}
@@ -114,11 +110,7 @@ export default function Nav() {
         <ul className="menu menu-vertical lg:menu-horizontal p-0 mt-4 lg:mt-0 w-full lg:flex lg:space-x-0 mr-20">
           <li className="w-full lg:w-auto">
             <Link
-              className={`text-right font-serif lg:text-left w-full lg:w-auto justify-end lg:justify-start ${
-                isLandscapePage
-                  ? "lg:border-none text-black lg:text-violet-800 nav-menu-button-landscape"
-                  : "nav-menu-button"
-              }`}
+              className={`text-right font-serif lg:text-left w-full lg:w-auto justify-end lg:justify-start nav-menu-button`}
               href="/"
             >
               Home
@@ -126,11 +118,7 @@ export default function Nav() {
           </li>
           <li className="w-full lg:w-auto">
             <Link
-              className={`text-right font-serif lg:text-left w-full lg:w-auto justify-end lg:justify-start ${
-                isLandscapePage
-                  ? "lg:border-none text-black lg:text-violet-800 nav-menu-button-landscape"
-                  : "nav-menu-button"
-              }`}
+              className={`text-right font-serif lg:text-left w-full lg:w-auto justify-end lg:justify-start nav-menu-button`}
               href="/landscape"
             >
               Landscape
@@ -138,11 +126,7 @@ export default function Nav() {
           </li>
           <li className="w-full lg:w-auto">
             <Link
-              className={`text-right font-serif lg:text-left w-full lg:w-auto justify-end lg:justify-start ${
-                isLandscapePage
-                  ? "lg:border-none text-black lg:text-violet-800 nav-menu-button-landscape"
-                  : "nav-menu-button"
-              }`}
+              className={`text-right font-serif lg:text-left w-full lg:w-auto justify-end lg:justify-start nav-menu-button`}
               href="/luminoles"
             >
               Luminoles
@@ -150,11 +134,7 @@ export default function Nav() {
           </li>
           <li className="w-full lg:w-auto">
             <Link
-              className={`text-right font-serif lg:text-left w-full lg:w-auto justify-end lg:justify-start ${
-                isLandscapePage
-                  ? "lg:border-none text-black lg:text-violet-800 nav-menu-button-landscape"
-                  : "nav-menu-button"
-              }`}
+              className={`text-right font-serif lg:text-left w-full lg:w-auto justify-end lg:justify-start nav-menu-button`}
               href="/short-stories"
             >
               Short Stories
@@ -162,11 +142,7 @@ export default function Nav() {
           </li>
           <li className="w-full lg:w-auto">
             <Link
-              className={`text-right font-serif lg:text-left w-full lg:w-auto justify-end lg:justify-start ${
-                isLandscapePage
-                  ? "lg:border-none text-black lg:text-violet-800 nav-menu-button-landscape"
-                  : "nav-menu-button"
-              }`}
+              className={`text-right font-serif lg:text-left w-full lg:w-auto justify-end lg:justify-start nav-menu-button`}
               href="/offerings"
             >
               Offerings
