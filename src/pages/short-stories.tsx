@@ -15,7 +15,10 @@ export default function ShortStoriesPage() {
 
   const scrollToSubscribeForm = () => {
     if (subscribeFormRef.current) {
-      subscribeFormRef.current.scrollIntoView({ behavior: "smooth" });
+      subscribeFormRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "center", // Added this line
+      });
     }
   };
 
