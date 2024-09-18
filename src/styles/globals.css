@@ -432,7 +432,6 @@ body {
   content: "";
   background-color: #fab5704c;
   background-color: #746ee851;
-
   position: absolute;
 }
 
@@ -441,12 +440,10 @@ body {
   width: 50%;
   height: 50%;
   top: 30%;
-  right: 7%;
-  
-
+  left: 7%;
 }
 
-.home-page-text-container::after {
+/* .home-page-text-container::after {
   content: "";
   position: absolute;
   height: 70%;
@@ -454,7 +451,7 @@ body {
   right: 2%;
   border: 1px solid;
 
-}
+} */
 
 .home-page-text-container .home-page-box {
   width: fit-content;
