@@ -164,14 +164,14 @@ body {
   font-family: 'Gentium Book Plus', serif;
 }
 
-/* Custom styles */
-/* .shadow-comic {
-  box-shadow: 5px 5px 0px #000;
-}
+/* light styles */
 
-.shadow-comic-hover {
-  box-shadow: 5px 5px 0px #ff5252;
-} */
+/* .navbar {
+  background-color: #fffffff2;
+}
+.nav-title {
+/*   color: rgb(185, 185, 185); 
+}
 
 .nav-menu-main-button {
   font-family: serif;
@@ -190,6 +190,36 @@ body {
 .nav-menu-main-button:hover {
   background-color: rgb(240, 226, 255) !important;
   color: var(--base-100-darker);
+  transform: scale(1.04);
+} */
+
+/* dark styles */
+
+.navbar {
+  background-color: #221735f2;
+}
+.nav-title {
+  color: rgb(234, 234, 234);
+}
+
+.nav-menu-main-button {
+  font-family: serif;
+}
+
+.nav-menu-button,
+.nav-menu-main-button {
+  background-color: #463262 !important;
+  position: relative;
+  color: rgb(234, 234, 234);
+  transition: color 0.3s ease, transform 0.4s ease, background-color 0.4s ease;
+  margin: 0 3px;
+  padding: 7px 13px;
+}
+
+.nav-menu-button:hover,
+.nav-menu-main-button:hover {
+  background-color: #4c3771 !important;
+  color: rgb(239, 239, 239);
   transform: scale(1.04);
 }
 
@@ -415,6 +445,20 @@ body {
 .wisteria-container {
   animation: sway 8s ease-in-out infinite;
 }
+
+.book-style {
+  height: 70% !important;
+  border-radius: 2.7rem;
+   border: 1px solid rgba(221, 221, 221, 0.222);
+/*  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  transition: all 1400ms ease; */
+}
+
+/* .book-style:hover {
+  box-shadow: 0px 0px 20px 1px #3b2a4425;
+  border: 1px solid rgba(0, 0, 0, 0.185);
+} */
 
 .home-page-text-container {
   color: rgb(252, 252, 252);
@@ -704,11 +748,6 @@ body {
   position: relative;
   overflow: visible;
   /* Allow elements to overflow */
-}
-
-.book-style {
-  height: 70% !important;
-  border-radius: 2.7rem;
 }
 
 /* .ray {

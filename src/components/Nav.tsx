@@ -50,7 +50,7 @@ export default function Nav() {
             height={24} // Adjust the height as needed
             priority
           />
-          <span className="ml-1 font-thin">{navTitle}</span>
+          <span className="ml-1 font-thin nav-title">{navTitle}</span>
         </Link>
       </div>
       <button
