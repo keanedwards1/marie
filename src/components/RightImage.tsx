@@ -15,7 +15,7 @@ const RightImage: React.FC<RightImageProps> = ({ className }) => {
         <div className="home-page-box">
           <p className="mt-4 text-m text-center z-10 lg:text-left font-serif">
             <span className="text-sm z-10">
-              <div className="text-4xl text-center font-bold stretched-text">
+              <div className="text-4xl text-center font-bold stretched-text text-dark-purple-hover">
                 A Vision for Humanity
               </div> 
               <br />
@@ -45,11 +45,13 @@ const RightImage: React.FC<RightImageProps> = ({ className }) => {
                 and assist humanity or leave for a more pleasant realm.
                 <br />
                 <br />
+                <div className="text-lg text-center text-dark-purple-hover">
                 Travel with Rose through the enchanting <span className="italic text-sm">Realm of Unity</span>, 
                 receive deep wisdom from colorful and quirky Luminoles, and discover the true source of power.
+                </div>
               </div>
               <br />
-              <div className="text-lg text-center">
+              <div className="text-lg text-center text-dark-purple-hover">
                 Question the nature of reality
                 <br />
                 Unravel the mysteries of life
@@ -58,10 +60,9 @@ const RightImage: React.FC<RightImageProps> = ({ className }) => {
               </div>
               <br />
               <br />
-              <div className="text-lg text-center font-bold">
+              <div className="text-lg text-center font-bold text-dark-purple-hover">
                 Take a Transformational Journey from Fear into Love
                 <br />
-                A Vision for Humanity
               </div>
             </span>
           </p>

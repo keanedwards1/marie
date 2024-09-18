@@ -479,7 +479,7 @@ body {
 }
 
 .home-page-text-container {
-  color: rgb(252, 252, 252);
+  color: rgb(249, 236, 255);
   color: black;
   position: relative;
   /*     font-family: sans-serif;
@@ -514,6 +514,15 @@ body {
   border: 1px solid;
 
 } */
+
+.home-page-box .text-dark-purple-hover {
+  transition: all 400ms ease-in;
+  color: rgb(240, 235, 255); /* Replace this with your desired hover color */
+}
+
+.home-page-box:hover .text-dark-purple-hover {
+  color: rgb(72, 27, 72); /* Replace this with your desired hover color */
+}
 
 .home-page-text-container .home-page-box {
   width: fit-content;
