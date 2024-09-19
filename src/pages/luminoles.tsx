@@ -1,3 +1,5 @@
+// src/pages/luminoles.tsx
+
 import Head from "../components/Head";
 import Nav from "../components/Nav";
 import CharacterCard from "../components/CharacterCard";
@@ -143,6 +145,7 @@ const characters = [
   },
   {
     name: "Leaf ",
+    bio: "",
     image: "/images/28-leaf-non-binary.jpeg",
   },
   { name: "Ismar", bio: "", image: "/images/29-ismar.jpeg" },
@@ -212,6 +215,7 @@ const characters = [
 ];
 
 export default function CharactersPage() {
+  const router = useRouter();
   return (
     <div className="min-h-screen bg-purple-50">
       <Head
