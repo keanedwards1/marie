@@ -193,8 +193,20 @@ body {
 .nav-menu-main-button:hover {
   background-color: rgb(240, 226, 255) !important;
   background-color: #f1f0fb !important;
-  color: #7069c2c5;
+  color: #3d3781c5;
   transform: scale(1.04);
+}
+
+@media (max-width: 1024px) {
+  .nav-menu-button,
+.nav-menu-main-button {
+  font-size: 18px;
+  color:#3d3781;
+}
+  .nav-menu-button:hover,
+.nav-menu-main-button:hover {
+  color: #272352;
+}
 }
 
 /* dark styles */
