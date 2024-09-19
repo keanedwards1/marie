@@ -46,7 +46,7 @@ const RightImage: React.FC<RightImageProps> = ({ className }) => {
                 <br />
                 <br />
                 <div className="text-lg text-center text-dark-purple-hover">
-                Travel with Rose through the enchanting <span className="italic text-sm">Realm of Unity</span>, 
+                Travel with Rose through the enchanting Realm of Unity, 
                 receive deep wisdom from colorful and quirky Luminoles, and discover the true source of power.
                 </div>
               </div>

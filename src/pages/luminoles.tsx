@@ -46,8 +46,6 @@ const characters = [
   {
     name: "Jax",
     bio: "Educator",
-    bio2: "Androgynous",
-    bio3: "Shapeshifter",
     image: "/images/9-jax-androgenous-xe-xem-pronouns-shapeshifter.jpg",
   },
   { 
@@ -145,7 +143,6 @@ const characters = [
   },
   {
     name: "Leaf ",
-    bio: "Non-Binary",
     image: "/images/28-leaf-non-binary.jpeg",
   },
   { name: "Ismar", bio: "", image: "/images/29-ismar.jpeg" },
