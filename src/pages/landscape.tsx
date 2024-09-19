@@ -27,7 +27,7 @@ const locations: Location[] = [
     id: 2,
     src: "/images/purple-starfruit.jpg",
     alt: "Purple Starfruit",
-    description: "Creamy as custard and succeulent as a mango—Luminoles utilize the power of thought and desire to generate new varieties of trees, flowers and fruits."
+    description: "Creamy as custard and succulent as a mango—Luminoles utilize the power of thought and desire to generate new varieties of trees, flowers and fruits."
   },
   /*   {
     id: 3,
