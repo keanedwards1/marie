@@ -27,7 +27,7 @@ const locations: Location[] = [
     id: 2,
     src: "/images/purple-starfruit.jpg",
     alt: "Purple Starfruit",
-    description: "Luminoles live in harmony with nature. Through the power of thought and desire, new varieties of trees, flowers and fruits spontaneously arise. Purple Starfruit is creamy as custard and succulent as a mango."
+    description: "Creamy as custard and succeulent as a mango—Luminoles utilize the power of thought and desire to generate new varieties of trees, flowers and fruits."
   },
   /*   {
     id: 3,
@@ -60,7 +60,7 @@ const locations: Location[] = [
     id: 5,
     src: "/images/central-hub-of-elysia.jpg",
     alt: "Central Hub of Elysia",
-    description: "The Central Hub of Elysia is a fantastical polycenter (city of Unity) integrated into the natural world with spiraling towers, waterfalls, fountains, bridges, and archways."
+    description: "A fantastical polycenter (city of Unity) integrated into the natural world with spiraling towers, waterfalls, fountains, bridges, and archways."
   },
   /*   {
     id: 9,
@@ -71,7 +71,7 @@ const locations: Location[] = [
     id: 6,
     src: "/images/the-zephyr.jpg",
     alt: "The Zephyr",
-    description: "At the heart of Elysia lies the Zephyr, a towering free-energy pyramid that connects to the crystal grid that powers all of Unity."
+    description: "The towering crystal pyramid that lives at the heart of all polycenters and connects with the crystal grid, providing free energy to all of Unity."
   },
   {
     id: 7,
@@ -94,14 +94,14 @@ const locations: Location[] = [
   {
     id: 10,
     src: "/images/radiant-dome.jpg",
-    alt: "Radiant Dome",
-    description: "All manufacturing takes place in the Radiant Domes and is always in perfect harmony with the laws of nature. All goods go to the Central Distribution Center and Akashi, the AI system of Unity, disperses them to Luminoles as needed."
+    alt: "Radiant Domes",
+    description: "All manufacturing is done in harmony with nature. Akashi, the AI system of Unity, disperses goods to Luminoles, as needed, from the Central Distribution Center."
   },
   {
     id: 11,
     src: "/images/makai-ola-island.jpg",
     alt: "Makai Ola Island",
-    description: "Through creative will, Luminoles design incredible new polycenters, each unique and perfectly harmonized with the inhabitants."
+    description: "Luminoles design new polycenters, each unique and perfectly harmonized with the inhabitants."
   },
   /*   {
     id: 16,
