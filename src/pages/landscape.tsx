@@ -21,7 +21,7 @@ const locations: Location[] = [
     src: "/images/azure-village.jpg",
     alt: "Azure Village",
     description:
-      "Azure Village, an outland settlement in the polycenter of Elysia, features beautifully crafted dome-shaped dwellings each perfectly designed to meet the needs of the residents. Crescent Healing Center, nestled to one side of the village, offers a sanctuary for Luminoles (the inhabitants of Unity) to release the trauma of old Earth and discover their innate gifts.",
+      "The beautiful homes of the outland village of elysia are perfectly designed to meet the needs of the Luminoles. Crescent Healing Center, nestled to one side, is a sanctuary to release old Earth trauma and discover innate gifts.",
   },
   {
     id: 2,
@@ -49,7 +49,7 @@ const locations: Location[] = [
     id: 4,
     src: "/images/green-haired-girl.jpg",
     alt: "Shapeshifting",
-    description: "As the Luminoles release trauma and awaken their divinity, they gain access to hidden powers. They learn to wield these abilities-- telepathy, shapeshifting, healing, telekinesis, floating, teleportation and instant manifestation-- for the benefit of all."
+    description: "Hidden powers arise in Unity—telepathy, shapeshifting, healing, telekinesis, floating, teleportation and instant manifestation."
   },
   /*   {
     id: 7,
