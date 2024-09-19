@@ -21,7 +21,7 @@ const locations: Location[] = [
     src: "/images/azure-village.jpg",
     alt: "Azure Village",
     description:
-      "The beautiful homes of the outland village of elysia are perfectly designed to meet the needs of the Luminoles. Crescent Healing Center, nestled to one side, is a sanctuary to release old Earth trauma and discover innate gifts.",
+      "The beautiful homes of the outland village of Elysia are perfectly designed to meet the needs of the Luminoles. Crescent Healing Center, nestled to one side, is a sanctuary to release old Earth trauma and discover innate gifts.",
   },
   {
     id: 2,
@@ -77,7 +77,7 @@ const locations: Location[] = [
     id: 7,
     src: "/images/radiant-dome-spider-girl.jpg",
     alt: "Nature Protector",
-    description: "In Unity, there are no traditional jobs, only contributions; ‘work’ is a relic of the past. Contributions include Healer, Creative, Nature Protector, Builder, Educator, Leader, and Explorer. As Luminoles release old Earth trauma, the natural desire to share their unique gifts emerges effortlessly."
+    description: "There are no jobs in Unity, only contributions—Healer, Creative, Nature Protector, Builder, Educator, Leader, and Explorer. The desire to share unique gifts emerges effortlessly."
   },
   {
     id: 8,
