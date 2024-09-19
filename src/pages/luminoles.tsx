@@ -78,7 +78,6 @@ const characters = [
   {
     name: "Nora",
     bio: "Healer",
-    bio2: "Floater",
     image: "/images/14-nora-healer-floater.jpeg",
   },
   {
@@ -99,7 +98,7 @@ const characters = [
   },
   {
     name: "Maanya",
-    bio: "Eleventh Dimensional Pleiadian",
+    bio: "Pleiadian",
     bio2: "Healer",
     image:
       "/images/18-maanya-eleventh-dimensional-from-the-pleiadian-star-system.jpeg",
@@ -208,7 +207,7 @@ const characters = [
   },
   {
     name: "Laanza",
-    bio: "Eleventh Dimensional Pleiadian",
+    bio: "Pleiadian",
     bio2: "Healer",
     image: "/images/40-laanza-eleventh-dimensional-pleiadian.jpeg",
   },

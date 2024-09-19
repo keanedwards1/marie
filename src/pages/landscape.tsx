@@ -118,6 +118,7 @@ const locations: Location[] = [
 
 ];
 
+
 export default function Landscape() {
   const [hoveredId, setHoveredId] = useState<number | null>(null);
 
@@ -156,7 +157,8 @@ export default function Landscape() {
         className="flex-grow container mx-auto px-4 py-16 max-w-7xl"
         id="location"
       >
-{/*         <div className="home-page-text-container mr-4 ml-4 sm:mr-10 sml:ml-10">
+{/*  **keep for now cause it has some nice formatting that might be helpful (delete before finalized)**
+        <div className="home-page-text-container mr-4 ml-4 sm:mr-10 sml:ml-10">
           <div className="flex justify-center home-page-box w-full">
             <div className="w-1/2">
               <h2 className="text-2xl mb-8 text-center font-serif">
@@ -171,31 +173,38 @@ export default function Landscape() {
           </div>
         </div> */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 mt-10 mb-10 mr-4 ml-4 sm:mr-10 sml:ml-10">
-          {locations.map((location) => (
-            <div
-              key={location.id}
-              className="location-card"
-              onMouseEnter={() => setHoveredId(location.id)}
-              onMouseLeave={() => setHoveredId(null)}
-            >
-              <div className="location-image-container relative">
-                <Image
-                  src={location.src}
-                  alt={location.alt}
-                  fill
-                  style={{ objectFit: "cover" }}
-                  className="location-image"
-                />
-              </div>
-              <div
-                className={`location-info ${
-                  hoveredId === location.id ? "hovered" : ""
-                }`}
-              >
-                <h3 className="location-title">{location.alt}</h3>
-              </div>
-            </div>
-          ))}
+        {locations.map((location) => (
+  <div
+    key={location.id}
+    className="location-card"
+  >
+    <div className="card-inner">
+      <div className="card-front">
+        <div className="location-image-container relative">
+          <Image
+            src={location.src}
+            alt={location.alt}
+            fill
+            style={{ objectFit: "cover" }}
+            className="location-image"
+          />
+        </div>
+        <div className="location-info">
+          <h3 className="location-title">{location.alt}</h3>
+        </div>
+      </div>
+      <div className="card-back">
+        {/* Customize the back content as needed */}
+        <h3 className="location-title">{location.alt}</h3>
+        <p className="location-description">
+          {/* Add a brief description or any other content */}
+          Explore more about {location.alt}.
+        </p>
+      </div>
+    </div>
+  </div>
+))}
+
         </div>
 
         <div className="w-full h-screenw-full h-96 -mb-10 mt-10 pt-10 flex items-center justify-center">
