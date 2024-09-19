@@ -51,7 +51,7 @@ const RightImage: React.FC<RightImageProps> = ({ className }) => {
 
                 As the opposing forces intensify, one by one, beings awaken and 
                 collapse duality, creating the possibility of choice. Upon awakening, 
-                they are no longer bound to Old Earth and are free to stay and assist 
+                they are no longer bound to old Earth and are free to stay and assist 
                 humanity or leave for a more pleasant realm.
                 <br />
                 <br />
