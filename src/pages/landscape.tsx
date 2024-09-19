@@ -21,7 +21,7 @@ const locations: Location[] = [
     src: "/images/azure-village.jpg",
     alt: "Azure Village",
     description:
-      "The beautiful homes of the outland village of Elysia are perfectly designed to meet the needs of the Luminoles. Crescent Healing Center, nestled to one side, is a sanctuary to release old Earth trauma and discover innate gifts.",
+      "The beautiful homes of the outland village of Elysia are perfectly designed to meet the needs of the Luminoles. Crescent Healing Center, nestled to one side, is a sanctuary for rejuvenation.",
   },
   {
     id: 2,
