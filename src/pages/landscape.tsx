@@ -83,7 +83,7 @@ const locations: Location[] = [
     id: 8,
     src: "/images/harmony-healing-center-greenhouse.jpg",
     alt: "Harmony Healing Center",
-    description: "Harmony Healing Center is in the Central Hub of Elysia and holds a large greenhouse with medicinal plants, a crystal room, and Cocoons (healing beds)."
+    description: "The large Healing Center in the Central Hub of Elysia—home to a large greenhouse of medicinal plants, a crystal room, and multiple Cocoons (healing beds)."
   },
   {
     id: 9,
