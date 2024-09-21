@@ -34,11 +34,15 @@ export default function ShortStoriesPage() {
         {/* <h1 className="text-4xl text-slate-800 font-serif font-bold">
           Short Stories
         </h1> */}
-        <p className="mt-4 text-3xl text-center text-black font-serif font-medium stretched-text-05">
+        <p className="mt-4 mb-3 text-3xl text-center text-black font-serif font-medium stretched-text-05">
           Coming 2025
         </p>
-        <p className="mt-2 text-lg text-slate-900 text-center font-serif">
-          Subscribe to receive updates
+        <p className="mt-2 mb-4 text-base text-slate-900 text-center font-serif">
+          Luminoles you met in the <span className="font-semibold">Realm of Unity</span>
+          <br />
+          share <span className="italic">intimate</span> details of their adventures.
+          <br />
+          <span className="font-semibold">Subscribe to receive updates</span>
         </p>
 
         {/* Add subscribe button here */}
