@@ -33,15 +33,15 @@ const Home: React.FC = () => {
 
       </section>
 
-      <div className="flex items-center relative justify-center z-10 pr-6 pl-6 lg:justify-center lg:flex-row flex-col mt-0 w-full space-x-4 gap-6">
-            <ComicButton
-              label="Coming Soon"
-              onClick={() => router.push("/coming-soon")}
-              className="home-comic-button"
-            />
+      <div className="flex items-center relative justify-center z-10 pr-6 pl-6 lg:justify-center lg:flex-row flex-col mt-4 lg:mt-0 w-full space-x-4 gap-6">
             <ComicButton
               label="⛰️ See Landscapes →"
               onClick={() => router.push("/landscape")}
+              className="home-comic-button"
+            />
+            <ComicButton
+              label="Coming Soon"
+              onClick={() => router.push("/coming-soon")}
               className="home-comic-button"
             />
           </div>

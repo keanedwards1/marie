@@ -56,8 +56,9 @@ const RightImage: React.FC<RightImageProps> = ({ className }) => {
                 <br />
                 <br />
 
-                <div className="text-lg text-center text-dark-purple-hover">
+                <div className="text-sm text-center text-dark-purple-hover">
                   🦋 🦋 🦋
+                  <br />
                   <br />
                   Travel with Rose through the enchanting Realm of Unity, 
                   receive deep wisdom from colorful and quirky Luminoles, and 
@@ -67,7 +68,7 @@ const RightImage: React.FC<RightImageProps> = ({ className }) => {
 
               <br />
 
-              <div className="text-lg text-center leading-7 text-dark-purple-hover">
+              <div className="text-sm text-center leading-7 text-dark-purple-hover">
                 <span className="italic">
                   Question the nature of reality
                 </span>
@@ -79,7 +80,6 @@ const RightImage: React.FC<RightImageProps> = ({ className }) => {
                 </span>
               </div>
 
-              <br />
               <br />
 
               <div className="text-lg text-center font-bold text-dark-purple-hover">
