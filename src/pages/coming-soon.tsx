@@ -17,9 +17,9 @@ export default function ComingSoonPage() {
                 <h1 className="text-4xl text-slate-800 font-serif font-bold">
                     Coming Soon
                 </h1>
-                <p className="mt-4 text-lg font-serif lg:w-1/2 md:w-1/3 text-slate-700 italic">
+{/*                 <p className="mt-4 text-lg font-serif lg:w-1/2 md:w-1/3 text-slate-700 italic">
                     &quot;The Realm Of Unity&quot; is currently in the works. Marie is working with her publishers to make final tweaks and finalize the cover art.
-                </p>
+                </p> */}
                 <p className="mt-2 -mb-20 text-lg text-slate-700 font-serif">
                     
                 </p>
