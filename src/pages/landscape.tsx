@@ -13,6 +13,7 @@ interface Location {
   src: string;
   alt: string;
   description: string;
+  alt2?: string;
 }
 
 const locations: Location[] = [
@@ -60,7 +61,7 @@ const locations: Location[] = [
     id: 5,
     src: "/images/central-hub-of-elysia.jpg",
     alt: "Central Hub of Elysia",
-    description: "A fantastical polycenter (city of Unity) integrated into the natural world with spiraling towers, waterfalls, fountains, bridges, and archways."
+    description: "A stunning polycenter where spiraling towers, fountains, bridges, and archways blend seamlessly with nature."
   },
   /*   {
     id: 9,
@@ -71,7 +72,7 @@ const locations: Location[] = [
     id: 6,
     src: "/images/the-zephyr.jpg",
     alt: "The Zephyr",
-    description: "The towering crystal pyramid that lives at the heart of all polycenters and connects with the crystal grid, providing free energy to all of Unity."
+    description: "At the heart of the polycenters, a towering crystal pyramid connects to the grid, providing free, limitless energy."
   },
   {
     id: 7,
@@ -83,7 +84,8 @@ const locations: Location[] = [
     id: 8,
     src: "/images/harmony-healing-center-greenhouse.jpg",
     alt: "Harmony Healing Center",
-    description: "The large Healing Center in the Central Hub of Elysia—home to a large greenhouse of medicinal plants, a crystal room, and multiple Cocoons (healing beds)."
+    alt2: "Harmony",
+    description: "In the Central Hub of Elysia, a vast Healing Center features a medicinal herb greenhouse, a crystal chamber, and numerous healing beds called Cocoons, all providing deep restoration."
   },
   {
     id: 9,
@@ -204,7 +206,7 @@ export default function Landscape() {
                 </div>
                 <div className="card-back">
                   {/* Customize the back content as needed */}
-                  <h3 className="location-title back-title">{location.alt}</h3>
+                  <h3 className="location-title back-title">{location.alt2 ? location.alt2 : location.alt}</h3>
                   <p className="location-description">
                     {/* Add a brief description or any other content */}
                     {location.description}
