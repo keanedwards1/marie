@@ -7,7 +7,7 @@ export const shortStories = [
     description:
       "Cedar and Dara have been childhood friends, but now, as teens, taking sex ed classes, desires from the deep are stirring.",
     pdfFilename: "",
-    fullStory: `
+/*     fullStory: `
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada. Sed vitae justo eget dui pulvinar facilisis at ac magna. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nullam ac erat ante. Nullam sit amet est justo. Vestibulum euismod est eu nisl dapibus, non blandit massa tincidunt. 
 
@@ -30,7 +30,7 @@ Months later, Joshiah stood at the entrance of the healing center, this time wit
 Fusce sit amet elit vel libero convallis varius. Praesent at libero ut tortor vestibulum eleifend ac ut felis. Vestibulum suscipit neque vitae est sodales, ut tempor lorem auctor. Integer convallis diam nec tellus suscipit, nec tincidunt leo dictum. Suspendisse volutpat, ligula in dictum varius, ligula eros malesuada libero, at pharetra lorem erat in orci. Nulla facilisi. Quisque ut mi sed lectus pharetra consequat nec nec justo. Morbi nec felis felis.
 
 Nam at magna non magna vehicula vestibulum. Suspendisse potenti. Integer pulvinar ligula non ex venenatis, id accumsan eros interdum. Morbi rutrum risus ut nulla tempor, id sodales nulla dictum. Sed sit amet arcu eu felis euismod dictum. Curabitur sit amet metus at lacus tempus venenatis. Curabitur varius neque sed sapien dictum, non dictum odio pharetra.
-    `,
+    `, */
   },
   {
     id: 2,
@@ -38,7 +38,7 @@ Nam at magna non magna vehicula vestibulum. Suspendisse potenti. Integer pulvina
     description:
       "Veeda, a teenage, single mom, struggling to survive on old Earth, shares her story with her children in Unity, igniting an unstoppable fire.",
     pdfFilename: "",
-    fullStory: `
+/*     fullStory: `
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada. Sed vitae justo eget dui pulvinar facilisis at ac magna. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nullam ac erat ante. Nullam sit amet est justo. Vestibulum euismod est eu nisl dapibus, non blandit massa tincidunt. 
 
@@ -61,7 +61,7 @@ Months later, Joshiah stood at the entrance of the healing center, this time wit
 Fusce sit amet elit vel libero convallis varius. Praesent at libero ut tortor vestibulum eleifend ac ut felis. Vestibulum suscipit neque vitae est sodales, ut tempor lorem auctor. Integer convallis diam nec tellus suscipit, nec tincidunt leo dictum. Suspendisse volutpat, ligula in dictum varius, ligula eros malesuada libero, at pharetra lorem erat in orci. Nulla facilisi. Quisque ut mi sed lectus pharetra consequat nec nec justo. Morbi nec felis felis.
 
 Nam at magna non magna vehicula vestibulum. Suspendisse potenti. Integer pulvinar ligula non ex venenatis, id accumsan eros interdum. Morbi rutrum risus ut nulla tempor, id sodales nulla dictum. Sed sit amet arcu eu felis euismod dictum. Curabitur sit amet metus at lacus tempus venenatis. Curabitur varius neque sed sapien dictum, non dictum odio pharetra.
-    `,
+    `, */
   },
   {
     id: 3,
@@ -69,7 +69,7 @@ Nam at magna non magna vehicula vestibulum. Suspendisse potenti. Integer pulvina
     description:
       "Joshiah, after suffering an unspeakable trauma on old Earth, seeks out healing from the one person he trusts more than life itself.",
     pdfFilename: "",
-    fullStory: `
+/*     fullStory: `
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada. Sed vitae justo eget dui pulvinar facilisis at ac magna. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nullam ac erat ante. Nullam sit amet est justo. Vestibulum euismod est eu nisl dapibus, non blandit massa tincidunt. 
 
@@ -92,7 +92,7 @@ Months later, Joshiah stood at the entrance of the healing center, this time wit
 Fusce sit amet elit vel libero convallis varius. Praesent at libero ut tortor vestibulum eleifend ac ut felis. Vestibulum suscipit neque vitae est sodales, ut tempor lorem auctor. Integer convallis diam nec tellus suscipit, nec tincidunt leo dictum. Suspendisse volutpat, ligula in dictum varius, ligula eros malesuada libero, at pharetra lorem erat in orci. Nulla facilisi. Quisque ut mi sed lectus pharetra consequat nec nec justo. Morbi nec felis felis.
 
 Nam at magna non magna vehicula vestibulum. Suspendisse potenti. Integer pulvinar ligula non ex venenatis, id accumsan eros interdum. Morbi rutrum risus ut nulla tempor, id sodales nulla dictum. Sed sit amet arcu eu felis euismod dictum. Curabitur sit amet metus at lacus tempus venenatis. Curabitur varius neque sed sapien dictum, non dictum odio pharetra.
-    `,
+    `, */
   },
   {
     id: 4,
