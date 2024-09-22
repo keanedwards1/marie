@@ -161,7 +161,7 @@ const characters = [
   },
   {
     name: "Azriel",
-    bio: "Crystal Healel",
+    bio: "Crystal Healer",
     image: "/images/32-azriel-crystal-healer.jpeg",
   },
   {
