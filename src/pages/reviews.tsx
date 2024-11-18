@@ -59,6 +59,8 @@ const Offerings: React.FC = () => {
       />
       <Nav />
       <div>
+        <TestimonialGrid />
+
         <div
           id="review-form"
           className="lg:mr-32 lg:ml-32 md:ml-10 md:mr-10 mr-6 ml-6 mt-16 rounded shadow flex flex-col justify-between p-3 review-form-bg"
@@ -131,8 +133,6 @@ const Offerings: React.FC = () => {
             </fieldset>
           </form>
         </div>
-
-        <TestimonialGrid />
       </div>
 
       <div className="mt-16 mb-16 flex flex-col lg:flex-row w-full gap-4 items-center justify-center">

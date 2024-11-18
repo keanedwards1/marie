@@ -70,8 +70,8 @@ export default function ShortStoriesPage() {
         </div>
         <div className="lg:w-3/12 md:w-5/12 w-9/12">
           <ComicButton
-            label="🕊️ View Offerings → "
-            onClick={() => router.push("/offerings")}
+            label="🕊️ View Reviews → "
+            onClick={() => router.push("/reviews")}
           />
         </div>
       </div>

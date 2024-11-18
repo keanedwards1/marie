@@ -32,8 +32,8 @@ export default function Nav() {
     navTitle = "The Realm of Unity Characters";
   } else if (router.pathname === "/short-stories") {
     navTitle = "The Realm of Unity Short Stories";
-  } else if (router.pathname === "/offerings") {
-    navTitle = "The Realm of Unity Offerings";
+  } else if (router.pathname === "/reviews") {
+    navTitle = "The Realm of Unity Reviews";
   }
 
   return (
@@ -143,9 +143,9 @@ export default function Nav() {
           <li className="w-full lg:w-auto">
             <Link
               className={`text-right font-serif lg:text-left w-full lg:w-auto justify-end lg:justify-start nav-menu-button`}
-              href="/offerings"
+              href="/reviews"
             >
-              Offerings
+              Reviews
             </Link>
           </li>
         </ul>

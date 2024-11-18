@@ -65,7 +65,7 @@ const Footer: React.FC = () => {
                   href="/"
                   className="hover:text-lavender-600 transition duration-300"
                 >
-                  Offerings
+                  Reviews
                 </Link>
               </li>
               {/*               <li>
