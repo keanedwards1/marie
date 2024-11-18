@@ -32,7 +32,7 @@ const TestimonialGrid: React.FC = () => {
         console.error('Error fetching reviews:', error);
       }
     };
-  
+
     fetchReviews();
   }, []);
 
@@ -66,11 +66,11 @@ const TestimonialGrid: React.FC = () => {
           className="my-masonry-grid"
           columnClassName="my-masonry-grid_column"
         >
-          {reviews.map((review, index) => {
+          {reviews.slice().reverse().map((review, index) => {
             const { bgClass, textClass, subTextClass } = getCardStyle(index);
             return (
-              <div 
-                key={review.id} 
+              <div
+                key={review.id}
                 className={`${bgClass} ${textClass} transition-colors duration-300 p-8 rounded-lg shadow-lg mb-6`}
               >
                 <div className="flex items-center mb-6">
