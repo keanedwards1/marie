@@ -59,7 +59,7 @@ export default function Nav() {
         aria-label="Toggle menu"
       >
         <svg
-          className="w-6 h-6"
+          className="w-6 h-6 text-sky-100"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"

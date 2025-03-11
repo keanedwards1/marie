@@ -169,10 +169,11 @@ body {
 .navbar {
   background-color: #fffffff2;
   background-color: #aca7e3c5;
+  background-color: #4458adc5;
 }
 .nav-title {
-/*   color: rgb(185, 185, 185);
- */}
+  color: rgb(234, 241, 252);
+}
 
 .nav-menu-main-button {
   font-family: serif;
@@ -182,6 +183,7 @@ body {
 .nav-menu-main-button {
   background-color: #e9d4f8 !important;
   background-color: #e4e2f5 !important;
+  background-color: #ebecff !important;
   position: relative;
   transition: color 0.3s ease, transform 0.4s ease, background-color 0.4s ease;
   margin: 0 3px;
@@ -202,10 +204,12 @@ body {
 .nav-menu-main-button {
   font-size: 18px;
   color:#3d3781;
+  color: rgb(234, 241, 252);
 }
   .nav-menu-button:hover,
 .nav-menu-main-button:hover {
   color: #272352;
+  color: rgb(234, 241, 252);
 }
 }
 
@@ -529,11 +533,11 @@ body {
 
 .home-page-box .text-dark-purple-hover {
   transition: all 400ms ease-in;
-  color: rgb(240, 235, 255); /* Replace this with your desired hover color */
+  color: rgb(240, 235, 255); 
 }
 
 .home-page-box:hover .text-dark-purple-hover {
-  color: rgb(72, 27, 72); /* Replace this with your desired hover color */
+  color: rgb(72, 27, 72); 
 }
 
 .home-page-text-container .home-page-box {
