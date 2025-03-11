@@ -61,7 +61,7 @@ const RightImage: React.FC<RightImageProps> = ({ className }) => {
                 <br /> */}
 
                 <div className="blurb-text text-center text-dark-purple-hover">
-                  🦋 🦋 🦋
+                  ⏜ ⏝ ⏜
                   <br />
                   <br />
                   On the crumbling dystopia of old Earth, a powerful meditation 

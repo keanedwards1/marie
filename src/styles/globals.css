@@ -531,14 +531,14 @@ body {
 
 } */
 
-.home-page-box .text-dark-purple-hover {
+/* .home-page-box .text-dark-purple-hover {
   transition: all 400ms ease-in;
   color: rgb(240, 235, 255); 
 }
 
 .home-page-box:hover .text-dark-purple-hover {
   color: rgb(72, 27, 72); 
-}
+} */
 
 .home-page-text-container .home-page-box {
   width: fit-content;
@@ -546,22 +546,24 @@ body {
   padding: 3rem;
   background-color: rgba(208, 188, 234, 0.074);
   background-color: #7069c2c5;
-  border: 1px solid rgba(210, 202, 232, 0.758);
-  -webkit-backdrop-filter: blur(20px);
+  background-color: transparent;
+/*   border: 1px solid rgba(210, 202, 232, 0.758);
+ */  -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
-  border-radius: 2.7rem;
-  transition: all 400ms ease-in;
+/*   border-radius: 2.7rem;
+ */  transition: all 400ms ease-in;
   overflow: visible;
-  box-shadow: 0px 0px 20px 10px #bb89d61c;
-  color: rgb(236, 234, 234);
-  text-shadow: 
+/*   box-shadow: 0px 0px 20px 10px #bb89d61c;
+ */  color: rgb(236, 234, 234);
+  color: black;
+/*   text-shadow: 
     -0.5px -0.5px 0 rgb(139, 120, 161),  
     0.5px -0.5px 0 rgb(139, 120, 161),  
     -0.5px 0.5px 0 rgb(139, 120, 161),  
-    0.5px 0.5px 0 rgb(0, 0, 0);
+    0.5px 0.5px 0 rgb(0, 0, 0); */
 }
 
-.home-page-text-container .home-page-box:hover {
+/* .home-page-text-container .home-page-box:hover {
   box-shadow: 0px 0px 20px 1px #8902b23f;
   box-shadow: 0px 0px 20px 1px #b7b3e4c5;
   border: 1px solid rgba(230, 226, 232, 0.882);
@@ -570,7 +572,7 @@ body {
   background-color: #f7f7fe74;
   color: rgb(10, 10, 10);
   text-shadow: none;
-}
+} */
 
 
 .home-page-text-container .home-page-box {
