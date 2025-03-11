@@ -25,7 +25,7 @@ export default function Nav() {
   const isHomePage = router.pathname === "/";
 
   // Set the navTitle based on the current route
-  let navTitle = "The Realm of Unity Book Launch";
+  let navTitle = "The Realm of Unity Book";
   if (router.pathname === "/landscape") {
     navTitle = "The Realm of Unity Landscape";
   } else if (router.pathname === "/luminoles") {
