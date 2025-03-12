@@ -1,0 +1,135 @@
+import React, { useState } from "react";
+import Nav from "../components/Nav";
+import Footer from "../components/RespFooter";
+
+// Dummy data for now
+const initialPosts = [
+  {
+    id: 1,
+    title: "Welcome to Our Blog!",
+    content: "This is the first blog post. Stay tuned for more updates!",
+    author: "Admin",
+    date: "March 10, 2025",
+    comments: [
+      { id: 1, author: "User1", text: "Looking forward to more posts!" },
+    ],
+  },
+  {
+    id: 2,
+    title: "Behind the Scenes of the Book Launch",
+    content: "We’re so excited to share this journey with you all.",
+    author: "Author Name",
+    date: "March 11, 2025",
+    comments: [],
+  },
+];
+
+export default function Blog() {
+  const [posts, setPosts] = useState(initialPosts);
+  const [newComments, setNewComments] = useState<Record<number, string>>({});
+
+  const handleCommentChange = (postId: number, value: string) => {
+    setNewComments({ ...newComments, [postId]: value });
+  };
+
+  const addComment = (postId: number) => {
+    if (!newComments[postId]) return;
+
+    const updatedPosts = posts.map((post) => {
+      if (post.id === postId) {
+        return {
+          ...post,
+          comments: [
+            ...post.comments,
+            { id: Date.now(), author: "Guest", text: newComments[postId] },
+          ],
+        };
+      }
+      return post;
+    });
+
+    setPosts(updatedPosts);
+    setNewComments({ ...newComments, [postId]: "" });
+  };
+
+  return (
+    <div 
+      className="min-h-screen flex flex-col" 
+      /* CHANGED: Added a new background color (includes alpha) */
+      style={{ backgroundColor: "#4458adc5" }}
+      /* END CHANGED */
+    >
+      <Nav />
+
+      <div 
+        className="max-w-4xl mx-auto w-full p-4 flex-1"
+        /* CHANGED: Centered content and gave extra padding */
+      >
+        {/* CHANGED: Bigger, bolder heading with white text to contrast the new background */}
+        <h1 className="text-5xl font-playfair text-center mb-8 font-bold text-white">
+          Our Blog
+        </h1>
+        {/* END CHANGED */}
+
+        {posts.map((post) => (
+          <div 
+            key={post.id} 
+            /* CHANGED: Rounded corners, white background, drop shadow, and additional spacing */
+            className="light-violet shadow-lg p-6 rounded-xl mb-8"
+            /* END CHANGED */
+          >
+            {/* CHANGED: Slightly bigger title and top spacing */}
+            <h2 className="text-3xl font-semibold mb-3">{post.title}</h2>
+            {/* END CHANGED */}
+
+            <p className="text-sm text-gray-500 mb-4">
+              By {post.author} on {post.date}
+            </p>
+            <p className="text-lg text-gray-800">{post.content}</p>
+
+            {/* Comments Section */}
+            <div className="mt-4 border-t pt-4">
+              <h3 className="text-lg font-semibold mb-2">Comments</h3>
+              {post.comments.length > 0 ? (
+                post.comments.map((comment) => (
+                  <div key={comment.id} className="border-b py-2">
+                    <p className="text-sm">
+                      <span className="font-bold">{comment.author}:</span>{" "}
+                      {comment.text}
+                    </p>
+                  </div>
+                ))
+              ) : (
+                <p className="text-gray-500">No comments yet. Be the first!</p>
+              )}
+
+              {/* Comment Input */}
+              <div className="mt-4">
+                <input
+                  type="text"
+                  value={newComments[post.id] || ""}
+                  onChange={(e) => handleCommentChange(post.id, e.target.value)}
+                  placeholder="Write a comment..."
+                  /* CHANGED: Rounded input and neutral border color */
+                  className="border border-gray-300 p-2 rounded w-full"
+                  /* END CHANGED */
+                />
+                <button
+                  onClick={() => addComment(post.id)}
+                  /* CHANGED: Use the special color + transitions */
+                  className="mt-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition-colors"
+                  style={{ backgroundColor: "#4458adc5" }}
+                  /* END CHANGED */
+                >
+                  Post Comment
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <Footer />
+    </div>
+  );
+}

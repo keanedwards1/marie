@@ -756,6 +756,10 @@ body {
   background-color: #b586cb; /* Light violet background */
 }
 
+.light-violet {
+  background-color: #f8f7f7;;
+  background-color: #f8f6ff; /* Light violet background */
+}
 
 .comic-button {
   display: inline-block;

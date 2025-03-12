@@ -1,0 +1,106 @@
+FOR LATER:
+
+Take this and integrate it into the admin panel:
+
+
+
+
+
+
+// CHANGED: Admin page for creating new posts in our in-memory store
+import React, { useState } from "react";
+import { useRouter } from "next/router";
+import Nav from "../../components/Nav";
+import Footer from "../../components/RespFooter";
+
+export default function AdminPage() {
+  const router = useRouter();
+  const [title, setTitle] = useState("");
+  const [author, setAuthor] = useState("");
+  const [excerpt, setExcerpt] = useState("");
+  const [content, setContent] = useState("");
+
+  // CHANGED: create a new post by hitting our /api/posts
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!title || !author || !content) return;
+
+    const res = await fetch("/api/posts", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ title, author, excerpt, content }),
+    });
+
+    if (res.ok) {
+      // Post created, redirect or show success message
+      router.push("/blog"); // go to the blog index
+    } else {
+      alert("Error creating post");
+    }
+  };
+
+  return (
+    <div className="min-h-screen flex flex-col" style={{ backgroundColor: "#eef1f6" }}>
+      <Nav />
+      <div className="max-w-2xl mx-auto w-full p-4 flex-1">
+        <h1 className="text-3xl font-bold mb-6">Admin: New Post</h1>
+
+        <form onSubmit={handleSubmit} className="bg-white shadow-lg p-6 rounded-xl">
+          <div className="mb-4">
+            <label className="font-semibold block mb-1">Title:</label>
+            <input
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className="border border-gray-300 p-2 rounded w-full"
+              placeholder="Post Title"
+            />
+          </div>
+
+          <div className="mb-4">
+            <label className="font-semibold block mb-1">Author:</label>
+            <input
+              value={author}
+              onChange={(e) => setAuthor(e.target.value)}
+              className="border border-gray-300 p-2 rounded w-full"
+              placeholder="Author Name"
+            />
+          </div>
+
+          <div className="mb-4">
+            <label className="font-semibold block mb-1">Excerpt:</label>
+            <input
+              value={excerpt}
+              onChange={(e) => setExcerpt(e.target.value)}
+              className="border border-gray-300 p-2 rounded w-full"
+              placeholder="Short preview text"
+            />
+          </div>
+
+          <div className="mb-4">
+            <label className="font-semibold block mb-1">Content:</label>
+            <textarea
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              className="border border-gray-300 p-2 rounded w-full"
+              placeholder="Full post content..."
+              rows={6}
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+            style={{ backgroundColor: "#4458adc5" }}
+          >
+            Publish
+          </button>
+        </form>
+      </div>
+      <Footer />
+    </div>
+  );
+}
+
+

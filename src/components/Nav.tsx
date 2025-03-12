@@ -119,9 +119,9 @@ export default function Nav() {
           <li className="w-full lg:w-auto">
             <Link
               className={`text-right font-serif lg:text-left w-full lg:w-auto justify-end lg:justify-start nav-menu-button`}
-              href="/landscape"
+              href="/blog"
             >
-              Landscape
+              Blog
             </Link>
           </li>
           <li className="w-full lg:w-auto">
