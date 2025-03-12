@@ -39,7 +39,7 @@ const Home: React.FC = () => {
           <LeftImage className="w-full lg:w-1/3" />
         </section>
 
-        <div className="flex items-center relative justify-center z-10 pr-6 pl-6 -mt-12 -mb-18 md:mt-16 md:mb-0  lg:justify-center lg:flex-row flex-col lg:mt-0 w-full space-x-4 gap-6">
+        <div className="flex items-center relative justify-center z-10 pr-12 pl-12 -mt-12 -mb-18 md:mt-16 md:mb-0  lg:justify-center lg:flex-row flex-col lg:mt-0 w-full space-x-4 gap-6">
           <ComicButton
             label="Buy On BookBaby"
             onClick={() => window.open("https://store.bookbaby.com/book/the-realm-of-unity1", "_blank")}

@@ -15,13 +15,13 @@ const RightImage: React.FC<RightImageProps> = ({ className }) => {
         <div className="home-page-box">
           <div className="mt-4 text-m text-center z-10 lg:text-left font-serif">
             <div className="text-sm z-10">
-              <div className="text-4xl text-center font-bold stretched-text text-dark-purple-hover">
+{/*               <div className="text-4xl text-center font-bold stretched-text text-dark-purple-hover">
                 A Vision for Humanity
-              </div>
+              </div> */}
               <br />
 
               <div className="text-center blurb-text">
-                The Realm of Unity came into being roughly two-hundred years ago. 
+                <span className="text-3xl">The Realm of Unity</span> came into being roughly two-hundred years ago. 
                 With the help of extraterrestrials, a small band of humans with 
                 a burning desire for peace and oneness brought into form the Earth-like 
                 realm. They then proceeded to reach out to all the inhabitants of old Earth, 
