@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="relative pt-16 pb-16 bg-lavender-50 text-lavender-800">
+    <footer className="relative pt-4 pb-4 bg-lavender-50 text-lavender-800">
       <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-white to-lavender-50"></div>
       <div className="container relative mx-auto px-4">
         {/* Rest of the footer content */}
@@ -23,7 +23,7 @@ const Footer: React.FC = () => {
           </div> */}
 
           {/* Quick Links */}
-          <div className="footer-card">
+          {/* <div className="footer-card">
             <h3 className="text-lg font-serif font-semibold mb-4 text-lavender-900">
               Quick Links
             </h3>
@@ -72,13 +72,13 @@ const Footer: React.FC = () => {
                 <Link href="/about" className="hover:text-lavender-600 transition duration-300">
                   About
                 </Link>
-              </li> */}
+              </li> 
             </ul>
-          </div>
+          </div> */}
 
 
                     {/* About Section */}
-                    <div className="footer-card">
+{/*                     <div className="footer-card">
             <h3 className="text-lg font-serif font-semibold mb-4 text-lavender-900">
               About The Author
             </h3>
@@ -100,7 +100,7 @@ const Footer: React.FC = () => {
                 />
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* Subscribe Form */}
           {/*           <div className="footer-card col-span-1 md:col-span-1 lg:col-span-1">
@@ -113,7 +113,7 @@ const Footer: React.FC = () => {
 
         {/* Social Media Links */}
         <div className="mt-4 text-center">
-          <div className="rounded-lg p-8">
+          <div className="rounded-lg p-4">
             <h3 className="text-lg font-serif font-semibold text-lavender-900">
               Please share my site with your friends and help me spread the
               word!
@@ -149,7 +149,7 @@ const Footer: React.FC = () => {
         </div>
 
         {/* Copyright */}
-        <div className="mt-10 text-center text-sm footer-copyright m-6 p-2 rounded-lg text-lavender-700">
+        <div className="mt-2 text-center text-sm footer-copyright mb-10 p-2 rounded-lg text-lavender-700">
           <p>
             &copy; {new Date().getFullYear()} V. M. Elyse &nbsp; ~ &nbsp; All
             rights reserved.

@@ -14,7 +14,7 @@ const LeftImage: React.FC<LeftImageProps> = ({className}) => {
       <div className="w-full max-w-[100%] lg:max-w-[99%] pb-[99.67%] relative bg-indigo-50 max-h-[98%] lg:mt-0 book-style">
         <Image
           className="z-10"
-          src="/mockup.webp"
+          src="/mockup-2.webp"
           alt="Book"
           fill
           style={{ objectFit: 'contain' }}

@@ -48,7 +48,7 @@ const SubscribeForm: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="text-neutral-800 py-10 lg:py-4 mt-36 relative bg-gradient-to-b from-white/0 to-white/100 overflow-hidden flex justify-center items-center flex-col w-full px-4 sm:px-6">
+    <form onSubmit={handleSubmit} className="text-neutral-800 py-10 lg:py-4 mt-28 relative bg-gradient-to-b from-white/0 to-white/100 overflow-hidden flex justify-center items-center flex-col w-full px-4 sm:px-6">
       <div className="lg:w-1/3 md:w-1/2 lg:m-2 m-0 p-3 rounded-lg bg-white bg-opacity-0">
         <div className="relative z-10 mb-4">
           <p className="text-gray-900 text-base sm:text-lg mt-1">
@@ -76,7 +76,7 @@ const SubscribeForm: React.FC = () => {
           </div>
           <button
             type="submit"
-            className="bg-lavender-600 text-white py-2 px-4 rounded-lg hover:bg-lavender-500 transition duration-300 text-sm sm:text-base w-full"
+            className="subscribe-button text-white py-2 px-4 rounded-lg transition duration-300 text-sm sm:text-base w-full"
             disabled={isLoading}
           >
             {isLoading ? "Subscribing..." : "Subscribe"}

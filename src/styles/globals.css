@@ -301,8 +301,8 @@ body {
   letter-spacing: 0.9px;
   font-family: serif;
   background-color: #7e4e9d;
-    background-color: #965ec0;
-
+  background-color: #965ec0;
+  background-color: #4458adc5;
   border: 2px solid #000;
   border-radius: 10px;
   box-shadow: 1px 1px 0px #000;
@@ -473,27 +473,31 @@ body {
  */  background-color: #584fb6c5;
   background-color: #7069c2c5;
   background-color: transparent;
-  background-color: #4458adc5;
+  background-color: transparent;
  -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
   transition: all 600ms ease;
 }
 
-.book-style:hover {
-  background-color: #5c6dbdc5;
+/* .book-style:hover {
+  background-color: transparent;
   box-shadow: inset 0px 0px 20px 1px #3b2a4425;
   border: 1px solid rgba(255, 255, 255, 0.185);
-}
+} */
 
 .home-comic-button {
-  background-color: #7069c2c5 !important;
+  background-color: #7069c2c5;
+  background-color: #4458adc5 !important;
 }
 
 .home-comic-button:hover {
   background-color: white !important;
   border: 2px solid #7069c2c5 !important;
+  border: 2px solid #4458adc5 !important;
   box-shadow: 5px 5px 0px #7069c2c5 !important;
+  box-shadow: 5px 5px 0px #4458adc5 !important;
   color: #7069c2c5 !important;
+  color: #4458adc5 !important;
 }
 
 .home-page-text-container {
@@ -767,6 +771,7 @@ body {
   font-family: serif;
   background-color: #7e4e9d;
   background-color: #965ec0;
+  background-color: #4458adc5;
   border: 2px solid #000;
   border-radius: 10px;
   box-shadow: 1px 1px 0px #000;
@@ -781,13 +786,17 @@ body {
 .comic-button:hover {
   background-color: #fff;
   color: var(--base-100-light);
+  color: #4458adc5;
   border: 2px solid var(--base-100-light);
+  border: 2px solid #4458adc5;
   box-shadow: 5px 5px 0px var(--base-100-light);
+  box-shadow: 5px 5px 0px #4458adc5;
   cursor: pointer;
 }
 
 .comic-button:active {
   background-color: var(--base-100-light);
+  background-color: #4458adc5;
   box-shadow: none;
   transform: translateY(4px);
 }
@@ -1099,4 +1108,12 @@ body {
 .location-description {
   font-size: 1.3rem;
   text-align: center;
+}
+
+.subscribe-button {
+  background-color: #4458adc5;
+}
+
+.subscribe-button:hover {
+  background-color: #566dd3c5;
 }
