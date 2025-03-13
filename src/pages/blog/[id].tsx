@@ -1,11 +1,28 @@
-import React from "react";
-import Link from "next/link";
+// src/pages/blog/[id].tsx
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import Link from "next/link";
 import Nav from "../../components/Nav";
 import Footer from "../../components/RespFooter";
 
-// CHANGED: Hardcoded mock data so you don’t need an API yet
-const mockPosts = [
+interface Comment {
+  id: number;
+  author: string;
+  text: string;
+  likes: number;
+}
+
+interface Post {
+  id: number;
+  title: string;
+  content: string;
+  author: string;
+  date: string;
+  comments: Comment[];
+}
+
+// Temporary mock posts (replace with API call later)
+const mockPosts: Post[] = [
   {
     id: 1,
     title: "Welcome to The Realm of Unity",
@@ -19,7 +36,8 @@ Stay with us as we delve deeper into the characters, lands, and legends that mak
     author: "V. M. Elyse",
     date: "March 10, 2025",
     comments: [
-      { id: 101, author: "User1", text: "Looking forward to more posts!" },
+      { id: 101, author: "User1", text: "Looking forward to more posts!", likes: 2 },
+      { id: 102, author: "MagicSeeker", text: "This world sounds incredible!", likes: 5 },
     ],
   },
   {
@@ -36,7 +54,10 @@ But the real question remains—where is the owner? And more importantly, what s
 As we unravel this mystery, let’s explore the importance of stories that make us wonder, laugh, and dream.`,
     author: "The Cat In The Hat",
     date: "March 11, 2025",
-    comments: [{ id: 102, author: "BookLover42", text: "I love this book!" }],
+    comments: [
+      { id: 103, author: "BookLover42", text: "I love this book!", likes: 4 },
+      { id: 104, author: "CuriousReader", text: "This reminds me of something...", likes: 1 },
+    ],
   },
   {
     id: 3,
@@ -62,12 +83,13 @@ As we unravel this mystery, let’s explore the importance of stories that make 
 
 Making bread is a deeply rewarding process. It teaches patience, precision, and the value of simple, quality ingredients. Whether you're a seasoned baker or a first-time enthusiast, this recipe will guide you toward creating the perfect loaf every time.
 
-Happy baking! 🍞`,
+Happy baking! 🍞,`,
     author: "Aspen",
     date: "March 12, 2025",
     comments: [],
   },
 ];
+
 
 export default function SinglePost() {
   const router = useRouter();
@@ -75,6 +97,37 @@ export default function SinglePost() {
 
   // Find the post from mock data
   const post = mockPosts.find((p) => p.id === Number(id));
+
+  // State for comments and likes
+  const [comments, setComments] = useState<Comment[]>(post ? post.comments : []);
+  const [newComment, setNewComment] = useState<string>("");
+  const [postLikes, setPostLikes] = useState<number>(0);
+  const [commentLikes, setCommentLikes] = useState<Record<number, number>>({});
+
+  // Load likes from localStorage when page loads
+  useEffect(() => {
+    if (post) {
+      const savedPostLikes = localStorage.getItem(`postLikes-${post.id}`);
+      if (savedPostLikes) setPostLikes(parseInt(savedPostLikes, 10));
+
+      const savedCommentLikes = localStorage.getItem(`commentLikes-${post.id}`);
+      if (savedCommentLikes) setCommentLikes(JSON.parse(savedCommentLikes));
+    }
+  }, [post]);
+
+  // Save post likes to localStorage
+  useEffect(() => {
+    if (post) {
+      localStorage.setItem(`postLikes-${post.id}`, postLikes.toString());
+    }
+  }, [postLikes, post]);
+
+  // Save comment likes to localStorage
+  useEffect(() => {
+    if (post) {
+      localStorage.setItem(`commentLikes-${post.id}`, JSON.stringify(commentLikes));
+    }
+  }, [commentLikes, post]);
 
   if (!post) {
     return (
@@ -86,54 +139,107 @@ export default function SinglePost() {
     );
   }
 
+  const handleLikePost = () => {
+    setPostLikes((prev) => prev + 1);
+  };
+
+  const handleLikeComment = (commentId: number) => {
+    setCommentLikes((prevLikes) => ({
+      ...prevLikes,
+      [commentId]: (prevLikes[commentId] || 0) + 1,
+    }));
+  };
+
+  const handleAddComment = () => {
+    if (!newComment.trim()) return;
+
+    const newCommentObj: Comment = {
+      id: Date.now(),
+      author: "Guest",
+      text: newComment.trim(),
+      likes: 0,
+    };
+
+    setComments([...comments, newCommentObj]);
+    setNewComment("");
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-[#fafafa]">
       <Nav />
 
       <div className="max-w-4xl mx-auto w-full p-4 flex-1">
-        {/* Back to Blog Arrow at the Top */}
         <div className="mb-4">
-          <Link
-            href="/blog"
-            className="group flex items-center space-x-2 text-black transition-all duration-200"
-          >
-            <span className="text-lg group-hover:-translate-x-1 transition-transform duration-200">
-              ←
-            </span>
-            <span className="hover:underline text-gray-700 group-hover:text-black font-medium">
-              Back to Blog
-            </span>
+          <Link href="/blog" className="text-gray-700 hover:underline">
+            ← Back to Blog
           </Link>
         </div>
 
-        <h1 className="text-4xl font-semibold mb-4 text-gray-800">
-          {post.title}
-        </h1>
-        <p className="text-sm text-gray-500 mb-6">
-          By {post.author} on {post.date}
-        </p>
+        <h1 className="text-4xl font-semibold mb-4 text-gray-800">{post.title}</h1>
+        <p className="text-sm text-gray-500 mb-6">By {post.author} on {post.date}</p>
 
-        {/* Automatically formats text into paragraphs */}
         <div className="text-lg text-gray-800 space-y-4">
-          {post.content
-            .split("\n")
-            .map((paragraph, index) =>
-              paragraph.trim() ? (
-                <p key={index}>{paragraph}</p>
-              ) : (
-                <br key={index} />
-              )
-            )}
+          {post.content.split("\n").map((paragraph, index) =>
+            paragraph.trim() ? <p key={index}>{paragraph}</p> : <br key={index} />
+          )}
         </div>
 
-        {/* Back to Blog Arrow at the Bottom */}
-        <div className="mt-8"></div>
+        {/* Post Like Button */}
+        <div className="mt-6 flex items-center">
+          <button
+            onClick={handleLikePost}
+            className="bg-[#4458adc5] hover:bg-[#3f4f95c5] text-white px-4 py-2 rounded flex items-center"
+          >
+            👍 Like Post ({postLikes})
+          </button>
+        </div>
+
+        {/* Comments Section */}
+        <div className="bg-white shadow-md p-6 rounded-lg mt-8">
+          <h3 className="text-xl font-semibold mb-4 text-[#1b1b1bc5]">Comments</h3>
+          {comments.length > 0 ? (
+            comments.map((comment) => (
+              <div key={comment.id} className="border-b py-2 flex justify-between items-center">
+                <p className="text-sm flex-1 text-[#1b1b1bc5]">
+                  <span className="font-bold">{comment.author}:</span> {comment.text}
+                </p>
+                <button
+                  onClick={() => handleLikeComment(comment.id)}
+                  className="ml-4 text-[#1b1b1bc5] bg-gray-100 hover:bg-gray-200 text-gray-800 px-3 py-1 transition rounded flex items-center"
+                >
+                  👍 {commentLikes[comment.id] || 0}
+                </button>
+              </div>
+            ))
+          ) : (
+            <p className="text-gray-500">No comments yet. Be the first!</p>
+          )}
+
+          {/* Add Comment Form */}
+          <div className="mt-4">
+            <input
+              type="text"
+              value={newComment}
+              onChange={(e) => setNewComment(e.target.value)}
+              placeholder="Write a comment..."
+              className="border text-[#1b1b1bc5] border-gray-300 p-2 rounded w-full"
+            />
+            <button
+              onClick={handleAddComment}
+              className="mt-2 bg-[#4458adc5] hover:bg-[#3f4f95c5] text-white px-4 py-2 rounded"
+            >
+              Post Comment
+            </button>
+          </div>
+        </div>
       </div>
 
       <Footer />
     </div>
   );
 }
+
+
 
 /* With API:↓ */
 

@@ -1,9 +1,11 @@
+// src/pages/blog/index.tsx
+
 import React from "react";
 import Link from "next/link";
 import Nav from "../../components/Nav";
 import Footer from "../../components/RespFooter";
 
-// CHANGED: Hardcoded mock data so you don’t need an API yet
+// Hardcoded mock data (replace with API later)
 const mockPosts = [
   {
     id: 1,
@@ -12,28 +14,36 @@ const mockPosts = [
     author: "V. M. Elyse",
     date: "March 10, 2025",
     excerpt: "Step into a world of magic, adventure, and ancient secrets...",
-    comments: [{ id: 101, author: "User1", text: "Looking forward to more posts!" }],
+    comments: [
+      { id: 101, author: "Anonymous", text: "I love this book, my favorite character is Alfred." },
+      { id: 102, author: "Cara Dilswith", text: "What are the best places to go in the realm of unity?" },
+    ],
   },
   {
     id: 2,
     title: "Whose Hat Was It Anyway?",
-    content: `A hat is just a hat—until it isn't. In the quiet town of Elmwick, a peculiar hat was found resting on the cobblestone street...`,
+    content: `A hat is just a hat—until it isn't...`,
     author: "The Cat In The Hat",
     date: "March 11, 2025",
     excerpt: "A mysterious hat appears—who did it belong to, and what’s its story?",
-    comments: [{ id: 102, author: "BookLover42", text: "I love this book!" }],
+    comments: [
+      { id: 103, author: "Sam Knight", text: "What's the cat in the hat doing here?" },
+      { id: 104, author: "Sara Moore", text: "Is this a cat in a hat?" },
+    ],
   },
   {
     id: 3,
     title: "How to Make a Perfect Loaf of Bread",
-    content: `Baking bread is both an art and a science. A well-made loaf is more than just food—it’s a symbol of warmth and comfort...`,
+    content: `Baking bread is both an art and a science...`,
     author: "Aspen",
     date: "March 12, 2025",
     excerpt: "Learn the art of baking the perfect homemade bread.",
-    comments: [],
+    comments: [
+      { id: 105, author: "Ben Sorenson", text: "Actually a good recipe." },
+      { id: 106, author: "Abby Simpson", text: "Not saying it's magical, but it's magical." }
+    ],
   },
 ];
-
 
 export default function BlogIndex() {
   return (
@@ -41,31 +51,42 @@ export default function BlogIndex() {
       <Nav />
 
       <div className="max-w-4xl mx-auto w-full p-4 flex-1">
-        {/* CHANGED: Bigger title with white text to contrast background */}
         <h1 className="text-5xl font-playfair text-center mt-6 mb-10 font-bold text-[#39383c]">
           The Realm Of Unity&apos;s Bulletin Board
         </h1>
 
         {mockPosts.map((post) => (
-          <div
-            key={post.id}
-            className="bg-[#fffaf4] p-6 rounded-xl mb-8"
-          >
+          <div key={post.id} className="bg-[#fffaf4] p-6 rounded-xl mb-8">
             <h2 className="text-3xl font-semibold mb-3 text-[#4458adc5]">
               <Link href={`/blog/${post.id}`} className="hover:underline">
                 {post.title}
               </Link>
             </h2>
 
-            <p className="text-sm text-gray-500 mb-4">
+            <p className="text-sm text-gray-500 mb-2">
               By {post.author} on {post.date}
             </p>
 
             <p className="text-lg text-[#3f3d3b] mb-4">{post.excerpt}</p>
 
+            {/* Display Top Comments (if available) */}
+            {post.comments.length > 0 && (
+              <div className="bg-[#f9f8ff] shadow-inner p-3 rounded-lg text-gray-700">
+                <h4 className="font-semibold mb-1 text-[#3f3d3b]">Comments:</h4>
+                {post.comments.slice(0, 2).map((comment) => (
+                  <p key={comment.id} className="text-sm">
+                    <span className="font-bold">{comment.author}:</span>{" "}
+                    {comment.text.length > 50
+                      ? `${comment.text.substring(0, 50)}...`
+                      : comment.text}
+                  </p>
+                ))}
+              </div>
+            )}
+
             <Link
               href={`/blog/${post.id}`}
-              className="inline-block bg-[#4458adc5] text-white px-4 py-2 rounded hover:bg-[#3f4f95c5] transition-colors"
+              className="mt-3 inline-block bg-[#4458adc5] hover:bg-[#3f4f95c5] text-white px-4 py-2 rounded transition-colors"
             >
               Read More
             </Link>
@@ -77,6 +98,7 @@ export default function BlogIndex() {
     </div>
   );
 }
+
 
 
 
