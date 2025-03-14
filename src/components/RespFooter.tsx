@@ -23,7 +23,7 @@ const Footer: React.FC = () => {
           </div> */}
 
           {/* Quick Links */}
-          {/* <div className="footer-card">
+          <div className="footer-card">
             <h3 className="text-lg font-serif font-semibold mb-4 text-lavender-900">
               Quick Links
             </h3>
@@ -72,13 +72,13 @@ const Footer: React.FC = () => {
                 <Link href="/about" className="hover:text-lavender-600 transition duration-300">
                   About
                 </Link>
-              </li> 
+              </li> */}
             </ul>
-          </div> */}
+          </div>
 
 
                     {/* About Section */}
-{/*                     <div className="footer-card">
+                    <div className="footer-card">
             <h3 className="text-lg font-serif font-semibold mb-4 text-lavender-900">
               About The Author
             </h3>
@@ -100,7 +100,7 @@ const Footer: React.FC = () => {
                 />
               </div>
             </div>
-          </div> */}
+          </div>
 
           {/* Subscribe Form */}
           {/*           <div className="footer-card col-span-1 md:col-span-1 lg:col-span-1">
