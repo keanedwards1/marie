@@ -1,16 +1,10 @@
 .
+├── Dockerfile
 ├── README.md
 ├── TODO-0.txt
 ├── TODO.txt
 ├── backend.tar.gz
 ├── c.sh
-├── cypress
-│   ├── downloads
-│   ├── fixtures
-│   │   └── example.json
-│   └── support
-│       ├── commands.ts
-│       └── e2e.ts
 ├── cypress.config.ts
 ├── jest.setup.js
 ├── next-env.d.ts
@@ -75,6 +69,7 @@
 │   │   ├── animal-1.png
 │   │   ├── animal-2.png
 │   │   ├── azure-village.jpg
+│   │   ├── azure-village.webp
 │   │   ├── butterfly-0.png
 │   │   ├── butterfly-1.png
 │   │   ├── butterfly-2.png
@@ -106,9 +101,12 @@
 │   │   ├── shumbala.jpg
 │   │   ├── the-whisper.jpg
 │   │   ├── the-zephyr.jpg
+│   │   ├── vmelyse.jpg
 │   │   └── wisteria.png
 │   ├── index.html
 │   ├── manifest.json
+│   ├── mockup-2.webp
+│   ├── mockup.webp
 │   ├── mstile-150x150.png
 │   ├── robots.txt
 │   ├── safari-pinned-tab.svg
@@ -146,14 +144,21 @@
 │   │   ├── _app.tsx
 │   │   ├── _document.tsx
 │   │   ├── admin.tsx
+│   │   ├── admin.txt
 │   │   ├── api
+│   │   │   ├── posts.ts
 │   │   │   └── proxy-download.ts
+│   │   ├── blog
+│   │   │   ├── [id].tsx
+│   │   │   └── index.tsx
+│   │   ├── blog.txt
+│   │   ├── coming-soon.tsx
 │   │   ├── for-later
 │   │   │   └── about.tsx
 │   │   ├── index.tsx
 │   │   ├── landscape.tsx
 │   │   ├── luminoles.tsx
-│   │   ├── offerings.tsx
+│   │   ├── reviews.tsx
 │   │   ├── short-stories
 │   │   │   └── [id].tsx
 │   │   └── short-stories.tsx
@@ -167,4 +172,4 @@
 ├── tree.txt
 └── tsconfig.json
 
-19 directories, 149 files
+16 directories, 157 files
