@@ -16,7 +16,7 @@ const mockPosts = [
     excerpt: "Step into a world of magic, adventure, and ancient secrets...",
     comments: [
       { id: 101, author: "Anonymous", text: "I love this book, my favorite character is Alfred." },
-      { id: 102, author: "Cara Dilswith", text: "What are the best places to go in the realm of unity?" },
+      { id: 102, author: "Cara Parker", text: "What are the best places to go in the realm of unity?" },
     ],
   },
   {
