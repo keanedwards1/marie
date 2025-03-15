@@ -1,34 +1,36 @@
+// src/pages/admin.tsx
+
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
-/* ----------------------------------
-   CHANGED: Import React Quill for WYSIWYG
----------------------------------- */
+// CHANGED: Import React Quill for WYSIWYG
 import dynamic from "next/dynamic";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
-import "react-quill/dist/quill.snow.css"; // Import Quill styles
+import "react-quill/dist/quill.snow.css";
 
-/* ----------------------------------
-   BlogPost & BlogComment interfaces
----------------------------------- */
+// BlogPost & BlogComment interfaces
 interface BlogComment {
   id: number;
+  post_id: number;
   author: string;
   text: string;
+  likes: number;
+  created_at: number;
 }
 
 interface BlogPost {
   id: number;
   title: string;
-  content: string; // will store HTML
+  content: string;
   author: string;
   date: string;
-  comments: BlogComment[];
+  likes: number;
+  created_at: number;
+  updated_at: number;
+  comments?: BlogComment[]; // We'll load comments separately or together
 }
 
-/* ----------------------------------
-   Review interface (unchanged)
----------------------------------- */
+// Review interface (unchanged)
 interface Review {
   id: number;
   first_name: string;
@@ -50,14 +52,10 @@ const AdminPage: React.FC = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState<{ [key: number]: boolean }>({});
 
-  /* ----------------------------------
-     Tab switching
-  ---------------------------------- */
+  // CHANGED: Tab switching
   const [activeTab, setActiveTab] = useState<"reviews" | "blogs">("reviews");
 
-  /* ----------------------------------
-     Blog Data
-  ---------------------------------- */
+  // CHANGED: Blog data
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
 
   // States for adding a new blog post
@@ -66,16 +64,14 @@ const AdminPage: React.FC = () => {
   const [newBlogDate, setNewBlogDate] = useState("");
   const [newBlogContent, setNewBlogContent] = useState<string>("");
 
-  // CHANGED: States for editing an existing blog post
+  // States for editing an existing blog post
   const [editingPostId, setEditingPostId] = useState<number | null>(null);
   const [editTitle, setEditTitle] = useState("");
   const [editAuthor, setEditAuthor] = useState("");
   const [editDate, setEditDate] = useState("");
   const [editContent, setEditContent] = useState<string>("");
 
-  /* ----------------------------------
-     React Quill config (optional)
-  ---------------------------------- */
+  // React Quill config (optional)
   const quillModules = {
     toolbar: [
       [{ header: [1, 2, 3, false] }],
@@ -98,29 +94,42 @@ const AdminPage: React.FC = () => {
     "image",
   ];
 
-  /* ----------------------------------
-     useEffect: Load Token & BlogPosts
-  ---------------------------------- */
+  // CHANGED: useEffect: check for stored token & fetch blog posts if token
   useEffect(() => {
+    // Try to load a stored admin token from localStorage
     const storedToken = localStorage.getItem("adminToken");
     if (storedToken) {
       setToken(storedToken);
       fetchAllReviews(storedToken);
     }
-
-    const storedBlogPosts = localStorage.getItem("adminBlogPosts");
-    if (storedBlogPosts) {
-      setBlogPosts(JSON.parse(storedBlogPosts));
-    }
+    // CHANGED: We fetch blog posts even if we’re not logged in (though admin actions will require token)
+    fetchBlogPosts();
   }, []);
 
-  /* ----------------------------------
-     Login & Logout
-  ---------------------------------- */
+  // CHANGED: fetch blog posts (public GET)
+  async function fetchBlogPosts() {
+    try {
+      const response = await fetch("https://159.89.233.75.nip.io/api/blog/posts");
+      if (!response.ok) {
+        throw new Error("Failed to fetch blog posts");
+      }
+      const data: BlogPost[] = await response.json();
+      // we can also fetch comments for each post if we want them included in the list
+      // but let's do that if needed. For now, just store posts.
+      setBlogPosts(data);
+    } catch (err) {
+      console.error("Error fetching blog posts:", err);
+      setError("Failed to fetch blog posts.");
+    }
+  }
+
+  // CHANGED: fetch post's comments if we want them
+  // We can do it individually in the BlogPostItem if you want to see comments.
+
+  // Login & Logout
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      // For demonstration, using your existing endpoint:
       const response = await fetch("https://159.89.233.75.nip.io/api/admin/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -148,9 +157,7 @@ const AdminPage: React.FC = () => {
     router.push("/");
   };
 
-  /* ----------------------------------
-     Reviews Logic
-  ---------------------------------- */
+  // Reviews Logic
   const fetchAllReviews = async (authToken: string) => {
     try {
       const response = await fetch("https://159.89.233.75.nip.io/api/admin/all-reviews", {
@@ -265,123 +272,170 @@ const AdminPage: React.FC = () => {
     </>
   );
 
-  /* ----------------------------------
-     Blog Logic
-  ---------------------------------- */
-
-  // Save blog posts in localStorage on every update
-  useEffect(() => {
-    localStorage.setItem("adminBlogPosts", JSON.stringify(blogPosts));
-  }, [blogPosts]);
+  // CHANGED: Admin Blog Logic
 
   // Add a brand new blog post
-  const handleAddBlogPost = () => {
+  const handleAddBlogPost = async () => {
     if (!newBlogTitle.trim() || !newBlogAuthor.trim() || !newBlogContent.trim()) {
       alert("Please fill out Title, Author, and Content.");
       return;
     }
-    const newPost: BlogPost = {
-      id: Date.now(),
-      title: newBlogTitle.trim(),
-      content: newBlogContent, // HTML from Quill
-      author: newBlogAuthor.trim(),
-      date: newBlogDate.trim() || new Date().toLocaleDateString(),
-      comments: [],
-    };
-    setBlogPosts([...blogPosts, newPost]);
-
-    // Reset fields
-    setNewBlogTitle("");
-    setNewBlogAuthor("");
-    setNewBlogDate("");
-    setNewBlogContent("");
-  };
-
-  // Remove a blog post entirely
-  const handleRemoveBlogPost = (postId: number) => {
-    if (confirm("Are you sure you want to remove this blog post?")) {
-      setBlogPosts(blogPosts.filter((post) => post.id !== postId));
+    try {
+      const response = await fetch("https://159.89.233.75.nip.io/api/blog/posts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          title: newBlogTitle.trim(),
+          author: newBlogAuthor.trim(),
+          date: newBlogDate.trim(),
+          content: newBlogContent,
+        }),
+      });
+      if (!response.ok) {
+        throw new Error("Failed to create blog post");
+      }
+      const data = await response.json();
+      // data.postId is the newly created post
+      // fetch updated list
+      fetchBlogPosts();
+      // Reset fields
+      setNewBlogTitle("");
+      setNewBlogAuthor("");
+      setNewBlogDate("");
+      setNewBlogContent("");
+      alert("Blog post created!");
+    } catch (err) {
+      console.error("Error creating blog post:", err);
+      alert("Error creating blog post.");
     }
   };
 
-  // Add a comment to a specific blog post
-  const handleAddBlogComment = (postId: number, text: string) => {
+  // Remove a blog post
+  const handleRemoveBlogPost = async (postId: number) => {
+    if (!window.confirm("Are you sure you want to remove this blog post?")) return;
+    try {
+      const response = await fetch(`https://159.89.233.75.nip.io/api/blog/posts/${postId}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (!response.ok) {
+        throw new Error("Failed to delete blog post");
+      }
+      // refresh
+      fetchBlogPosts();
+    } catch (err) {
+      console.error("Error deleting blog post:", err);
+      alert("Error deleting blog post.");
+    }
+  };
+
+  // Add a comment to a specific blog post (admin)
+  const handleAddBlogComment = async (postId: number, text: string) => {
     if (!text.trim()) return;
-    setBlogPosts((prev) =>
-      prev.map((post) => {
-        if (post.id === postId) {
-          const newComment: BlogComment = {
-            id: Date.now(),
+    try {
+      const response = await fetch(
+        `https://159.89.233.75.nip.io/api/blog/posts/${postId}/comments`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
             author: "Admin",
             text: text.trim(),
-          };
-          return { ...post, comments: [...post.comments, newComment] };
+          }),
         }
-        return post;
-      })
-    );
-  };
-
-  // Remove an individual comment
-  const handleRemoveBlogComment = (postId: number, commentId: number) => {
-    if (confirm("Remove this comment?")) {
-      setBlogPosts((prev) =>
-        prev.map((post) => {
-          if (post.id === postId) {
-            return {
-              ...post,
-              comments: post.comments.filter((c) => c.id !== commentId),
-            };
-          }
-          return post;
-        })
       );
+      if (!response.ok) {
+        throw new Error("Failed to add comment");
+      }
+      // Optionally, re-fetch that post’s data or do an inline update
+      fetchBlogPosts();
+    } catch (err) {
+      console.error("Error adding comment:", err);
+      alert("Error adding comment.");
     }
   };
 
-  /* ----------------------------------
-     Editing an existing post
-  ---------------------------------- */
-  const handleBeginEdit = (post: BlogPost) => {
+  // Remove a blog comment (admin only)
+  const handleRemoveBlogComment = async (commentId: number) => {
+    if (!window.confirm("Remove this comment?")) return;
+    try {
+      const response = await fetch(
+        `https://159.89.233.75.nip.io/api/blog/comments/${commentId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Failed to remove comment");
+      }
+      fetchBlogPosts();
+    } catch (err) {
+      console.error("Error removing comment:", err);
+      alert("Error removing comment.");
+    }
+  };
+
+  // Editing an existing post
+  const handleBeginEdit = async (post: BlogPost) => {
     setEditingPostId(post.id);
     setEditTitle(post.title);
     setEditAuthor(post.author);
     setEditDate(post.date);
     setEditContent(post.content);
-    // Switch to the Blogs tab if not already
+    // Switch tab if needed
     setActiveTab("blogs");
   };
 
-  const handleSaveEdit = () => {
+  const handleSaveEdit = async () => {
     if (!editingPostId) return;
     if (!editTitle.trim() || !editAuthor.trim() || !editContent.trim()) {
       alert("Please fill out Title, Author, and Content.");
       return;
     }
-    // Save changes
-    setBlogPosts((prev) =>
-      prev.map((p) =>
-        p.id === editingPostId
-          ? {
-              ...p,
-              title: editTitle.trim(),
-              author: editAuthor.trim(),
-              date: editDate.trim() || new Date().toLocaleDateString(),
-              content: editContent,
-            }
-          : p
-      )
-    );
-    // Reset editing state
-    setEditingPostId(null);
-    setEditTitle("");
-    setEditAuthor("");
-    setEditDate("");
-    setEditContent("");
+    try {
+      const response = await fetch(
+        `https://159.89.233.75.nip.io/api/blog/posts/${editingPostId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            title: editTitle.trim(),
+            author: editAuthor.trim(),
+            date: editDate.trim(),
+            content: editContent,
+          }),
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Failed to update blog post");
+      }
+      // refresh
+      fetchBlogPosts();
+      // Reset editing
+      setEditingPostId(null);
+      setEditTitle("");
+      setEditAuthor("");
+      setEditDate("");
+      setEditContent("");
+      alert("Blog post updated!");
+    } catch (err) {
+      console.error("Error updating blog post:", err);
+      alert("Error updating blog post.");
+    }
   };
 
   const handleCancelEdit = () => {
-    // Reset
     setEditingPostId(null);
     setEditTitle("");
     setEditAuthor("");
@@ -389,16 +443,46 @@ const AdminPage: React.FC = () => {
     setEditContent("");
   };
 
-  /* ----------------------------------
-     Display each blog post with Comments
-  ---------------------------------- */
+  // CHANGED: For displaying each post in "Blog Management"
   const BlogPostItem: React.FC<{ post: BlogPost }> = ({ post }) => {
     const [commentText, setCommentText] = useState("");
+
+    // CHANGED: we may want to fetch comments for this post if not loaded:
+    // But if you're returning them all in one go, it’s already in post.comments
+    // For demonstration, let's fetch comments via the single post route if needed
+    const [showComments, setShowComments] = useState(false);
+    const [comments, setComments] = useState<BlogComment[] | null>(
+      post.comments || null
+    );
+
+    async function fetchCommentsForPost() {
+      try {
+        const res = await fetch(`https://159.89.233.75.nip.io/api/blog/posts/${post.id}`);
+        if (!res.ok) {
+          throw new Error("Failed to fetch post comments");
+        }
+        const data = await res.json();
+        setComments(data.comments || []);
+      } catch (error) {
+        console.error("Error fetching comments for post:", error);
+        alert("Error fetching comments");
+      }
+    }
+
+    const handleToggleComments = () => {
+      if (!showComments && !comments) {
+        // fetch them
+        fetchCommentsForPost();
+      }
+      setShowComments(!showComments);
+    };
 
     return (
       <div className="bg-white p-4 rounded shadow-md mb-4">
         <div className="flex flex-row justify-between">
-          <h3 className="text-xl text-[#354057] font-medium">{post.title}</h3>
+          <h3 className="text-xl text-[#354057] font-medium">
+            {post.title} (Likes: {post.likes})
+          </h3>
           <div className="flex flex-row gap-3">
             {/* Edit Post Button */}
             <button
@@ -419,63 +503,71 @@ const AdminPage: React.FC = () => {
         <p className="text-sm text-gray-500">
           By {post.author} on {post.date}
         </p>
-        <div className="mt-2">
-          {/* Render the HTML from Quill */}
-          <div
-            className="text-[#354057]"
-            dangerouslySetInnerHTML={{ __html: post.content }}
-          />
-        </div>
+        <div
+          className="mt-2 text-[#354057]"
+          dangerouslySetInnerHTML={{ __html: post.content }}
+        />
 
-        {/* Manage Comments */}
-        <div className="mt-4 bg-gray-100 p-3 rounded">
-          <h4 className="font-bold text-[#354057] mb-2">Comments:</h4>
-          {post.comments.length > 0 ? (
-            post.comments.map((c) => (
-              <div
-                key={c.id}
-                className="flex flex-row justify-between text-[#354057] bg-white p-2 mb-2 rounded"
-              >
-                <span>
-                  <strong>{c.author}:</strong> {c.text}
-                </span>
-                <button
-                  onClick={() => handleRemoveBlogComment(post.id, c.id)}
-                  className="bg-[#ec8e47] hover:bg-[#f04040] text-white px-3 py-1 text-sm transition rounded"
+        {/* Show/hide comments button */}
+        <button
+          onClick={handleToggleComments}
+          className="mt-3 bg-[#617beb] hover:bg-[#4760d2] text-white px-3 py-1 rounded"
+        >
+          {showComments ? "Hide Comments" : "Show Comments"}
+        </button>
+
+        {/* Comments section (if showComments is true) */}
+        {showComments && comments && (
+          <div className="mt-4 bg-gray-100 p-3 rounded">
+            <h4 className="font-bold text-[#354057] mb-2">Comments:</h4>
+            {comments.length > 0 ? (
+              comments.map((c) => (
+                <div
+                  key={c.id}
+                  className="flex flex-row justify-between text-[#354057] bg-white p-2 mb-2 rounded"
                 >
-                  Remove
-                </button>
-              </div>
-            ))
-          ) : (
-            <p className="text-gray-500">No comments yet.</p>
-          )}
-          <div className="mt-2 flex">
-            <input
-              type="text"
-              value={commentText}
-              onChange={(e) => setCommentText(e.target.value)}
-              placeholder="Add new comment..."
-              className="flex-1 border text-[#354057] border-gray-300 rounded p-1 mr-2"
-            />
-            <button
-              onClick={() => {
-                handleAddBlogComment(post.id, commentText);
-                setCommentText("");
-              }}
-              className="bg-[#617beb] hover:bg-[#4760d2] transition text-white px-3 py-1 rounded"
-            >
-              Add
-            </button>
+                  <span>
+                    <strong>{c.author}:</strong> {c.text} (Likes: {c.likes})
+                  </span>
+                  <button
+                    onClick={() => handleRemoveBlogComment(c.id)}
+                    className="bg-[#ec8e47] hover:bg-[#f04040] text-white px-3 py-1 text-sm transition rounded"
+                  >
+                    Remove
+                  </button>
+                </div>
+              ))
+            ) : (
+              <p className="text-gray-500">No comments yet.</p>
+            )}
+            <div className="mt-2 flex">
+              <input
+                type="text"
+                value={commentText}
+                onChange={(e) => setCommentText(e.target.value)}
+                placeholder="Add new comment..."
+                className="flex-1 border text-[#354057] border-gray-300 rounded p-1 mr-2"
+              />
+              <button
+                onClick={() => {
+                  handleAddBlogComment(post.id, commentText);
+                  setCommentText("");
+                  // Optionally re-fetch comments afterward or do inline
+                  // For simplicity: do an inline approach or fetch again
+                  setTimeout(() => fetchCommentsForPost(), 500);
+                }}
+                className="bg-[#617beb] hover:bg-[#4760d2] transition text-white px-3 py-1 rounded"
+              >
+                Add
+              </button>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     );
   };
 
-  /* ----------------------------------
-     Render Page
-  ---------------------------------- */
+  // Render page
   if (!token) {
     return (
       <div className="min-h-screen bg-purple-50 flex items-center justify-center">
@@ -509,7 +601,10 @@ const AdminPage: React.FC = () => {
       <div className="flex flex-row justify-between">
         <h1 className="text-3xl text-[#3f3f3f] mb-4">Admin Dashboard</h1>
         <div className="w-1/3 md:w-1/6 lg:w-1/12">
-          <button onClick={handleLogout} className="comic-button comic-button-admin mb-4">
+          <button
+            onClick={handleLogout}
+            className="comic-button comic-button-admin mb-4"
+          >
             Logout
           </button>
         </div>
@@ -650,7 +745,7 @@ const AdminPage: React.FC = () => {
                 theme="snow"
                 value={editContent}
                 onChange={setEditContent}
-                className="mb-2"
+                className="mb-2 text-[#354057]"
                 modules={quillModules}
                 formats={quillFormats}
               />
@@ -690,6 +785,7 @@ const AdminPage: React.FC = () => {
 };
 
 export default AdminPage;
+
 
 
 

@@ -1,0 +1,344 @@
+Saved from before the blog additions
+
+const express = require('express');
+const Joi = require('joi');
+const rateLimit = require('express-rate-limit');
+const winston = require('winston');
+const mailchimp = require('@mailchimp/mailchimp_marketing');
+const cors = require('cors');
+const path = require('path');
+const sqlite3 = require('sqlite3').verbose();
+const { open } = require('sqlite');
+const helmet = require('helmet');
+const createDOMPurify = require('dompurify');
+const { JSDOM } = require('jsdom');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
+
+const app = express();
+app.use(express.json({ limit: '10kb' }));
+app.use(helmet());
+
+// DOMPurify setup
+const window = new JSDOM('').window;
+const DOMPurify = createDOMPurify(window);
+
+const corsOptions = {
+  origin: ['http://localhost:3000', 'https://marie-sooty.vercel.app', 'https://159.89.233.75.nip.io', 'https://www.therealmofunity.com', 'https://www.therealmofunity.com'],
+  optionsSuccessStatus: 200
+};
+app.use(cors(corsOptions));
+
+// Initialize the database
+let db;
+
+const reviewSchema = Joi.object({
+  firstName: Joi.string().min(1).max(50).required(),
+  lastName: Joi.string().min(1).max(50).required(),
+  jobTitle: Joi.string().min(1).max(100),
+  review: Joi.string().min(10).max(5000).required()
+});
+
+// Mailchimp setup
+const apiKey = process.env.MAILCHIMP_API_KEY;
+const serverPrefix = process.env.MAILCHIMP_SERVER_PREFIX;
+const listId = process.env.MAILCHIMP_LIST_ID;
+
+if (!apiKey || !serverPrefix || !listId) {
+  throw new Error('Mailchimp environment variables are not set.');
+}
+
+mailchimp.setConfig({
+  apiKey: apiKey,
+  server: serverPrefix,
+});
+
+// Set up logging
+const logger = winston.createLogger({
+  level: 'info',
+  format: winston.format.json(),
+  defaultMeta: { service: 'user-service' },
+  transports: [
+    new winston.transports.File({ filename: 'error.log', level: 'error' }),
+    new winston.transports.File({ filename: 'combined.log' })
+  ]
+});
+
+if (process.env.NODE_ENV !== 'production') {
+  logger.add(new winston.transports.Console({
+    format: winston.format.simple()
+  }));
+}
+
+// Set up general rate limiting
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100
+});
+app.use(apiLimiter);
+
+// Set up specific rate limiting for reviews
+const reviewLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000, // 1 hour
+  max: 5 // limit each IP to 5 review submissions per hour
+});
+
+// Set up specific rate limiting for PDF downloads
+const pdfLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000, // 1 hour
+  max: 10, // limit each IP to 10 requests per hour
+  message: "Too many download requests, please try again later."
+});
+
+// Define input validation schemas
+const subscribeSchema = Joi.object({
+  email: Joi.string().email().required(),
+  name: Joi.string().min(2).max(30).required()
+});
+
+const allowedPDFs = [
+  'dr-suess-the-bitter-butter-battle.pdf',
+  'what-if-the-titanic-hadnt-sunk.pdf',
+  'pov-youre-a.pdf'
+];
+
+const downloadSchema = Joi.object({
+  filename: Joi.string().valid(...allowedPDFs).required()
+});
+
+// Mailchimp subscription function
+const addSubscriber = async (email, name) => {
+  try {
+    const response = await mailchimp.lists.addListMember(listId, {
+      email_address: email,
+      status: 'subscribed',
+      merge_fields: {
+        FNAME: name
+      }
+    });
+    return response;
+  } catch (error) {
+    logger.error('Mailchimp subscription error', { error: error.message });
+    throw error;
+  }
+};
+
+// Serve static files from the 'public' directory
+app.use(express.static('public'));
+
+// Routes
+app.get('/', (req, res) => {
+  logger.info('Root endpoint accessed');
+  res.json({ message: 'API is running' });
+});
+
+app.post('/subscribe', async (req, res) => {
+  logger.info('Subscription attempt', { email: req.body.email });
+  const { error, value } = subscribeSchema.validate(req.body, { abortEarly: false });
+  if (error) {
+    logger.warn('Invalid subscription attempt', { error: error.details.map(d => d.message) });
+    return res.status(400).json({ errors: error.details.map(d => d.message) });
+  }
+  try {
+    await addSubscriber(value.email, value.name);
+    logger.info('Subscription successful', { email: value.email });
+    res.json({ message: 'Subscription received and added to Mailchimp' });
+  } catch (error) {
+    logger.error('Subscription failed', { email: value.email, error: error.message });
+    res.status(500).json({ error: 'Failed to add subscriber to Mailchimp' });
+  }
+});
+
+// Prevent hotlinking
+const allowedDomains = ['localhost', 'marie-sooty.vercel.app', '159.89.233.75.nip.io', 'therealmofunity.com', 'www.therealmofunity.com'];
+
+app.post('/api/submit-review', reviewLimiter, async (req, res) => {
+  logger.info('Review submission attempt', { review: req.body });
+  const { error, value } = reviewSchema.validate(req.body, { abortEarly: false });
+  if (error) {
+    const errorMessages = error.details.map(detail => {
+      if (detail.path[0] === 'review' && detail.type === 'string.min') {
+        return "Review must be at least 10 characters long.";
+      }
+      return detail.message;
+    });
+    logger.warn('Invalid review submission', { errors: errorMessages });
+    return res.status(400).json({ errors: errorMessages });
+  }
+  try {
+    const sanitizedReview = DOMPurify.sanitize(value.review);
+    const result = await db.run(
+      `INSERT INTO reviews (first_name, last_name, job_title, review, created_at) 
+       VALUES (?, ?, ?, ?, ?)`,
+      [value.firstName, value.lastName, value.jobTitle, sanitizedReview, Date.now()]
+    );
+    logger.info('Review submitted successfully', { reviewId: result.lastID });
+    res.json({ message: 'Review submitted successfully' });
+  } catch (error) {
+    logger.error('Review submission failed', { error: error.message });
+    res.status(500).json({ error: 'Failed to submit review' });
+  }
+});
+
+app.get('/api/reviews', async (req, res) => {
+  try {
+    const approvedReviews = await db.all('SELECT * FROM reviews WHERE status = ?', ['approve']);
+    res.json(approvedReviews);
+  } catch (error) {
+    logger.error('Failed to fetch approved reviews', { error: error.message });
+    res.status(500).json({ error: 'Failed to fetch approved reviews' });
+  }
+});
+
+app.get('/api/all-reviews', async (req, res) => {
+  try {
+    const allReviews = await db.all('SELECT * FROM reviews');
+    res.json(allReviews);
+  } catch (error) {
+    logger.error('Failed to fetch all reviews', { error: error.message });
+    res.status(500).json({ error: 'Failed to fetch all reviews' });
+  }
+});
+
+app.use('/api/download', (req, res, next) => {
+  const referer = req.get('Referer');
+  if (referer) {
+    const refererHost = new URL(referer).hostname;
+    if (allowedDomains.some(domain => refererHost.includes(domain))) {
+      return next();
+    }
+  }
+  res.status(403).send('Access denied');
+});
+
+app.get('/api/download/:filename', pdfLimiter, (req, res) => {
+  const { error } = downloadSchema.validate(req.params);
+  if (error) {
+    logger.warn('Invalid download attempt', { error: error.details[0].message });
+    return res.status(400).json({ error: error.details[0].message });
+  }
+
+  const filename = req.params.filename;
+  const filePath = path.join(__dirname, 'public', 'pdfs', filename);
+
+  res.download(filePath, (err) => {
+    if (err) {
+      logger.error('File download failed', { filename, error: err.message });
+      res.status(404).send('File not found');
+    } else {
+      logger.info('File downloaded successfully', { filename });
+    }
+  });
+});
+
+// Admin login route
+app.post('/api/admin/login', async (req, res) => {
+  const { username, password } = req.body;
+
+  console.log('Login attempt:', username);
+  console.log('Stored username:', process.env.ADMIN_USERNAME);
+  
+  const adminUser = {
+    username: process.env.ADMIN_USERNAME,
+    passwordHash: process.env.ADMIN_PASSWORD_HASH
+  };
+
+  console.log('Username match:', username === adminUser.username);
+  
+  const passwordMatch = await bcrypt.compare(password, adminUser.passwordHash);
+  console.log('Password match:', passwordMatch);
+
+  if (username !== adminUser.username || !passwordMatch) {
+    return res.status(401).json({ error: 'Invalid credentials' });
+  }
+
+  const token = jwt.sign({ username }, process.env.JWT_SECRET, { expiresIn: '1h' });
+  res.json({ token });
+});
+
+// Middleware to verify JWT token
+const verifyToken = (req, res, next) => {
+  const token = req.headers['authorization']?.split(' ')[1];
+  if (!token) return res.status(403).json({ error: 'No token provided' });
+
+  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+    if (err) return res.status(401).json({ error: 'Unauthorized' });
+    req.username = decoded.username;
+    next();
+  });
+};
+
+// Get pending reviews
+app.get('/api/admin/pending-reviews', verifyToken, async (req, res) => {
+  try {
+    const pendingReviews = await db.all('SELECT * FROM reviews WHERE status = ?', ['pending']);
+    res.json(pendingReviews);
+  } catch (error) {
+    logger.error('Failed to fetch pending reviews', { error: error.message });
+    res.status(500).json({ error: 'Failed to fetch pending reviews' });
+  }
+});
+
+// Get all reviews
+app.get('/api/admin/all-reviews', verifyToken, async (req, res) => {
+  try {
+    const allReviews = await db.all('SELECT * FROM reviews');
+    res.json(allReviews);
+  } catch (error) {
+    logger.error('Failed to fetch all reviews', { error: error.message });
+    res.status(500).json({ error: 'Failed to fetch all reviews' });
+  }
+});
+
+// Approve, reject, or set a review to pending
+app.post('/api/admin/review-action', verifyToken, async (req, res) => {
+  const { reviewId, action } = req.body;
+  if (!['approve', 'reject', 'pending'].includes(action)) {
+    return res.status(400).json({ error: 'Invalid action' });
+  }
+
+  try {
+    await db.run('UPDATE reviews SET status = ? WHERE id = ?', [action, reviewId]);
+    res.json({ message: `Review ${action}d successfully` });
+  } catch (error) {
+    logger.error(`Failed to ${action} review`, { error: error.message });
+    res.status(500).json({ error: `Failed to ${action} review` });
+  }
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  logger.error('Unhandled error', { error: err.message });
+  res.status(500).send('An unexpected error occurred');
+});
+
+// Initialize database and start server
+(async () => {
+  try {
+    db = await open({
+      filename: path.join(__dirname, 'reviews.db'),
+      driver: sqlite3.Database
+    });
+    
+    await db.exec(`CREATE TABLE IF NOT EXISTS reviews (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      first_name TEXT NOT NULL,
+      last_name TEXT NOT NULL,
+      job_title TEXT,
+      review TEXT NOT NULL,
+      status TEXT NOT NULL DEFAULT 'pending',
+      created_at INTEGER NOT NULL
+    )`);
+
+    const port = process.env.PORT || 3000;
+    app.listen(port, () => {
+      logger.info(`Server running on port ${port}`);
+      console.log('Server running as:', process.getuid && process.getuid(), process.getgid && process.getgid());
+    });
+  } catch (error) {
+    logger.error('Failed to initialize database', { error: error.message });
+    process.exit(1);
+  }
+})();
+

@@ -1,103 +1,95 @@
 // src/pages/blog/index.tsx
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Nav from "../../components/Nav";
 import Footer from "../../components/RespFooter";
 
-// Hardcoded mock data (replace with API later)
-const mockPosts = [
-  {
-    id: 1,
-    title: "Welcome to The Realm of Unity",
-    content: `Ever wonder what a magical world would look like? Welcome to The Realm of Unity—a place where imagination, adventure, and wonder converge...`,
-    author: "V. M. Elyse",
-    date: "March 10, 2025",
-    excerpt: "Step into a world of magic, adventure, and ancient secrets...",
-    comments: [
-      { id: 101, author: "Anonymous", text: "I love this book, my favorite character is Alfred." },
-      { id: 102, author: "Cara Parker", text: "What are the best places to go in the realm of unity?" },
-    ],
-  },
-  {
-    id: 2,
-    title: "Whose Hat Was It Anyway?",
-    content: `A hat is just a hat—until it isn't...`,
-    author: "The Cat In The Hat",
-    date: "March 11, 2025",
-    excerpt: "A mysterious hat appears—who did it belong to, and what’s its story?",
-    comments: [
-      { id: 103, author: "Sam Knight", text: "What's the cat in the hat doing here?" },
-      { id: 104, author: "Sara Moore", text: "Is this a cat in a hat?" },
-    ],
-  },
-  {
-    id: 3,
-    title: "How to Make a Perfect Loaf of Bread",
-    content: `Baking bread is both an art and a science...`,
-    author: "Aspen",
-    date: "March 12, 2025",
-    excerpt: "Learn the art of baking the perfect homemade bread.",
-    comments: [
-      { id: 105, author: "Ben Sorenson", text: "Actually a good recipe." },
-      { id: 106, author: "Abby Simpson", text: "Not saying it's magical, but it's magical." }
-    ],
-  },
-];
+interface BlogPost {
+  id: number;
+  title: string;
+  content: string;
+  author: string;
+  date: string;
+  likes: number;
+  created_at: number;
+  updated_at: number;
+}
+
+// Helper function to strip HTML tags for the excerpt
+function stripHtml(html: string): string {
+  return html.replace(/<[^>]+>/g, "");
+}
 
 export default function BlogIndex() {
+  const [posts, setPosts] = useState<BlogPost[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string>("");
+
+  useEffect(() => {
+    async function fetchPosts() {
+      try {
+        const response = await fetch("https://159.89.233.75.nip.io/api/blog/posts");
+        if (!response.ok) {
+          throw new Error("Failed to fetch blog posts");
+        }
+        const data: BlogPost[] = await response.json();
+        setPosts(data);
+      } catch (err) {
+        console.error(err);
+        setError("Error fetching blog posts.");
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchPosts();
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col bg-[#dbe1f9c5]">
       <Nav />
-
       <div className="max-w-4xl mx-auto w-full p-4 flex-1">
         <h1 className="text-5xl font-playfair text-center mt-6 mb-10 font-bold text-[#39383c]">
           The Realm Of Unity&apos;s Bulletin Board
         </h1>
-
-        {mockPosts.map((post) => (
-          <div key={post.id} className="bg-[#fffaf4] p-6 rounded-xl mb-8">
-            <h2 className="text-3xl font-semibold mb-3 text-[#4458adc5]">
-              <Link href={`/blog/${post.id}`} className="hover:underline">
-                {post.title}
-              </Link>
-            </h2>
-
-            <p className="text-sm text-gray-500 mb-2">
-              By {post.author} on {post.date}
-            </p>
-
-            <p className="text-lg text-[#3f3d3b] mb-4">{post.excerpt}</p>
-
-            {/* Display Top Comments (if available) */}
-            {post.comments.length > 0 && (
-              <div className="bg-[#f9f8ff] shadow-inner p-3 rounded-lg text-gray-700">
-                <h4 className="font-semibold mb-1 text-[#3f3d3b]">Comments:</h4>
-                {post.comments.slice(0, 2).map((comment) => (
-                  <p key={comment.id} className="text-sm">
-                    <span className="font-bold">{comment.author}:</span>{" "}
-                    {comment.text.length > 50
-                      ? `${comment.text.substring(0, 50)}...`
-                      : comment.text}
-                  </p>
-                ))}
+        {loading && <p className="text-center mb-6">Loading posts...</p>}
+        {error && <p className="text-center text-[#4458adc5] mb-6">{error}</p>}
+        {!loading &&
+          !error &&
+          posts.map((post) => {
+            // Create an excerpt by stripping HTML and taking the first 150 characters
+            const plainContent = stripHtml(post.content);
+            const excerpt =
+              plainContent.length > 150
+                ? plainContent.substring(0, 150) + "..."
+                : plainContent;
+            return (
+              <div key={post.id} className="bg-[#fffaf4] p-6 rounded-xl mb-8">
+                <h2 className="text-3xl font-semibold mb-3 text-[#4458adc5]">
+                  <Link href={`/blog/${post.id}`} className="hover:underline">
+                    {post.title}
+                  </Link>
+                </h2>
+                <p className="text-sm text-gray-500 mb-2">
+                  By {post.author} on {post.date}
+                </p>
+                <p className="text-lg text-[#3f3d3b] mb-4">{excerpt}</p>
+                <Link
+                  href={`/blog/${post.id}`}
+                  className="mt-3 inline-block bg-[#4458adc5] hover:bg-[#3f4f95c5] text-white px-4 py-2 rounded transition-colors"
+                >
+                  Read More
+                </Link>
               </div>
-            )}
-
-            <Link
-              href={`/blog/${post.id}`}
-              className="mt-3 inline-block bg-[#4458adc5] hover:bg-[#3f4f95c5] text-white px-4 py-2 rounded transition-colors"
-            >
-              Read More
-            </Link>
-          </div>
-        ))}
+            );
+          })}
       </div>
-
       <Footer />
     </div>
   );
 }
+
+
 
 
 
