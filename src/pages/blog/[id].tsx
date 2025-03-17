@@ -5,7 +5,6 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import Nav from "../../components/Nav";
 import Footer from "../../components/RespFooter";
-import { M_PLUS_1 } from "next/font/google";
 
 // Define interfaces matching your DB structure
 interface Comment {
@@ -33,26 +32,21 @@ export default function SinglePost() {
   const router = useRouter();
   const { id } = router.query;
 
-  // State to hold the post data
   const [post, setPost] = useState<Post | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
-
-  // For the new comment text
   const [newComment, setNewComment] = useState<string>("");
-
-  // Track if user has liked the post or not (once per localStorage)
   const [postLiked, setPostLiked] = useState<boolean>(false);
-  // Track which comments the user has liked (by commentId)
   const [commentLiked, setCommentLiked] = useState<Record<number, boolean>>({});
 
-  // Fetch post data from server
   useEffect(() => {
     if (!id) return;
     async function fetchPost() {
       try {
         setLoading(true);
-        const res = await fetch(`https://159.89.233.75.nip.io/api/blog/posts/${id}`);
+        const res = await fetch(
+          `https://159.89.233.75.nip.io/api/blog/posts/${id}`
+        );
         if (!res.ok) {
           throw new Error("Post not found");
         }
@@ -93,7 +87,6 @@ export default function SinglePost() {
     localStorage.setItem(`commentLiked-${id}`, JSON.stringify(commentLiked));
   }, [commentLiked, id]);
 
-  // Handle "like once" for the post
   async function handleLikePost() {
     if (!post) return;
     if (postLiked) {
@@ -119,7 +112,6 @@ export default function SinglePost() {
     }
   }
 
-  // Handle "like once" for comments
   async function handleLikeComment(commentId: number) {
     if (!post) return;
     if (commentLiked[commentId]) {
@@ -148,7 +140,6 @@ export default function SinglePost() {
     }
   }
 
-  // Handle adding a new comment
   async function handleAddComment() {
     if (!newComment.trim() || !post) return;
     try {
@@ -215,13 +206,43 @@ export default function SinglePost() {
             ← Back to Blog
           </Link>
         </div>
+
         <h1 className="text-4xl font-semibold mb-4 text-gray-800">{post.title}</h1>
-        <p className="text-sm text-gray-500 mb-6">By {post.author} on {post.date}</p>
+        <p className="text-sm text-gray-500 mb-6">
+          By {post.author} on {post.date}
+        </p>
+
+        {/* CHANGED: Wrap content in .blog-post-content so you can style headings/lists */}
         <div
-          className="text-lg text-gray-800 space-y-4"
+          className="text-lg text-gray-800 space-y-4 blog-post-content" // CHANGED
           dangerouslySetInnerHTML={{ __html: post.content }}
         />
-        {/* Post Like Button with original color animation */}
+        {/* CHANGED: Add styling for headings, lists, etc. */}
+        <style jsx>{`
+          .blog-post-content h1, .blog-post-content h2, .blog-post-content h3 {
+            font-weight: bold;
+            margin-top: 1rem;
+            margin-bottom: 0.75rem;
+          }
+          .blog-post-content h1 { font-size: 1.875rem; /* ~text-3xl */ }
+          .blog-post-content h2 { font-size: 1.5rem;   /* ~text-2xl */ }
+          .blog-post-content h3 { font-size: 1.25rem;  /* ~text-xl */ }
+
+          .blog-post-content ul, .blog-post-content ol {
+            margin: 1rem 0 1rem 2rem; /* left indent for lists */
+            padding-left: 0;
+          }
+
+          /* Ensure bullets & numbers display as normal list markers */
+          .blog-post-content ul {
+            list-style-type: disc;
+          }
+          .blog-post-content ol {
+            list-style-type: decimal;
+          }
+        `}</style>
+        {/* END CHANGED */}
+
         <div className="mt-6 flex items-center">
           <div
             className={`flex items-center rounded py-1 px-2 transition ${
@@ -247,6 +268,7 @@ export default function SinglePost() {
             <span className="ml-3 text-sm text-green-600"></span>
           )}
         </div>
+
         {/* Comments Section */}
         <div className="bg-white shadow-md p-6 rounded-lg mt-8">
           <h3 className="text-xl font-semibold mb-4 text-[#1b1b1bc5]">Comments</h3>
@@ -256,9 +278,11 @@ export default function SinglePost() {
                 <p className="text-sm flex-1 text-[#1b1b1bc5] mr-4">
                   <span className="font-bold">{comment.author}:</span> {comment.text}
                 </p>
-                {/* Comment Like Button */}
-                <div className={`flex items-center rounded py-1 px-2 transition text-gray-800 ${
-                  commentLiked[comment.id] ? "bg-[#1b1b1bc5] text-white" : "bg-gray-100"}`}>
+                <div
+                  className={`flex items-center rounded py-1 px-2 transition text-gray-800 ${
+                    commentLiked[comment.id] ? "bg-[#1b1b1bc5] text-white" : "bg-gray-100"
+                  }`}
+                >
                   <span className="text-sm mr-2">{comment.likes}</span>
                   <button
                     onClick={() => handleLikeComment(comment.id)}
@@ -279,7 +303,6 @@ export default function SinglePost() {
           ) : (
             <p className="text-gray-500">No comments yet. Be the first!</p>
           )}
-          {/* Add Comment Form */}
           <div className="mt-4">
             <input
               type="text"
@@ -301,6 +324,7 @@ export default function SinglePost() {
     </div>
   );
 }
+
 
 
 

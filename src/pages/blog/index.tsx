@@ -19,10 +19,24 @@ interface BlogPost {
 // Helper function to strip HTML tags for the excerpt
 function stripHtml(html: string): string {
   return html
-    .replace(/<br\s*\/?>/gi, "\n")    // Convert <br> to a newline
-    .replace(/<\/p>/gi, "\n\n")      // Give a blank line after paragraph end
-    .replace(/<[^>]+>/g, "")         // Remove all other tags
-    .trim();                          // Trim leading/trailing whitespace
+    // Give headings some space
+    .replace(/<h[1-3][^>]*>/gi, "\n\n")
+    .replace(/<\/h[1-3]>/gi, "\n\n")
+    // Paragraphs
+    .replace(/<p[^>]*>/gi, "\n")
+    .replace(/<\/p>/gi, "\n\n")
+    // Line breaks
+    .replace(/<br\s*\/?>/gi, "\n")
+    // Lists
+    .replace(/<li[^>]*>/gi, "• ")
+    .replace(/<\/li>/gi, "\n")
+    .replace(/<\/?ul[^>]*>/gi, "\n\n")
+    .replace(/<\/?ol[^>]*>/gi, "\n\n")
+    // Remove all other tags
+    .replace(/<[^>]+>/g, "")
+    // Clean up multiple blank lines
+    .replace(/\n{2,}/g, "\n\n")
+    .trim();
 }
 
 // CHANGED: Function to decode HTML entities (e.g., &nbsp;, &amp;)
