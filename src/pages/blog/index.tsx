@@ -18,7 +18,21 @@ interface BlogPost {
 
 // Helper function to strip HTML tags for the excerpt
 function stripHtml(html: string): string {
-  return html.replace(/<[^>]+>/g, "");
+  return html
+    .replace(/<br\s*\/?>/gi, "\n")    // Convert <br> to a newline
+    .replace(/<\/p>/gi, "\n\n")      // Give a blank line after paragraph end
+    .replace(/<[^>]+>/g, "")         // Remove all other tags
+    .trim();                          // Trim leading/trailing whitespace
+}
+
+// CHANGED: Function to decode HTML entities (e.g., &nbsp;, &amp;)
+function decodeHtmlEntities(str: string): string {
+  if (typeof document !== "undefined") {
+    const txt = document.createElement("textarea");
+    txt.innerHTML = str;
+    return txt.value;
+  }
+  return str;
 }
 
 export default function BlogIndex() {
@@ -57,12 +71,13 @@ export default function BlogIndex() {
         {!loading &&
           !error &&
           posts.map((post) => {
-            // Create an excerpt by stripping HTML and taking the first 150 characters
+            // CHANGED: Create an excerpt by stripping HTML, decoding HTML entities, and taking the first 150 characters
             const plainContent = stripHtml(post.content);
+            const decodedContent = decodeHtmlEntities(plainContent);
             const excerpt =
-              plainContent.length > 150
-                ? plainContent.substring(0, 150) + "..."
-                : plainContent;
+              decodedContent.length > 150
+                ? decodedContent.substring(0, 150) + "..."
+                : decodedContent;
             return (
               <div key={post.id} className="bg-[#fffaf4] p-6 rounded-xl mb-8">
                 <h2 className="text-3xl font-semibold mb-3 text-[#4458adc5]">
@@ -88,6 +103,7 @@ export default function BlogIndex() {
     </div>
   );
 }
+
 
 
 
