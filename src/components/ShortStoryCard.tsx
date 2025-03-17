@@ -1,3 +1,5 @@
+// src/components/ShortStoryCard.tsx
+
 import { useState } from 'react';
 import ComicButton from "./ComicButton";
 import Link from 'next/link';

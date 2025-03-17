@@ -78,7 +78,7 @@ export default function BlogIndex() {
       <Nav />
       <div className="max-w-4xl mx-auto w-full p-4 flex-1">
         <h1 className="text-5xl font-playfair text-center mt-6 mb-10 font-bold text-[#39383c]">
-          The Realm Of Unity&apos;s Bulletin Board
+          The Realm Of Unity&apos;s Blog
         </h1>
         {loading && <p className="text-center mb-6">Loading posts...</p>}
         {error && <p className="text-center text-[#4458adc5] mb-6">{error}</p>}

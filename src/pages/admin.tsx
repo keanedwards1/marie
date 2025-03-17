@@ -1,5 +1,3 @@
-// src/pages/admin.tsx
-
 import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 
@@ -27,7 +25,7 @@ interface BlogPost {
   likes: number;
   created_at: number;
   updated_at: number;
-  comments?: BlogComment[]; // We'll load comments separately or together
+  comments?: BlogComment[];
 }
 
 // Review interface (unchanged)
@@ -41,6 +39,9 @@ interface Review {
   created_at: number;
 }
 
+// Extend tab types for admin dashboard
+type AdminTab = "reviews" | "blogs" | "pdfs";
+
 const AdminPage: React.FC = () => {
   const router = useRouter();
 
@@ -52,8 +53,8 @@ const AdminPage: React.FC = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState<{ [key: number]: boolean }>({});
 
-  // CHANGED: Tab switching
-  const [activeTab, setActiveTab] = useState<"reviews" | "blogs">("reviews");
+  // CHANGED: Tab switching (added "pdfs")
+  const [activeTab, setActiveTab] = useState<AdminTab>("reviews");
 
   // CHANGED: Blog data
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
@@ -108,15 +109,12 @@ const AdminPage: React.FC = () => {
     "info"
   );
 
-  // CHANGED: Removed the part that looks for admin token in localStorage
   useEffect(() => {
-    // CHANGED: Removed localStorage fetching logic
-    // We fetch blog posts even if we’re not logged in
+    // Fetch blog posts even if we’re not logged in
     fetchBlogPosts();
 
     // Override the browser's alert with a styled version
     (window as any).alert = (msg: string) => {
-      // Attempt simple logic for type
       const lower = msg.toLowerCase();
       if (lower.includes("error")) {
         setAlertType("error");
@@ -127,7 +125,6 @@ const AdminPage: React.FC = () => {
       }
       setAlertMessage(msg);
 
-      // Auto-dismiss after 3 seconds
       setTimeout(() => {
         setAlertMessage(null);
       }, 3000);
@@ -137,9 +134,7 @@ const AdminPage: React.FC = () => {
   // CHANGED: fetch blog posts (public GET)
   async function fetchBlogPosts() {
     try {
-      const response = await fetch(
-        "https://159.89.233.75.nip.io/api/blog/posts"
-      );
+      const response = await fetch("https://159.89.233.75.nip.io/api/blog/posts");
       if (!response.ok) {
         throw new Error("Failed to fetch blog posts");
       }
@@ -151,26 +146,37 @@ const AdminPage: React.FC = () => {
     }
   }
 
+  // CHANGED: Fetch PDFs from backend for admin PDF management
+  async function fetchPdfs(authToken: string) {
+    try {
+      const res = await fetch("https://159.89.233.75.nip.io/api/admin/list-pdfs", {
+        headers: { Authorization: `Bearer ${authToken}` },
+      });
+      if (!res.ok) throw new Error("Failed to fetch PDFs");
+      const data = await res.json();
+      setUploadedPdfs(data);
+    } catch (err) {
+      console.error("Error fetching PDFs:", err);
+    }
+  }
+
   // Login & Logout
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await fetch(
-        "https://159.89.233.75.nip.io/api/admin/login",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ username, password }),
-        }
-      );
+      const response = await fetch("https://159.89.233.75.nip.io/api/admin/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+      });
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.error || "Login failed");
       }
       const data = await response.json();
       setToken(data.token);
-      // CHANGED: Removed localStorage.setItem("adminToken", data.token);
       fetchAllReviews(data.token);
+      fetchPdfs(data.token); // Fetch PDFs after login
     } catch (err: unknown) {
       console.error("Login error:", err);
       if (err instanceof Error) setError(err.message);
@@ -181,19 +187,15 @@ const AdminPage: React.FC = () => {
 
   const handleLogout = () => {
     setToken("");
-    // CHANGED: Removed localStorage.removeItem("adminToken");
     router.push("/");
   };
 
   // Reviews Logic
   const fetchAllReviews = async (authToken: string) => {
     try {
-      const response = await fetch(
-        "https://159.89.233.75.nip.io/api/admin/all-reviews",
-        {
-          headers: { Authorization: `Bearer ${authToken}` },
-        }
-      );
+      const response = await fetch("https://159.89.233.75.nip.io/api/admin/all-reviews", {
+        headers: { Authorization: `Bearer ${authToken}` },
+      });
       if (!response.ok) throw new Error("Failed to fetch reviews");
       const allReviews = await response.json();
       setReviews(allReviews);
@@ -208,19 +210,15 @@ const AdminPage: React.FC = () => {
   ) => {
     setLoading((prev) => ({ ...prev, [reviewId]: true }));
     try {
-      const response = await fetch(
-        "https://159.89.233.75.nip.io/api/admin/review-action",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({ reviewId, action }),
-        }
-      );
+      const response = await fetch("https://159.89.233.75.nip.io/api/admin/review-action", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ reviewId, action }),
+      });
       if (!response.ok) throw new Error(`Failed to ${action} review`);
-      // Update the review status locally
       setReviews((prevReviews) =>
         prevReviews.map((review) =>
           review.id === reviewId ? { ...review, status: action } : review
@@ -235,9 +233,7 @@ const AdminPage: React.FC = () => {
   };
 
   // Separate components for each review status
-  const pendingReviews = reviews.filter(
-    (review) => review.status === "pending"
-  );
+  const pendingReviews = reviews.filter((review) => review.status === "pending");
   const approvedReviews = reviews.filter(
     (review) => review.status === "approved" || review.status === "approve"
   );
@@ -281,10 +277,7 @@ const AdminPage: React.FC = () => {
               <div key={action} className="ml-2">
                 <button
                   onClick={() =>
-                    handleReviewAction(
-                      review.id,
-                      action as "approve" | "reject" | "pending"
-                    )
+                    handleReviewAction(review.id, action as "approve" | "reject" | "pending")
                   }
                   disabled={loading[review.id]}
                   className={`
@@ -299,9 +292,7 @@ const AdminPage: React.FC = () => {
                     ${loading[review.id] ? "opacity-50" : ""}
                   `}
                 >
-                  {loading[review.id]
-                    ? "Processing..."
-                    : action.charAt(0).toUpperCase() + action.slice(1)}
+                  {loading[review.id] ? "Processing..." : action.charAt(0).toUpperCase() + action.slice(1)}
                 </button>
               </div>
             ))}
@@ -311,43 +302,86 @@ const AdminPage: React.FC = () => {
     </>
   );
 
-  // CHANGED: Admin Blog Logic
+  // CHANGED: PDF Management states
+  const [pdfFile, setPdfFile] = useState<File | null>(null);
+  const [uploadedPdfs, setUploadedPdfs] = useState<string[]>([]);
 
-  // Add a brand new blog post
+  // CHANGED: PDF Upload handler
+  async function handlePdfUpload() {
+    if (!pdfFile) {
+      alert("No file selected!");
+      return;
+    }
+    try {
+      const formData = new FormData();
+      formData.append("pdfFile", pdfFile);
+
+      const res = await fetch("https://159.89.233.75.nip.io/api/admin/upload-pdf", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+      });
+      if (!res.ok) {
+        const errData = await res.json();
+        throw new Error(errData.error || "Failed to upload PDF");
+      }
+      const data = await res.json();
+      alert(`PDF uploaded: ${data.filename}`);
+      setPdfFile(null);
+      fetchPdfs(token);
+    } catch (err) {
+      console.error("Error uploading PDF:", err);
+      alert("Error uploading PDF.");
+    }
+  }
+
+  // CHANGED: PDF deletion handler (requires a server route for deletion)
+  async function handleDeletePdf(filename: string) {
+    if (!window.confirm(`Are you sure you want to delete ${filename}?`)) return;
+    try {
+      const res = await fetch(`https://159.89.233.75.nip.io/api/admin/delete-pdf/${encodeURIComponent(filename)}`, {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (!res.ok) {
+        const errData = await res.json();
+        throw new Error(errData.error || "Failed to delete PDF");
+      }
+      alert(`PDF deleted: ${filename}`);
+      fetchPdfs(token);
+    } catch (err) {
+      console.error("Error deleting PDF:", err);
+      alert("Error deleting PDF.");
+    }
+  }
+
+  // Admin Blog Logic remains the same for adding/editing/deleting posts/comments
   const handleAddBlogPost = async () => {
-    if (
-      !newBlogTitle.trim() ||
-      !newBlogAuthor.trim() ||
-      !newBlogContent.trim()
-    ) {
+    if (!newBlogTitle.trim() || !newBlogAuthor.trim() || !newBlogContent.trim()) {
       alert("Please fill out Title, Author, and Content.");
       return;
     }
     try {
-      const response = await fetch(
-        "https://159.89.233.75.nip.io/api/blog/posts",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            title: newBlogTitle.trim(),
-            author: newBlogAuthor.trim(),
-            date: newBlogDate.trim(),
-            content: newBlogContent,
-          }),
-        }
-      );
+      const response = await fetch("https://159.89.233.75.nip.io/api/blog/posts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          title: newBlogTitle.trim(),
+          author: newBlogAuthor.trim(),
+          date: newBlogDate.trim(),
+          content: newBlogContent,
+        }),
+      });
       if (!response.ok) {
         throw new Error("Failed to create blog post");
       }
       const data = await response.json();
-      // data.postId is the newly created post
-      // fetch updated list
       fetchBlogPosts();
-      // Reset fields
       setNewBlogTitle("");
       setNewBlogAuthor("");
       setNewBlogDate("");
@@ -359,20 +393,13 @@ const AdminPage: React.FC = () => {
     }
   };
 
-  // Remove a blog post
   const handleRemoveBlogPost = async (postId: number) => {
-    if (!window.confirm("Are you sure you want to remove this blog post?"))
-      return;
+    if (!window.confirm("Are you sure you want to remove this blog post?")) return;
     try {
-      const response = await fetch(
-        `https://159.89.233.75.nip.io/api/blog/posts/${postId}`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await fetch(`https://159.89.233.75.nip.io/api/blog/posts/${postId}`, {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
+      });
       if (!response.ok) {
         throw new Error("Failed to delete blog post");
       }
@@ -383,21 +410,17 @@ const AdminPage: React.FC = () => {
     }
   };
 
-  // Add a comment to a specific blog post (admin)
   const handleAddBlogComment = async (postId: number, text: string) => {
     if (!text.trim()) return;
     try {
-      const response = await fetch(
-        `https://159.89.233.75.nip.io/api/blog/posts/${postId}/comments`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            author: "Admin",
-            text: text.trim(),
-          }),
-        }
-      );
+      const response = await fetch(`https://159.89.233.75.nip.io/api/blog/posts/${postId}/comments`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          author: "Admin",
+          text: text.trim(),
+        }),
+      });
       if (!response.ok) {
         throw new Error("Failed to add comment");
       }
@@ -408,19 +431,13 @@ const AdminPage: React.FC = () => {
     }
   };
 
-  // Remove a blog comment (admin only)
   const handleRemoveBlogComment = async (commentId: number) => {
     if (!window.confirm("Remove this comment?")) return;
     try {
-      const response = await fetch(
-        `https://159.89.233.75.nip.io/api/blog/comments/${commentId}`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await fetch(`https://159.89.233.75.nip.io/api/blog/comments/${commentId}`, {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
+      });
       if (!response.ok) {
         throw new Error("Failed to remove comment");
       }
@@ -431,14 +448,12 @@ const AdminPage: React.FC = () => {
     }
   };
 
-  // Editing an existing post
   const handleBeginEdit = async (post: BlogPost) => {
     setEditingPostId(post.id);
     setEditTitle(post.title);
     setEditAuthor(post.author);
     setEditDate(post.date);
     setEditContent(post.content);
-    // Switch tab if needed
     setActiveTab("blogs");
   };
 
@@ -449,22 +464,19 @@ const AdminPage: React.FC = () => {
       return;
     }
     try {
-      const response = await fetch(
-        `https://159.89.233.75.nip.io/api/blog/posts/${editingPostId}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            title: editTitle.trim(),
-            author: editAuthor.trim(),
-            date: editDate.trim(),
-            content: editContent,
-          }),
-        }
-      );
+      const response = await fetch(`https://159.89.233.75.nip.io/api/blog/posts/${editingPostId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          title: editTitle.trim(),
+          author: editAuthor.trim(),
+          date: editDate.trim(),
+          content: editContent,
+        }),
+      });
       if (!response.ok) {
         throw new Error("Failed to update blog post");
       }
@@ -489,19 +501,14 @@ const AdminPage: React.FC = () => {
     setEditContent("");
   };
 
-  // CHANGED: For displaying each post in "Blog Management"
   const BlogPostItem: React.FC<{ post: BlogPost }> = ({ post }) => {
     const [commentText, setCommentText] = useState("");
     const [showComments, setShowComments] = useState(false);
-    const [comments, setComments] = useState<BlogComment[] | null>(
-      post.comments || null
-    );
+    const [comments, setComments] = useState<BlogComment[] | null>(post.comments || null);
 
     async function fetchCommentsForPost() {
       try {
-        const res = await fetch(
-          `https://159.89.233.75.nip.io/api/blog/posts/${post.id}`
-        );
+        const res = await fetch(`https://159.89.233.75.nip.io/api/blog/posts/${post.id}`);
         if (!res.ok) {
           throw new Error("Failed to fetch post comments");
         }
@@ -527,14 +534,12 @@ const AdminPage: React.FC = () => {
             {post.title} (Likes: {post.likes})
           </h3>
           <div className="flex flex-row gap-3">
-            {/* Edit Post Button */}
             <button
               onClick={() => handleBeginEdit(post)}
               className="bg-[#617beb] hover:bg-[#4760d2] text-white px-3 py-1 rounded"
             >
               Edit
             </button>
-            {/* Remove Post Button */}
             <button
               onClick={() => handleRemoveBlogPost(post.id)}
               className="bg-[#ec8e47] hover:bg-[#f04040] text-white shadow transition px-3 py-1 rounded"
@@ -546,28 +551,19 @@ const AdminPage: React.FC = () => {
         <p className="text-sm text-gray-500">
           By {post.author} on {post.date}
         </p>
-        <div
-          className="mt-2 text-[#354057]"
-          dangerouslySetInnerHTML={{ __html: post.content }}
-        />
-
-        {/* Show/hide comments button */}
+        <div className="mt-2 text-[#354057]" dangerouslySetInnerHTML={{ __html: post.content }} />
         <button
           onClick={handleToggleComments}
           className="mt-3 bg-[#617beb] hover:bg-[#4760d2] text-white px-3 py-1 rounded"
         >
           {showComments ? "Hide Comments" : "Show Comments"}
         </button>
-
         {showComments && comments && (
           <div className="mt-4 bg-gray-100 p-3 rounded">
             <h4 className="font-bold text-[#354057] mb-2">Comments:</h4>
             {comments.length > 0 ? (
               comments.map((c) => (
-                <div
-                  key={c.id}
-                  className="flex flex-row justify-between text-[#354057] bg-white p-2 mb-2 rounded"
-                >
+                <div key={c.id} className="flex flex-row justify-between text-[#354057] bg-white p-2 mb-2 rounded">
                   <span>
                     <strong>{c.author}:</strong> {c.text} (Likes: {c.likes})
                   </span>
@@ -607,14 +603,11 @@ const AdminPage: React.FC = () => {
     );
   };
 
-  // Render page
+  // Render Page
   if (!token) {
     return (
       <div className="min-h-screen bg-purple-50 flex items-center justify-center">
-        <form
-          onSubmit={handleLogin}
-          className="bg-white p-8 m-6 rounded shadow-md"
-        >
+        <form onSubmit={handleLogin} className="bg-white p-8 m-6 rounded shadow-md">
           <h2 className="text-2xl mb-4 text-[#6f7ec0]">Admin Login</h2>
           <input
             type="text"
@@ -630,15 +623,10 @@ const AdminPage: React.FC = () => {
             onChange={(e) => setPassword(e.target.value)}
             className="w-full p-2 mb-4 border rounded text-gray-700 focus:border-gray-900 focus:border-1 focus:ring-gray-800 focus:outline-none transition-colors"
           />
-          <button
-            type="submit"
-            className="w-full comic-button comic-button-admin p-2 rounded"
-          >
+          <button type="submit" className="w-full comic-button comic-button-admin p-2 rounded">
             Login
           </button>
-          {error && (
-            <p className="text-[#f75050] font-serif mt-4 -mb-3">*{error}</p>
-          )}
+          {error && <p className="text-[#f75050] font-serif mt-4 -mb-3">*{error}</p>}
         </form>
       </div>
     );
@@ -649,16 +637,12 @@ const AdminPage: React.FC = () => {
       <div className="flex flex-row justify-between">
         <h1 className="text-3xl text-[#3f3f3f] mb-4">Admin Dashboard</h1>
         <div className="w-1/3 md:w-1/6 lg:w-1/12">
-          <button
-            onClick={handleLogout}
-            className="comic-button comic-button-admin mb-4"
-          >
+          <button onClick={handleLogout} className="comic-button comic-button-admin mb-4">
             Logout
           </button>
         </div>
       </div>
 
-      {/* CHANGED: Styled alert display */}
       {alertMessage && (
         <div
           className={`fixed top-4 right-4 z-50 px-4 py-2 rounded shadow-md transition-all duration-300 ${
@@ -673,7 +657,6 @@ const AdminPage: React.FC = () => {
         </div>
       )}
 
-      {/* Tab Buttons */}
       <div className="flex flex-row gap-4 mb-4">
         <button
           onClick={() => setActiveTab("reviews")}
@@ -695,9 +678,18 @@ const AdminPage: React.FC = () => {
         >
           Blog Management
         </button>
+        <button
+          onClick={() => setActiveTab("pdfs")}
+          className={`px-4 py-2 rounded transition ${
+            activeTab === "pdfs"
+              ? "bg-[#6f7ec0] text-white"
+              : "bg-[#dde2fa] hover:bg-[#bdc8f7] text-[#354057]"
+          }`}
+        >
+          PDF Management
+        </button>
       </div>
 
-      {/* REVIEW TAB */}
       {activeTab === "reviews" && (
         <>
           <div className="bg-[#6f7ec0] text-white p-8 rounded mb-10 mt-4">
@@ -724,16 +716,12 @@ const AdminPage: React.FC = () => {
         </>
       )}
 
-      {/* BLOG TAB */}
       {activeTab === "blogs" && (
         <div className="bg-[#6f7ec0] p-8 rounded">
           <h2 className="text-2xl mb-6 text-white">Manage Blog Posts</h2>
 
-          {/* CREATE A NEW POST */}
           <div className="bg-white p-4 rounded shadow-md mb-6">
-            <h3 className="text-[#354057] mb-2 text-lg font-medium">
-              Create a Blog
-            </h3>
+            <h3 className="text-[#354057] mb-2 text-lg font-medium">Create a Blog</h3>
             <div className="flex flex-col sm:flex-row gap-2 mb-2">
               <input
                 type="text"
@@ -776,12 +764,9 @@ const AdminPage: React.FC = () => {
             </button>
           </div>
 
-          {/* EDITING AN EXISTING POST */}
           {editingPostId && (
             <div ref={editRef} className="bg-white p-4 rounded shadow-md mb-6">
-              <h3 className="text-[#354057] mb-2 text-lg font-medium">
-                Edit Blog Post
-              </h3>
+              <h3 className="text-[#354057] mb-2 text-lg font-medium">Edit Blog Post</h3>
               <div className="flex flex-col sm:flex-row gap-2 mb-2">
                 <input
                   type="text"
@@ -832,15 +817,58 @@ const AdminPage: React.FC = () => {
             </div>
           )}
 
-          {/* LIST OF EXISTING POSTS */}
           <div>
             <h3 className="mb-2 text-white text-2xl">Existing Posts</h3>
             {blogPosts.length > 0 ? (
-              blogPosts.map((post) => (
-                <BlogPostItem key={post.id} post={post} />
-              ))
+              blogPosts.map((post) => <BlogPostItem key={post.id} post={post} />)
             ) : (
               <p className="text-white">No blog posts yet. Add one above!</p>
+            )}
+          </div>
+        </div>
+      )}
+
+      {activeTab === "pdfs" && (
+        <div className="bg-[#6f7ec0] p-8 rounded">
+          <h2 className="text-2xl mb-6 text-white">PDF Management</h2>
+
+          <div className="bg-white p-4 rounded shadow-md mb-6">
+            <h3 className="text-[#354057] mb-2 text-lg font-medium">Upload a PDF</h3>
+            <input
+              type="file"
+              accept="application/pdf"
+              onChange={(e) => {
+                if (e.target.files && e.target.files[0]) {
+                  setPdfFile(e.target.files[0]);
+                }
+              }}
+            />
+            <button
+              onClick={handlePdfUpload}
+              className="ml-3 bg-[#617beb] hover:bg-[#4760d2] transition text-white px-4 py-2 rounded"
+            >
+              Upload
+            </button>
+          </div>
+
+          <div className="bg-white p-4 rounded shadow-md">
+            <h3 className="text-[#354057] mb-2 text-lg font-medium">Existing PDFs</h3>
+            {uploadedPdfs.length > 0 ? (
+              <ul>
+                {uploadedPdfs.map((filename) => (
+                  <li key={filename} className="flex justify-between items-center mb-2">
+                    <span className="text-[#354057]">{filename}</span>
+                    <button
+                      onClick={() => handleDeletePdf(filename)}
+                      className="bg-[#ec8e47] hover:bg-[#f04040] text-white px-3 py-1 rounded"
+                    >
+                      Delete
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-gray-600">No PDFs found.</p>
             )}
           </div>
         </div>
@@ -852,6 +880,7 @@ const AdminPage: React.FC = () => {
 };
 
 export default AdminPage;
+
 
 
 /*   import React, { useState, useEffect } from "react";
