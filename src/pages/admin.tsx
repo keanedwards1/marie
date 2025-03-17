@@ -108,14 +108,9 @@ const AdminPage: React.FC = () => {
     "info"
   );
 
-  // CHANGED: Override default `window.alert` with a styled approach
+  // CHANGED: Removed the part that looks for admin token in localStorage
   useEffect(() => {
-    // Try to load a stored admin token from localStorage
-    const storedToken = localStorage.getItem("adminToken");
-    if (storedToken) {
-      setToken(storedToken);
-      fetchAllReviews(storedToken);
-    }
+    // CHANGED: Removed localStorage fetching logic
     // We fetch blog posts even if we’re not logged in
     fetchBlogPosts();
 
@@ -174,7 +169,7 @@ const AdminPage: React.FC = () => {
       }
       const data = await response.json();
       setToken(data.token);
-      localStorage.setItem("adminToken", data.token);
+      // CHANGED: Removed localStorage.setItem("adminToken", data.token);
       fetchAllReviews(data.token);
     } catch (err: unknown) {
       console.error("Login error:", err);
@@ -186,7 +181,7 @@ const AdminPage: React.FC = () => {
 
   const handleLogout = () => {
     setToken("");
-    localStorage.removeItem("adminToken");
+    // CHANGED: Removed localStorage.removeItem("adminToken");
     router.push("/");
   };
 
@@ -857,6 +852,7 @@ const AdminPage: React.FC = () => {
 };
 
 export default AdminPage;
+
 
 /*   import React, { useState, useEffect } from "react";
   import { useRouter } from "next/router";
