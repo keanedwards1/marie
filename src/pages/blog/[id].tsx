@@ -257,7 +257,7 @@ export default function SinglePost() {
                   <span className="font-bold">{comment.author}:</span> {comment.text}
                 </p>
                 {/* Comment Like Button */}
-                <div className={`flex items-center rounded py-1 px-2 transition bg-gray-100 text-gray-800 ${
+                <div className={`flex items-center rounded py-1 px-2 transition text-gray-800 ${
                   commentLiked[comment.id] ? "bg-[#1b1b1bc5] text-white" : "bg-gray-100"}`}>
                   <span className="text-sm mr-2">{comment.likes}</span>
                   <button

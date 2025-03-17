@@ -1,6 +1,6 @@
 // src/pages/admin.tsx
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 
 // CHANGED: Import React Quill for WYSIWYG
@@ -71,6 +71,14 @@ const AdminPage: React.FC = () => {
   const [editDate, setEditDate] = useState("");
   const [editContent, setEditContent] = useState<string>("");
 
+  const editRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (editingPostId && editRef.current) {
+      editRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }, [editingPostId]);
+
   // React Quill config (optional)
   const quillModules = {
     toolbar: [
@@ -94,7 +102,13 @@ const AdminPage: React.FC = () => {
     "image",
   ];
 
-  // CHANGED: useEffect: check for stored token & fetch blog posts if token
+  // CHANGED: For styled alerts
+  const [alertMessage, setAlertMessage] = useState<string | null>(null);
+  const [alertType, setAlertType] = useState<"success" | "error" | "info">(
+    "info"
+  );
+
+  // CHANGED: Override default `window.alert` with a styled approach
   useEffect(() => {
     // Try to load a stored admin token from localStorage
     const storedToken = localStorage.getItem("adminToken");
@@ -102,20 +116,39 @@ const AdminPage: React.FC = () => {
       setToken(storedToken);
       fetchAllReviews(storedToken);
     }
-    // CHANGED: We fetch blog posts even if we’re not logged in (though admin actions will require token)
+    // We fetch blog posts even if we’re not logged in
     fetchBlogPosts();
+
+    // Override the browser's alert with a styled version
+    (window as any).alert = (msg: string) => {
+      // Attempt simple logic for type
+      const lower = msg.toLowerCase();
+      if (lower.includes("error")) {
+        setAlertType("error");
+      } else if (lower.includes("created") || lower.includes("updated")) {
+        setAlertType("success");
+      } else {
+        setAlertType("info");
+      }
+      setAlertMessage(msg);
+
+      // Auto-dismiss after 3 seconds
+      setTimeout(() => {
+        setAlertMessage(null);
+      }, 3000);
+    };
   }, []);
 
   // CHANGED: fetch blog posts (public GET)
   async function fetchBlogPosts() {
     try {
-      const response = await fetch("https://159.89.233.75.nip.io/api/blog/posts");
+      const response = await fetch(
+        "https://159.89.233.75.nip.io/api/blog/posts"
+      );
       if (!response.ok) {
         throw new Error("Failed to fetch blog posts");
       }
       const data: BlogPost[] = await response.json();
-      // we can also fetch comments for each post if we want them included in the list
-      // but let's do that if needed. For now, just store posts.
       setBlogPosts(data);
     } catch (err) {
       console.error("Error fetching blog posts:", err);
@@ -123,18 +156,18 @@ const AdminPage: React.FC = () => {
     }
   }
 
-  // CHANGED: fetch post's comments if we want them
-  // We can do it individually in the BlogPostItem if you want to see comments.
-
   // Login & Logout
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await fetch("https://159.89.233.75.nip.io/api/admin/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
-      });
+      const response = await fetch(
+        "https://159.89.233.75.nip.io/api/admin/login",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username, password }),
+        }
+      );
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.error || "Login failed");
@@ -160,9 +193,12 @@ const AdminPage: React.FC = () => {
   // Reviews Logic
   const fetchAllReviews = async (authToken: string) => {
     try {
-      const response = await fetch("https://159.89.233.75.nip.io/api/admin/all-reviews", {
-        headers: { Authorization: `Bearer ${authToken}` },
-      });
+      const response = await fetch(
+        "https://159.89.233.75.nip.io/api/admin/all-reviews",
+        {
+          headers: { Authorization: `Bearer ${authToken}` },
+        }
+      );
       if (!response.ok) throw new Error("Failed to fetch reviews");
       const allReviews = await response.json();
       setReviews(allReviews);
@@ -177,14 +213,17 @@ const AdminPage: React.FC = () => {
   ) => {
     setLoading((prev) => ({ ...prev, [reviewId]: true }));
     try {
-      const response = await fetch("https://159.89.233.75.nip.io/api/admin/review-action", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ reviewId, action }),
-      });
+      const response = await fetch(
+        "https://159.89.233.75.nip.io/api/admin/review-action",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ reviewId, action }),
+        }
+      );
       if (!response.ok) throw new Error(`Failed to ${action} review`);
       // Update the review status locally
       setReviews((prevReviews) =>
@@ -201,7 +240,9 @@ const AdminPage: React.FC = () => {
   };
 
   // Separate components for each review status
-  const pendingReviews = reviews.filter((review) => review.status === "pending");
+  const pendingReviews = reviews.filter(
+    (review) => review.status === "pending"
+  );
   const approvedReviews = reviews.filter(
     (review) => review.status === "approved" || review.status === "approve"
   );
@@ -245,7 +286,10 @@ const AdminPage: React.FC = () => {
               <div key={action} className="ml-2">
                 <button
                   onClick={() =>
-                    handleReviewAction(review.id, action as "approve" | "reject" | "pending")
+                    handleReviewAction(
+                      review.id,
+                      action as "approve" | "reject" | "pending"
+                    )
                   }
                   disabled={loading[review.id]}
                   className={`
@@ -276,24 +320,31 @@ const AdminPage: React.FC = () => {
 
   // Add a brand new blog post
   const handleAddBlogPost = async () => {
-    if (!newBlogTitle.trim() || !newBlogAuthor.trim() || !newBlogContent.trim()) {
+    if (
+      !newBlogTitle.trim() ||
+      !newBlogAuthor.trim() ||
+      !newBlogContent.trim()
+    ) {
       alert("Please fill out Title, Author, and Content.");
       return;
     }
     try {
-      const response = await fetch("https://159.89.233.75.nip.io/api/blog/posts", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          title: newBlogTitle.trim(),
-          author: newBlogAuthor.trim(),
-          date: newBlogDate.trim(),
-          content: newBlogContent,
-        }),
-      });
+      const response = await fetch(
+        "https://159.89.233.75.nip.io/api/blog/posts",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            title: newBlogTitle.trim(),
+            author: newBlogAuthor.trim(),
+            date: newBlogDate.trim(),
+            content: newBlogContent,
+          }),
+        }
+      );
       if (!response.ok) {
         throw new Error("Failed to create blog post");
       }
@@ -315,18 +366,21 @@ const AdminPage: React.FC = () => {
 
   // Remove a blog post
   const handleRemoveBlogPost = async (postId: number) => {
-    if (!window.confirm("Are you sure you want to remove this blog post?")) return;
+    if (!window.confirm("Are you sure you want to remove this blog post?"))
+      return;
     try {
-      const response = await fetch(`https://159.89.233.75.nip.io/api/blog/posts/${postId}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await fetch(
+        `https://159.89.233.75.nip.io/api/blog/posts/${postId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       if (!response.ok) {
         throw new Error("Failed to delete blog post");
       }
-      // refresh
       fetchBlogPosts();
     } catch (err) {
       console.error("Error deleting blog post:", err);
@@ -352,7 +406,6 @@ const AdminPage: React.FC = () => {
       if (!response.ok) {
         throw new Error("Failed to add comment");
       }
-      // Optionally, re-fetch that post’s data or do an inline update
       fetchBlogPosts();
     } catch (err) {
       console.error("Error adding comment:", err);
@@ -420,9 +473,7 @@ const AdminPage: React.FC = () => {
       if (!response.ok) {
         throw new Error("Failed to update blog post");
       }
-      // refresh
       fetchBlogPosts();
-      // Reset editing
       setEditingPostId(null);
       setEditTitle("");
       setEditAuthor("");
@@ -446,10 +497,6 @@ const AdminPage: React.FC = () => {
   // CHANGED: For displaying each post in "Blog Management"
   const BlogPostItem: React.FC<{ post: BlogPost }> = ({ post }) => {
     const [commentText, setCommentText] = useState("");
-
-    // CHANGED: we may want to fetch comments for this post if not loaded:
-    // But if you're returning them all in one go, it’s already in post.comments
-    // For demonstration, let's fetch comments via the single post route if needed
     const [showComments, setShowComments] = useState(false);
     const [comments, setComments] = useState<BlogComment[] | null>(
       post.comments || null
@@ -457,7 +504,9 @@ const AdminPage: React.FC = () => {
 
     async function fetchCommentsForPost() {
       try {
-        const res = await fetch(`https://159.89.233.75.nip.io/api/blog/posts/${post.id}`);
+        const res = await fetch(
+          `https://159.89.233.75.nip.io/api/blog/posts/${post.id}`
+        );
         if (!res.ok) {
           throw new Error("Failed to fetch post comments");
         }
@@ -471,7 +520,6 @@ const AdminPage: React.FC = () => {
 
     const handleToggleComments = () => {
       if (!showComments && !comments) {
-        // fetch them
         fetchCommentsForPost();
       }
       setShowComments(!showComments);
@@ -516,7 +564,6 @@ const AdminPage: React.FC = () => {
           {showComments ? "Hide Comments" : "Show Comments"}
         </button>
 
-        {/* Comments section (if showComments is true) */}
         {showComments && comments && (
           <div className="mt-4 bg-gray-100 p-3 rounded">
             <h4 className="font-bold text-[#354057] mb-2">Comments:</h4>
@@ -552,8 +599,6 @@ const AdminPage: React.FC = () => {
                 onClick={() => {
                   handleAddBlogComment(post.id, commentText);
                   setCommentText("");
-                  // Optionally re-fetch comments afterward or do inline
-                  // For simplicity: do an inline approach or fetch again
                   setTimeout(() => fetchCommentsForPost(), 500);
                 }}
                 className="bg-[#617beb] hover:bg-[#4760d2] transition text-white px-3 py-1 rounded"
@@ -571,7 +616,10 @@ const AdminPage: React.FC = () => {
   if (!token) {
     return (
       <div className="min-h-screen bg-purple-50 flex items-center justify-center">
-        <form onSubmit={handleLogin} className="bg-white p-8 m-6 rounded shadow-md">
+        <form
+          onSubmit={handleLogin}
+          className="bg-white p-8 m-6 rounded shadow-md"
+        >
           <h2 className="text-2xl mb-4 text-[#6f7ec0]">Admin Login</h2>
           <input
             type="text"
@@ -587,10 +635,15 @@ const AdminPage: React.FC = () => {
             onChange={(e) => setPassword(e.target.value)}
             className="w-full p-2 mb-4 border rounded text-gray-700 focus:border-gray-900 focus:border-1 focus:ring-gray-800 focus:outline-none transition-colors"
           />
-          <button type="submit" className="w-full comic-button comic-button-admin p-2 rounded">
+          <button
+            type="submit"
+            className="w-full comic-button comic-button-admin p-2 rounded"
+          >
             Login
           </button>
-          {error && <p className="text-[#f75050] font-serif mt-4 -mb-3">*{error}</p>}
+          {error && (
+            <p className="text-[#f75050] font-serif mt-4 -mb-3">*{error}</p>
+          )}
         </form>
       </div>
     );
@@ -609,6 +662,21 @@ const AdminPage: React.FC = () => {
           </button>
         </div>
       </div>
+
+      {/* CHANGED: Styled alert display */}
+      {alertMessage && (
+        <div
+          className={`fixed top-4 right-4 z-50 px-4 py-2 rounded shadow-md transition-all duration-300 ${
+            alertType === "error"
+              ? "bg-[#f06b6b] text-white"
+              : alertType === "success"
+              ? "bg-[#6f7ec0e0] text-white"
+              : "bg-blue-100 text-[#354057]"
+          }`}
+        >
+          {alertMessage}
+        </div>
+      )}
 
       {/* Tab Buttons */}
       <div className="flex flex-row gap-4 mb-4">
@@ -668,7 +736,9 @@ const AdminPage: React.FC = () => {
 
           {/* CREATE A NEW POST */}
           <div className="bg-white p-4 rounded shadow-md mb-6">
-            <h3 className="text-[#354057] mb-2 text-lg font-medium">Create a Blog</h3>
+            <h3 className="text-[#354057] mb-2 text-lg font-medium">
+              Create a Blog
+            </h3>
             <div className="flex flex-col sm:flex-row gap-2 mb-2">
               <input
                 type="text"
@@ -693,7 +763,6 @@ const AdminPage: React.FC = () => {
               />
             </div>
 
-            {/* Rich Text Editor (React Quill) for new post */}
             <ReactQuill
               theme="snow"
               value={newBlogContent}
@@ -714,8 +783,10 @@ const AdminPage: React.FC = () => {
 
           {/* EDITING AN EXISTING POST */}
           {editingPostId && (
-            <div className="bg-white p-4 rounded shadow-md mb-6">
-              <h3 className="text-[#354057] mb-2 text-lg font-medium">Edit Blog Post</h3>
+            <div ref={editRef} className="bg-white p-4 rounded shadow-md mb-6">
+              <h3 className="text-[#354057] mb-2 text-lg font-medium">
+                Edit Blog Post
+              </h3>
               <div className="flex flex-col sm:flex-row gap-2 mb-2">
                 <input
                   type="text"
@@ -740,7 +811,6 @@ const AdminPage: React.FC = () => {
                 />
               </div>
 
-              {/* Rich Text Editor for editing post */}
               <ReactQuill
                 theme="snow"
                 value={editContent}
@@ -753,13 +823,13 @@ const AdminPage: React.FC = () => {
               <div className="flex gap-3">
                 <button
                   onClick={handleSaveEdit}
-                  className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded"
+                  className="bg-[#55c859d9] hover:bg-[#47d29a] transition text-white px-4 py-2 rounded"
                 >
                   Save Changes
                 </button>
                 <button
                   onClick={handleCancelEdit}
-                  className="bg-gray-300 hover:bg-gray-400 text-gray-700 px-4 py-2 rounded"
+                  className="bg-gray-300 hover:bg-gray-400 transition text-gray-700 px-4 py-2 rounded"
                 >
                   Cancel
                 </button>
@@ -771,7 +841,9 @@ const AdminPage: React.FC = () => {
           <div>
             <h3 className="mb-2 text-white text-2xl">Existing Posts</h3>
             {blogPosts.length > 0 ? (
-              blogPosts.map((post) => <BlogPostItem key={post.id} post={post} />)
+              blogPosts.map((post) => (
+                <BlogPostItem key={post.id} post={post} />
+              ))
             ) : (
               <p className="text-white">No blog posts yet. Add one above!</p>
             )}
@@ -785,10 +857,6 @@ const AdminPage: React.FC = () => {
 };
 
 export default AdminPage;
-
-
-
-
 
 /*   import React, { useState, useEffect } from "react";
   import { useRouter } from "next/router";
