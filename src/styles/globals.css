@@ -721,39 +721,39 @@ body {
 }
 
 .review-card1 {
-  background-color: #f7e8ff; /* Light violet background */
+  background-color: #e8ecff; /* Light violet background */
 }
 
 .review-card1:hover {
-  background-color: #e7c9fe; /* Light violet background */
+  background-color: #c9d6fe; /* Light violet background */
 }
 
 .review-card2 {
-  background-color: #a878d8; /* Light violet background */
+  background-color: #7885d8; /* Light violet background */
 }
 
 .review-card2:hover {
-  background-color: #985ccc; /* Light violet background */
+  background-color: #5c6fcc; /* Light violet background */
 }
 
 .review-card3 {
-  background-color: #e6d8f5; /* Light violet background */
+  background-color: #d8daf5; /* Light violet background */
 }
 
 .review-card3:hover {
-  background-color: #d2b6eb; /* Light violet background */
+  background-color: #b6c2eb; /* Light violet background */
 }
 
 .review-card4 {
-  background-color: #f7e5ff; /* Light violet background */
+  background-color: #e5e6ff; /* Light violet background */
 }
 
 .review-card4:hover {
-  background-color: #eac6ff; /* Light violet background */
+  background-color: #ccc6ff; /* Light violet background */
 }
 
 .review-card5 {
-  background-color: #b996da; /* Light violet background */
+  background-color: #9698da; /* Light violet background */
 }
 
 .review-card5:hover {
@@ -910,12 +910,12 @@ body {
     0.5px 0.5px 10px #00000017;
 }
 
-.location-card {
+/* .location-card {
   position: relative;
   overflow: visible;
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   border-radius: 20px;
-}
+} */
 
 .location-card:hover {
 /*   box-shadow: 20px 20px 60px #d4b2db,
@@ -1023,34 +1023,32 @@ body {
 /* Add this to your global CSS file, e.g., styles/globals.css */
 
 /* Container Perspective */
-.location-card {
+/* .location-card {
   perspective: 1000px;
-}
+} */
 
 /* Inner Wrapper for 3D Rotation */
 .card-inner {
   position: relative;
   width: 100%;
   height: 100%;
-  transition: transform 0.8s;
-  transform-style: preserve-3d;
 }
 
 /* Flip the card on hover */
-.location-card:hover .card-inner {
+/* .location-card:hover .card-inner {
   transform: rotateY(180deg);
-}
+} */
 
 /* Front and Back Faces */
-.card-front,
+/* .card-front,
 .card-back {
   position: absolute;
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
-  border-radius: 20px; /* Optional: Add some rounding */
-  overflow: hidden; /* Ensure content doesn't spill out */
-}
+  border-radius: 20px;
+  overflow: hidden; 
+} */
 
 /* Front Face */
 .card-front {
@@ -1058,7 +1056,7 @@ body {
 }
 
 /* Back Face */
-.card-back {
+/* .card-back {
   background: linear-gradient(135deg, #7c91eedf 0%, #8959b9a5 100%);
   color: rgb(236, 234, 234);
   transform: rotateY(180deg);
@@ -1069,12 +1067,12 @@ body {
   padding: 16px;
   border-radius: 20px;
   text-shadow: -0.5px -0.5px 0 rgb(139, 120, 161), 0.5px -0.5px 0 rgb(139, 120, 161), -0.5px 0.5px 0 rgb(139, 120, 161), 0.5px 0.5px 0 rgb(0, 0, 0);
-}
+} */
 
 /* Optional: Add shadow and other styles */
 .location-card {
   width: 100%;
-  height: 500px; /* Adjust height as needed */
+  height: 500px;
   cursor: pointer;
 }
 
@@ -1097,12 +1095,12 @@ body {
 }
 
 .card-inner {
-  box-shadow: 1px 0px 60px #8959b9a3,  /* Increased blur radius */
+  box-shadow: 1px 0px 60px #6459b9a3,  /* Increased blur radius */
   -1px -5px 20px #ffffffb2;  /* Increased blur radius */
   border-radius: 20px;
 }
 
-.back-title {
+/* .back-title {
   font-size: 1.5rem;
   text-align: center;
   margin-bottom: 10px;
@@ -1111,17 +1109,67 @@ body {
   letter-spacing: 1px;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
   transition: color 0.3s ease;
+} */
+
+.location-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
 }
 
-.location-description {
-  font-size: 1.3rem;
+/* Card front remains visible, with an added overlay element */
+.location-card .card-front {
+  position: relative;
+}
+
+/* Ensure the image covers the container */
+.location-card .location-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* The overlay is transparent by default */
+.location-card .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0);
+  transition: background-color 0.3s ease;
+  z-index: 1;
+  border-radius: 10px;
+}
+
+/* Hide the extra text until hover */
+.location-card .card-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: white;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
+  padding: 1rem;
 }
 
-.subscribe-button {
-  background-color: #4458adc5;
+/* On hover, darken the overlay and show the text */
+.location-card:hover .overlay {
+  background-color: rgba(41, 41, 41, 0.27); /* Adjust darkness as needed */
 }
 
-.subscribe-button:hover {
-  background-color: #566dd3c5;
+.location-card:hover .card-back {
+  opacity: 1;
 }
+
+

@@ -235,8 +235,8 @@ export default function CharactersPage() {
       <div className="mt-16 mb-16 flex flex-col lg:flex-row w-full gap-4 items-center justify-center">
         <div className="lg:w-3/12 md:w-5/12 w-9/12 z-10">
           <ComicButton
-            label="← See Landscapes ⛰️"
-            onClick={() => router.push("/landscape")}
+            label="← Read Blog 📖"
+            onClick={() => router.push("/blog")}
           />
         </div>
         <div className="lg:w-3/12 md:w-5/12 w-9/12 z-10">

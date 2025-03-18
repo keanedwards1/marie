@@ -51,8 +51,8 @@ const Home: React.FC = () => {
             className="home-comic-button bottom-amazon"
           />
             <ComicButton
-            label="⛰️ See Landscapes →"
-            onClick={() => router.push("/landscape")}
+            label="📚 Read Blog →"
+            onClick={() => router.push("/blog")}
             className="home-comic-button"
           />
         </div>

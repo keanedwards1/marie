@@ -4,6 +4,9 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Nav from "../../components/Nav";
 import Footer from "../../components/RespFooter";
+import ComicButton from "@/components/ComicButton";
+import { useRouter } from "next/router";
+import SubscribeForm from "@/components/SubscribeForm";
 
 interface BlogPost {
   id: number;
@@ -18,25 +21,27 @@ interface BlogPost {
 
 // Helper function to strip HTML tags for the excerpt
 function stripHtml(html: string): string {
-  return html
-    // Give headings some space
-    .replace(/<h[1-3][^>]*>/gi, "\n\n")
-    .replace(/<\/h[1-3]>/gi, "\n\n")
-    // Paragraphs
-    .replace(/<p[^>]*>/gi, "\n")
-    .replace(/<\/p>/gi, "\n\n")
-    // Line breaks
-    .replace(/<br\s*\/?>/gi, "\n")
-    // Lists
-    .replace(/<li[^>]*>/gi, "• ")
-    .replace(/<\/li>/gi, "\n")
-    .replace(/<\/?ul[^>]*>/gi, "\n\n")
-    .replace(/<\/?ol[^>]*>/gi, "\n\n")
-    // Remove all other tags
-    .replace(/<[^>]+>/g, "")
-    // Clean up multiple blank lines
-    .replace(/\n{2,}/g, "\n\n")
-    .trim();
+  return (
+    html
+      // Give headings some space
+      .replace(/<h[1-3][^>]*>/gi, "\n\n")
+      .replace(/<\/h[1-3]>/gi, "\n\n")
+      // Paragraphs
+      .replace(/<p[^>]*>/gi, "\n")
+      .replace(/<\/p>/gi, "\n\n")
+      // Line breaks
+      .replace(/<br\s*\/?>/gi, "\n")
+      // Lists
+      .replace(/<li[^>]*>/gi, "• ")
+      .replace(/<\/li>/gi, "\n")
+      .replace(/<\/?ul[^>]*>/gi, "\n\n")
+      .replace(/<\/?ol[^>]*>/gi, "\n\n")
+      // Remove all other tags
+      .replace(/<[^>]+>/g, "")
+      // Clean up multiple blank lines
+      .replace(/\n{2,}/g, "\n\n")
+      .trim()
+  );
 }
 
 // CHANGED: Function to decode HTML entities (e.g., &nbsp;, &amp;)
@@ -50,6 +55,7 @@ function decodeHtmlEntities(str: string): string {
 }
 
 export default function BlogIndex() {
+  const router = useRouter();
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
@@ -57,7 +63,9 @@ export default function BlogIndex() {
   useEffect(() => {
     async function fetchPosts() {
       try {
-        const response = await fetch("https://159.89.233.75.nip.io/api/blog/posts");
+        const response = await fetch(
+          "https://159.89.233.75.nip.io/api/blog/posts"
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch blog posts");
         }
@@ -113,17 +121,31 @@ export default function BlogIndex() {
             );
           })}
       </div>
-      <Footer />
+      <div className="mt-36 -mb-20 flex flex-col lg:flex-row w-full z-10 gap-4 items-center justify-center">
+        <div className="lg:w-3/12 md:w-5/12 w-9/12 z-10">
+          <ComicButton
+            label="← Back to Home 🏡"
+            onClick={() => router.push("/")}
+          />
+        </div>
+        <div className="lg:w-3/12 md:w-5/12 w-9/12 z-10">
+          <ComicButton
+            label="🧚‍♂️ View Luminoles → "
+            onClick={() => router.push("/luminoles")}
+          />
+        </div>
+      </div>
+
+      <div className="">
+        <SubscribeForm />
+      </div>
+
+      <div className="bg-grey">
+        <Footer />
+      </div>
     </div>
   );
 }
-
-
-
-
-
-
-
 
 /* WITH API */
 /* // CHANGED: New "Blog Index" page (Substack-like layout with SSR)
