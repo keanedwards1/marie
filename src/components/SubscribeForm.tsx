@@ -76,7 +76,7 @@ const SubscribeForm: React.FC = () => {
           </div>
           <button
             type="submit"
-            className="subscribe-button text-white py-2 px-4 rounded-lg transition duration-300 text-sm sm:text-base w-full"
+            className="subscribe-button bg-[#4458adc5] hover:bg-[#5063b7c5] text-white py-2 px-4 rounded-lg transition duration-300 text-sm sm:text-base w-full"
             disabled={isLoading}
           >
             {isLoading ? "Subscribing..." : "Subscribe"}

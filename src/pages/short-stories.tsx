@@ -49,7 +49,7 @@ export default function ShortStoriesPage() {
         <div className="flex justify-center mt-2 mb-8">
           <button
             onClick={scrollToSubscribeForm}
-            className="subscribe-button text-white py-1 px-5 rounded-lg transition duration-300 text-sm sm:text-base"
+            className="subscribe-button bg-[#4458adc5] hover:bg-[#5063b7c5] text-white py-1 px-5 rounded-lg transition duration-300 text-sm sm:text-base"
           >
             Subscribe
           </button>
