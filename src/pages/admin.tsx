@@ -1,3 +1,5 @@
+// src/pages/admin.tsx
+
 import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 
@@ -53,7 +55,7 @@ const AdminPage: React.FC = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState<{ [key: number]: boolean }>({});
 
-  // CHANGED: Tab switching (added "pdfs")
+  // CHANGED: Tab switching (using "pdfs" for combined PDF and Short Story management)
   const [activeTab, setActiveTab] = useState<AdminTab>("reviews");
 
   // CHANGED: Blog data
@@ -105,9 +107,7 @@ const AdminPage: React.FC = () => {
 
   // CHANGED: For styled alerts
   const [alertMessage, setAlertMessage] = useState<string | null>(null);
-  const [alertType, setAlertType] = useState<"success" | "error" | "info">(
-    "info"
-  );
+  const [alertType, setAlertType] = useState<"success" | "error" | "info">("info");
 
   useEffect(() => {
     // Fetch blog posts even if we’re not logged in
@@ -146,7 +146,8 @@ const AdminPage: React.FC = () => {
     }
   }
 
-  // CHANGED: Fetch PDFs from backend for admin PDF management
+  // CHANGED: Fetch PDFs from backend for admin PDF management (kept intact)
+  const [uploadedPdfs, setUploadedPdfs] = useState<string[]>([]);
   async function fetchPdfs(authToken: string) {
     try {
       const res = await fetch("https://159.89.233.75.nip.io/api/admin/list-pdfs", {
@@ -160,7 +161,119 @@ const AdminPage: React.FC = () => {
     }
   }
 
+  // -------------------------------
+  // NEW: Short Story Management States & Functions
+  // -------------------------------
+  const [shortStories, setShortStories] = useState<any[]>([]);
+  const [newShortStoryTitle, setNewShortStoryTitle] = useState("");
+  const [newShortStoryDescription, setNewShortStoryDescription] = useState("");
+  // Instead of a text field, we use a dropdown to select a PDF
+  const [selectedPdf, setSelectedPdf] = useState("");
+  // New states for editing a short story
+  const [editingShortStory, setEditingShortStory] = useState<any | null>(null);
+  const [editShortStoryTitle, setEditShortStoryTitle] = useState("");
+  const [editShortStoryDescription, setEditShortStoryDescription] = useState("");
+  const [editShortStoryPdf, setEditShortStoryPdf] = useState("");
+  const [editShortStoryOrder, setEditShortStoryOrder] = useState<number | null>(null);
+
+  async function fetchShortStories() {
+    try {
+      const res = await fetch("https://159.89.233.75.nip.io/api/short-stories");
+      const data = await res.json();
+      setShortStories(data);
+    } catch (err) {
+      console.error("Error fetching short stories:", err);
+    }
+  }
+
+  async function handleAddShortStory() {
+    if (!selectedPdf) {
+      alert("Please select a PDF for this short story.");
+      return;
+    }
+    try {
+      const res = await fetch("https://159.89.233.75.nip.io/api/short-stories", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          title: newShortStoryTitle,
+          description: newShortStoryDescription,
+          pdfFilename: selectedPdf,
+          fullStory: null  // Not needed since PDF is the full story
+        }),
+      });
+      const data = await res.json();
+      alert("Short story created!");
+      setNewShortStoryTitle("");
+      setNewShortStoryDescription("");
+      setSelectedPdf("");
+      fetchShortStories();
+    } catch (err) {
+      console.error("Error creating short story:", err);
+      alert("Error creating short story.");
+    }
+  }
+
+  async function handleDeleteShortStory(id: number) {
+    try {
+      const res = await fetch(`https://159.89.233.75.nip.io/api/short-stories/${id}`, {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const data = await res.json();
+      alert("Short story deleted!");
+      fetchShortStories();
+    } catch (err) {
+      console.error("Error deleting short story:", err);
+      alert("Error deleting short story.");
+    }
+  }
+
+  function handleBeginEditShortStory(story: any) {
+    setEditingShortStory(story);
+    setEditShortStoryTitle(story.title);
+    setEditShortStoryDescription(story.description);
+    setEditShortStoryPdf(story.pdfFilename || "");
+    setEditShortStoryOrder(story.display_order);
+  }
+
+  async function handleSaveShortStoryEdit() {
+    if (!editingShortStory) return;
+    try {
+      const res = await fetch(`https://159.89.233.75.nip.io/api/short-stories/${editingShortStory.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          title: editShortStoryTitle,
+          description: editShortStoryDescription,
+          pdfFilename: editShortStoryPdf,
+          display_order: editShortStoryOrder,
+          fullStory: null
+        }),
+      });
+      const data = await res.json();
+      alert("Short story updated!");
+      setEditingShortStory(null);
+      fetchShortStories();
+    } catch (err) {
+      console.error("Error updating short story:", err);
+      alert("Error updating short story.");
+    }
+  }
+
+  function handleCancelShortStoryEdit() {
+    setEditingShortStory(null);
+  }
+
+  // -------------------------------
   // Login & Logout
+  // -------------------------------
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
@@ -176,7 +289,8 @@ const AdminPage: React.FC = () => {
       const data = await response.json();
       setToken(data.token);
       fetchAllReviews(data.token);
-      fetchPdfs(data.token); // Fetch PDFs after login
+      fetchPdfs(data.token); // Keep PDF management intact
+      fetchShortStories();    // Also fetch short stories for pairing
     } catch (err: unknown) {
       console.error("Login error:", err);
       if (err instanceof Error) setError(err.message);
@@ -190,7 +304,9 @@ const AdminPage: React.FC = () => {
     router.push("/");
   };
 
+  // -------------------------------
   // Reviews Logic
+  // -------------------------------
   const fetchAllReviews = async (authToken: string) => {
     try {
       const response = await fetch("https://159.89.233.75.nip.io/api/admin/all-reviews", {
@@ -232,7 +348,6 @@ const AdminPage: React.FC = () => {
     }
   };
 
-  // Separate components for each review status
   const pendingReviews = reviews.filter((review) => review.status === "pending");
   const approvedReviews = reviews.filter(
     (review) => review.status === "approved" || review.status === "approve"
@@ -250,10 +365,7 @@ const AdminPage: React.FC = () => {
       <div className="flex flex-row justify-between">
         <h2 className="sm:text-2xl text-xs mb-4 mt-8">{title}</h2>
         <h2 className="sm:text-2xl text-right text-xs ml-10 mb-4 mt-8">
-          Action:{" "}
-          <span className="text-xs sm:text-sm">
-            (will move the review to the respective category you pick)
-          </span>
+          Action: <span className="text-xs sm:text-sm">(will move the review to the respective category you pick)</span>
         </h2>
       </div>
       {reviews.map((review) => (
@@ -281,13 +393,7 @@ const AdminPage: React.FC = () => {
                   }
                   disabled={loading[review.id]}
                   className={`
-                    ${
-                      action === "approve"
-                        ? "bg-cyan-100 hover:bg-cyan-200"
-                        : action === "reject"
-                        ? "bg-orange-100 hover:bg-orange-200"
-                        : "bg-gray-100 hover:bg-gray-200"
-                    }
+                    ${action === "approve" ? "bg-cyan-100 hover:bg-cyan-200" : action === "reject" ? "bg-orange-100 hover:bg-orange-200" : "bg-gray-100 hover:bg-gray-200"}
                     text-gray-600 hover:text-gray-800 transition-all duration-300 hover:scale-105 p-2 rounded
                     ${loading[review.id] ? "opacity-50" : ""}
                   `}
@@ -302,11 +408,11 @@ const AdminPage: React.FC = () => {
     </>
   );
 
-  // CHANGED: PDF Management states
+  // -------------------------------
+  // PDF Management (unchanged)
+  // -------------------------------
   const [pdfFile, setPdfFile] = useState<File | null>(null);
-  const [uploadedPdfs, setUploadedPdfs] = useState<string[]>([]);
 
-  // CHANGED: PDF Upload handler
   async function handlePdfUpload() {
     if (!pdfFile) {
       alert("No file selected!");
@@ -318,9 +424,7 @@ const AdminPage: React.FC = () => {
 
       const res = await fetch("https://159.89.233.75.nip.io/api/admin/upload-pdf", {
         method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { Authorization: `Bearer ${token}` },
         body: formData,
       });
       if (!res.ok) {
@@ -330,6 +434,8 @@ const AdminPage: React.FC = () => {
       const data = await res.json();
       alert(`PDF uploaded: ${data.filename}`);
       setPdfFile(null);
+      // Optionally update the selected PDF for short stories:
+      // setSelectedPdf(data.filename);
       fetchPdfs(token);
     } catch (err) {
       console.error("Error uploading PDF:", err);
@@ -337,7 +443,6 @@ const AdminPage: React.FC = () => {
     }
   }
 
-  // CHANGED: PDF deletion handler (requires a server route for deletion)
   async function handleDeletePdf(filename: string) {
     if (!window.confirm(`Are you sure you want to delete ${filename}?`)) return;
     try {
@@ -357,7 +462,9 @@ const AdminPage: React.FC = () => {
     }
   }
 
-  // Admin Blog Logic remains the same for adding/editing/deleting posts/comments
+  // -------------------------------
+  // Admin Blog Logic (unchanged)
+  // -------------------------------
   const handleAddBlogPost = async () => {
     if (!newBlogTitle.trim() || !newBlogAuthor.trim() || !newBlogContent.trim()) {
       alert("Please fill out Title, Author, and Content.");
@@ -603,7 +710,9 @@ const AdminPage: React.FC = () => {
     );
   };
 
+  // --------------------------
   // Render Page
+  // --------------------------
   if (!token) {
     return (
       <div className="min-h-screen bg-purple-50 flex items-center justify-center">
@@ -657,6 +766,7 @@ const AdminPage: React.FC = () => {
         </div>
       )}
 
+      {/* Tab Buttons */}
       <div className="flex flex-row gap-4 mb-4">
         <button
           onClick={() => setActiveTab("reviews")}
@@ -690,6 +800,7 @@ const AdminPage: React.FC = () => {
         </button>
       </div>
 
+      {/* Reviews Tab */}
       {activeTab === "reviews" && (
         <>
           <div className="bg-[#6f7ec0] text-white p-8 rounded mb-10 mt-4">
@@ -716,10 +827,10 @@ const AdminPage: React.FC = () => {
         </>
       )}
 
+      {/* Blogs Tab */}
       {activeTab === "blogs" && (
         <div className="bg-[#6f7ec0] p-8 rounded">
           <h2 className="text-2xl mb-6 text-white">Manage Blog Posts</h2>
-
           <div className="bg-white p-4 rounded shadow-md mb-6">
             <h3 className="text-[#354057] mb-2 text-lg font-medium">Create a Blog</h3>
             <div className="flex flex-col sm:flex-row gap-2 mb-2">
@@ -745,7 +856,6 @@ const AdminPage: React.FC = () => {
                 className="border border-gray-300 text-[#354057] rounded p-2 flex-1"
               />
             </div>
-
             <ReactQuill
               theme="snow"
               value={newBlogContent}
@@ -755,7 +865,6 @@ const AdminPage: React.FC = () => {
               formats={quillFormats}
               placeholder="Write your blog content here..."
             />
-
             <button
               onClick={handleAddBlogPost}
               className="bg-[#617beb] hover:bg-[#4760d2] transition text-white px-4 py-2 rounded"
@@ -763,7 +872,6 @@ const AdminPage: React.FC = () => {
               Add Blog Post
             </button>
           </div>
-
           {editingPostId && (
             <div ref={editRef} className="bg-white p-4 rounded shadow-md mb-6">
               <h3 className="text-[#354057] mb-2 text-lg font-medium">Edit Blog Post</h3>
@@ -790,7 +898,6 @@ const AdminPage: React.FC = () => {
                   className="border border-gray-300 text-[#354057] rounded p-2 flex-1"
                 />
               </div>
-
               <ReactQuill
                 theme="snow"
                 value={editContent}
@@ -799,7 +906,6 @@ const AdminPage: React.FC = () => {
                 modules={quillModules}
                 formats={quillFormats}
               />
-
               <div className="flex gap-3">
                 <button
                   onClick={handleSaveEdit}
@@ -816,7 +922,6 @@ const AdminPage: React.FC = () => {
               </div>
             </div>
           )}
-
           <div>
             <h3 className="mb-2 text-white text-2xl">Existing Posts</h3>
             {blogPosts.length > 0 ? (
@@ -828,10 +933,13 @@ const AdminPage: React.FC = () => {
         </div>
       )}
 
+      {/* ---------------------------- */}
+      {/* NEW: "pdfs" Tab – PDF & Short Story Management */}
+      {/* ---------------------------- */}
       {activeTab === "pdfs" && (
         <div className="bg-[#6f7ec0] p-8 rounded">
+          {/* Existing PDF Management Section */}
           <h2 className="text-2xl mb-6 text-white">PDF Management</h2>
-
           <div className="bg-white p-4 rounded shadow-md mb-6">
             <h3 className="text-[#354057] mb-2 text-lg font-medium">Upload a PDF</h3>
             <input
@@ -850,8 +958,7 @@ const AdminPage: React.FC = () => {
               Upload
             </button>
           </div>
-
-          <div className="bg-white p-4 rounded shadow-md">
+          <div className="bg-white p-4 rounded shadow-md mb-6">
             <h3 className="text-[#354057] mb-2 text-lg font-medium">Existing PDFs</h3>
             {uploadedPdfs.length > 0 ? (
               <ul>
@@ -871,6 +978,142 @@ const AdminPage: React.FC = () => {
               <p className="text-gray-600">No PDFs found.</p>
             )}
           </div>
+
+          {/* NEW: Short Story Management Section */}
+          <h2 className="text-2xl mb-6 text-white">Short Story Management</h2>
+          {/* If a short story is being edited, show the edit form */}
+          {editingShortStory ? (
+            <div className="bg-white p-4 rounded shadow-md mb-6">
+              <h3 className="text-[#354057] mb-2 text-lg font-medium">Edit Short Story</h3>
+              <input
+                type="text"
+                placeholder="Title"
+                value={editShortStoryTitle}
+                onChange={(e) => setEditShortStoryTitle(e.target.value)}
+                className="border border-gray-300 text-[#354057] rounded p-2 mb-2 w-full"
+              />
+              <input
+                type="text"
+                placeholder="Description"
+                value={editShortStoryDescription}
+                onChange={(e) => setEditShortStoryDescription(e.target.value)}
+                className="border border-gray-300 text-[#354057] rounded p-2 mb-2 w-full"
+              />
+              {/* Dropdown to select a PDF */}
+              <select
+                value={editShortStoryPdf}
+                onChange={(e) => setEditShortStoryPdf(e.target.value)}
+                className="border border-gray-300 text-[#354057] rounded p-2 mb-2 w-full"
+              >
+                <option value="">Select a PDF</option>
+                {uploadedPdfs.map((filename) => (
+                  <option key={filename} value={filename}>
+                    {filename}
+                  </option>
+                ))}
+              </select>
+              {/* Input for display order */}
+              <input
+                type="number"
+                placeholder="Order"
+                value={editShortStoryOrder !== null ? editShortStoryOrder : ""}
+                onChange={(e) => setEditShortStoryOrder(parseInt(e.target.value))}
+                className="border border-gray-300 text-[#354057] rounded p-2 mb-2 w-full"
+              />
+              <div className="flex gap-3">
+                <button
+                  onClick={handleSaveShortStoryEdit}
+                  className="bg-[#55c859d9] hover:bg-[#47d29a] transition text-white px-4 py-2 rounded"
+                >
+                  Save Changes
+                </button>
+                <button
+                  onClick={handleCancelShortStoryEdit}
+                  className="bg-gray-300 hover:bg-gray-400 transition text-gray-700 px-4 py-2 rounded"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          ) : (
+            // Otherwise, show the form to create a new short story
+            <div className="bg-white p-4 rounded shadow-md mb-6">
+              <h3 className="text-[#354057] mb-2 text-lg font-medium">Create a New Short Story</h3>
+              <div className="flex flex-col sm:flex-row gap-2 mb-2">
+                <input
+                  type="text"
+                  placeholder="Title"
+                  value={newShortStoryTitle}
+                  onChange={(e) => setNewShortStoryTitle(e.target.value)}
+                  className="border border-gray-300 text-[#354057] rounded p-2 flex-1"
+                />
+                <input
+                  type="text"
+                  placeholder="Description"
+                  value={newShortStoryDescription}
+                  onChange={(e) => setNewShortStoryDescription(e.target.value)}
+                  className="border border-gray-300 text-[#354057] rounded p-2 flex-1"
+                />
+              </div>
+              {/* Dropdown to select a PDF */}
+              <select
+                value={selectedPdf}
+                onChange={(e) => setSelectedPdf(e.target.value)}
+                className="border border-gray-300 text-[#354057] rounded p-2 mb-2 w-full"
+              >
+                <option value="">Select a PDF</option>
+                {uploadedPdfs.map((filename) => (
+                  <option key={filename} value={filename}>
+                    {filename}
+                  </option>
+                ))}
+              </select>
+              <button
+                onClick={handleAddShortStory}
+                className="bg-[#617beb] hover:bg-[#4760d2] transition text-white px-4 py-2 rounded"
+              >
+                Add Short Story
+              </button>
+            </div>
+          )}
+
+          <div className="bg-white p-4 rounded shadow-md">
+            <h3 className="text-[#354057] mb-2 text-lg font-medium">Existing Short Stories</h3>
+            {shortStories.length > 0 ? (
+              <ul>
+                {shortStories.map((story) => (
+                  <li
+                    key={story.id}
+                    className="flex justify-between items-center border-b py-2"
+                  >
+                    <div>
+                      <h4 className="text-[#354057] font-semibold">{story.title}</h4>
+                      <p className="text-[#354057] text-sm">{story.description}</p>
+                      <p className="text-sm text-gray-600">
+                        PDF: {story.pdfFilename || "Not assigned"} | Order: {story.display_order}
+                      </p>
+                    </div>
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => handleBeginEditShortStory(story)}
+                        className="bg-[#617beb] hover:bg-[#4760d2] text-white px-3 py-1 rounded"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => handleDeleteShortStory(story.id)}
+                        className="bg-[#ec8e47] hover:bg-[#f04040] text-white px-3 py-1 rounded"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-[#354057]">No short stories found.</p>
+            )}
+          </div>
         </div>
       )}
 
@@ -880,6 +1123,8 @@ const AdminPage: React.FC = () => {
 };
 
 export default AdminPage;
+
+
 
 
 

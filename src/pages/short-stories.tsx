@@ -1,23 +1,25 @@
-// /src/pages/short-stories.tsx
+// src/pages/short-stories.tsx
 
-import React, { useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import { useRouter } from "next/router";
 import Nav from "../components/Nav";
 import ShortStoryCard from "../components/ShortStoryCard";
 import Footer from "../components/RespFooter";
 import ComicButton from "@/components/ComicButton";
-import { useRouter } from "next/router";
-import { shortStories } from "../data/shortStories";
 import SubscribeForm from "@/components/SubscribeForm";
+
+const SERVER_URL = "https://159.89.233.75.nip.io";
 
 export default function ShortStoriesPage() {
   const router = useRouter();
+  const [stories, setStories] = useState<any[]>([]);
   const subscribeFormRef = useRef<HTMLDivElement>(null);
 
   const scrollToSubscribeForm = () => {
     if (subscribeFormRef.current) {
       subscribeFormRef.current.scrollIntoView({
         behavior: "smooth",
-        block: "center", // Added this line
+        block: "center",
       });
     }
   };
@@ -27,13 +29,20 @@ export default function ShortStoriesPage() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  useEffect(() => {
+    // Fetch short stories from the backend on component mount
+    fetch(`${SERVER_URL}/api/short-stories`)
+      .then((res) => res.json())
+      .then((data) => setStories(data))
+      .catch((err) => console.error("Error fetching short stories:", err));
+  }, []);
+
   return (
     <div className="min-h-screen bg-purple-50 relative">
       <Nav />
       <div className="container mx-auto p-4">
-        {/* <h1 className="text-4xl text-slate-800 font-serif font-bold">
-          Short Stories
-        </h1> */}
+        {/* You can uncomment or adjust the title as needed */}
+        {/* <h1 className="text-4xl text-slate-800 font-serif font-bold">Short Stories</h1> */}
         <p className="mt-4 mb-3 text-3xl text-center text-black font-serif font-medium stretched-text-05">
           Coming 2025
         </p>
@@ -45,7 +54,7 @@ export default function ShortStoriesPage() {
           <span className="font-semibold">Subscribe to receive updates</span>
         </p>
 
-        {/* Add subscribe button here */}
+        {/* Subscribe Button */}
         <div className="flex justify-center mt-2 mb-8">
           <button
             onClick={scrollToSubscribeForm}
@@ -56,7 +65,7 @@ export default function ShortStoriesPage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 mt-5 gap-6">
-          {shortStories.map((story) => (
+          {stories.map((story) => (
             <ShortStoryCard key={story.id} story={story} />
           ))}
         </div>
