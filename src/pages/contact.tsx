@@ -1,5 +1,5 @@
 // =======================================
-// NEW FILE: /src/pages/contact.tsx
+//  /src/pages/contact.tsx - SECURE VERSION
 // =======================================
 
 import React, { useState } from "react";
@@ -9,14 +9,10 @@ import Footer from "../components/RespFooter";
 import SubscribeForm from "@/components/SubscribeForm";
 import ComicButton from "@/components/ComicButton";
 import router from "next/router";
+import DOMPurify from "dompurify"; // ✅ ADDED: For input sanitization
 
-/**
- * A simple Contact Page designed to be consistent
- * with the rest of the site. Uses your existing Nav
- * and Footer components, and emphasizes #4458adc5.
- */
 export default function ContactPage() {
-  // Local state for the form
+  // ✅ State for form inputs
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -29,41 +25,99 @@ export default function ContactPage() {
     success: "",
   });
 
-  // Update form fields
+  // ✅ Get API URL from environment variables (Prevents hardcoding)
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://159.89.233.75.nip.io";
+
+  // ✅ Basic sanitization function
+  const sanitizeInput = (input: string) => DOMPurify.sanitize(input);
+
+  // ✅ Email validation regex
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  // ✅ Handle input changes
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     setFormStatus({ error: "", success: "" });
   };
 
-  // Handle form submission (placeholder behavior here)
+  // ✅ Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real project, you'd send formData to your API or an email service
-    // For now, we'll just simulate success and clear the form:
-    if (formData.name && formData.email && formData.message) {
+
+    // ✅ Validate required fields
+    if (!formData.name || !formData.email || !formData.message) {
+      setFormStatus({
+        error: "Please fill out all required fields.",
+        success: "",
+      });
+      return;
+    }
+
+    // ✅ Validate email format
+    if (!emailPattern.test(formData.email)) {
+      setFormStatus({
+        error: "Please enter a valid email address.",
+        success: "",
+      });
+      return;
+    }
+
+    // ✅ Sanitize user inputs before sending
+    const safeFormData = {
+      name: sanitizeInput(formData.name),
+      email: sanitizeInput(formData.email),
+      subject: sanitizeInput(formData.subject),
+      message: sanitizeInput(formData.message),
+    };
+
+    try {
+      const response = await fetch(`${API_URL}/api/send-email`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(safeFormData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        console.error("🚨 Error Response:", data.error);
+        throw new Error(data.error || "An unknown error occurred");
+      }
+
+      // ✅ Reset form after success
       setFormStatus({ error: "", success: "Thank you for contacting us!" });
       setFormData({ name: "", email: "", subject: "", message: "" });
-    } else {
-      setFormStatus({ ...formStatus, error: "Please fill out all required fields." });
+
+    } catch (error: any) {
+      console.error("🚨 Error Sending Message:", error);
+      setFormStatus({
+        error: error.message || "Something went wrong. Please try again.",
+        success: "",
+      });
     }
   };
 
   return (
     <div className="min-h-screen flex flex-col relative">
-      {/* Reuse your <Head /> component for SEO */}
-      <Head title="Contact Us | Realm of Unity" description="Contact page for The Realm of Unity" />
+      {/* ✅ SEO Head */}
+      <Head
+        title="Contact Us | Realm of Unity"
+        description="Contact page for The Realm of Unity"
+      />
 
-      {/* Reuse your Nav component for consistency */}
+      {/* ✅ Navigation */}
       <Nav />
 
-      {/* Main Page Content */}
+      {/* ✅ Page Content */}
       <div className="flex-grow md:p-8 lg:p-12 flex -pb-12 flex-col items-center">
         <h1 className="text-4xl mb-8 font-serif font-bold text-[#2e2e2e]">
           Contact Us
         </h1>
-        <p className="text-lg mb-8 font-serif font-md text-[#2e2e2e]">Feel free to send a message if you have any questions at all.</p>
+        <p className="text-lg mb-8 font-serif font-md text-[#2e2e2e]">
+          Feel free to send a message if you have any questions at all.
+        </p>
 
-        {/* Contact Form Container */}
+        {/* ✅ Contact Form */}
         <div className="max-w-2xl w-full bg-white shadow-md text-[#212121] rounded-lg p-6 md:p-8">
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
@@ -126,7 +180,7 @@ export default function ContactPage() {
               ></textarea>
             </div>
 
-            {/* Error or Success Messages */}
+            {/* ✅ Error or Success Messages */}
             {formStatus.error && (
               <p className="text-red-600 text-sm">{formStatus.error}</p>
             )}
@@ -134,34 +188,26 @@ export default function ContactPage() {
               <p className="text-green-600 text-sm">{formStatus.success}</p>
             )}
 
-            {/* Submit Button */}
-            <button
-              type="submit"
-              className="comic-button text-large"
-            >
+            {/* ✅ Submit Button */}
+            <button type="submit" className="comic-button text-large">
               Send Message
             </button>
           </form>
         </div>
       </div>
 
-    {/* --- Navigation Buttons --- */}
-        <section className="mt-16 mb-16 flex flex-col lg:flex-row w-full gap-4 items-center justify-center">
+      {/* ✅ Navigation Buttons */}
+      <section className="mt-16 mb-16 flex flex-col lg:flex-row w-full gap-4 items-center justify-center">
         <div className="lg:w-3/12 md:w-5/12 w-9/12">
-          <ComicButton
-            label="← View Reviews 🕊️"
-            onClick={() => router.push("/short-stories")}
-          />
+          <ComicButton label="← View Reviews 🕊️" onClick={() => router.push("/short-stories")} />
         </div>
         <div className="lg:w-3/12 md:w-5/12 w-9/12">
           <ComicButton label="🏡 Go Home ↩" onClick={() => router.push("/")} />
         </div>
       </section>
 
-      {/* Optionally reuse your SubscribeForm at the bottom */}
+      {/* ✅ Subscription Form & Footer */}
       <SubscribeForm />
-
-      {/* Finally, reuse your Footer */}
       <Footer />
     </div>
   );
