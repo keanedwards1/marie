@@ -148,6 +148,14 @@ export default function Nav() {
               Reviews
             </Link>
           </li>
+          <li className="w-full lg:w-auto">
+            <Link
+              className={`text-right font-serif lg:text-left w-full lg:w-auto justify-end lg:justify-start nav-menu-button`}
+              href="/contact"
+            >
+              Contact
+            </Link>
+          </li>
         </ul>
       </div>
     </nav>

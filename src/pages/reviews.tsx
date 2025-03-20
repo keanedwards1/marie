@@ -420,7 +420,7 @@ const Offerings: React.FC = () => {
           />
         </div>
         <div className="lg:w-3/12 md:w-5/12 w-9/12">
-          <ComicButton label="🏡 Go Home ↩" onClick={() => router.push("/")} />
+          <ComicButton label="Contact Me 📫 →" onClick={() => router.push("/contact")} />
         </div>
       </section>
 
