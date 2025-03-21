@@ -146,7 +146,7 @@ const AdminPage: React.FC = () => {
     }
   }
 
-  // CHANGED: Fetch PDFs from backend for admin PDF management (kept intact)
+  // CHANGED: Fetch PDFs from backend for admin PDF management
   const [uploadedPdfs, setUploadedPdfs] = useState<string[]>([]);
   async function fetchPdfs(authToken: string) {
     try {
@@ -202,10 +202,10 @@ const AdminPage: React.FC = () => {
           title: newShortStoryTitle,
           description: newShortStoryDescription,
           pdfFilename: selectedPdf,
-          fullStory: null  // Not needed since PDF is the full story
+          fullStory: null, // Not needed since PDF is the full story
         }),
       });
-      const data = await res.json();
+      await res.json();
       alert("Short story created!");
       setNewShortStoryTitle("");
       setNewShortStoryDescription("");
@@ -223,7 +223,7 @@ const AdminPage: React.FC = () => {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });
-      const data = await res.json();
+      await res.json();
       alert("Short story deleted!");
       fetchShortStories();
     } catch (err) {
@@ -243,21 +243,24 @@ const AdminPage: React.FC = () => {
   async function handleSaveShortStoryEdit() {
     if (!editingShortStory) return;
     try {
-      const res = await fetch(`https://159.89.233.75.nip.io/api/short-stories/${editingShortStory.id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          title: editShortStoryTitle,
-          description: editShortStoryDescription,
-          pdfFilename: editShortStoryPdf,
-          display_order: editShortStoryOrder,
-          fullStory: null
-        }),
-      });
-      const data = await res.json();
+      const res = await fetch(
+        `https://159.89.233.75.nip.io/api/short-stories/${editingShortStory.id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            title: editShortStoryTitle,
+            description: editShortStoryDescription,
+            pdfFilename: editShortStoryPdf,
+            display_order: editShortStoryOrder,
+            fullStory: null,
+          }),
+        }
+      );
+      await res.json();
       alert("Short story updated!");
       setEditingShortStory(null);
       fetchShortStories();
@@ -269,6 +272,80 @@ const AdminPage: React.FC = () => {
 
   function handleCancelShortStoryEdit() {
     setEditingShortStory(null);
+  }
+
+  // CHANGED: useRef for short-story editing (for smooth scroll)
+  const shortStoryEditRef = useRef<HTMLDivElement>(null);
+
+  // CHANGED: scroll edit form into view
+  useEffect(() => {
+    if (editingShortStory && shortStoryEditRef.current) {
+      shortStoryEditRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }, [editingShortStory]);
+
+  // CHANGED: DnD states/functions
+  const [draggingStory, setDraggingStory] = useState<any | null>(null);
+
+  // CHANGED: Start dragging
+  function handleDragStart(e: React.DragEvent<HTMLLIElement>, story: any) {
+    setDraggingStory(story);
+  }
+
+  // CHANGED: Must allow drop
+  function handleDragOver(e: React.DragEvent<HTMLLIElement>) {
+    e.preventDefault();
+  }
+
+  // CHANGED: On drop, swap the two stories' display_order
+  async function handleDrop(e: React.DragEvent<HTMLLIElement>, targetStory: any) {
+    e.preventDefault();
+    if (!draggingStory || draggingStory.id === targetStory.id) return;
+
+    try {
+      const draggingOrder = draggingStory.display_order;
+      const targetOrder = targetStory.display_order;
+
+      // Swap the "dragging story"
+      await fetch(
+        `https://159.89.233.75.nip.io/api/short-stories/${draggingStory.id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            ...draggingStory,
+            display_order: targetOrder,
+          }),
+        }
+      );
+
+      // Swap the "target story"
+      await fetch(
+        `https://159.89.233.75.nip.io/api/short-stories/${targetStory.id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            ...targetStory,
+            display_order: draggingOrder,
+          }),
+        }
+      );
+
+      // Refresh list
+      fetchShortStories();
+    } catch (error) {
+      console.error("Error swapping stories:", error);
+      alert("Failed to swap short stories.");
+    } finally {
+      setDraggingStory(null);
+    }
   }
 
   // -------------------------------
@@ -289,8 +366,8 @@ const AdminPage: React.FC = () => {
       const data = await response.json();
       setToken(data.token);
       fetchAllReviews(data.token);
-      fetchPdfs(data.token); // Keep PDF management intact
-      fetchShortStories();    // Also fetch short stories for pairing
+      fetchPdfs(data.token);
+      fetchShortStories();
     } catch (err: unknown) {
       console.error("Login error:", err);
       if (err instanceof Error) setError(err.message);
@@ -365,7 +442,10 @@ const AdminPage: React.FC = () => {
       <div className="flex flex-row justify-between">
         <h2 className="sm:text-2xl text-xs mb-4 mt-8">{title}</h2>
         <h2 className="sm:text-2xl text-right text-xs ml-10 mb-4 mt-8">
-          Action: <span className="text-xs sm:text-sm">(will move the review to the respective category you pick)</span>
+          Action:{" "}
+          <span className="text-xs sm:text-sm">
+            (will move the review to the respective category you pick)
+          </span>
         </h2>
       </div>
       {reviews.map((review) => (
@@ -393,7 +473,13 @@ const AdminPage: React.FC = () => {
                   }
                   disabled={loading[review.id]}
                   className={`
-                    ${action === "approve" ? "bg-cyan-100 hover:bg-cyan-200" : action === "reject" ? "bg-orange-100 hover:bg-orange-200" : "bg-gray-100 hover:bg-gray-200"}
+                    ${
+                      action === "approve"
+                        ? "bg-cyan-100 hover:bg-cyan-200"
+                        : action === "reject"
+                        ? "bg-orange-100 hover:bg-orange-200"
+                        : "bg-gray-100 hover:bg-gray-200"
+                    }
                     text-gray-600 hover:text-gray-800 transition-all duration-300 hover:scale-105 p-2 rounded
                     ${loading[review.id] ? "opacity-50" : ""}
                   `}
@@ -409,7 +495,7 @@ const AdminPage: React.FC = () => {
   );
 
   // -------------------------------
-  // PDF Management (unchanged)
+  // PDF Management
   // -------------------------------
   const [pdfFile, setPdfFile] = useState<File | null>(null);
 
@@ -434,8 +520,6 @@ const AdminPage: React.FC = () => {
       const data = await res.json();
       alert(`PDF uploaded: ${data.filename}`);
       setPdfFile(null);
-      // Optionally update the selected PDF for short stories:
-      // setSelectedPdf(data.filename);
       fetchPdfs(token);
     } catch (err) {
       console.error("Error uploading PDF:", err);
@@ -446,10 +530,13 @@ const AdminPage: React.FC = () => {
   async function handleDeletePdf(filename: string) {
     if (!window.confirm(`Are you sure you want to delete ${filename}?`)) return;
     try {
-      const res = await fetch(`https://159.89.233.75.nip.io/api/admin/delete-pdf/${encodeURIComponent(filename)}`, {
-        method: "DELETE",
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await fetch(
+        `https://159.89.233.75.nip.io/api/admin/delete-pdf/${encodeURIComponent(filename)}`,
+        {
+          method: "DELETE",
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       if (!res.ok) {
         const errData = await res.json();
         throw new Error(errData.error || "Failed to delete PDF");
@@ -463,7 +550,7 @@ const AdminPage: React.FC = () => {
   }
 
   // -------------------------------
-  // Admin Blog Logic (unchanged)
+  // Admin Blog Logic
   // -------------------------------
   const handleAddBlogPost = async () => {
     if (!newBlogTitle.trim() || !newBlogAuthor.trim() || !newBlogContent.trim()) {
@@ -487,7 +574,7 @@ const AdminPage: React.FC = () => {
       if (!response.ok) {
         throw new Error("Failed to create blog post");
       }
-      const data = await response.json();
+      await response.json();
       fetchBlogPosts();
       setNewBlogTitle("");
       setNewBlogAuthor("");
@@ -520,14 +607,17 @@ const AdminPage: React.FC = () => {
   const handleAddBlogComment = async (postId: number, text: string) => {
     if (!text.trim()) return;
     try {
-      const response = await fetch(`https://159.89.233.75.nip.io/api/blog/posts/${postId}/comments`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          author: "Admin",
-          text: text.trim(),
-        }),
-      });
+      const response = await fetch(
+        `https://159.89.233.75.nip.io/api/blog/posts/${postId}/comments`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            author: "Admin",
+            text: text.trim(),
+          }),
+        }
+      );
       if (!response.ok) {
         throw new Error("Failed to add comment");
       }
@@ -571,19 +661,22 @@ const AdminPage: React.FC = () => {
       return;
     }
     try {
-      const response = await fetch(`https://159.89.233.75.nip.io/api/blog/posts/${editingPostId}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          title: editTitle.trim(),
-          author: editAuthor.trim(),
-          date: editDate.trim(),
-          content: editContent,
-        }),
-      });
+      const response = await fetch(
+        `https://159.89.233.75.nip.io/api/blog/posts/${editingPostId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            title: editTitle.trim(),
+            author: editAuthor.trim(),
+            date: editDate.trim(),
+            content: editContent,
+          }),
+        }
+      );
       if (!response.ok) {
         throw new Error("Failed to update blog post");
       }
@@ -670,7 +763,10 @@ const AdminPage: React.FC = () => {
             <h4 className="font-bold text-[#354057] mb-2">Comments:</h4>
             {comments.length > 0 ? (
               comments.map((c) => (
-                <div key={c.id} className="flex flex-row justify-between text-[#354057] bg-white p-2 mb-2 rounded">
+                <div
+                  key={c.id}
+                  className="flex flex-row justify-between text-[#354057] bg-white p-2 mb-2 rounded"
+                >
                   <span>
                     <strong>{c.author}:</strong> {c.text} (Likes: {c.likes})
                   </span>
@@ -983,7 +1079,8 @@ const AdminPage: React.FC = () => {
           <h2 className="text-2xl mb-6 text-white">Short Story Management</h2>
           {/* If a short story is being edited, show the edit form */}
           {editingShortStory ? (
-            <div className="bg-white p-4 rounded shadow-md mb-6">
+            // CHANGED: attach ref for auto-scroll
+            <div ref={shortStoryEditRef} className="bg-white p-4 rounded shadow-md mb-6">
               <h3 className="text-[#354057] mb-2 text-lg font-medium">Edit Short Story</h3>
               <input
                 type="text"
@@ -1013,13 +1110,13 @@ const AdminPage: React.FC = () => {
                 ))}
               </select>
               {/* Input for display order */}
-              <input
+{/*               <input
                 type="number"
                 placeholder="Order"
                 value={editShortStoryOrder !== null ? editShortStoryOrder : ""}
                 onChange={(e) => setEditShortStoryOrder(parseInt(e.target.value))}
                 className="border border-gray-300 text-[#354057] rounded p-2 mb-2 w-full"
-              />
+              /> */}
               <div className="flex gap-3">
                 <button
                   onClick={handleSaveShortStoryEdit}
@@ -1078,19 +1175,25 @@ const AdminPage: React.FC = () => {
           )}
 
           <div className="bg-white p-4 rounded shadow-md">
-            <h3 className="text-[#354057] mb-2 text-lg font-medium">Existing Short Stories</h3>
+            <h3 className="text-[#354057] mb-2 text-lg font-medium">Existing Short Stories (Drag and Drop to Reorder)</h3>
             {shortStories.length > 0 ? (
               <ul>
                 {shortStories.map((story) => (
+                  // CHANGED: each <li> is draggable, with drag events
                   <li
                     key={story.id}
                     className="flex justify-between items-center border-b py-2"
+                    draggable
+                    onDragStart={(e) => handleDragStart(e, story)}
+                    onDragOver={handleDragOver}
+                    onDrop={(e) => handleDrop(e, story)}
                   >
                     <div>
                       <h4 className="text-[#354057] font-semibold">{story.title}</h4>
                       <p className="text-[#354057] text-sm">{story.description}</p>
                       <p className="text-sm text-gray-600">
-                        PDF: {story.pdfFilename || "Not assigned"} | Order: {story.display_order}
+                        PDF: {story.pdfFilename || "Not assigned"} | Order:{" "}
+                        {story.display_order}
                       </p>
                     </div>
                     <div className="flex gap-2">
@@ -1123,6 +1226,7 @@ const AdminPage: React.FC = () => {
 };
 
 export default AdminPage;
+
 
 
 
