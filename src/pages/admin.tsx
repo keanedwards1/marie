@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 
-// CHANGED: Import React Quill for WYSIWYG
+// CHANGED: For WYSIWYG & “Content” editing
 import dynamic from "next/dynamic";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
@@ -41,8 +41,8 @@ interface Review {
   created_at: number;
 }
 
-// Extend tab types for admin dashboard
-type AdminTab = "reviews" | "blogs" | "pdfs";
+// CHANGED: Extended AdminTab to include "content"
+type AdminTab = "reviews" | "blogs" | "pdfs" | "content";
 
 const AdminPage: React.FC = () => {
   const router = useRouter();
@@ -55,19 +55,20 @@ const AdminPage: React.FC = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState<{ [key: number]: boolean }>({});
 
-  // CHANGED: Tab switching (using "pdfs" for combined PDF and Short Story management)
+  // Tab switching
+  // CHANGED: Default is still "reviews"; but "content" is now possible
   const [activeTab, setActiveTab] = useState<AdminTab>("reviews");
 
-  // CHANGED: Blog data
+  // CHANGED: State for blog data
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
 
-  // States for adding a new blog post
+  // State for adding a new blog post
   const [newBlogTitle, setNewBlogTitle] = useState("");
   const [newBlogAuthor, setNewBlogAuthor] = useState("");
   const [newBlogDate, setNewBlogDate] = useState("");
   const [newBlogContent, setNewBlogContent] = useState<string>("");
 
-  // States for editing an existing blog post
+  // State for editing an existing blog post
   const [editingPostId, setEditingPostId] = useState<number | null>(null);
   const [editTitle, setEditTitle] = useState("");
   const [editAuthor, setEditAuthor] = useState("");
@@ -82,7 +83,7 @@ const AdminPage: React.FC = () => {
     }
   }, [editingPostId]);
 
-  // React Quill config (optional)
+  // CHANGED: Quill config for blog + content editing
   const quillModules = {
     toolbar: [
       [{ header: [1, 2, 3, false] }],
@@ -92,7 +93,6 @@ const AdminPage: React.FC = () => {
       ["clean"],
     ],
   };
-
   const quillFormats = [
     "header",
     "bold",
@@ -109,8 +109,32 @@ const AdminPage: React.FC = () => {
   const [alertMessage, setAlertMessage] = useState<string | null>(null);
   const [alertType, setAlertType] = useState<"success" | "error" | "info">("info");
 
+  // CHANGED: For PDF and Short Story usage
+  const [uploadedPdfs, setUploadedPdfs] = useState<string[]>([]);
+
+  // CHANGED: For short stories management
+  const [shortStories, setShortStories] = useState<any[]>([]);
+  const [newShortStoryTitle, setNewShortStoryTitle] = useState("");
+  const [newShortStoryDescription, setNewShortStoryDescription] = useState("");
+  const [selectedPdf, setSelectedPdf] = useState("");
+  const [editingShortStory, setEditingShortStory] = useState<any | null>(null);
+  const [editShortStoryTitle, setEditShortStoryTitle] = useState("");
+  const [editShortStoryDescription, setEditShortStoryDescription] = useState("");
+  const [editShortStoryPdf, setEditShortStoryPdf] = useState("");
+  const [editShortStoryOrder, setEditShortStoryOrder] = useState<number | null>(null);
+
+  // CHANGED: DnD state
+  const [draggingStory, setDraggingStory] = useState<any | null>(null);
+
+  // CHANGED: Refs for scrolling
+  const shortStoryEditRef = useRef<HTMLDivElement>(null);
+
+  // CHANGED: New state to hold RightImage content & track loading
+  const [rightImageBlurb, setRightImageBlurb] = useState<string>("");
+  const [loadingRightImage, setLoadingRightImage] = useState(false);
+
+  // On mount, always fetch blog posts
   useEffect(() => {
-    // Fetch blog posts even if we’re not logged in
     fetchBlogPosts();
 
     // Override the browser's alert with a styled version
@@ -131,7 +155,58 @@ const AdminPage: React.FC = () => {
     };
   }, []);
 
-  // CHANGED: fetch blog posts (public GET)
+  // CHANGED: When user switches to the 'content' tab, load RightImage data
+  useEffect(() => {
+    if (activeTab === "content") {
+      setLoadingRightImage(true);
+      fetch("https://159.89.233.75.nip.io/api/site-content/rightImageBlurb")
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error("Failed to fetch RightImage content");
+          }
+          return res.json();
+        })
+        .then((data) => {
+          setRightImageBlurb(data.content || "");
+        })
+        .catch((err) => {
+          console.error("Error fetching RightImage content:", err);
+        })
+        .finally(() => {
+          setLoadingRightImage(false);
+        });
+    }
+  }, [activeTab]);
+
+  // -------------------------------
+  // CHANGED: Save RightImage content
+  // -------------------------------
+  const handleSaveRightImage = async () => {
+    try {
+      const response = await fetch(
+        "https://159.89.233.75.nip.io/api/site-content/rightImageBlurb",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ content: rightImageBlurb }),
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Failed to update RightImage content");
+      }
+      alert("Home page content updated!");
+    } catch (error) {
+      console.error("Error updating RightImage content:", error);
+      alert("Error updating RightImage content.");
+    }
+  };
+
+  // -------------------------------
+  // Fetch blog posts (public GET)
+  // -------------------------------
   async function fetchBlogPosts() {
     try {
       const response = await fetch("https://159.89.233.75.nip.io/api/blog/posts");
@@ -146,8 +221,9 @@ const AdminPage: React.FC = () => {
     }
   }
 
-  // CHANGED: Fetch PDFs from backend for admin PDF management
-  const [uploadedPdfs, setUploadedPdfs] = useState<string[]>([]);
+  // -------------------------------
+  // Fetch PDFs from backend
+  // -------------------------------
   async function fetchPdfs(authToken: string) {
     try {
       const res = await fetch("https://159.89.233.75.nip.io/api/admin/list-pdfs", {
@@ -162,20 +238,8 @@ const AdminPage: React.FC = () => {
   }
 
   // -------------------------------
-  // NEW: Short Story Management States & Functions
+  // Short Story logic
   // -------------------------------
-  const [shortStories, setShortStories] = useState<any[]>([]);
-  const [newShortStoryTitle, setNewShortStoryTitle] = useState("");
-  const [newShortStoryDescription, setNewShortStoryDescription] = useState("");
-  // Instead of a text field, we use a dropdown to select a PDF
-  const [selectedPdf, setSelectedPdf] = useState("");
-  // New states for editing a short story
-  const [editingShortStory, setEditingShortStory] = useState<any | null>(null);
-  const [editShortStoryTitle, setEditShortStoryTitle] = useState("");
-  const [editShortStoryDescription, setEditShortStoryDescription] = useState("");
-  const [editShortStoryPdf, setEditShortStoryPdf] = useState("");
-  const [editShortStoryOrder, setEditShortStoryOrder] = useState<number | null>(null);
-
   async function fetchShortStories() {
     try {
       const res = await fetch("https://159.89.233.75.nip.io/api/short-stories");
@@ -274,30 +338,23 @@ const AdminPage: React.FC = () => {
     setEditingShortStory(null);
   }
 
-  // CHANGED: useRef for short-story editing (for smooth scroll)
-  const shortStoryEditRef = useRef<HTMLDivElement>(null);
-
-  // CHANGED: scroll edit form into view
   useEffect(() => {
     if (editingShortStory && shortStoryEditRef.current) {
       shortStoryEditRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
     }
   }, [editingShortStory]);
 
-  // CHANGED: DnD states/functions
-  const [draggingStory, setDraggingStory] = useState<any | null>(null);
-
-  // CHANGED: Start dragging
+  // -------------------------------
+  // Drag & Drop for Short Stories
+  // -------------------------------
   function handleDragStart(e: React.DragEvent<HTMLLIElement>, story: any) {
     setDraggingStory(story);
   }
 
-  // CHANGED: Must allow drop
   function handleDragOver(e: React.DragEvent<HTMLLIElement>) {
     e.preventDefault();
   }
 
-  // CHANGED: On drop, swap the two stories' display_order
   async function handleDrop(e: React.DragEvent<HTMLLIElement>, targetStory: any) {
     e.preventDefault();
     if (!draggingStory || draggingStory.id === targetStory.id) return;
@@ -894,6 +951,18 @@ const AdminPage: React.FC = () => {
         >
           PDF Management
         </button>
+
+        {/* CHANGED: New Content Management Tab */}
+        <button
+          onClick={() => setActiveTab("content")}
+          className={`px-4 py-2 rounded transition ${
+            activeTab === "content"
+              ? "bg-[#6f7ec0] text-white"
+              : "bg-[#dde2fa] hover:bg-[#bdc8f7] text-[#354057]"
+          }`}
+        >
+          Content Management
+        </button>
       </div>
 
       {/* Reviews Tab */}
@@ -1029,12 +1098,9 @@ const AdminPage: React.FC = () => {
         </div>
       )}
 
-      {/* ---------------------------- */}
-      {/* NEW: "pdfs" Tab – PDF & Short Story Management */}
-      {/* ---------------------------- */}
+      {/* PDFs Tab */}
       {activeTab === "pdfs" && (
         <div className="bg-[#6f7ec0] p-8 rounded">
-          {/* Existing PDF Management Section */}
           <h2 className="text-2xl mb-6 text-white">PDF Management</h2>
           <div className="bg-white p-4 rounded shadow-md mb-6">
             <h3 className="text-[#354057] mb-2 text-lg font-medium">Upload a PDF</h3>
@@ -1075,9 +1141,7 @@ const AdminPage: React.FC = () => {
             )}
           </div>
 
-          {/* NEW: Short Story Management Section */}
           <h2 className="text-2xl mb-6 text-white">Short Story Management</h2>
-          {/* If a short story is being edited, show the edit form */}
           {editingShortStory ? (
             // CHANGED: attach ref for auto-scroll
             <div ref={shortStoryEditRef} className="bg-white p-4 rounded shadow-md mb-6">
@@ -1096,7 +1160,6 @@ const AdminPage: React.FC = () => {
                 onChange={(e) => setEditShortStoryDescription(e.target.value)}
                 className="border border-gray-300 text-[#354057] rounded p-2 mb-2 w-full"
               />
-              {/* Dropdown to select a PDF */}
               <select
                 value={editShortStoryPdf}
                 onChange={(e) => setEditShortStoryPdf(e.target.value)}
@@ -1109,7 +1172,6 @@ const AdminPage: React.FC = () => {
                   </option>
                 ))}
               </select>
-              {/* Input for display order */}
 {/*               <input
                 type="number"
                 placeholder="Order"
@@ -1133,7 +1195,6 @@ const AdminPage: React.FC = () => {
               </div>
             </div>
           ) : (
-            // Otherwise, show the form to create a new short story
             <div className="bg-white p-4 rounded shadow-md mb-6">
               <h3 className="text-[#354057] mb-2 text-lg font-medium">Create a New Short Story</h3>
               <div className="flex flex-col sm:flex-row gap-2 mb-2">
@@ -1152,7 +1213,6 @@ const AdminPage: React.FC = () => {
                   className="border border-gray-300 text-[#354057] rounded p-2 flex-1"
                 />
               </div>
-              {/* Dropdown to select a PDF */}
               <select
                 value={selectedPdf}
                 onChange={(e) => setSelectedPdf(e.target.value)}
@@ -1175,11 +1235,12 @@ const AdminPage: React.FC = () => {
           )}
 
           <div className="bg-white p-4 rounded shadow-md">
-            <h3 className="text-[#354057] mb-2 text-lg font-medium">Existing Short Stories (Drag and Drop to Reorder)</h3>
+            <h3 className="text-[#354057] mb-2 text-lg font-medium">
+              Existing Short Stories (Drag and Drop to Reorder)
+            </h3>
             {shortStories.length > 0 ? (
               <ul>
                 {shortStories.map((story) => (
-                  // CHANGED: each <li> is draggable, with drag events
                   <li
                     key={story.id}
                     className="flex justify-between items-center border-b py-2"
@@ -1220,12 +1281,43 @@ const AdminPage: React.FC = () => {
         </div>
       )}
 
+      {/* CHANGED: Content (RightImage) Tab */}
+      {activeTab === "content" && (
+        <div className="bg-[#6f7ec0] p-8 rounded">
+          <h2 className="text-2xl mb-6 text-white">Manage Home Page Content (Under Construction)</h2>
+          <div className="bg-white p-4 rounded shadow-md">
+            {loadingRightImage ? (
+              <p>Loading...</p>
+            ) : (
+              <>
+                <ReactQuill
+                  theme="snow"
+                  value={rightImageBlurb}
+                  onChange={setRightImageBlurb}
+                  modules={quillModules}
+                  formats={quillFormats}
+                  className="mb-4 text-black"
+                />
+                <button
+                  onClick={handleSaveRightImage}
+                  disabled={true}
+                  className="bg-[#617beb] transition text-white px-4 py-2 rounded" /* hover:bg-[#4760d2] */
+                >
+                  Save Content
+                </button>
+              </>
+            )}
+          </div>
+        </div>
+      )}
+
       {error && <p className="text-[#ff0000] mt-2">{error}</p>}
     </div>
   );
 };
 
 export default AdminPage;
+
 
 
 
