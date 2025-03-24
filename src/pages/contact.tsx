@@ -97,45 +97,99 @@ export default function ContactPage() {
       <Head title="Contact Us | Realm of Unity" description="Contact page for The Realm of Unity" />
       <Nav />
 
-      <div className="flex-grow md:p-8 lg:p-12 flex -pb-12 flex-col items-center">
-        <h1 className="text-4xl mb-8 font-serif font-bold text-[#2e2e2e]">Contact Us</h1>
-        <p className="text-lg mb-8 font-serif font-md text-[#2e2e2e]">
+      {/* UPDATED FOR RESPONSIVENESS: Added "px-4" on small screens and adjusted spacing/text sizes */}
+      <div className="flex-grow px-4 md:px-8 lg:px-12 py-8 flex flex-col items-center">
+        {/* UPDATED FOR RESPONSIVENESS: Use responsive text sizes */}
+        <h1 className="text-2xl md:text-4xl mb-4 md:mb-8 font-serif font-bold text-[#2e2e2e]">
+          Contact Us
+        </h1>
+        <p className="text-base md:text-lg mb-6 md:mb-8 font-serif font-md text-[#2e2e2e]">
           Feel free to send a message if you have any questions at all.
         </p>
 
         <div className="max-w-2xl w-full bg-white shadow-md text-[#212121] rounded-lg p-6 md:p-8">
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label htmlFor="name" className="block font-semibold">Name <span className="text-red-500">*</span></label>
-              <input className="w-full mt-1 p-2 border border-gray-300 rounded focus:outline-none text-[#212121] focus:ring-2 focus:ring-[#4458adc5]" type="text" id="name" name="name" placeholder="Your full name" value={formData.name} onChange={handleChange} />
+              <label htmlFor="name" className="block font-semibold">
+                Name <span className="text-red-500">*</span>
+              </label>
+              <input
+                className="w-full mt-1 p-2 border border-gray-300 rounded focus:outline-none text-[#212121] focus:ring-2 focus:ring-[#4458adc5]"
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Your full name"
+                value={formData.name}
+                onChange={handleChange}
+              />
             </div>
 
             <div>
-              <label htmlFor="email" className="block text-[#212121] font-semibold">Email <span className="text-red-500">*</span></label>
-              <input className="w-full mt-1 p-2 border border-gray-300 rounded focus:outline-none text-[#212121] focus:ring-2 focus:ring-[#4458adc5]" type="email" id="email" name="email" placeholder="example@email.com" value={formData.email} onChange={handleChange} />
+              <label htmlFor="email" className="block text-[#212121] font-semibold">
+                Email <span className="text-red-500">*</span>
+              </label>
+              <input
+                className="w-full mt-1 p-2 border border-gray-300 rounded focus:outline-none text-[#212121] focus:ring-2 focus:ring-[#4458adc5]"
+                type="email"
+                id="email"
+                name="email"
+                placeholder="example@email.com"
+                value={formData.email}
+                onChange={handleChange}
+              />
             </div>
 
             <div>
-              <label htmlFor="subject" className="block text-[#212121] font-semibold">Subject</label>
-              <input className="w-full mt-1 p-2 border border-gray-300 rounded focus:outline-none text-[#212121] focus:ring-2 focus:ring-[#4458adc5]" type="text" id="subject" name="subject" placeholder="(Optional) Let us know what this is about" value={formData.subject} onChange={handleChange} />
+              <label htmlFor="subject" className="block text-[#212121] font-semibold">
+                Subject
+              </label>
+              <input
+                className="w-full mt-1 p-2 border border-gray-300 rounded focus:outline-none text-[#212121] focus:ring-2 focus:ring-[#4458adc5]"
+                type="text"
+                id="subject"
+                name="subject"
+                placeholder="(Optional) Let us know what this is about"
+                value={formData.subject}
+                onChange={handleChange}
+              />
             </div>
 
             <div>
-              <label htmlFor="message" className="block text-[#212121] font-semibold">Message <span className="text-red-500">*</span></label>
-              <textarea className="w-full mt-1 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 text-[#212121] focus:ring-[#4458adc5]" id="message" name="message" rows={5} placeholder="Type your message here..." value={formData.message} onChange={handleChange}></textarea>
+              <label htmlFor="message" className="block text-[#212121] font-semibold">
+                Message <span className="text-red-500">*</span>
+              </label>
+              <textarea
+                className="w-full mt-1 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 text-[#212121] focus:ring-[#4458adc5]"
+                id="message"
+                name="message"
+                rows={5}
+                placeholder="Type your message here..."
+                value={formData.message}
+                onChange={handleChange}
+              ></textarea>
             </div>
 
-            {formStatus.error && <p className="text-red-600 text-sm">{formStatus.error}</p>}
-            {formStatus.success && <p className="text-green-600 text-sm">{formStatus.success}</p>}
+            {formStatus.error && (
+              <p className="text-red-600 text-sm">{formStatus.error}</p>
+            )}
+            {formStatus.success && (
+              <p className="text-green-600 text-sm">{formStatus.success}</p>
+            )}
 
-            <button type="submit" className="comic-button text-large">Send Message</button>
+            <button type="submit" className="comic-button text-large">
+              Send Message
+            </button>
           </form>
         </div>
       </div>
 
-      <section className="mt-16 mb-16 flex flex-col lg:flex-row w-full gap-4 items-center justify-center">
+      {/* UPDATED FOR RESPONSIVENESS: flex-col on small screens; “gap-4” handles spacing */}
+      <section className="mt-8 mb-16 flex flex-col lg:flex-row w-full gap-4 items-center justify-center">
         <div className="lg:w-3/12 md:w-5/12 w-9/12">
-          <ComicButton label="← View Reviews 🕊️" onClick={() => router.push("/short-stories")} />
+          <ComicButton
+            label="← View Reviews 🕊️"
+            onClick={() => router.push("/short-stories")}
+          />
         </div>
         <div className="lg:w-3/12 md:w-5/12 w-9/12">
           <ComicButton label="🏡 Go Home ↩" onClick={() => router.push("/")} />
