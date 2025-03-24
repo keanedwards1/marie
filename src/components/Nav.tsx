@@ -100,7 +100,7 @@ export default function Nav() {
           transition-all duration-300 ease-in-out
           ${
             isMenuOpen
-              ? "h-[200px] opacity-100"
+              ? "h-[220px] opacity-100"
               : "h-0 opacity-0 lg:h-auto lg:opacity-100"
           }
           overflow-hidden

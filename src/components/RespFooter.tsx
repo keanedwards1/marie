@@ -38,15 +38,15 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <Link
-                  href="/"
+                  href="/blog"
                   className="hover:text-lavender-600 transition duration-300"
                 >
-                  Landscape
+                  Blog
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/characters"
+                  href="/luminoles"
                   className="hover:text-lavender-600 transition duration-300"
                 >
                   Luminoles
@@ -62,10 +62,18 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <Link
-                  href="/"
+                  href="/reviews"
                   className="hover:text-lavender-600 transition duration-300"
                 >
                   Reviews
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/contact"
+                  className="hover:text-lavender-600 transition duration-300"
+                >
+                  Contact
                 </Link>
               </li>
               {/*               <li>
