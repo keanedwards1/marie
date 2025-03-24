@@ -97,9 +97,9 @@ export default function ContactPage() {
       <Head title="Contact Us | Realm of Unity" description="Contact page for The Realm of Unity" />
       <Nav />
 
-      <div className="flex-grow md:p-8 lg:p-12 flex -pb-12 flex-col items-center">
+      <div className="flex-grow md:p-8 p-4 lg:p-12 flex -pb-12 flex-col items-center">
         <h1 className="text-4xl mb-8 font-serif font-bold text-[#2e2e2e]">Contact Us</h1>
-        <p className="text-lg mb-8 font-serif font-md text-[#2e2e2e]">
+        <p className="text-lg mb-8 p-2 sm:p-0 font-serif font-md text-[#2e2e2e]">
           Feel free to send a message if you have any questions at all.
         </p>
 
