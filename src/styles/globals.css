@@ -533,7 +533,7 @@ body {
   height: 50%;
   top: 35%;
   left: 7%;
-} */
+}
  .home-page-text-container::after {
   content: "";
   position: absolute;
