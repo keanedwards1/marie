@@ -83,24 +83,26 @@ const AdminPage: React.FC = () => {
   // CHANGED: Quill config for blog + bio
   const quillModules = {
     toolbar: [
-      [{ header: [1, 2, 3, false] }],
-      ["bold", "italic", "underline", "strike"],
-      [{ list: "ordered" }, { list: "bullet" }],
-      ["link", "image"],
-      ["clean"],
+/*       [{ header: [1, 2, 3, false] }],
+ */      ["bold", "italic", "underline", "strike"],
+/*       [{ list: "ordered" }, { list: "bullet" }],
+      ["link", "image"], */
+/*       ["clean"], */
     ],
   };
   const quillFormats = [
-    "header",
     "bold",
     "italic",
     "underline",
     "strike",
+  ];
+
+  /*    
+    "header", 
     "list",
     "bullet",
     "link",
-    "image",
-  ];
+    "image", */
 
   const [alertMessage, setAlertMessage] = useState<string | null>(null);
   const [alertType, setAlertType] = useState<"success" | "error" | "info">("info");
