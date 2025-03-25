@@ -38,6 +38,14 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <Link
+                  href="/bio"
+                  className="hover:text-lavender-600 transition duration-300"
+                >
+                  Bio
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/blog"
                   className="hover:text-lavender-600 transition duration-300"
                 >

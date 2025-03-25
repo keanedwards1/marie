@@ -100,7 +100,7 @@ export default function Nav() {
           transition-all duration-300 ease-in-out
           ${
             isMenuOpen
-              ? "h-[220px] opacity-100"
+              ? "h-[260px] opacity-100"
               : "h-0 opacity-0 lg:h-auto lg:opacity-100"
           }
           overflow-hidden
@@ -114,6 +114,14 @@ export default function Nav() {
               href="/"
             >
               Home
+            </Link>
+          </li>
+          <li className="w-full lg:w-auto">
+            <Link
+              className={`text-right font-serif lg:text-left w-full lg:w-auto justify-end lg:justify-start nav-menu-button`}
+              href="/bio"
+            >
+              Bio
             </Link>
           </li>
           <li className="w-full lg:w-auto">

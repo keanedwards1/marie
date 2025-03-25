@@ -124,8 +124,8 @@ export default function BlogIndex() {
       <div className="mt-36 -mb-20 flex flex-col lg:flex-row w-full z-10 gap-4 items-center justify-center">
         <div className="lg:w-3/12 md:w-5/12 w-9/12 z-10">
           <ComicButton
-            label="← Back to Home 🏡"
-            onClick={() => router.push("/")}
+            label="← See Bio 📖"
+            onClick={() => router.push("/bio")}
           />
         </div>
         <div className="lg:w-3/12 md:w-5/12 w-9/12 z-10">

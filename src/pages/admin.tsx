@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 
-// CHANGED: For WYSIWYG & “Content” editing
+// CHANGED: For WYSIWYG & “Bio” editing (was "Content")
 import dynamic from "next/dynamic";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
@@ -41,8 +41,8 @@ interface Review {
   created_at: number;
 }
 
-// CHANGED: Extended AdminTab to include "content"
-type AdminTab = "reviews" | "blogs" | "pdfs" | "content";
+// CHANGED: Replaced "content" with "bio"
+type AdminTab = "reviews" | "blogs" | "pdfs" | "bio";
 
 const AdminPage: React.FC = () => {
   const router = useRouter();
@@ -56,19 +56,16 @@ const AdminPage: React.FC = () => {
   const [loading, setLoading] = useState<{ [key: number]: boolean }>({});
 
   // Tab switching
-  // CHANGED: Default is still "reviews"; but "content" is now possible
   const [activeTab, setActiveTab] = useState<AdminTab>("reviews");
 
-  // CHANGED: State for blog data
+  // Blog state
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
-
-  // State for adding a new blog post
   const [newBlogTitle, setNewBlogTitle] = useState("");
   const [newBlogAuthor, setNewBlogAuthor] = useState("");
   const [newBlogDate, setNewBlogDate] = useState("");
   const [newBlogContent, setNewBlogContent] = useState<string>("");
 
-  // State for editing an existing blog post
+  // Editing existing blog post
   const [editingPostId, setEditingPostId] = useState<number | null>(null);
   const [editTitle, setEditTitle] = useState("");
   const [editAuthor, setEditAuthor] = useState("");
@@ -83,7 +80,7 @@ const AdminPage: React.FC = () => {
     }
   }, [editingPostId]);
 
-  // CHANGED: Quill config for blog + content editing
+  // CHANGED: Quill config for blog + bio
   const quillModules = {
     toolbar: [
       [{ header: [1, 2, 3, false] }],
@@ -105,14 +102,11 @@ const AdminPage: React.FC = () => {
     "image",
   ];
 
-  // CHANGED: For styled alerts
   const [alertMessage, setAlertMessage] = useState<string | null>(null);
   const [alertType, setAlertType] = useState<"success" | "error" | "info">("info");
 
-  // CHANGED: For PDF and Short Story usage
+  // PDFs and Short Stories
   const [uploadedPdfs, setUploadedPdfs] = useState<string[]>([]);
-
-  // CHANGED: For short stories management
   const [shortStories, setShortStories] = useState<any[]>([]);
   const [newShortStoryTitle, setNewShortStoryTitle] = useState("");
   const [newShortStoryDescription, setNewShortStoryDescription] = useState("");
@@ -123,21 +117,18 @@ const AdminPage: React.FC = () => {
   const [editShortStoryPdf, setEditShortStoryPdf] = useState("");
   const [editShortStoryOrder, setEditShortStoryOrder] = useState<number | null>(null);
 
-  // CHANGED: DnD state
   const [draggingStory, setDraggingStory] = useState<any | null>(null);
-
-  // CHANGED: Refs for scrolling
   const shortStoryEditRef = useRef<HTMLDivElement>(null);
 
-  // CHANGED: New state to hold RightImage content & track loading
-  const [rightImageBlurb, setRightImageBlurb] = useState<string>("");
-  const [loadingRightImage, setLoadingRightImage] = useState(false);
+  // CHANGED: State to hold the Bio content & track loading
+  const [bioContent, setBioContent] = useState<string>("");     // CHANGED
+  const [loadingBio, setLoadingBio] = useState(false);          // CHANGED
 
   // On mount, always fetch blog posts
   useEffect(() => {
     fetchBlogPosts();
 
-    // Override the browser's alert with a styled version
+    // Replace browser's alert with a styled version
     (window as any).alert = (msg: string) => {
       const lower = msg.toLowerCase();
       if (lower.includes("error")) {
@@ -155,58 +146,52 @@ const AdminPage: React.FC = () => {
     };
   }, []);
 
-  // CHANGED: When user switches to the 'content' tab, load RightImage data
+  // CHANGED: When user switches to the 'bio' tab, load the Bio from /api/bio
   useEffect(() => {
-    if (activeTab === "content") {
-      setLoadingRightImage(true);
-      fetch("https://159.89.233.75.nip.io/api/site-content/rightImageBlurb")
+    if (activeTab === "bio") {
+      setLoadingBio(true);
+      fetch("https://159.89.233.75.nip.io/api/bio")
         .then((res) => {
           if (!res.ok) {
-            throw new Error("Failed to fetch RightImage content");
+            throw new Error("Failed to fetch bio");
           }
           return res.json();
         })
         .then((data) => {
-          setRightImageBlurb(data.content || "");
+          // "data" should be { content: "..." }
+          setBioContent(data.content || "");
         })
         .catch((err) => {
-          console.error("Error fetching RightImage content:", err);
+          console.error("Error fetching bio:", err);
         })
         .finally(() => {
-          setLoadingRightImage(false);
+          setLoadingBio(false);
         });
     }
   }, [activeTab]);
 
-  // -------------------------------
-  // CHANGED: Save RightImage content
-  // -------------------------------
-  const handleSaveRightImage = async () => {
+  // CHANGED: Handle saving the Bio via PUT /api/bio
+  const handleSaveBio = async () => {
     try {
-      const response = await fetch(
-        "https://159.89.233.75.nip.io/api/site-content/rightImageBlurb",
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({ content: rightImageBlurb }),
-        }
-      );
+      const response = await fetch("https://159.89.233.75.nip.io/api/bio", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ content: bioContent }),
+      });
       if (!response.ok) {
-        throw new Error("Failed to update RightImage content");
+        throw new Error("Failed to update bio");
       }
-      alert("Home page content updated!");
+      alert("Bio updated!");
     } catch (error) {
-      console.error("Error updating RightImage content:", error);
-      alert("Error updating RightImage content.");
+      console.error("Error updating bio:", error);
+      alert("Error updating bio.");
     }
   };
 
-  // -------------------------------
   // Fetch blog posts (public GET)
-  // -------------------------------
   async function fetchBlogPosts() {
     try {
       const response = await fetch("https://159.89.233.75.nip.io/api/blog/posts");
@@ -221,9 +206,7 @@ const AdminPage: React.FC = () => {
     }
   }
 
-  // -------------------------------
   // Fetch PDFs from backend
-  // -------------------------------
   async function fetchPdfs(authToken: string) {
     try {
       const res = await fetch("https://159.89.233.75.nip.io/api/admin/list-pdfs", {
@@ -237,9 +220,7 @@ const AdminPage: React.FC = () => {
     }
   }
 
-  // -------------------------------
   // Short Story logic
-  // -------------------------------
   async function fetchShortStories() {
     try {
       const res = await fetch("https://159.89.233.75.nip.io/api/short-stories");
@@ -344,9 +325,7 @@ const AdminPage: React.FC = () => {
     }
   }, [editingShortStory]);
 
-  // -------------------------------
   // Drag & Drop for Short Stories
-  // -------------------------------
   function handleDragStart(e: React.DragEvent<HTMLLIElement>, story: any) {
     setDraggingStory(story);
   }
@@ -405,9 +384,7 @@ const AdminPage: React.FC = () => {
     }
   }
 
-  // -------------------------------
   // Login & Logout
-  // -------------------------------
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
@@ -438,9 +415,7 @@ const AdminPage: React.FC = () => {
     router.push("/");
   };
 
-  // -------------------------------
   // Reviews Logic
-  // -------------------------------
   const fetchAllReviews = async (authToken: string) => {
     try {
       const response = await fetch("https://159.89.233.75.nip.io/api/admin/all-reviews", {
@@ -551,9 +526,7 @@ const AdminPage: React.FC = () => {
     </>
   );
 
-  // -------------------------------
   // PDF Management
-  // -------------------------------
   const [pdfFile, setPdfFile] = useState<File | null>(null);
 
   async function handlePdfUpload() {
@@ -606,9 +579,7 @@ const AdminPage: React.FC = () => {
     }
   }
 
-  // -------------------------------
   // Admin Blog Logic
-  // -------------------------------
   const handleAddBlogPost = async () => {
     if (!newBlogTitle.trim() || !newBlogAuthor.trim() || !newBlogContent.trim()) {
       alert("Please fill out Title, Author, and Content.");
@@ -863,9 +834,7 @@ const AdminPage: React.FC = () => {
     );
   };
 
-  // --------------------------
   // Render Page
-  // --------------------------
   if (!token) {
     return (
       <div className="min-h-screen bg-purple-50 flex items-center justify-center">
@@ -952,16 +921,16 @@ const AdminPage: React.FC = () => {
           PDF Management
         </button>
 
-        {/* CHANGED: New Content Management Tab */}
+        {/* CHANGED: Replaced "Content" management tab with "Bio" tab */}
         <button
-          onClick={() => setActiveTab("content")}
+          onClick={() => setActiveTab("bio")}
           className={`px-4 py-2 rounded transition ${
-            activeTab === "content"
+            activeTab === "bio"
               ? "bg-[#6f7ec0] text-white"
               : "bg-[#dde2fa] hover:bg-[#bdc8f7] text-[#354057]"
           }`}
         >
-          Content Management
+          Bio Management
         </button>
       </div>
 
@@ -1143,7 +1112,6 @@ const AdminPage: React.FC = () => {
 
           <h2 className="text-2xl mb-6 text-white">Short Story Management</h2>
           {editingShortStory ? (
-            // CHANGED: attach ref for auto-scroll
             <div ref={shortStoryEditRef} className="bg-white p-4 rounded shadow-md mb-6">
               <h3 className="text-[#354057] mb-2 text-lg font-medium">Edit Short Story</h3>
               <input
@@ -1172,13 +1140,16 @@ const AdminPage: React.FC = () => {
                   </option>
                 ))}
               </select>
-{/*               <input
-                type="number"
-                placeholder="Order"
-                value={editShortStoryOrder !== null ? editShortStoryOrder : ""}
-                onChange={(e) => setEditShortStoryOrder(parseInt(e.target.value))}
-                className="border border-gray-300 text-[#354057] rounded p-2 mb-2 w-full"
-              /> */}
+{/*
+  We can uncomment if you wish to allow editing display_order directly:
+  <input
+    type="number"
+    placeholder="Order"
+    value={editShortStoryOrder !== null ? editShortStoryOrder : ""}
+    onChange={(e) => setEditShortStoryOrder(parseInt(e.target.value))}
+    className="border border-gray-300 text-[#354057] rounded p-2 mb-2 w-full"
+  />
+*/}
               <div className="flex gap-3">
                 <button
                   onClick={handleSaveShortStoryEdit}
@@ -1281,29 +1252,28 @@ const AdminPage: React.FC = () => {
         </div>
       )}
 
-      {/* CHANGED: Content (RightImage) Tab */}
-      {activeTab === "content" && (
+      {/* CHANGED: Bio Tab (replaces the old "content" tab) */}
+      {activeTab === "bio" && (
         <div className="bg-[#6f7ec0] p-8 rounded">
-          <h2 className="text-2xl mb-6 text-white">Manage Home Page Content (Under Construction)</h2>
+          <h2 className="text-2xl mb-6 text-white">Bio Management</h2>
           <div className="bg-white p-4 rounded shadow-md">
-            {loadingRightImage ? (
+            {loadingBio ? (
               <p>Loading...</p>
             ) : (
               <>
                 <ReactQuill
                   theme="snow"
-                  value={rightImageBlurb}
-                  onChange={setRightImageBlurb}
+                  value={bioContent}
+                  onChange={setBioContent}
                   modules={quillModules}
                   formats={quillFormats}
                   className="mb-4 text-black"
                 />
                 <button
-                  onClick={handleSaveRightImage}
-                  disabled={true}
-                  className="bg-[#617beb] transition text-white px-4 py-2 rounded" /* hover:bg-[#4760d2] */
+                  onClick={handleSaveBio}
+                  className="bg-[#617beb] hover:bg-[#4760d2] transition text-white px-4 py-2 rounded"
                 >
-                  Save Content
+                  Save Bio
                 </button>
               </>
             )}
@@ -1317,6 +1287,7 @@ const AdminPage: React.FC = () => {
 };
 
 export default AdminPage;
+
 
 
 
