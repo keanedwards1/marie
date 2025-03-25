@@ -141,7 +141,9 @@ const Footer: React.FC = () => {
 
           <div className="flex justify-center space-x-6 mt-4">
             <a
-              href="#"
+              href="https://www.facebook.com/venus.elyse"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-[#7c84d9] hover:text-[#b3baf1] transition duration-300"
               aria-label="Facebook"
             >
@@ -155,7 +157,9 @@ const Footer: React.FC = () => {
               <Twitter size={24} />
             </a>
             <a
-              href="#"
+              href="https://www.instagram.com/vmelyse7/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-[#7c84d9] hover:text-[#b3baf1] transition duration-300"
               aria-label="Instagram"
             >

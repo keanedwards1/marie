@@ -70,11 +70,12 @@ const RightImage: React.FC<RightImageProps> = ({ className }) => {
               <br />
 
               <div className="text-center blurb-text">
+
                 <div
                   className="text-white p-6 rounded-3xl"
                   style={{
-                    background: "radial-gradient(circle at center, #7c84d9, #27409b)",
-
+                    background:
+                      "radial-gradient(circle at center, #7c84d9, #27409b)",
                   }}
                 >
                   {" "}
@@ -93,6 +94,7 @@ const RightImage: React.FC<RightImageProps> = ({ className }) => {
                     utopian realm and decide for yourself what is possible.
                   </span>
                 </div>
+                
                 <br />
                 <br />
                 <span className="">The realm of Unity</span> came into being
