@@ -2,30 +2,20 @@ import React from "react";
 import Link from "next/link";
 import SubscribeForm from "./SubscribeForm";
 import Image from "next/image";
+// Import the Simple Icons from React Icons
 import {
-  Facebook,
-  Twitter,
-  Instagram,
-  BookOpenText, // using this for Goodreads since there's no dedicated icon
-} from "lucide-react";
+  SiFacebook,
+  SiGitter,
+  SiInstagram,
+  SiSubstack,
+} from "react-icons/si";
 
 const Footer: React.FC = () => {
   return (
     <footer className="relative pt-4 pb-4 bg-lavender-50 text-lavender-800">
-      <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-white to-lavender-50"></div>
+      <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-white to-lavender-50" />
       <div className="container relative mx-auto px-4">
-        {/* Rest of the footer content */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Contact Information */}
-          {/*           <div className="footer-card">
-            <h3 className="text-lg font-serif font-semibold mb-4 text-lavender-900">
-              Contact Me
-            </h3>
-            <ul className="text-m font-serif space-y-2">
-              <li> Email: <a href="mailto:vmelyse@gmail.com" className="hover:text-lavender-600 transition duration-300">vmelyse@gmail.com</a></li>
-            </ul>
-          </div> */}
-
           {/* Quick Links */}
           <div className="footer-card">
             <h3 className="text-lg font-serif font-semibold mb-4 text-lavender-900">
@@ -88,11 +78,6 @@ const Footer: React.FC = () => {
                   Contact
                 </Link>
               </li>
-              {/*               <li>
-                <Link href="/about" className="hover:text-lavender-600 transition duration-300">
-                  About
-                </Link>
-              </li> */}
             </ul>
           </div>
 
@@ -120,14 +105,6 @@ const Footer: React.FC = () => {
               </div>
             </div>
           </div>
-
-          {/* Subscribe Form */}
-          {/*           <div className="footer-card col-span-1 md:col-span-1 lg:col-span-1">
-            <h3 className="text-lg font-serif font-semibold mb-4 text-lavender-900">
-              Stay Updated
-            </h3>
-            <SubscribeForm />
-          </div> */}
         </div>
 
         {/* Social Media Links */}
@@ -140,38 +117,65 @@ const Footer: React.FC = () => {
           </div>
 
           <div className="flex justify-center space-x-6 mt-4">
-            <a
-              href="https://www.facebook.com/venus.elyse"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[#7c84d9] hover:text-[#b3baf1] transition duration-300"
-              aria-label="Facebook"
-            >
-              <Facebook size={24} />
-            </a>
-            <a
-              href="#"
-              className="text-[#7c84d9] hover:text-[#b3baf1] transition duration-300"
-              aria-label="Twitter"
-            >
-              <Twitter size={24} />
-            </a>
-            <a
-              href="https://www.instagram.com/vmelyse7/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[#7c84d9] hover:text-[#b3baf1] transition duration-300"
-              aria-label="Instagram"
-            >
-              <Instagram size={24} />
-            </a>
-            <a
-              href="#"
-              className="text-[#7c84d9] hover:text-[#b3baf1] transition duration-300"
-              aria-label="Goodreads"
-            >
-              <BookOpenText size={24} />
-            </a>
+            {/* FACEBOOK */}
+            <div className="relative group">
+              <a
+                href="https://www.facebook.com/venus.elyse"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#7c84d9] hover:text-[#b3baf1] transition duration-300"
+                aria-label="Facebook"
+              >
+                <SiFacebook size={24} />
+              </a>
+              <span className="pointer-events-none absolute bottom-full mb-2 left-1/2 -translate-x-1/2 px-2 py-1 rounded text-sm text-white bg-black opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                Facebook
+              </span>
+            </div>
+
+            {/* TWITTER */}
+            {/* <div className="relative group">
+              <a
+                href="#"
+                className="text-[#7c84d9] hover:text-[#b3baf1] transition duration-300"
+                aria-label="Twitter"
+              >
+                <SiGitter size={24} />
+              </a>
+              <span className="pointer-events-none absolute bottom-full mb-2 left-1/2 -translate-x-1/2 px-2 py-1 rounded text-sm text-white bg-black opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                Twitter
+              </span>
+            </div> */}
+
+            {/* INSTAGRAM */}
+            <div className="relative group">
+              <a
+                href="https://www.instagram.com/vmelyse7/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#7c84d9] hover:text-[#b3baf1] transition duration-300"
+                aria-label="Instagram"
+              >
+                <SiInstagram size={24} />
+              </a>
+              <span className="pointer-events-none absolute bottom-full mb-2 left-1/2 -translate-x-1/2 px-2 py-1 rounded text-sm text-white bg-black opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                Instagram
+              </span>
+            </div>
+
+            {/* GOODREADS */}
+            <div className="relative group">
+              <a
+                href="#"
+                className="text-[#7c84d9] hover:text-[#b3baf1] transition duration-300"
+                aria-label="Goodreads"
+              >
+                <SiSubstack size={24} />
+              </a>
+              <span className="pointer-events-none absolute bottom-full mb-2 left-1/2 -translate-x-1/2 px-2 py-1 rounded text-sm text-white bg-black opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                Substack
+              </span>
+            </div>
           </div>
         </div>
 
