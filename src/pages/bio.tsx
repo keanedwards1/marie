@@ -11,7 +11,6 @@ import router from "next/router";
 const BIO_URL = "https://159.89.233.75.nip.io/api/bio";
 
 export default function BioPage() {
-  // We store the entire bio as raw HTML in this string
   const [bioHtml, setBioHtml] = useState<string>("");
   const [isAdmin, setIsAdmin] = useState<boolean>(false);
 
@@ -21,7 +20,6 @@ export default function BioPage() {
   const [notFound, setNotFound] = useState<boolean>(false);
 
   useEffect(() => {
-    // 1) Check if URL has ?admin for editing
     if (
       typeof window !== "undefined" &&
       window.location.search.includes("admin")
@@ -29,14 +27,12 @@ export default function BioPage() {
       setIsAdmin(true);
     }
 
-    // 2) Fetch the bio from server
     fetch(BIO_URL)
       .then((res) => {
         if (res.status === 404) {
-          // The DB might not have a 'bio' row yet
           setNotFound(true);
           setIsLoading(false);
-          return null; // end
+          return null;
         }
         if (!res.ok) {
           throw new Error(`Failed to fetch bio. Status: ${res.status}`);
@@ -45,12 +41,10 @@ export default function BioPage() {
       })
       .then((data) => {
         if (data?.content) {
-          // The 'content' is raw HTML. We'll store it in state
           setBioHtml(data.content);
         }
       })
       .catch((err) => {
-        // If anything else fails, show an error
         setError(err.message || "Error loading bio");
       })
       .finally(() => {
@@ -58,9 +52,7 @@ export default function BioPage() {
       });
   }, []);
 
-  // Admin action: Save the updated HTML
   const handleSaveBio = async () => {
-    // Usually you'd get the token from localStorage or context, e.g.:
     const token = localStorage.getItem("myAdminToken") || "";
 
     try {
@@ -68,9 +60,8 @@ export default function BioPage() {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`, // must have admin token
+          Authorization: `Bearer ${token}`,
         },
-        // Just send the raw HTML in "content"
         body: JSON.stringify({ content: bioHtml }),
       });
 
@@ -85,75 +76,42 @@ export default function BioPage() {
     }
   };
 
-  // Render
-  if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p className="text-gray-600">Loading bio...</p>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p className="text-red-600">Error: {error}</p>
-      </div>
-    );
-  }
-
-  if (notFound) {
-    return (
-      <div className="min-h-screen flex flex-col">
-        <Head title="Marie’s Bio" description="Bio page not found" />
-        <Nav />
-        <div className="flex-grow flex items-center justify-center bg-purple-50">
-          <p className="text-gray-700 text-xl">No bio found in the database.</p>
-        </div>
-        <Footer />
-      </div>
-    );
-  }
-
+  // CHANGED: Instead of returning early for isLoading, error, or notFound,
+  // we always render the main layout, and conditionally show the states
   return (
     <div className="min-h-screen flex flex-col bg-purple-50">
       <Head title="Marie’s Bio" description="Bio page for Marie" />
       <Nav />
 
-      {/* Hero / Heading */}
       <div className="relative h-64 flex items-center justify-center bg-gradient-to-b from-[#6e7cc0] via-[#a5aed5] to-[#faf5ff]">
         <h1 className="text-4xl sm:text-5xl text-white">About Me</h1>
       </div>
 
-      {/* Shape Divider */}
-      {/*     <div className="overflow-hidden leading-none">
-        <svg className="block w-full h-[70px]" viewBox="0 0 1200 120" preserveAspectRatio="none">
-          <path
-            d="M321.39,56.35C190.52,65.87,84.66,92.39,
-               0,108.09V120H1200V0C1115.34,6.73,
-               1009.48,21.75,853.61,44.41,
-               676.16,70.27,491.53,47.11,
-               321.39,56.35Z"
-            fill="#fff"
-          />
-        </svg>
-      </div> */}
-
-      {/* Bio Card */}
       <div className="flex-grow py-12">
         <div className="max-w-3xl mx-auto p-4">
           <div className="bg-white/80 backdrop-blur-md shadow-xl rounded-lg p-8">
-            {/* If we have raw HTML, we display with dangerouslySetInnerHTML
-                so that <p> tags, etc. show up properly */}
-            {!isAdmin && (
+            {/* CHANGED: Show "Loading", "Error", or "Not Found" messages here */}
+            {isLoading && (
+              <p className="text-gray-600">Loading bio...</p>
+            )}
+
+            {error && (
+              <p className="text-red-600">Error: {error}</p>
+            )}
+
+            {notFound && (
+              <p className="text-gray-700 text-xl">No bio found in the database.</p>
+            )}
+
+            {/* If no error/notFound/loading, show either the raw HTML or the editing form */}
+            {!isLoading && !error && !notFound && !isAdmin && (
               <div
                 className="text-base sm:text-lg text-gray-800 font-serif leading-relaxed"
                 dangerouslySetInnerHTML={{ __html: bioHtml }}
               />
             )}
 
-            {/* If admin, we let user directly edit the raw HTML */}
-            {isAdmin && (
+            {!isLoading && !error && !notFound && isAdmin && (
               <div>
                 <label className="block mb-2 text-gray-600">
                   Edit Raw HTML for Bio:
@@ -164,7 +122,6 @@ export default function BioPage() {
                   value={bioHtml}
                   onChange={(e) => setBioHtml(e.target.value)}
                 />
-
                 <button
                   onClick={handleSaveBio}
                   className="comic-button px-4 py-2"
@@ -177,7 +134,6 @@ export default function BioPage() {
         </div>
       </div>
 
-      {/* Navigation Links */}
       <section className="my-12 flex flex-col lg:flex-row w-full gap-4 items-center justify-center">
         <div className="lg:w-3/12 md:w-5/12 w-9/12 z-10">
           <ComicButton
