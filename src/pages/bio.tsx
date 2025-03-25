@@ -7,6 +7,7 @@ import Footer from "../components/RespFooter";
 import SubscribeForm from "@/components/SubscribeForm";
 import ComicButton from "@/components/ComicButton";
 import router from "next/router";
+import Image from "next/image";
 
 const BIO_URL = "https://159.89.233.75.nip.io/api/bio";
 
@@ -91,16 +92,14 @@ export default function BioPage() {
         <div className="max-w-3xl mx-auto p-4 -mt-24 hover:-mt-64 transition-all duration-1000 ease-in-out">
           <div className="bg-white/80 backdrop-blur-md shadow-xl rounded-lg p-8">
             {/* CHANGED: Show "Loading", "Error", or "Not Found" messages here */}
-            {isLoading && (
-              <p className="text-gray-600">Loading bio...</p>
-            )}
+            {isLoading && <p className="text-gray-600">Loading bio...</p>}
 
-            {error && (
-              <p className="text-red-600">Error: {error}</p>
-            )}
+            {error && <p className="text-red-600">Error: {error}</p>}
 
             {notFound && (
-              <p className="text-gray-700 text-xl">No bio found in the database.</p>
+              <p className="text-gray-700 text-xl">
+                No bio found in the database.
+              </p>
             )}
 
             {/* If no error/notFound/loading, show either the raw HTML or the editing form */}
@@ -110,6 +109,19 @@ export default function BioPage() {
                 dangerouslySetInnerHTML={{ __html: bioHtml }}
               />
             )}
+
+            {/* Bio Image */}
+            <div className="mt-8 flex justify-center">
+              <div className="relative w-48 h-48">
+                <Image
+                  src="/images/bio-headshot.jpeg"
+                  alt="Portrait of the author"
+                  fill
+                  className="rounded-full object-cover shadow-lg"
+                  priority
+                />
+              </div>
+            </div>
 
             {!isLoading && !error && !notFound && isAdmin && (
               <div>
