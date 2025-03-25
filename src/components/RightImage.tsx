@@ -71,10 +71,10 @@ const RightImage: React.FC<RightImageProps> = ({ className }) => {
 
               <div className="text-center blurb-text">
                 <div
-                  className="p-6 rounded-3xl "
+                  className="text-white p-6 rounded-3xl home-gradient"
                 >
                   <p>
-                    <span className=" text-white text-2xl md:text-3xl font-light home-gradient rounded-full px-3 py-1">
+                    <span className=" text-2xl md:text-3xl font-light rounded-full px-3 py-1">
                       Is Utopia Real?
                     </span>
                   </p>
@@ -88,7 +88,7 @@ const RightImage: React.FC<RightImageProps> = ({ className }) => {
                     utopian realm and decide for yourself what is possible.
                   </span>
                 </div>
-                ✳︎ ✳︎ ✳︎
+                {/* ✳︎ ✳︎ ✳︎ */}
                   <br />
                   <br />
                 <span className="">The realm of Unity</span> came into being

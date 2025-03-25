@@ -91,9 +91,9 @@
 
 .home-gradient {
   background:radial-gradient(circle at center, #7c84d9, #27409b);
-  background: radial-gradient(circle at center,#1e1951  0%, #394788 30%, #5172e8  100%);
-  background: radial-gradient(circle at center,#4191db  0%, #417adb 30%, #6e7cc0 100%);
   background: #6e7cc0;
+  background: radial-gradient(circle at center,#4191db  0%, #417adb 30%, #6e7cc0 100%);
+  background: radial-gradient(circle at center,#1e1951  0%, #394788 30%, #5172e8  100%);
 }
 
 :root {
