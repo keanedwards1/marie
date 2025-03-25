@@ -534,7 +534,7 @@ body {
   top: 35%;
   left: 7%;
 }
- .home-page-text-container::after {
+/*  .home-page-text-container::after {
   content: "";
   position: absolute;
   height: 70%;
@@ -542,7 +542,7 @@ body {
   right: 2%;
   border: 1px solid;
 
-}
+} */
 
 /* .home-page-box .text-dark-purple-hover {
   transition: all 400ms ease-in;
