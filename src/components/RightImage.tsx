@@ -70,8 +70,15 @@ const RightImage: React.FC<RightImageProps> = ({ className }) => {
               <br />
 
               <div className="text-center blurb-text">
+                
+                <p>
+                  <span className="text-3xl font-light">
+                  Is utopia real?
+                  </span>
+                </p>
+                <br />
                 <span className="font-gentium text-lg leading-relaxed">
-                Is utopia real? Can humans come together and live in peace and
+                Can humans come together and live in peace and
                 harmony? What might that look and feel like? If it is possible,
                 how might we get there? This book explores an alternate reality,
                 where humans live harmoniously with nature and each other. You
@@ -79,7 +86,10 @@ const RightImage: React.FC<RightImageProps> = ({ className }) => {
                 utopian realm and decide for yourself what is possible.</span>
                 <br />
                 <br />
-                <span className="text-3xl">The Realm of Unity</span> came into
+                ✳︎ ✳︎ ✳︎
+                <br />
+                <br />
+                <span className="">The Realm of Unity</span> came into
                 being roughly two-hundred years ago. With the help of
                 extraterrestrials, a small band of humans with a burning desire
                 for peace and oneness brought into form the Earth-like realm.
