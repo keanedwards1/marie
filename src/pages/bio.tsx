@@ -84,11 +84,11 @@ export default function BioPage() {
       <Nav />
 
       <div className="relative h-64 flex items-center justify-center bg-gradient-to-b from-[#6e7cc0] via-[#a5aed5] to-[#faf5ff]">
-        <h1 className="text-4xl sm:text-5xl text-white">About Me</h1>
+        <h1 className="text-4xl sm:text-5xl text-white"></h1> {/* About Me */}
       </div>
 
       <div className="flex-grow py-12">
-        <div className="max-w-3xl mx-auto p-4">
+        <div className="max-w-3xl mx-auto p-4 -mt-24 hover:-mt-64 transition-all duration-1000 ease-in-out">
           <div className="bg-white/80 backdrop-blur-md shadow-xl rounded-lg p-8">
             {/* CHANGED: Show "Loading", "Error", or "Not Found" messages here */}
             {isLoading && (
