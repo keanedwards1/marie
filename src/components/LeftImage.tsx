@@ -19,7 +19,7 @@ const LeftImage: React.FC<LeftImageProps> = ({ className }) => {
           className="absolute inset-0 z-0 rounded-full blur-3xl"
           style={{
             background:
-              "radial-gradient(circle at center, rgba(124, 58, 237, 0.5), rgba(56, 189, 248, 0.4), transparent)",
+              "radial-gradient(circle at center, rgba(208, 202, 247, 0.8), rgba(180, 170, 240, 0.5), transparent)",
           }}
         />
 
