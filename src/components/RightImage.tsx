@@ -72,11 +72,7 @@ const RightImage: React.FC<RightImageProps> = ({ className }) => {
               <div className="text-center blurb-text">
 
                 <div
-                  className="text-white p-6 rounded-3xl"
-                  style={{
-                    background:
-                      "radial-gradient(circle at center, #7c84d9, #27409b)",
-                  }}
+                  className="text-white p-6 rounded-3xl home-gradient"
                 >
                   {" "}
                   <p>

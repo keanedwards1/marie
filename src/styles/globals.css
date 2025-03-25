@@ -89,6 +89,11 @@
 
 /* Your existing CSS rules would go here */
 
+.home-gradient {
+  background: radial-gradient(circle at center,#1e1951  0%, #4c5eaf 30%, #b6dcf1  100%);
+
+}
+
 :root {
   --primary: #6B7280;
   /* Muted blue-grey */
