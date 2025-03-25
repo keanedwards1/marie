@@ -103,15 +103,55 @@ export default function BioPage() {
             )}
 
             {/* If no error/notFound/loading, show either the raw HTML or the editing form */}
-            {!isLoading && !error && !notFound && !isAdmin && (
-              <div
-                className="text-base sm:text-lg text-gray-800 font-serif leading-relaxed"
-                dangerouslySetInnerHTML={{ __html: bioHtml }}
-              />
-            )}
+            {!isLoading &&
+              !error &&
+              !notFound &&
+              !isAdmin &&
+              (() => {
+                const pMatches = bioHtml.match(/<p[^>]*>[\s\S]*?<\/p>/gi);
+                const firstParagraph = pMatches?.[0] || "";
+                const secondParagraph = pMatches?.[1] || "";
+                const combined = `${firstParagraph}${secondParagraph}`;
+                const remainingHtml = bioHtml.replace(combined, "");
+
+                return (
+                  <>
+                    {/* First paragraph alone */}
+                    <div
+                      className="text-base sm:text-lg text-gray-800 font-serif leading-relaxed mb-6"
+                      dangerouslySetInnerHTML={{ __html: firstParagraph }}
+                    />
+
+                    {/* Flex layout: second paragraph + image */}
+                    <div className="flex flex-col lg:flex-row gap-6 mb-6 items-start">
+                      <div
+                        className="text-base sm:text-lg text-gray-800 font-serif leading-relaxed lg:w-2/3"
+                        dangerouslySetInnerHTML={{ __html: secondParagraph }}
+                      />
+                      <div className="flex justify-center lg:justify-end w-full lg:w-1/3">
+                        <div className="relative w-40 h-40 lg:w-48 lg:h-48">
+                          <Image
+                            src="/images/bio-headshot.jpeg"
+                            alt="Portrait of the author"
+                            fill
+                            className="rounded-full object-cover shadow-lg"
+                            priority
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Remaining content */}
+                    <div
+                      className="text-base sm:text-lg text-gray-800 font-serif leading-relaxed"
+                      dangerouslySetInnerHTML={{ __html: remainingHtml }}
+                    />
+                  </>
+                );
+              })()}
 
             {/* Bio Image */}
-            <div className="mt-8 flex justify-center">
+            {/*             <div className="mt-8 flex justify-center">
               <div className="relative w-48 h-48">
                 <Image
                   src="/images/bio-headshot.jpeg"
@@ -121,7 +161,7 @@ export default function BioPage() {
                   priority
                 />
               </div>
-            </div>
+            </div> */}
 
             {!isLoading && !error && !notFound && isAdmin && (
               <div>
