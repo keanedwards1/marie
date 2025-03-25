@@ -2,6 +2,12 @@ import React from "react";
 import Link from "next/link";
 import SubscribeForm from "./SubscribeForm";
 import Image from "next/image";
+import {
+  Facebook,
+  Twitter,
+  Instagram,
+  BookOpenText, // using this for Goodreads since there's no dedicated icon
+} from "lucide-react";
 
 const Footer: React.FC = () => {
   return (
@@ -10,8 +16,6 @@ const Footer: React.FC = () => {
       <div className="container relative mx-auto px-4">
         {/* Rest of the footer content */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        
-
           {/* Contact Information */}
           {/*           <div className="footer-card">
             <h3 className="text-lg font-serif font-semibold mb-4 text-lavender-900">
@@ -92,19 +96,18 @@ const Footer: React.FC = () => {
             </ul>
           </div>
 
-
-                    {/* About Section */}
-                    <div className="footer-card">
+          {/* About Section */}
+          <div className="footer-card">
             <h3 className="text-lg font-serif font-semibold mb-4 text-lavender-900">
               About The Author
             </h3>
             <div className="flex flex-col md:flex-row gap-8">
               <p className="text-md font-serif leading-relaxed">
-                V. M. Elyse (Marie) is a spiritual seeker and lover of truth. She
-                lives in Northern California with her family, and this is her
-                offering to the world. The Realm of Unity is her first book, but
-                not her last. It is her most fervent wish that this book brings
-                more light, love and healing into this ailing world.
+                V. M. Elyse (Marie) is a spiritual seeker and lover of truth.
+                She lives in Northern California with her family, and this is
+                her offering to the world. The Realm of Unity is her first book,
+                but not her last. It is her most fervent wish that this book
+                brings more light, love and healing into this ailing world.
               </p>
               <div className="flex w-full justify-center items-center md:mr-4 mb-4">
                 <Image
@@ -136,32 +139,36 @@ const Footer: React.FC = () => {
             </h3>
           </div>
 
-          {/*           <div className="flex justify-center space-x-6">
+          <div className="flex justify-center space-x-6 mt-4">
             <a
               href="#"
-              className="text-2xl text-lavender-700 hover:text-lavender-500 transition duration-300"
+              className="text-[#7c84d9] hover:text-[#b3baf1] transition duration-300"
+              aria-label="Facebook"
             >
-              <i className="fab fa-facebook"></i>
+              <Facebook size={24} />
             </a>
             <a
               href="#"
-              className="text-2xl text-lavender-700 hover:text-lavender-500 transition duration-300"
+              className="text-[#7c84d9] hover:text-[#b3baf1] transition duration-300"
+              aria-label="Twitter"
             >
-              <i className="fab fa-twitter"></i>
+              <Twitter size={24} />
             </a>
             <a
               href="#"
-              className="text-2xl text-lavender-700 hover:text-lavender-500 transition duration-300"
+              className="text-[#7c84d9] hover:text-[#b3baf1] transition duration-300"
+              aria-label="Instagram"
             >
-              <i className="fab fa-instagram"></i>
+              <Instagram size={24} />
             </a>
             <a
               href="#"
-              className="text-2xl text-lavender-700 hover:text-lavender-500 transition duration-300"
+              className="text-[#7c84d9] hover:text-[#b3baf1] transition duration-300"
+              aria-label="Goodreads"
             >
-              <i className="fab fa-goodreads"></i>
+              <BookOpenText size={24} />
             </a>
-          </div> */}
+          </div>
         </div>
 
         {/* Copyright */}

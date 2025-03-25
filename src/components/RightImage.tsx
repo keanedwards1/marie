@@ -70,27 +70,33 @@ const RightImage: React.FC<RightImageProps> = ({ className }) => {
               <br />
 
               <div className="text-center blurb-text">
-                
-                <div className="bg-[#5a69b4] text-white p-6 rounded-full">
+                <div
+                  className="text-white p-6 rounded-3xl"
+                  style={{
+                    background: "radial-gradient(circle at center, #7c84d9, #27409b)",
+
+                  }}
+                >
+                  {" "}
                   <p>
-                    <span className="text-3xl font-light">
-                    Is Utopia Real?
+                    <span className="text-2xl md:text-3xl font-light">
+                      Is Utopia Real?
                     </span>
                   </p>
                   <br />
-                  <span className="font-gentium text-lg leading-relaxed">
-                  Can humans come together and live in peace and
-                  harmony? What might that look and feel like? If it is possible,
-                  how might we get there? This book explores an alternate reality,
-                  where humans live harmoniously with nature and each other. You
-                  are invited to take a whimsical journey through an enchanting
-                  utopian realm and decide for yourself what is possible.</span>
+                  <span className="font-gentium text-sm sm:text-md lg:text-xl leading-relaxed">
+                    Can humans come together and live in peace and harmony? What
+                    might that look and feel like? If it is possible, how might
+                    we get there? This book explores an alternate reality, where
+                    humans live harmoniously with nature and each other. You are
+                    invited to take a whimsical journey through an enchanting
+                    utopian realm and decide for yourself what is possible.
+                  </span>
                 </div>
                 <br />
                 <br />
-
-                <span className="">The realm of Unity</span> came into
-                being roughly two-hundred years ago. With the help of
+                <span className="">The realm of Unity</span> came into being
+                roughly two-hundred years ago. With the help of
                 extraterrestrials, a small band of humans with a burning desire
                 for peace and oneness brought into form the Earth-like realm.
                 They then proceeded to reach out to all the inhabitants of old
