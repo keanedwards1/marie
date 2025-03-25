@@ -90,8 +90,8 @@
 /* Your existing CSS rules would go here */
 
 .home-gradient {
-  background: radial-gradient(circle at center,#1e1951  0%, #4c5eaf 30%, #b6dcf1  100%);
-
+  background:radial-gradient(circle at center, #7c84d9, #27409b);
+  background: radial-gradient(circle at center,#1e1951  0%, #394788 30%, #5172e8  100%);
 }
 
 :root {
