@@ -164,9 +164,11 @@ const Footer: React.FC = () => {
             </div>
 
             {/* SUBSTACK */}
-{/*             <div className="relative group">
+            <div className="relative group">
               <a
-                href="#"
+                href="https://substack.com/@vmelyse?utm_source=user-menu"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-[#7c84d9] hover:text-[#b3baf1] transition duration-300"
                 aria-label="Substack"
               >
@@ -175,7 +177,7 @@ const Footer: React.FC = () => {
               <span className="pointer-events-none absolute bottom-full mb-2 left-1/2 -translate-x-1/2 px-2 py-1 rounded text-sm text-white bg-black opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 Substack
               </span>
-            </div> */}
+            </div>
           </div>
         </div>
 

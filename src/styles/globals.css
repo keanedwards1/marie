@@ -92,6 +92,8 @@
 .home-gradient {
   background:radial-gradient(circle at center, #7c84d9, #27409b);
   background: radial-gradient(circle at center,#1e1951  0%, #394788 30%, #5172e8  100%);
+  background: radial-gradient(circle at center,#4191db  0%, #417adb 30%, #6e7cc0 100%);
+  background: #6e7cc0;
 }
 
 :root {
@@ -517,7 +519,7 @@ body {
   
 }
 
-.home-page-text-container::before,
+ .home-page-text-container::before,
 .home-page-text-container::after {
   content: "";
   background-color: #fab5704c;
@@ -529,11 +531,10 @@ body {
   border-radius: 50%;
   width: 50%;
   height: 50%;
-  top: 30%;
+  top: 35%;
   left: 7%;
-}
-/*  */
-/* .home-page-text-container::after {
+} */
+ .home-page-text-container::after {
   content: "";
   position: absolute;
   height: 70%;
@@ -541,7 +542,7 @@ body {
   right: 2%;
   border: 1px solid;
 
-} */ 
+}
 
 /* .home-page-box .text-dark-purple-hover {
   transition: all 400ms ease-in;
