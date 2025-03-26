@@ -90,11 +90,34 @@
 /* Your existing CSS rules would go here */
 
 .home-gradient {
+  position: relative;
+  overflow: hidden;
   background:radial-gradient(circle at center, #7c84d9, #27409b);
   background: #6e7cc0;
   background: radial-gradient(circle at center,#4191db  0%, #417adb 30%, #6e7cc0 100%);
-  background: radial-gradient(circle at center,#1e1951  0%, #394788 30%, #5172e8  100%);
+  background: radial-gradient(circle at center, #1e1951 0%, #394788 30%, #5172e8 100%);
+  transition: background 400ms ease-in-out;
 }
+
+.home-gradient::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, #837fb9 0%, #324180 30%, #5471dc 100%);
+  opacity: 0;
+  transition: opacity 400ms ease-in-out;
+  z-index: 0;
+}
+
+.home-gradient:hover::before {
+  opacity: 1;
+}
+
+.home-gradient > * {
+  position: relative;
+  z-index: 1;
+}
+
 
 :root {
   --primary: #6B7280;
