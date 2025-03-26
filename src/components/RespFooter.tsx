@@ -128,7 +128,7 @@ const Footer: React.FC = () => {
               >
                 <SiFacebook size={24} />
               </a>
-              <span className="pointer-events-none absolute bottom-full mb-2 left-1/2 -translate-x-1/2 px-2 py-1 rounded text-sm text-white bg-black opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <span className="pointer-events-none absolute bottom-full mb-2 left-1/2 -translate-x-1/2 px-2 py-1 rounded text-sm text-white bg-[#2d2d2d] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 Facebook
               </span>
             </div>
@@ -158,7 +158,7 @@ const Footer: React.FC = () => {
               >
                 <SiInstagram size={24} />
               </a>
-              <span className="pointer-events-none absolute bottom-full mb-2 left-1/2 -translate-x-1/2 px-2 py-1 rounded text-sm text-white bg-black opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <span className="pointer-events-none absolute bottom-full mb-2 left-1/2 -translate-x-1/2 px-2 py-1 rounded text-sm text-white bg-[#2d2d2d] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 Instagram
               </span>
             </div>
@@ -174,7 +174,7 @@ const Footer: React.FC = () => {
               >
                 <SiSubstack size={24} />
               </a>
-              <span className="pointer-events-none absolute bottom-full mb-2 left-1/2 -translate-x-1/2 px-2 py-1 rounded text-sm text-white bg-black opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <span className="pointer-events-none absolute bottom-full mb-2 left-1/2 -translate-x-1/2 px-2 py-1 rounded text-sm text-white bg-[#2d2d2d] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 Substack
               </span>
             </div>
