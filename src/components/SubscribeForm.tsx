@@ -1,6 +1,48 @@
 // src/components/SubscribeForm.tsx
 
-import React, { useState, FormEvent, ChangeEvent } from "react";
+import React from "react";
+
+const SubscribeForm: React.FC = () => {
+  return (
+    <div className="text-neutral-800 py-10 lg:py-4 mt-28 relative bg-gradient-to-b from-white/0 to-white/100 overflow-hidden flex justify-center items-center flex-col w-full px-4 sm:px-6">
+      <div className="lg:w-1/3 md:w-1/2 lg:m-2 m-0 p-3 rounded-lg bg-white bg-opacity-0">
+        <div className="relative z-10 mb-4">
+          <p className="text-gray-900 text-base sm:text-lg mt-1">
+            Sign up for Marie&apos;s newsletter to receive stories and wisdom. 
+          </p>
+        </div>
+        <div className="flex justify-center">
+          <iframe
+            src="https://vmelyse.substack.com/embed"
+            width="100%"
+            height="320"
+            style={{
+              border: 'none',
+              background: 'transparent',
+              borderRadius: '0.5rem',
+              width: '100%',
+              maxWidth: '480px',
+            }}
+            frameBorder="0"
+            scrolling="no"
+          />
+        </div>
+        <div className="absolute w-32 h-20 right-2 top-0 bg-lavender-200 -z-10 rounded-full blur-xl opacity-50"></div>
+        <div className="absolute w-24 h-24 -right-6 -top-12 bg-lavender-300 -z-10 rounded-full blur-xl opacity-50"></div>
+      </div>
+    </div>
+  );
+};
+
+export default SubscribeForm;
+
+
+
+
+
+
+/* Mailchimp Version */
+/* import React, { useState, FormEvent, ChangeEvent } from "react";
 
 const SubscribeForm: React.FC = () => {
   const [email, setEmail] = useState<string>("");
@@ -19,7 +61,7 @@ const SubscribeForm: React.FC = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, name }), /*  */
+        body: JSON.stringify({ email, name }), 
       });
 
       const data = await response.json();
@@ -90,4 +132,4 @@ const SubscribeForm: React.FC = () => {
   );
 };
 
-export default SubscribeForm;
+export default SubscribeForm; */
